@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle, X } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -33,9 +34,24 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simular envio do formulário
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Salvar dados no Supabase
+      const { error } = await supabase
+        .from('contact_leads')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            company: formData.company || null,
+            sector: formData.sector,
+            message: formData.message || null
+          }
+        ]);
+
+      if (error) {
+        throw error;
+      }
       
       toast({
         title: "Solicitação enviada com sucesso!",
@@ -54,6 +70,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       
       onClose();
     } catch (error) {
+      console.error('Erro ao salvar contato:', error);
       toast({
         title: "Erro ao enviar solicitação",
         description: "Tente novamente ou entre em contato conosco diretamente.",
