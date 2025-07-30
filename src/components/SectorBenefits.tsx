@@ -4,6 +4,9 @@ import {
   Home, 
   Briefcase, 
   Megaphone,
+  Calculator,
+  Bed,
+  Settings,
   Clock,
   TrendingUp,
   Users,
@@ -50,6 +53,36 @@ const SectorBenefits = () => {
         "Campanhas automatizadas multicanal",
         "Segmentação inteligente de leads",
         "ROI otimizado com IA"
+      ]
+    },
+    {
+      icon: Calculator,
+      title: "Contabilidade",
+      color: "text-orange-500",
+      benefits: [
+        "Atendimento automatizado para clientes",
+        "Agendamento de consultorias tributárias",
+        "Triagem de documentos e serviços"
+      ]
+    },
+    {
+      icon: Bed,
+      title: "Pousadas",
+      color: "text-teal-500",
+      benefits: [
+        "Check-in/check-out automatizado",
+        "Gestão de reservas inteligente",
+        "Suporte 24h para hóspedes"
+      ]
+    },
+    {
+      icon: Settings,
+      title: "Automações Personalizadas",
+      color: "text-indigo-500",
+      benefits: [
+        "Soluções sob medida para seu negócio",
+        "Integração com sistemas existentes",
+        "Automação de processos específicos"
       ]
     }
   ];
