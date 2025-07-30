@@ -13,23 +13,23 @@ const Technology = () => {
   const features = [
     {
       icon: Workflow,
-      title: "Integração n8n",
-      description: "Automação visual sem código para conectar todos os seus sistemas"
+      title: "Automação Inteligente",
+      description: "Processos automatizados que conectam todos os seus sistemas de forma eficiente"
     },
     {
       icon: Code,
-      title: "Desenvolvimento Lovable",
-      description: "Interfaces modernas e responsivas criadas em tempo recorde"
+      title: "Interfaces Modernas",
+      description: "Tecnologia de ponta para experiências digitais intuitivas e responsivas"
     },
     {
       icon: Cpu,
       title: "IA Avançada",
-      description: "Machine learning para respostas cada vez mais inteligentes"
+      description: "Inteligência artificial para respostas cada vez mais precisas e personalizadas"
     },
     {
       icon: Zap,
-      title: "Deploy Instantâneo",
-      description: "Sua solução no ar em minutos, não semanas"
+      title: "Implementação Ágil",
+      description: "Soluções tecnológicas implementadas rapidamente com máxima eficiência"
     }
   ];
 
@@ -54,9 +54,9 @@ const Technology = () => {
             </h2>
             
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Combinamos o poder do <strong>n8n</strong> para automação no-code com 
-              o <strong>Lovable</strong> para desenvolvimento ágil. Resultado: soluções 
-              empresariais em tempo e custo reduzidos.
+              Utilizamos as mais avançadas tecnologias de automação e inteligência artificial 
+              para criar soluções empresariais eficientes. Resultado: processos otimizados 
+              em tempo e custo reduzidos.
             </p>
 
             <ul className="space-y-4 mb-8">
@@ -102,28 +102,28 @@ const Technology = () => {
           </div>
         </div>
 
-        {/* Seção de integração visual */}
+        {/* Seção de processo visual */}
         <div className="mt-20 text-center">
           <div className="inline-flex items-center gap-4 px-8 py-4 bg-background rounded-full shadow-elegant">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center">
                 <Workflow className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="font-semibold text-foreground">n8n</span>
+              <span className="font-semibold text-foreground">Análise</span>
             </div>
             <ArrowRight className="w-5 h-5 text-muted-foreground" />
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center">
                 <Code className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="font-semibold text-foreground">Lovable</span>
+              <span className="font-semibold text-foreground">Automação</span>
             </div>
             <ArrowRight className="w-5 h-5 text-muted-foreground" />
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center">
                 <Zap className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="font-semibold text-foreground">Sua Solução</span>
+              <span className="font-semibold text-foreground">Resultados</span>
             </div>
           </div>
         </div>
