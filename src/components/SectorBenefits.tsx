@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 import { 
   Heart, 
   Home, 
@@ -20,6 +21,7 @@ const SectorBenefits = () => {
     {
       icon: Heart,
       title: "Clínicas",
+      url: "/clinicas",
       color: "text-red-500",
       benefits: [
         "Agendamento 24h com lembretes automáticos",
@@ -30,6 +32,7 @@ const SectorBenefits = () => {
     {
       icon: Home,
       title: "Imobiliárias",
+      url: "/imobiliarias",
       color: "text-blue-500",
       benefits: [
         "Qualificação automática de leads",
@@ -40,6 +43,7 @@ const SectorBenefits = () => {
     {
       icon: Briefcase,
       title: "Profissionais Liberais",
+      url: "/profissionais-liberais",
       color: "text-green-500",
       benefits: [
         "Triagem automática de clientes",
@@ -50,6 +54,7 @@ const SectorBenefits = () => {
     {
       icon: Megaphone,
       title: "Marketing",
+      url: "/marketing",
       color: "text-purple-500",
       benefits: [
         "Campanhas automatizadas multicanal",
@@ -60,6 +65,7 @@ const SectorBenefits = () => {
     {
       icon: Calculator,
       title: "Contabilidade",
+      url: "/contabilidade",
       color: "text-orange-500",
       benefits: [
         "Atendimento automatizado para clientes",
@@ -70,6 +76,7 @@ const SectorBenefits = () => {
     {
       icon: Bed,
       title: "Pousadas",
+      url: "/pousadas",
       color: "text-teal-500",
       benefits: [
         "Check-in/check-out automatizado",
@@ -80,6 +87,7 @@ const SectorBenefits = () => {
     {
       icon: UtensilsCrossed,
       title: "Restaurantes",
+      url: "/restaurantes",
       color: "text-amber-500",
       benefits: [
         "Pedidos automatizados via WhatsApp",
@@ -90,6 +98,7 @@ const SectorBenefits = () => {
     {
       icon: ShoppingBag,
       title: "E-commerce",
+      url: "/ecommerce",
       color: "text-pink-500",
       benefits: [
         "Atendimento pré-venda automatizado",
@@ -100,6 +109,7 @@ const SectorBenefits = () => {
     {
       icon: Settings,
       title: "Automações Personalizadas",
+      url: "/automacoes-personalizadas",
       color: "text-indigo-500",
       benefits: [
         "Soluções sob medida para seu negócio",
@@ -125,11 +135,9 @@ const SectorBenefits = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sectors.map((sector, index) => (
-            <Card 
-              key={index} 
-              className="group hover:shadow-elegant transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-md"
-            >
+        {sectors.map((sector, index) => (
+          <Link key={index} to={sector.url}>
+            <Card className="group hover:shadow-elegant transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-md cursor-pointer">
               <CardContent className="p-6">
                 <div className="text-center mb-6">
                   <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-light mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -152,7 +160,8 @@ const SectorBenefits = () => {
                 </ul>
               </CardContent>
             </Card>
-          ))}
+          </Link>
+        ))}
         </div>
 
         {/* Seção de métricas */}
