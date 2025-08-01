@@ -7,6 +7,8 @@ import {
   Calculator,
   Bed,
   Settings,
+  UtensilsCrossed,
+  ShoppingBag,
   Clock,
   TrendingUp,
   Users,
@@ -73,6 +75,26 @@ const SectorBenefits = () => {
         "Check-in/check-out automatizado",
         "Gestão de reservas inteligente",
         "Suporte 24h para hóspedes"
+      ]
+    },
+    {
+      icon: UtensilsCrossed,
+      title: "Restaurantes",
+      color: "text-amber-500",
+      benefits: [
+        "Pedidos automatizados via WhatsApp",
+        "Cardápio digital interativo",
+        "Gestão de entregas inteligente"
+      ]
+    },
+    {
+      icon: ShoppingBag,
+      title: "E-commerce",
+      color: "text-pink-500",
+      benefits: [
+        "Atendimento pré-venda automatizado",
+        "Recuperação de carrinho abandonado",
+        "Suporte pós-venda 24/7"
       ]
     },
     {
