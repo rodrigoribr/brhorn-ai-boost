@@ -11,16 +11,34 @@ const Pousadas = () => {
       {/* Header */}
       <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center gap-4">
-            <Link to="/">
-              <Button variant="ghost" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Voltar
-              </Button>
-            </Link>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Link to="/">
+                <Button variant="ghost" size="sm">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Voltar
+                </Button>
+              </Link>
+              <div className="flex items-center gap-3">
+                <Bed className="w-8 h-8 text-teal-500" />
+                <h1 className="text-3xl font-bold text-foreground">Automação para Pousadas</h1>
+              </div>
+            </div>
+            {/* Login Form */}
             <div className="flex items-center gap-3">
-              <Bed className="w-8 h-8 text-teal-500" />
-              <h1 className="text-3xl font-bold text-foreground">Automação para Pousadas</h1>
+              <Input 
+                type="email" 
+                placeholder="Email" 
+                className="w-40"
+              />
+              <Input 
+                type="password" 
+                placeholder="Senha" 
+                className="w-40"
+              />
+              <Button size="sm">
+                Entrar
+              </Button>
             </div>
           </div>
         </div>
@@ -100,34 +118,17 @@ const Pousadas = () => {
           </div>
         </div>
 
-        {/* Login Section */}
-        <div className="max-w-md mx-auto mt-16 bg-card border border-border rounded-lg p-8">
-          <h3 className="text-2xl font-bold text-foreground mb-6 text-center">
-            Faça login para começar
+        {/* CTA Section */}
+        <div className="text-center mt-16">
+          <h3 className="text-2xl font-bold text-foreground mb-4">
+            Pronto para automatizar sua pousada?
           </h3>
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input 
-                id="email" 
-                type="email" 
-                placeholder="seu@email.com" 
-                className="mt-1"
-              />
-            </div>
-            <div>
-              <Label htmlFor="password">Senha</Label>
-              <Input 
-                id="password" 
-                type="password" 
-                placeholder="••••••••" 
-                className="mt-1"
-              />
-            </div>
-            <Button className="w-full" size="lg">
-              Entrar
-            </Button>
-          </div>
+          <p className="text-muted-foreground mb-8">
+            Configure tudo em menos de 15 minutos
+          </p>
+          <Button size="lg" className="px-8">
+            Começar automação gratuita
+          </Button>
         </div>
       </main>
     </div>
