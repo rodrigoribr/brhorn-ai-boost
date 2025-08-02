@@ -137,8 +137,8 @@ const SectorBenefits = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sectors.map((sector, index) => (
           <Link key={index} to={sector.url}>
-            <Card className="group hover:shadow-elegant transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-md cursor-pointer">
-              <CardContent className="p-6">
+            <Card className="group hover:shadow-elegant transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-md cursor-pointer h-full">
+              <CardContent className="p-6 h-full flex flex-col">
                 <div className="text-center mb-6">
                   <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-light mb-4 group-hover:scale-110 transition-transform duration-300`}>
                     <sector.icon className={`w-8 h-8 ${sector.color}`} />
