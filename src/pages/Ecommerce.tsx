@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { ShoppingBag, MessageSquare, ShoppingCart, HeadphonesIcon, ArrowLeft, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -98,17 +100,34 @@ const Ecommerce = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center mt-16">
-          <h3 className="text-2xl font-bold text-foreground mb-4">
-            Pronto para vender mais online?
+        {/* Login Section */}
+        <div className="max-w-md mx-auto mt-16 bg-card border border-border rounded-lg p-8">
+          <h3 className="text-2xl font-bold text-foreground mb-6 text-center">
+            Faça login para começar
           </h3>
-          <p className="text-muted-foreground mb-8">
-            Configure tudo em menos de 15 minutos
-          </p>
-          <Button size="lg" className="px-8">
-            Começar automação gratuita
-          </Button>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input 
+                id="email" 
+                type="email" 
+                placeholder="seu@email.com" 
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="password">Senha</Label>
+              <Input 
+                id="password" 
+                type="password" 
+                placeholder="••••••••" 
+                className="mt-1"
+              />
+            </div>
+            <Button className="w-full" size="lg">
+              Entrar
+            </Button>
+          </div>
         </div>
       </main>
     </div>
