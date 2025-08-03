@@ -41,23 +41,48 @@ const Footer = () => {
             <h3 className="font-semibold text-background mb-4">Soluções</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#beneficios" className="text-background/80 hover:text-background transition-colors">
-                  Para Clínicas
+                <a href="/clinicas" className="text-background/80 hover:text-background transition-colors">
+                  Clínicas
                 </a>
               </li>
               <li>
-                <a href="#beneficios" className="text-background/80 hover:text-background transition-colors">
-                  Para Imobiliárias
+                <a href="/imobiliarias" className="text-background/80 hover:text-background transition-colors">
+                  Imobiliárias
                 </a>
               </li>
               <li>
-                <a href="#beneficios" className="text-background/80 hover:text-background transition-colors">
+                <a href="/profissionais-liberais" className="text-background/80 hover:text-background transition-colors">
                   Profissionais Liberais
                 </a>
               </li>
               <li>
-                <a href="#beneficios" className="text-background/80 hover:text-background transition-colors">
-                  Marketing Digital
+                <a href="/marketing" className="text-background/80 hover:text-background transition-colors">
+                  Marketing
+                </a>
+              </li>
+              <li>
+                <a href="/contabilidade" className="text-background/80 hover:text-background transition-colors">
+                  Contabilidade
+                </a>
+              </li>
+              <li>
+                <a href="/pousadas" className="text-background/80 hover:text-background transition-colors">
+                  Pousadas
+                </a>
+              </li>
+              <li>
+                <a href="/restaurantes" className="text-background/80 hover:text-background transition-colors">
+                  Restaurantes
+                </a>
+              </li>
+              <li>
+                <a href="/ecommerce" className="text-background/80 hover:text-background transition-colors">
+                  E-commerce
+                </a>
+              </li>
+              <li>
+                <a href="/automacoes-personalizadas" className="text-background/80 hover:text-background transition-colors">
+                  Automações Personalizadas
                 </a>
               </li>
             </ul>
