@@ -15,7 +15,7 @@ const Index = () => {
       <Hero />
       <SectorBenefits />
       <Technology />
-      <Testimonials />
+      
       <CTASection onOpenContact={() => setIsContactModalOpen(true)} />
       <Footer />
       
