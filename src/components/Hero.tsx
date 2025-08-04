@@ -59,21 +59,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Estatísticas rápidas */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 animate-slideUp">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">30%</div>
-            <div className="text-muted-foreground">Redução de faltas</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">24h</div>
-            <div className="text-muted-foreground">Atendimento automático</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">2x</div>
-            <div className="text-muted-foreground">Mais agendamentos</div>
-          </div>
-        </div>
       </div>
     </section>
   );

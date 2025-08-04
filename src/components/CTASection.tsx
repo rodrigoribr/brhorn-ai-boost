@@ -34,11 +34,11 @@ const CTASection = ({ onOpenContact }: CTASectionProps) => {
         <div className="flex flex-wrap justify-center gap-6 mb-10">
           <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
             <Zap className="w-4 h-4 text-primary-foreground" />
-            <span className="text-primary-foreground text-sm font-medium">Setup em 15 min</span>
+            <span className="text-primary-foreground text-sm font-medium">Setup em 7 dias</span>
           </div>
           <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
             <Clock className="w-4 h-4 text-primary-foreground" />
-            <span className="text-primary-foreground text-sm font-medium">Suporte 24/7</span>
+            <span className="text-primary-foreground text-sm font-medium">Ajustes 21 dias</span>
           </div>
           <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
             <TrendingUp className="w-4 h-4 text-primary-foreground" />
@@ -68,12 +68,6 @@ const CTASection = ({ onOpenContact }: CTASectionProps) => {
           </div>
         </div>
 
-        {/* Urgência controlada */}
-        <div className="mt-8 inline-block bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3 border border-white/20">
-          <p className="text-primary-foreground/90 text-sm">
-            <strong>Oferta limitada:</strong> Implementação gratuita para os próximos 10 clientes
-          </p>
-        </div>
       </div>
     </section>
   );
