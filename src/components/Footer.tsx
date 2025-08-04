@@ -128,14 +128,14 @@ const Footer = () => {
               © 2024 BRHORN. Todos os direitos reservados.
             </p>
             <div className="flex gap-6 text-sm">
-              <a href="#" className="text-background/60 hover:text-background transition-colors">
+              <a href="/politica-privacidade" className="text-background/60 hover:text-background transition-colors">
                 Política de Privacidade
               </a>
-              <a href="#" className="text-background/60 hover:text-background transition-colors">
+              <a href="/termos-uso" className="text-background/60 hover:text-background transition-colors">
                 Termos de Uso
               </a>
-              <a href="#" className="text-background/60 hover:text-background transition-colors">
-                LGPD
+              <a href="/exclusao-dados" className="text-background/60 hover:text-background transition-colors">
+                Exclusão de Dados
               </a>
             </div>
           </div>

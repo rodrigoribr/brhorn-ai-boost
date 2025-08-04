@@ -14,6 +14,9 @@ import Pousadas from "./pages/Pousadas";
 import Restaurantes from "./pages/Restaurantes";
 import Ecommerce from "./pages/Ecommerce";
 import AutomacoesPersonalizadas from "./pages/AutomacoesPersonalizadas";
+import PoliticaPrivacidade from "./pages/PoliticaPrivacidade";
+import TermosUso from "./pages/TermosUso";
+import ExclusaoDados from "./pages/ExclusaoDados";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +37,9 @@ const App = () => (
           <Route path="/restaurantes" element={<Restaurantes />} />
           <Route path="/ecommerce" element={<Ecommerce />} />
           <Route path="/automacoes-personalizadas" element={<AutomacoesPersonalizadas />} />
+          <Route path="/politica-privacidade" element={<PoliticaPrivacidade />} />
+          <Route path="/termos-uso" element={<TermosUso />} />
+          <Route path="/exclusao-dados" element={<ExclusaoDados />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
