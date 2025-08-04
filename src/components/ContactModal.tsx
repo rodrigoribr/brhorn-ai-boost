@@ -35,22 +35,30 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     setIsSubmitting(true);
     
     try {
-      // Salvar dados no Supabase
-      const { error } = await supabase
-        .from('contact_leads')
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            company: formData.company || null,
-            sector: formData.sector,
-            message: formData.message || null
-          }
-        ]);
+      // Enviar dados para o webhook do n8n
+      const webhookUrl = 'https://webhooks.n8n.brhorn.com/form/335274a8-1a7c-40dd-a5ea-ef3ff921409f';
+      const credentials = btoa('brhorn_form:ofXbNo81TsteAJf6HXfzCNVyu55AY36a');
+      
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${credentials}`
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company || '',
+          sector: formData.sector,
+          message: formData.message || '',
+          timestamp: new Date().toISOString(),
+          source: 'website_contact_form'
+        })
+      });
 
-      if (error) {
-        throw error;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
       
       toast({
@@ -70,7 +78,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       
       onClose();
     } catch (error) {
-      console.error('Erro ao salvar contato:', error);
+      console.error('Erro ao enviar contato:', error);
       toast({
         title: "Erro ao enviar solicitação",
         description: "Tente novamente ou entre em contato conosco diretamente.",
