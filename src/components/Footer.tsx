@@ -1,5 +1,6 @@
 import logo from "@/assets/logo1.jpg";
 import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -41,49 +42,49 @@ const Footer = () => {
             <h3 className="font-semibold text-background mb-4">Soluções</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/clinicas" className="text-background/80 hover:text-background transition-colors">
+                <Link to="/clinicas" className="text-background/80 hover:text-background transition-colors">
                   Clínicas
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/imobiliarias" className="text-background/80 hover:text-background transition-colors">
+                <Link to="/imobiliarias" className="text-background/80 hover:text-background transition-colors">
                   Imobiliárias
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/profissionais-liberais" className="text-background/80 hover:text-background transition-colors">
+                <Link to="/profissionais-liberais" className="text-background/80 hover:text-background transition-colors">
                   Profissionais Liberais
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/marketing" className="text-background/80 hover:text-background transition-colors">
+                <Link to="/marketing" className="text-background/80 hover:text-background transition-colors">
                   Marketing
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contabilidade" className="text-background/80 hover:text-background transition-colors">
+                <Link to="/contabilidade" className="text-background/80 hover:text-background transition-colors">
                   Contabilidade
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/pousadas" className="text-background/80 hover:text-background transition-colors">
+                <Link to="/pousadas" className="text-background/80 hover:text-background transition-colors">
                   Pousadas
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/restaurantes" className="text-background/80 hover:text-background transition-colors">
+                <Link to="/restaurantes" className="text-background/80 hover:text-background transition-colors">
                   Restaurantes
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/ecommerce" className="text-background/80 hover:text-background transition-colors">
+                <Link to="/ecommerce" className="text-background/80 hover:text-background transition-colors">
                   E-commerce
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/automacoes-personalizadas" className="text-background/80 hover:text-background transition-colors">
+                <Link to="/automacoes-personalizadas" className="text-background/80 hover:text-background transition-colors">
                   Automações Personalizadas
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -128,15 +129,15 @@ const Footer = () => {
               © 2024 BRHORN. Todos os direitos reservados.
             </p>
             <div className="flex gap-6 text-sm">
-              <a href="/politica-privacidade" className="text-background/60 hover:text-background transition-colors">
+              <Link to="/politica-privacidade" className="text-background/60 hover:text-background transition-colors">
                 Política de Privacidade
-              </a>
-              <a href="/termos-uso" className="text-background/60 hover:text-background transition-colors">
+              </Link>
+              <Link to="/termos-uso" className="text-background/60 hover:text-background transition-colors">
                 Termos de Uso
-              </a>
-              <a href="/exclusao-dados" className="text-background/60 hover:text-background transition-colors">
+              </Link>
+              <Link to="/exclusao-dados" className="text-background/60 hover:text-background transition-colors">
                 Exclusão de Dados
-              </a>
+              </Link>
             </div>
           </div>
         </div>
