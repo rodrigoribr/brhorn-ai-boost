@@ -36,7 +36,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     
     try {
       // Enviar dados para o webhook do n8n
-      const webhookUrl = 'https://webhooks.n8n.brhorn.com/form/335274a8-1a7c-40dd-a5ea-ef3ff921409f';
+      const webhookUrl = 'https://webhooks.n8n.brhorn.com/webhook/de921d77-9893-4e42-8324-06e955f1928d';
       const credentials = btoa('brhorn_form:ofXbNo81TsteAJf6HXfzCNVyu55AY36a');
       
       const response = await fetch(webhookUrl, {
