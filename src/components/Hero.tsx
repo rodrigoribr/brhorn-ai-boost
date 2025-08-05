@@ -13,7 +13,7 @@ const Hero = () => {
         <div className="max-w-7xl mx-auto flex items-center">
           <img 
             src={logo} 
-            alt="BRHORN Logo" 
+            alt="brhorn Logo" 
             className="h-12 w-auto"
           />
         </div>

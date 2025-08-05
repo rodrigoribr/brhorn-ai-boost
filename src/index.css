@@ -17,7 +17,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* BRHORN brand colors - blue gradient */
+    /* brhorn brand colors - blue gradient */
     --primary: 207 100% 50%; /* #00A8FF */
     --primary-foreground: 0 0% 100%;
     --primary-dark: 215 100% 40%; /* #0052CC */
@@ -40,7 +40,7 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
     
-    /* BRHORN custom design tokens */
+    /* brhorn custom design tokens */
     --gradient-primary: linear-gradient(135deg, hsl(207 100% 50%), hsl(215 100% 40%));
     --gradient-light: linear-gradient(135deg, hsl(207 100% 95%), hsl(215 100% 98%));
     --shadow-elegant: 0 20px 25px -5px hsl(207 100% 50% / 0.1), 0 10px 10px -5px hsl(207 100% 50% / 0.04);

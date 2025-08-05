@@ -10,7 +10,7 @@ const Testimonials = () => {
       company: "São Paulo, SP",
       avatar: "AS",
       rating: 5,
-      testimonial: "Reduzimos tarefas manuais pela metade e dobramos o agendamento online em 3 meses. O chatbot da BRHORN transformou nossa operação.",
+      testimonial: "Reduzimos tarefas manuais pela metade e dobramos o agendamento online em 3 meses. O chatbot da brhorn transformou nossa operação.",
       highlight: "Dobrou agendamentos"
     },
     {

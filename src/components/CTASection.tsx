@@ -26,7 +26,7 @@ const CTASection = ({ onOpenContact }: CTASectionProps) => {
           
           <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-4xl mx-auto leading-relaxed">
             Junte-se a centenas de empresas que já automatizaram seus processos 
-            e multiplicaram seus resultados com a BRHORN.
+            e multiplicaram seus resultados com a brhorn.
           </p>
         </div>
 
