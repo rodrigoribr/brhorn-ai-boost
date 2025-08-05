@@ -25,7 +25,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/brhorn-ai-boost">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/clinicas" element={<Clinicas />} />
