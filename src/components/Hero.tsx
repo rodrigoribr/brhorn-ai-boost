@@ -40,7 +40,7 @@ const Hero = () => {
             Transforme processos manuais em automação eficiente.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex justify-center">
             <Button 
               variant="hero" 
               size="lg" 
@@ -48,13 +48,6 @@ const Hero = () => {
               className="text-lg px-8 py-4 h-auto"
             >
               Fale com um Especialista
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="text-lg px-8 py-4 h-auto border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-            >
-              Ver Demonstração
             </Button>
           </div>
         </div>
