@@ -10,11 +10,11 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-light overflow-hidden">
       {/* Header com Logo */}
       <header className="absolute top-0 left-0 right-0 z-10 p-6">
-        <div className="max-w-7xl mx-auto flex items-center">
+        <div className="max-w-7xl mx-auto flex justify-center items-center">
           <img 
             src={logo} 
             alt="brhorn Logo" 
-            className="h-12 w-auto"
+            className="h-20 w-auto"
           />
         </div>
       </header>
