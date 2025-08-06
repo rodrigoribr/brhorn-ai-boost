@@ -25,16 +25,16 @@ const Imobiliarias = () => {
               </div>
             </div>
             {/* Login Form */}
-            <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-3">
               <Input 
                 type="email" 
                 placeholder="Email" 
-                className="w-40"
+                className="w-32 lg:w-40"
               />
               <Input 
                 type="password" 
                 placeholder="Senha" 
-                className="w-40"
+                className="w-32 lg:w-40"
               />
               <Button size="sm">
                 Entrar
