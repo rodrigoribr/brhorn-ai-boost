@@ -169,7 +169,7 @@ const SectorBenefits = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
               <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
-              <div className="text-2xl font-bold text-foreground mb-1">90%</div>
+              <div className="text-2xl font-bold text-foreground mb-1">80%</div>
               <div className="text-sm text-muted-foreground">Economia de tempo</div>
             </div>
             <div>
@@ -184,8 +184,8 @@ const SectorBenefits = () => {
             </div>
             <div>
               <Target className="w-8 h-8 text-primary mx-auto mb-3" />
-              <div className="text-2xl font-bold text-foreground mb-1">15min</div>
-              <div className="text-sm text-muted-foreground">Setup completo</div>
+              <div className="text-2xl font-bold text-foreground mb-1">Setup</div>
+              <div className="text-sm text-muted-foreground">Rápido</div>
             </div>
           </div>
         </div>
