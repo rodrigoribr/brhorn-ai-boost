@@ -104,21 +104,21 @@ const Technology = () => {
 
         {/* Seção de processo visual */}
         <div className="mt-20 text-center">
-          <div className="inline-flex items-center gap-4 px-8 py-4 bg-background rounded-full shadow-elegant">
+          <div className="flex flex-col md:flex-row md:inline-flex items-center gap-4 px-6 md:px-8 py-4 bg-background rounded-2xl md:rounded-full shadow-elegant mx-auto max-w-sm md:max-w-none">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center">
                 <Workflow className="w-4 h-4 text-primary-foreground" />
               </div>
               <span className="font-semibold text-foreground">Análise</span>
             </div>
-            <ArrowRight className="w-5 h-5 text-muted-foreground" />
+            <ArrowRight className="w-5 h-5 text-muted-foreground rotate-90 md:rotate-0" />
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center">
                 <Code className="w-4 h-4 text-primary-foreground" />
               </div>
               <span className="font-semibold text-foreground">Automação</span>
             </div>
-            <ArrowRight className="w-5 h-5 text-muted-foreground" />
+            <ArrowRight className="w-5 h-5 text-muted-foreground rotate-90 md:rotate-0" />
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center">
                 <Zap className="w-4 h-4 text-primary-foreground" />
