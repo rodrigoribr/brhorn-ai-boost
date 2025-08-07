@@ -14,7 +14,7 @@ const Hero = () => {
           <img 
             src={logo} 
             alt="brhorn Logo" 
-            className="h-24 w-auto"
+            className="h-32 w-auto"
           />
           <span className="text-2xl font-bold text-foreground">
             Automação & IA
