@@ -7,7 +7,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-light overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-light overflow-hidden pt-40 md:pt-0">
       {/* Header com Logo */}
       <header className="absolute top-0 left-0 right-0 z-10 p-6">
         <div className="max-w-7xl mx-auto flex flex-col justify-center items-center gap-2">
