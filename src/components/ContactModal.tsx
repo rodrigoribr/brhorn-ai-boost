@@ -12,9 +12,10 @@ import { supabase } from "@/integrations/supabase/client";
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onFormSubmit?: () => void;
 }
 
-const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
+const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -77,6 +78,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       });
       
       onClose();
+      onFormSubmit?.();
     } catch (error) {
       console.error('Erro ao enviar contato:', error);
       toast({

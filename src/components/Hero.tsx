@@ -1,9 +1,14 @@
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/brhorn-logo.png";
 
-const Hero = () => {
+interface HeroProps {
+  onContactClick?: () => void;
+}
+
+const Hero = ({ onContactClick }: HeroProps) => {
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    onContactClick?.();
   };
 
   return (

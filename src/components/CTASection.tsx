@@ -3,9 +3,15 @@ import { ArrowRight, Zap, Clock, TrendingUp } from "lucide-react";
 
 interface CTASectionProps {
   onOpenContact: () => void;
+  onContactClick?: () => void;
 }
 
-const CTASection = ({ onOpenContact }: CTASectionProps) => {
+const CTASection = ({ onOpenContact, onContactClick }: CTASectionProps) => {
+  const handleContactClick = () => {
+    onContactClick?.();
+    onOpenContact();
+  };
+
   return (
     <section id="contact" className="py-20 bg-gradient-primary relative overflow-hidden">
       {/* Background decorativo */}
@@ -51,7 +57,7 @@ const CTASection = ({ onOpenContact }: CTASectionProps) => {
           <Button 
             variant="secondary" 
             size="lg"
-            onClick={onOpenContact}
+            onClick={handleContactClick}
             className="group text-lg px-8 py-4 h-auto bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold shadow-hero hover:shadow-elegant transform hover:scale-105 transition-all duration-300"
           >
             Quero uma Demonstração Gratuita
