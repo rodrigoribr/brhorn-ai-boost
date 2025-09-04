@@ -13,17 +13,39 @@ const Hero = ({ onContactClick }: HeroProps) => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-light overflow-hidden pt-40 md:pt-0">
-      {/* Header com Logo */}
+      {/* Header com Logo e Menu */}
       <header className="absolute top-0 left-0 right-0 z-10 p-6">
-        <div className="max-w-7xl mx-auto flex flex-col justify-center items-center gap-2">
-          <img 
-            src={logo} 
-            alt="brhorn Logo" 
-            className="h-32 w-auto"
-          />
-          <span className="text-2xl font-bold text-foreground">
-            Automação & IA
-          </span>
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          {/* Logo e texto à esquerda */}
+          <div className="flex items-center gap-3">
+            <img 
+              src={logo} 
+              alt="brhorn Logo" 
+              className="h-16 w-auto"
+            />
+            <span className="text-xl font-bold text-foreground">
+              Automação & IA
+            </span>
+          </div>
+
+          {/* Menu de navegação */}
+          <nav className="hidden lg:flex items-center space-x-8">
+            <a href="#inicio" className="text-foreground hover:text-primary transition-colors">
+              Início
+            </a>
+            <a href="#sobre" className="text-foreground hover:text-primary transition-colors">
+              Sobre Nós
+            </a>
+            <a href="#solucoes" className="text-foreground hover:text-primary transition-colors">
+              Soluções
+            </a>
+            <a href="#clientes" className="text-foreground hover:text-primary transition-colors">
+              Nossos Clientes
+            </a>
+            <a href="#contato" className="text-foreground hover:text-primary transition-colors">
+              Fale Conosco
+            </a>
+          </nav>
         </div>
       </header>
 
