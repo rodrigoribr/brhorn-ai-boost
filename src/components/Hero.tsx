@@ -19,8 +19,8 @@ const Hero = ({ onContactClick }: HeroProps) => {
         <div className="relative bg-gradient-to-r from-primary/10 via-primary/5 to-primary-dark/10 backdrop-blur-sm border-b border-primary/20">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent"></div>
           
-          <div className="max-w-7xl mx-auto flex justify-between items-center p-6">
-            {/* Logo e texto à esquerda */}
+          <div className="max-w-7xl mx-auto flex items-center justify-center p-6 gap-8">
+            {/* Logo e texto */}
             <div className="flex flex-col items-center gap-1 relative z-10">
               <img 
                 src={logo} 
@@ -33,7 +33,7 @@ const Hero = ({ onContactClick }: HeroProps) => {
             </div>
 
             {/* Menu de navegação centralizado */}
-            <nav className="hidden lg:flex items-center justify-center flex-1 mx-12">
+            <nav className="hidden lg:flex items-center justify-center">
               <div className="flex items-center space-x-10 bg-white/5 backdrop-blur-md rounded-full px-8 py-3 border border-primary/20">
                 <a href="#inicio" className="menu-item relative text-lg font-medium text-foreground hover:text-primary transition-all duration-300 group">
                   <span className="relative z-10">Início</span>
@@ -62,9 +62,6 @@ const Hero = ({ onContactClick }: HeroProps) => {
                 </a>
               </div>
             </nav>
-
-            {/* Espaço para balancear o layout */}
-            <div className="w-32"></div>
           </div>
 
           {/* Linhas de energia animadas */}
