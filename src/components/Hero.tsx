@@ -15,7 +15,7 @@ const Hero = ({ onContactClick }: HeroProps) => {
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-light overflow-hidden pt-40 md:pt-0">
       {/* Header com Logo e Menu */}
       <header className="absolute top-0 left-0 right-0 z-10 p-6">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <div className="max-w-7xl mx-auto flex items-center gap-12">
           {/* Logo e texto à esquerda */}
           <div className="flex flex-col items-center gap-1">
             <img 
