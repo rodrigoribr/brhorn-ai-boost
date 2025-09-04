@@ -17,13 +17,13 @@ const Hero = ({ onContactClick }: HeroProps) => {
       <header className="absolute top-0 left-0 right-0 z-10 p-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo e texto à esquerda */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col items-center gap-1">
             <img 
               src={logo} 
               alt="brhorn Logo" 
               className="h-16 w-auto"
             />
-            <span className="text-xl font-bold text-foreground">
+            <span className="text-lg font-bold text-foreground">
               Automação & IA
             </span>
           </div>
