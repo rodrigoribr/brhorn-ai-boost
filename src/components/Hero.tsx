@@ -12,40 +12,66 @@ const Hero = ({ onContactClick }: HeroProps) => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-light overflow-hidden pt-40 md:pt-0">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-light overflow-hidden pt-32 md:pt-24">
       {/* Header com Logo e Menu */}
-      <header className="absolute top-0 left-0 right-0 z-10 p-6">
-        <div className="max-w-7xl mx-auto flex items-center gap-12">
-          {/* Logo e texto à esquerda */}
-          <div className="flex flex-col items-center gap-1">
-            <img 
-              src={logo} 
-              alt="brhorn Logo" 
-              className="h-16 w-auto"
-            />
-            <span className="text-lg font-bold text-foreground">
-              Automação & IA
-            </span>
+      <header className="absolute top-0 left-0 right-0 z-10">
+        {/* Faixa futurista */}
+        <div className="relative bg-gradient-to-r from-primary/10 via-primary/5 to-primary-dark/10 backdrop-blur-sm border-b border-primary/20">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent"></div>
+          
+          <div className="max-w-7xl mx-auto flex justify-between items-center p-6">
+            {/* Logo e texto à esquerda */}
+            <div className="flex flex-col items-center gap-1 relative z-10">
+              <img 
+                src={logo} 
+                alt="brhorn Logo" 
+                className="h-16 w-auto"
+              />
+              <span className="text-lg font-bold text-foreground">
+                Automação & IA
+              </span>
+            </div>
+
+            {/* Menu de navegação centralizado */}
+            <nav className="hidden lg:flex items-center justify-center flex-1 mx-12">
+              <div className="flex items-center space-x-10 bg-white/5 backdrop-blur-md rounded-full px-8 py-3 border border-primary/20">
+                <a href="#inicio" className="menu-item relative text-lg font-medium text-foreground hover:text-primary transition-all duration-300 group">
+                  <span className="relative z-10">Início</span>
+                  <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary-dark/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                </a>
+                <a href="#sobre" className="menu-item relative text-lg font-medium text-foreground hover:text-primary transition-all duration-300 group">
+                  <span className="relative z-10">Sobre Nós</span>
+                  <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary-dark/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                </a>
+                <a href="#solucoes" className="menu-item relative text-lg font-medium text-foreground hover:text-primary transition-all duration-300 group">
+                  <span className="relative z-10">Soluções</span>
+                  <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary-dark/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                </a>
+                <a href="#clientes" className="menu-item relative text-lg font-medium text-foreground hover:text-primary transition-all duration-300 group">
+                  <span className="relative z-10">Nossos Clientes</span>
+                  <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary-dark/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                </a>
+                <a href="#contato" className="menu-item relative text-lg font-medium text-foreground hover:text-primary transition-all duration-300 group">
+                  <span className="relative z-10">Fale Conosco</span>
+                  <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary-dark/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                </a>
+              </div>
+            </nav>
+
+            {/* Espaço para balancear o layout */}
+            <div className="w-32"></div>
           </div>
 
-          {/* Menu de navegação */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            <a href="#inicio" className="text-foreground hover:text-primary transition-colors">
-              Início
-            </a>
-            <a href="#sobre" className="text-foreground hover:text-primary transition-colors">
-              Sobre Nós
-            </a>
-            <a href="#solucoes" className="text-foreground hover:text-primary transition-colors">
-              Soluções
-            </a>
-            <a href="#clientes" className="text-foreground hover:text-primary transition-colors">
-              Nossos Clientes
-            </a>
-            <a href="#contato" className="text-foreground hover:text-primary transition-colors">
-              Fale Conosco
-            </a>
-          </nav>
+          {/* Linhas de energia animadas */}
+          <div className="absolute bottom-0 left-0 right-0 h-px">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-dark to-transparent opacity-30 animate-pulse"></div>
+          </div>
         </div>
       </header>
 
