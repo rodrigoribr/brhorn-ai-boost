@@ -17,9 +17,9 @@ const Index = () => {
     setHasClickedContact(true);
     
     try {
-      const webhookUrl = 'https://webhooks.n8n.brhorn.com/webhook/9225a475-059b-4cf9-8618-cbe49c78682f';
-      const credentials = btoa('brhorn_form:ofXbNo81TsteAJf6HXfzCNVyu55AY36a');
-      
+      const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
+      const credentials = import.meta.env.VITE_WEBHOOK_CREDENTIALS;
+
       await fetch(webhookUrl, {
         method: 'POST',
         headers: {

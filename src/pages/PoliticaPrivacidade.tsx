@@ -93,7 +93,7 @@ const PoliticaPrivacidade = () => {
                   brhorn – suporte@brhorn.com
                 </p>
                 <p className="text-muted-foreground text-sm mt-4">
-                  Última atualização: 2025-08-03
+                  Última atualização: {import.meta.env.VITE_PRIVACY_POLICY_UPDATE || '2023-09-01'}
                 </p>
               </section>
             </div>
