@@ -1,5 +1,5 @@
 import logo from "@/assets/logo1.jpg";
-import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -20,13 +20,6 @@ const Footer = () => {
             </p>
             
             <div className="flex gap-4">
-              <a 
-                href="#" 
-                className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-dark transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5 text-primary-foreground" />
-              </a>
               <a 
                 href="https://www.instagram.com/brhorn_ia/" 
                 className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-dark transition-colors"
