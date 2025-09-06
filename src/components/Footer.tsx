@@ -1,5 +1,5 @@
 import logo from "@/assets/logo1.jpg";
-import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -35,6 +35,15 @@ const Footer = () => {
                 rel="noopener noreferrer"
               >
                 <Instagram className="w-5 h-5 text-primary-foreground" />
+              </a>
+              <a 
+                href="https://www.facebook.com/people/Brhorn/61579100998129/?locale=pt_BR" 
+                className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-dark transition-colors"
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Facebook className="w-5 h-5 text-primary-foreground" />
               </a>
             </div>
           </div>
