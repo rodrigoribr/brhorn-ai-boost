@@ -28,9 +28,11 @@ const Footer = () => {
                 <Linkedin className="w-5 h-5 text-primary-foreground" />
               </a>
               <a 
-                href="#" 
+                href="https://www.instagram.com/brhorn_ia/" 
                 className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-dark transition-colors"
                 aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Instagram className="w-5 h-5 text-primary-foreground" />
               </a>
