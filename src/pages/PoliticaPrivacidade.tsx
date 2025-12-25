@@ -11,8 +11,8 @@ const PoliticaPrivacidade = () => {
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               size="sm"
               onClick={() => window.history.back()}
               className="flex items-center gap-2"
@@ -22,22 +22,8 @@ const PoliticaPrivacidade = () => {
             </Button>
             <h1 className="text-xl font-semibold">Política de Privacidade</h1>
           </div>
-          
-          <div className="flex items-center gap-3">
-            <Input
-              type="email"
-              placeholder="E-mail"
-              className="w-40 h-9"
-            />
-            <Input
-              type="password"
-              placeholder="Senha"
-              className="w-32 h-9"
-            />
-            <Button size="sm" className="h-9">
-              Entrar
-            </Button>
-          </div>
+
+
         </div>
       </header>
 
@@ -46,7 +32,7 @@ const PoliticaPrivacidade = () => {
         <Card>
           <CardContent className="p-8">
             <h1 className="text-3xl font-bold mb-6 text-foreground">Política de Privacidade</h1>
-            
+
             <p className="text-muted-foreground mb-8 text-lg">
               A brhorn coleta dados estritamente necessários para autenticação e suporte.
             </p>

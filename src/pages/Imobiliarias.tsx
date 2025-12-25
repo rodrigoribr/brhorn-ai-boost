@@ -24,22 +24,7 @@ const Imobiliarias = () => {
                 <h1 className="text-3xl font-bold text-foreground">Automação para Imobiliárias</h1>
               </div>
             </div>
-            {/* Login Form */}
-            <div className="hidden md:flex items-center gap-3">
-              <Input 
-                type="email" 
-                placeholder="Email" 
-                className="w-32 lg:w-40"
-              />
-              <Input 
-                type="password" 
-                placeholder="Senha" 
-                className="w-32 lg:w-40"
-              />
-              <Button size="sm">
-                Entrar
-              </Button>
-            </div>
+
           </div>
         </div>
       </header>
