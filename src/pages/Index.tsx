@@ -13,19 +13,25 @@ const Index = () => {
 
   const sendWebhookNotification = async () => {
     if (hasClickedContact) return; // Evita múltiplas notificações na mesma sessão
-    
+
     setHasClickedContact(true);
-    
+
     try {
-      const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
+      const webhookUrl = 'https://n8nwebhooks01.brhorn.com/webhook/5572cf97-cc95-4241-949a-02082b1b6ead';
       const credentials = import.meta.env.VITE_WEBHOOK_CREDENTIALS;
+
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+
+      if (credentials) {
+        const encodedCredentials = credentials.includes(':') ? btoa(credentials) : credentials;
+        headers['Authorization'] = `Basic ${encodedCredentials}`;
+      }
 
       await fetch(webhookUrl, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Basic ${credentials}`
-        },
+        headers: headers,
         body: JSON.stringify({
           event_type: 'contact_button_click',
           timestamp: new Date().toISOString(),
@@ -50,16 +56,16 @@ const Index = () => {
       <Hero onContactClick={sendWebhookNotification} />
       <SectorBenefits />
       <Technology onContactClick={sendWebhookNotification} />
-      
-      <CTASection 
-        onOpenContact={() => setIsContactModalOpen(true)} 
+
+      <CTASection
+        onOpenContact={() => setIsContactModalOpen(true)}
         onContactClick={sendWebhookNotification}
       />
       <Footer />
-      
-      <ContactModal 
-        isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
+
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
         onFormSubmit={handleFormSubmit}
       />
     </div>
