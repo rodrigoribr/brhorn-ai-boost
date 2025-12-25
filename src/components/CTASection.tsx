@@ -29,9 +29,9 @@ const CTASection = ({ onOpenContact, onContactClick }: CTASectionProps) => {
               seu negócio?
             </span>
           </h2>
-          
+
           <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-4xl mx-auto leading-relaxed">
-            Junte-se a centenas de empresas que já automatizaram seus processos 
+            Junte-se a centenas de empresas que já automatizaram seus processos
             e multiplicaram seus resultados com a brhorn.
           </p>
         </div>
@@ -54,25 +54,19 @@ const CTASection = ({ onOpenContact, onContactClick }: CTASectionProps) => {
 
         {/* CTAs principais */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-          <Button 
-            variant="secondary" 
+          <Button
+            variant="secondary"
             size="lg"
             onClick={handleContactClick}
             className="group text-lg px-8 py-4 h-auto bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold shadow-hero hover:shadow-elegant transform hover:scale-105 transition-all duration-300"
           >
-            Quero uma Demonstração Gratuita
+            Solicitar contato
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
 
         {/* Garantias e segurança */}
-        <div className="text-center">
-          <div className="inline-flex flex-wrap items-center justify-center gap-6 text-primary-foreground/80 text-sm">
-            <span>✓ Demonstração personalizada</span>
-            <span>✓ Sem compromisso</span>
-            <span>✓ Análise gratuita do seu negócio</span>
-          </div>
-        </div>
+
 
       </div>
     </section>
