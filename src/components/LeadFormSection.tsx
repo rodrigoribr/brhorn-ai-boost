@@ -28,6 +28,11 @@ export const LeadFormSection = () => {
         e.preventDefault();
         setIsSubmitting(true);
 
+        // Disparar evento de Lead no Facebook Pixel ao clicar/submeter (validado)
+        if ((window as any).fbq) {
+            (window as any).fbq('track', 'Lead');
+        }
+
         try {
             // Enviar dados para o webhook do n8n
             const webhookUrl = 'https://n8nwebhooks01.brhorn.com/webhook/5572cf97-cc95-4241-949a-02082b1b6ead';
@@ -61,10 +66,7 @@ export const LeadFormSection = () => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            // Disparar evento de Lead no Facebook Pixel após sucesso
-            if ((window as any).fbq) {
-                (window as any).fbq('track', 'Lead');
-            }
+
 
             toast({
                 title: "Solicitação enviada com sucesso!",
@@ -193,7 +195,7 @@ export const LeadFormSection = () => {
                                     Enviando...
                                 </div>
                             ) : (
-                                "Solicitar demonstração gratuita ▶"
+                                "Solicitar contato"
                             )}
                         </Button>
                         <div className="text-xs text-center text-muted-foreground mt-4">
