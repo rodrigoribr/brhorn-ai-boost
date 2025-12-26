@@ -1,0 +1,207 @@
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import { CheckCircle } from "lucide-react";
+
+export const LeadFormSection = () => {
+    const { toast } = useToast();
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        sector: '',
+        message: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleInputChange = (field: string, value: string) => {
+        setFormData(prev => ({ ...prev, [field]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        try {
+            // Enviar dados para o webhook do n8n
+            const webhookUrl = 'https://n8nwebhooks01.brhorn.com/webhook/5572cf97-cc95-4241-949a-02082b1b6ead';
+            const credentials = import.meta.env.VITE_WEBHOOK_CREDENTIALS;
+
+            const headers: Record<string, string> = {
+                'Content-Type': 'application/json',
+            };
+
+            if (credentials) {
+                const encodedCredentials = credentials.includes(':') ? btoa(credentials) : credentials;
+                headers['Authorization'] = `Basic ${encodedCredentials}`;
+            }
+
+            const response = await fetch(webhookUrl, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    company: formData.company || '',
+                    sector: formData.sector,
+                    message: formData.message || '',
+                    timestamp: new Date().toISOString(),
+                    source: 'website_inline_form'
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            // Disparar evento de Lead no Facebook Pixel após sucesso
+            if ((window as any).fbq) {
+                (window as any).fbq('track', 'Lead');
+            }
+
+            toast({
+                title: "Solicitação enviada com sucesso!",
+                description: "Nossa equipe entrará em contato em até 24 horas.",
+            });
+
+            // Reset form
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                company: '',
+                sector: '',
+                message: ''
+            });
+
+        } catch (error) {
+            console.error('Erro ao enviar contato:', error);
+            toast({
+                title: "Erro ao enviar solicitação",
+                description: "Tente novamente ou entre em contato conosco diretamente.",
+                variant: "destructive"
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    const isFormValid = formData.name && formData.email && formData.phone && formData.sector;
+
+    return (
+        <section id="contact-form" className="py-20 bg-background">
+            <div className="max-w-3xl mx-auto px-6">
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold mb-4">Veja a automação na prática</h2>
+                    <p className="text-muted-foreground">Preencha o formulário e fale com um especialista.</p>
+                </div>
+
+                <div className="bg-white p-8 rounded-2xl shadow-sm border">
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="grid grid-cols-1 gap-6">
+                            <div>
+                                <Label htmlFor="name">Nome completo *</Label>
+                                <Input
+                                    id="name"
+                                    type="text"
+                                    value={formData.name}
+                                    onChange={(e) => handleInputChange('name', e.target.value)}
+                                    placeholder="Seu nome completo"
+                                    className="mt-1"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <Label htmlFor="email">E-mail corporativo *</Label>
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    value={formData.email}
+                                    onChange={(e) => handleInputChange('email', e.target.value)}
+                                    placeholder="seu@email.com"
+                                    className="mt-1"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <Label htmlFor="phone">Telefone/WhatsApp *</Label>
+                                <Input
+                                    id="phone"
+                                    type="tel"
+                                    value={formData.phone}
+                                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                                    placeholder="(11) 99999-9999"
+                                    className="mt-1"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <Label htmlFor="company">Empresa</Label>
+                                <Input
+                                    id="company"
+                                    type="text"
+                                    value={formData.company}
+                                    onChange={(e) => handleInputChange('company', e.target.value)}
+                                    placeholder="Nome da sua empresa"
+                                    className="mt-1"
+                                />
+                            </div>
+
+                            <div>
+                                <Label htmlFor="sector">Descreva brevemente seu desafio *</Label>
+                                <Textarea
+                                    id="sector"
+                                    value={formData.sector}
+                                    onChange={(e) => handleInputChange('sector', e.target.value)}
+                                    placeholder="Ex: Preciso automatizar o atendimento no WhatsApp..."
+                                    className="mt-1"
+                                    required
+                                />
+                            </div>
+
+                            {/* <div>
+                <Label htmlFor="message">Mensagem</Label>
+                <Textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={(e) => handleInputChange('message', e.target.value)}
+                  placeholder="Conte-nos sobre seu negócio e objetivos..."
+                  rows={3}
+                  className="mt-1"
+                />
+              </div> */}
+                        </div>
+
+                        <Button
+                            type="submit"
+                            className="w-full bg-[#0091FF] hover:bg-[#007acc] text-white font-semibold py-6 rounded-xl text-lg mt-4 transition-all"
+                            disabled={!isFormValid || isSubmitting}
+                        >
+                            {isSubmitting ? (
+                                <div className="flex items-center gap-2">
+                                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                    Enviando...
+                                </div>
+                            ) : (
+                                "Solicitar demonstração gratuita ▶"
+                            )}
+                        </Button>
+                        <div className="text-xs text-center text-muted-foreground mt-4">
+                            Seus dados estão seguros conosco.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    );
+};

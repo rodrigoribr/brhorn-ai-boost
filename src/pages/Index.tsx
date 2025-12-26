@@ -1,14 +1,13 @@
 import { useState } from "react";
 import Hero from "@/components/Hero";
-import SectorBenefits from "@/components/SectorBenefits";
-import Technology from "@/components/Technology";
-import Testimonials from "@/components/Testimonials";
-import CTASection from "@/components/CTASection";
+import { PainPoints } from "@/components/PainPoints";
+import { ValueProp } from "@/components/ValueProp";
+import { ProcessSteps } from "@/components/ProcessSteps";
+import { UseCases } from "@/components/UseCases";
+import { LeadFormSection } from "@/components/LeadFormSection";
 import Footer from "@/components/Footer";
-import ContactModal from "@/components/ContactModal";
 
 const Index = () => {
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [hasClickedContact, setHasClickedContact] = useState(false);
 
   const sendWebhookNotification = async () => {
@@ -38,7 +37,7 @@ const Index = () => {
           source: 'website_contact_button',
           page_url: window.location.href,
           user_agent: navigator.userAgent,
-          message: 'Usuário clicou em "Fale com um Especialista" mas não preencheu o formulário'
+          message: 'Usuário clicou em "Solicitar demonstração"'
         })
       });
     } catch (error) {
@@ -46,28 +45,15 @@ const Index = () => {
     }
   };
 
-  const handleFormSubmit = () => {
-    // Reset o flag quando o formulário é enviado
-    setHasClickedContact(false);
-  };
-
   return (
     <div className="min-h-screen bg-background font-poppins">
       <Hero onContactClick={sendWebhookNotification} />
-      <SectorBenefits />
-      <Technology onContactClick={sendWebhookNotification} />
-
-      <CTASection
-        onOpenContact={() => setIsContactModalOpen(true)}
-        onContactClick={sendWebhookNotification}
-      />
+      <PainPoints />
+      <ValueProp />
+      <ProcessSteps />
+      <UseCases />
+      <LeadFormSection />
       <Footer />
-
-      <ContactModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-        onFormSubmit={handleFormSubmit}
-      />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import logo from "@/assets/logo1.jpg";
+import logo from "@/assets/logo-new.png";
 import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -9,19 +9,19 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo e descrição */}
           <div className="md:col-span-2">
-            <img 
-              src={logo} 
-              alt="brhorn Logo" 
-              className="h-10 w-auto mb-4 brightness-0 invert"
+            <img
+              src={logo}
+              alt="brhorn Logo"
+              className="h-12 w-auto mb-4 brightness-0 invert"
             />
             <p className="text-background/80 mb-6 max-w-md leading-relaxed">
-              Transformamos negócios através da automação inteligente. 
+              Transformamos negócios através da automação inteligente.
               Especialistas em IA, n8n e desenvolvimento ágil para resultados extraordinários.
             </p>
-            
+
             <div className="flex gap-4">
-              <a 
-                href="https://www.instagram.com/brhorn_ia/" 
+              <a
+                href="https://www.instagram.com/brhorn_ia/"
                 className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-dark transition-colors"
                 aria-label="Instagram"
                 target="_blank"
@@ -29,8 +29,8 @@ const Footer = () => {
               >
                 <Instagram className="w-5 h-5 text-primary-foreground" />
               </a>
-              <a 
-                href="https://www.facebook.com/people/Brhorn/61579100998129/?locale=pt_BR" 
+              <a
+                href="https://www.facebook.com/people/Brhorn/61579100998129/?locale=pt_BR"
                 className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-dark transition-colors"
                 aria-label="Facebook"
                 target="_blank"
@@ -41,57 +41,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links rápidos */}
-          <div>
-            <h3 className="font-semibold text-background mb-4">Soluções</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/clinicas" className="text-background/80 hover:text-background transition-colors">
-                  Clínicas
-                </Link>
-              </li>
-              <li>
-                <Link to="/imobiliarias" className="text-background/80 hover:text-background transition-colors">
-                  Imobiliárias
-                </Link>
-              </li>
-              <li>
-                <Link to="/profissionais-liberais" className="text-background/80 hover:text-background transition-colors">
-                  Profissionais Liberais
-                </Link>
-              </li>
-              <li>
-                <Link to="/marketing" className="text-background/80 hover:text-background transition-colors">
-                  Marketing
-                </Link>
-              </li>
-              <li>
-                <Link to="/contabilidade" className="text-background/80 hover:text-background transition-colors">
-                  Contabilidade
-                </Link>
-              </li>
-              <li>
-                <Link to="/pousadas" className="text-background/80 hover:text-background transition-colors">
-                  Pousadas
-                </Link>
-              </li>
-              <li>
-                <Link to="/restaurantes" className="text-background/80 hover:text-background transition-colors">
-                  Restaurantes
-                </Link>
-              </li>
-              <li>
-                <Link to="/ecommerce" className="text-background/80 hover:text-background transition-colors">
-                  E-commerce
-                </Link>
-              </li>
-              <li>
-                <Link to="/automacoes-personalizadas" className="text-background/80 hover:text-background transition-colors">
-                  Automações Personalizadas
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {/* Links omitidos conforme solicitado */}
 
           {/* Contato */}
           <div>
@@ -99,8 +49,8 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-primary" />
-                <a 
-                  href="mailto:contato@brhorn.com" 
+                <a
+                  href="mailto:contato@brhorn.com"
                   className="text-background/80 hover:text-background transition-colors"
                 >
                   contato@brhorn.com
@@ -108,8 +58,8 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-primary" />
-                <a 
-                  href="tel:+553599161747" 
+                <a
+                  href="tel:+553599161747"
                   className="text-background/80 hover:text-background transition-colors"
                 >
                   (35) 9 9161 7547
@@ -145,7 +95,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Analytics placeholder */}
       {/* GA4 here */}
     </footer>
