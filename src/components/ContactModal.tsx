@@ -34,7 +34,7 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       // Enviar dados para o webhook do n8n
       const webhookUrl = 'https://n8nwebhooks01.brhorn.com/webhook/5572cf97-cc95-4241-949a-02082b1b6ead';
@@ -67,12 +67,17 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
+      // Disparar evento de Lead no Facebook Pixel
+      if ((window as any).fbq) {
+        (window as any).fbq('track', 'Lead');
+      }
+
       toast({
         title: "Solicitação enviada com sucesso!",
         description: "Nossa equipe entrará em contato em até 24 horas.",
       });
-      
+
       // Reset form
       setFormData({
         name: '',
@@ -82,7 +87,7 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
         sector: '',
         message: ''
       });
-      
+
       onClose();
       onFormSubmit?.();
     } catch (error) {
@@ -107,8 +112,8 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
             <DialogTitle className="text-2xl font-bold text-foreground">
               Fale com um Especialista
             </DialogTitle>
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               size="icon"
               onClick={onClose}
               className="h-6 w-6 p-0"
@@ -201,16 +206,16 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
           </div>
 
           <div className="flex gap-3 pt-4">
-            <Button 
-              type="button" 
-              variant="outline" 
+            <Button
+              type="button"
+              variant="outline"
               onClick={onClose}
               className="flex-1"
             >
               Cancelar
             </Button>
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               variant="cta"
               disabled={!isFormValid || isSubmitting}
               className="flex-1"
