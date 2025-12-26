@@ -35,10 +35,7 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Disparar evento de Lead no Facebook Pixel ao clicar/submeter
-    if ((window as any).fbq) {
-      (window as any).fbq('track', 'Lead');
-    }
+
 
     try {
       // Enviar dados para o webhook do n8n
@@ -74,6 +71,11 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
       }
 
 
+
+      // Disparar evento de Lead no Facebook Pixel após sucesso
+      if ((window as any).fbq) {
+        (window as any).fbq('track', 'Lead');
+      }
 
       toast({
         title: "Solicitação enviada com sucesso!",
