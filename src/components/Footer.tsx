@@ -79,7 +79,7 @@ const Footer = () => {
         <div className="border-t border-background/20 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-background/60 text-sm">
-              © 2024 brhorn. Todos os direitos reservados.
+              © 2025 brhorn. Todos os direitos reservados.
             </p>
             <div className="flex gap-6 text-sm">
               <Link to="/politica-privacidade" className="text-background/60 hover:text-background transition-colors">
