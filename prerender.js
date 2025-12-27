@@ -12,11 +12,9 @@ const PORT = 45678;
 
 const server = http.createServer((req, res) => {
     try {
-        // Clean URL parameters
         const urlPath = req.url.split('?')[0];
         let filePath = path.join(DIST_DIR, urlPath === '/' ? 'index.html' : urlPath);
 
-        // Simple SPA fallback: if file not found, serve index.html
         if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
             filePath = TARGET_FILE;
         }
@@ -41,7 +39,6 @@ const server = http.createServer((req, res) => {
         res.end(content, 'utf-8');
     } catch (error) {
         if (error.code === 'ENOENT') {
-            // Should have been caught by existsSync check but just in case
             res.writeHead(404);
             res.end('404 Not Found');
         } else {
@@ -56,10 +53,31 @@ server.listen(PORT, async () => {
 
     try {
         console.log('Launching browser...');
-        const browser = await puppeteer.launch({
-            headless: "new",
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
-        });
+        let browser;
+
+        if (process.env.VERCEL) {
+            console.log('Detected Vercel environment. Using @sparticuz/chromium...');
+            try {
+                const chromium = (await import('@sparticuz/chromium')).default;
+                browser = await puppeteer.launch({
+                    args: chromium.args,
+                    defaultViewport: chromium.defaultViewport,
+                    executablePath: await chromium.executablePath(),
+                    headless: chromium.headless,
+                    ignoreHTTPSErrors: true,
+                });
+            } catch (err) {
+                console.error('Failed to load @sparticuz/chromium:', err);
+                throw err;
+            }
+        } else {
+            console.log('Detected Local environment. Using default Puppeteer...');
+            browser = await puppeteer.launch({
+                headless: true,
+                args: ['--no-sandbox', '--disable-setuid-sandbox']
+            });
+        }
+
         const page = await browser.newPage();
 
         console.log('Navigating...');
@@ -71,7 +89,7 @@ server.listen(PORT, async () => {
         console.log('Capturing HTML...');
         const html = await page.content();
 
-        console.log('Saving index.html...');
+        console.log(`Saving index.html (${html.length} bytes)...`);
         fs.writeFileSync(TARGET_FILE, html);
         console.log('✅ Prerender successful!');
 
