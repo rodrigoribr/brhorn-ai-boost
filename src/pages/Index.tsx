@@ -2,8 +2,7 @@ import { useState } from "react";
 import Hero from "@/components/Hero";
 import { PainPoints } from "@/components/PainPoints";
 import { ValueProp } from "@/components/ValueProp";
-import { ProcessSteps } from "@/components/ProcessSteps";
-import { UseCases } from "@/components/UseCases";
+
 import { LeadFormSection } from "@/components/LeadFormSection";
 import Footer from "@/components/Footer";
 
@@ -37,7 +36,7 @@ const Index = () => {
           source: 'website_contact_button',
           page_url: window.location.href,
           user_agent: navigator.userAgent,
-          message: 'Usuário clicou em "Solicitar demonstração"'
+          message: 'Usuário clicou em "Ver automação funcionando"'
         })
       });
     } catch (error) {
@@ -48,10 +47,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background font-poppins">
       <Hero onContactClick={sendWebhookNotification} />
-      <PainPoints />
+      <PainPoints onContactClick={sendWebhookNotification} />
       <ValueProp />
-      <ProcessSteps />
-      <UseCases />
       <LeadFormSection />
       <Footer />
     </div>

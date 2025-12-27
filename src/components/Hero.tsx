@@ -29,9 +29,8 @@ const Hero = ({ onContactClick }: HeroProps) => {
 
       {/* Headline */}
       <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-        Automatize <br />
-        processos da sua <br />
-        empresa com <span className="text-blue-500">IA</span>
+        Transforme atendimento manual <br />
+        em vendas automáticas com <span className="text-blue-500">IA</span>
       </h1>
 
       {/* Subheadline */}
@@ -44,7 +43,7 @@ const Hero = ({ onContactClick }: HeroProps) => {
         onClick={scrollToForm}
         className="bg-[#0091FF] hover:bg-[#007acc] text-white rounded-full px-8 py-6 text-lg font-semibold shadow-lg shadow-blue-500/20 transition-all hover:scale-105"
       >
-        Solicitar demonstração <ArrowRight className="ml-2 w-5 h-5" />
+        Ver automação funcionando <ArrowRight className="ml-2 w-5 h-5" />
       </Button>
     </section>
   );
