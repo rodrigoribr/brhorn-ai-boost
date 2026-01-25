@@ -26,22 +26,21 @@ export const ValueProp = () => {
     ];
 
     return (
-        <section className="py-20 bg-background">
-            <div className="max-w-4xl mx-auto px-6">
-                <div className="flex items-center gap-2 mb-8">
-                    {/* Header kept simple as per design it's just text usually */}
-                    <h2 className="text-4xl font-bold text-blue-600 block w-full text-center md:text-left">O que a brhorn faz</h2>
+        <section className="py-24 bg-background border-t border-white/5">
+            <div className="max-w-5xl mx-auto px-6">
+                <div className="flex items-center gap-2 mb-16">
+                    <h2 className="text-4xl md:text-5xl font-bold text-white block w-full text-center md:text-left tracking-tight">O que a brhorn faz</h2>
                 </div>
 
-                <div className="space-y-8">
+                <div className="space-y-12">
                     {benefits.map((benefit, index) => (
-                        <div key={index} className="flex items-start gap-4">
-                            <div className="mt-1 bg-blue-600 rounded-full p-1 flex-shrink-0">
-                                <CheckCircle2 className="w-5 h-5 text-white" />
+                        <div key={index} className="flex items-start gap-6 group">
+                            <div className="mt-1 bg-white/10 rounded-full p-2 flex-shrink-0 border border-white/20 group-hover:border-white/50 transition-colors">
+                                <CheckCircle2 className="w-6 h-6 text-white" />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-1">{benefit.title}</h3>
-                                <p className="text-gray-600 text-lg leading-relaxed">{benefit.description}</p>
+                                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight group-hover:translate-x-1 transition-transform">{benefit.title}</h3>
+                                <p className="text-zinc-400 text-lg leading-relaxed max-w-2xl">{benefit.description}</p>
                             </div>
                         </div>
                     ))}

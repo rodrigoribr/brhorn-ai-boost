@@ -15,36 +15,67 @@ const Hero = ({ onContactClick }: HeroProps) => {
   };
 
   return (
-    <section className="pt-12 pb-20 px-6 max-w-4xl mx-auto text-center flex flex-col items-center">
-      {/* Logo */}
-      <div className="mb-12 w-64 md:w-80">
-        <img src={logo} alt="Brhorn Logo" className="w-full h-auto object-contain" />
+    <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden bg-background">
+      {/* Massive Background Typography - The "Monolith" */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none overflow-hidden">
+        <span className="text-[20vw] md:text-[25vw] font-bold tracking-tighter text-white leading-none whitespace-nowrap">
+          FUTURE
+        </span>
       </div>
 
-      {/* Tag */}
-      <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-500 text-xs font-semibold uppercase tracking-wider">
-        <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-        A última Geração IA
+      <div className="container px-6 mx-auto relative z-10 grid grid-cols-12 gap-6 h-full items-center">
+        {/* Left Column (10%) - Social Proof / Indicators */}
+        <div className="hidden md:flex flex-col justify-between h-[60vh] col-span-1 border-l border-white/10 pl-6">
+          <div className="text-xs font-mono text-zinc-500 rotate-180 writing-vertical-rl tracking-[0.2em] uppercase">
+            System Active
+          </div>
+          <div className="flex flex-col gap-4">
+            <div className="w-1 h-12 bg-white/20"></div>
+            <div className="w-1 h-4 bg-white/60"></div>
+          </div>
+        </div>
+
+        {/* Right Content (90%) - Asymmetric & Staggered */}
+        <div className="col-span-12 md:col-span-11 md:pl-12 flex flex-col items-start text-left">
+
+          {/* Logo - Smaller and aligned */}
+          <div className="mb-12 w-48 opacity-80">
+            <img src={logo} alt="Brhorn Logo" className="w-full h-auto object-contain invert brightness-0 filter" />
+          </div>
+
+          <div className="space-y-2 mb-8">
+            <h1 className="text-6xl md:text-8xl font-bold text-white tracking-tighter leading-[0.9] uppercase">
+              <span className="block opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>Transforme</span>
+              <span className="block opacity-0 animate-fade-in-up pl-12 md:pl-24 text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 to-zinc-600" style={{ animationDelay: '0.3s' }}>
+                Atendimento
+              </span>
+              <span className="block opacity-0 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>Em Vendas.</span>
+            </h1>
+          </div>
+
+          <p className="text-zinc-400 text-xl font-light max-w-xl mb-12 leading-relaxed opacity-0 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+            Agentes inteligentes que não apenas respondem, mas <strong className="text-white font-medium">executam</strong>.
+            A era da automação passiva acabou.
+          </p>
+
+          <div className="flex flex-col md:flex-row gap-6 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
+            <Button
+              onClick={scrollToForm}
+              className="group bg-white hover:bg-zinc-200 text-black rounded-none px-10 py-7 text-lg font-bold tracking-wide transition-all border border-transparent hover:border-white/50"
+            >
+              INICIAR PROTOCOLO
+              <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+
+            <button
+              onClick={scrollToForm}
+              className="text-zinc-400 hover:text-white uppercase tracking-widest text-sm font-semibold border-b border-transparent hover:border-white transition-all pb-1 translate-y-2"
+            >
+              Ver Casos de Uso
+            </button>
+          </div>
+        </div>
       </div>
-
-      {/* Headline */}
-      <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-        Transforme atendimento manual <br />
-        em vendas automáticas com <span className="text-blue-500">IA</span>
-      </h1>
-
-      {/* Subheadline */}
-      <p className="text-muted-foreground text-lg mb-8 max-w-lg mx-auto leading-relaxed">
-        Criamos agentes inteligentes que executam tarefas, atendem clientes e organizam operações automaticamente.
-      </p>
-
-      {/* CTA Button */}
-      <Button
-        onClick={scrollToForm}
-        className="bg-[#0091FF] hover:bg-[#007acc] text-white rounded-full px-8 py-6 text-lg font-semibold shadow-lg shadow-blue-500/20 transition-all hover:scale-105"
-      >
-        Ver automação funcionando <ArrowRight className="ml-2 w-5 h-5" />
-      </Button>
     </section>
   );
 };

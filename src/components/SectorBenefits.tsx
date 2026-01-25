@@ -1,9 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { 
-  Heart, 
-  Home, 
-  Briefcase, 
+import {
+  Heart,
+  Home,
+  Briefcase,
   Megaphone,
   Calculator,
   Bed,
@@ -13,7 +13,8 @@ import {
   Clock,
   TrendingUp,
   Users,
-  Target
+  Target,
+  ArrowRight
 } from "lucide-react";
 
 const SectorBenefits = () => {
@@ -120,73 +121,63 @@ const SectorBenefits = () => {
   ];
 
   return (
-    <section id="beneficios" className="py-20 bg-background">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Soluções para cada
-            <span className="block bg-gradient-primary bg-clip-text text-transparent">
-              tipo de negócio
-            </span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Nossa automação inteligente se adapta às necessidades específicas do seu setor
+    <section id="beneficios" className="py-32 bg-background border-t border-white/5">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <div>
+            <div className="inline-block px-3 py-1 mb-6 border border-white/20 bg-white/5 text-white text-xs font-mono uppercase tracking-widest rounded-sm">
+              Setores Compatíveis
+            </div>
+            <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-none">
+              SOLUÇÕES <br />
+              <span className="text-zinc-600">MODULARES</span>
+            </h2>
+          </div>
+          <p className="text-xl text-zinc-400 max-w-md text-right hidden md:block">
+            Arquitetura adaptável para escalar qualquer operação.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {sectors.map((sector, index) => (
-          <Link key={index} to={sector.url}>
-            <Card className="group hover:shadow-elegant transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-md cursor-pointer h-full">
-              <CardContent className="p-6 h-full flex flex-col">
-                <div className="text-center mb-6">
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-light mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <sector.icon className={`w-8 h-8 ${sector.color}`} />
-                  </div>
-                  <h3 className="text-2xl font-semibold text-foreground mb-4">
+        {/* Interactive List Layout */}
+        <div className="flex flex-col divide-y divide-white/10 border-t border-b border-white/10">
+          {sectors.map((sector, index) => (
+            <Link key={index} to={sector.url} className="group relative py-10 md:py-14 flex flex-col md:flex-row md:items-center justify-between transition-all hover:bg-white/5 px-4 cursor-pointer">
+              <div className="flex items-center gap-6 md:gap-10">
+                <span className="text-lg font-mono text-zinc-600 group-hover:text-white transition-colors">0{index + 1}</span>
+                <div className="flex items-center gap-4">
+                  {/* Icon hidden by default, reveal on hover could be cool, but keeping it simple/brutalist */}
+                  <sector.icon className={`w-8 h-8 ${sector.color} opacity-50 group-hover:opacity-100 transition-opacity`} />
+                  <h3 className="text-3xl md:text-5xl font-bold text-zinc-300 group-hover:text-white transition-colors tracking-tight">
                     {sector.title}
                   </h3>
                 </div>
-                
-                <ul className="space-y-3">
-                  {sector.benefits.map((benefit, benefitIndex) => (
-                    <li key={benefitIndex} className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                      <span className="text-muted-foreground leading-relaxed">
-                        {benefit}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
+              </div>
+
+              <div className="mt-6 md:mt-0 flex items-center md:opacity-0 md:group-hover:opacity-100 md:translate-x-10 md:group-hover:translate-x-0 transition-all duration-300">
+                <span className="text-sm uppercase tracking-widest text-white font-semibold mr-4">Explorar Módulo</span>
+                <ArrowRight className="w-6 h-6 text-white" />
+              </div>
+            </Link>
+          ))}
         </div>
 
-        {/* Seção de métricas */}
-        <div className="mt-20 bg-gradient-light rounded-2xl p-8 md:p-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
-              <div className="text-2xl font-bold text-foreground mb-1">80%</div>
-              <div className="text-sm text-muted-foreground">Economia de tempo</div>
-            </div>
-            <div>
-              <TrendingUp className="w-8 h-8 text-primary mx-auto mb-3" />
-              <div className="text-2xl font-bold text-foreground mb-1">3x</div>
-              <div className="text-sm text-muted-foreground">Mais conversões</div>
-            </div>
-            <div>
-              <Users className="w-8 h-8 text-primary mx-auto mb-3" />
-              <div className="text-2xl font-bold text-foreground mb-1">24/7</div>
-              <div className="text-sm text-muted-foreground">Suporte ativo</div>
-            </div>
-            <div>
-              <Target className="w-8 h-8 text-primary mx-auto mb-3" />
-              <div className="text-2xl font-bold text-foreground mb-1">Setup</div>
-              <div className="text-sm text-muted-foreground">Rápido</div>
-            </div>
+        {/* Metric Bar - Brutalist */}
+        <div className="grid grid-cols-2 md:grid-cols-4 mt-20 border border-white/10 divide-x divide-white/10 bg-white/5">
+          <div className="p-8 text-center">
+            <div className="text-4xl font-mono font-bold text-white mb-2">80%</div>
+            <div className="text-xs uppercase tracking-widest text-zinc-500">Tempo Salvo</div>
+          </div>
+          <div className="p-8 text-center">
+            <div className="text-4xl font-mono font-bold text-white mb-2">3x</div>
+            <div className="text-xs uppercase tracking-widest text-zinc-500">Conversão</div>
+          </div>
+          <div className="p-8 text-center">
+            <div className="text-4xl font-mono font-bold text-white mb-2">24/7</div>
+            <div className="text-xs uppercase tracking-widest text-zinc-500">Atividade</div>
+          </div>
+          <div className="p-8 text-center">
+            <div className="text-4xl font-mono font-bold text-white mb-2">FAST</div>
+            <div className="text-xs uppercase tracking-widest text-zinc-500">Setup</div>
           </div>
         </div>
       </div>

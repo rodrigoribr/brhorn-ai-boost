@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-foreground text-background py-12">
+    <footer className="bg-background border-t border-white/5 text-zinc-400 py-16">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Logo e descrição */}
           <div className="md:col-span-2">
             <img
               src={logo}
               alt="brhorn Logo"
-              className="h-12 w-auto mb-4 brightness-0 invert"
+              className="h-10 w-auto mb-6 brightness-0 invert opacity-80"
             />
-            <p className="text-background/80 mb-6 max-w-md leading-relaxed">
+            <p className="text-zinc-500 mb-8 max-w-sm leading-relaxed text-sm">
               Transformamos negócios através da automação inteligente.
               Especialistas em IA, n8n e desenvolvimento ágil para resultados extraordinários.
             </p>
@@ -22,21 +22,21 @@ const Footer = () => {
             <div className="flex gap-4">
               <a
                 href="https://www.instagram.com/brhorn_ia/"
-                className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-dark transition-colors"
+                className="w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all group"
                 aria-label="Instagram"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Instagram className="w-5 h-5 text-primary-foreground" />
+                <Instagram className="w-4 h-4 text-zinc-400 group-hover:text-black" />
               </a>
               <a
                 href="https://www.facebook.com/people/Brhorn/61579100998129/?locale=pt_BR"
-                className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary-dark transition-colors"
+                className="w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all group"
                 aria-label="Facebook"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Facebook className="w-5 h-5 text-primary-foreground" />
+                <Facebook className="w-4 h-4 text-zinc-400 group-hover:text-black" />
               </a>
             </div>
           </div>
@@ -45,29 +45,29 @@ const Footer = () => {
 
           {/* Contato */}
           <div>
-            <h3 className="font-semibold text-background mb-4">Contato</h3>
-            <ul className="space-y-3">
+            <h3 className="font-mono text-sm uppercase tracking-widest text-white mb-6">Contato</h3>
+            <ul className="space-y-4">
               <li className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-primary" />
+                <Mail className="w-4 h-4 text-white" />
                 <a
                   href="mailto:contato@brhorn.com"
-                  className="text-background/80 hover:text-background transition-colors"
+                  className="text-zinc-400 hover:text-white transition-colors"
                 >
                   contato@brhorn.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-primary" />
+                <Phone className="w-4 h-4 text-white" />
                 <a
                   href="tel:+553599161747"
-                  className="text-background/80 hover:text-background transition-colors"
+                  className="text-zinc-400 hover:text-white transition-colors"
                 >
                   (35) 9 9161 7547
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-primary mt-0.5" />
-                <span className="text-background/80">
+                <MapPin className="w-4 h-4 text-white mt-0.5" />
+                <span className="text-zinc-400">
                   Minas Gerais, Brasil
                 </span>
               </li>
@@ -76,19 +76,19 @@ const Footer = () => {
         </div>
 
         {/* Linha divisória e informações legais */}
-        <div className="border-t border-background/20 mt-8 pt-8">
+        <div className="border-t border-white/5 mt-16 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-background/60 text-sm">
+            <p className="text-zinc-600 text-xs uppercase tracking-wider">
               © 2025 brhorn. Todos os direitos reservados.
             </p>
-            <div className="flex gap-6 text-sm">
-              <Link to="/politica-privacidade" className="text-background/60 hover:text-background transition-colors">
+            <div className="flex gap-6 text-xs uppercase tracking-wider">
+              <Link to="/politica-privacidade" className="text-zinc-600 hover:text-white transition-colors">
                 Política de Privacidade
               </Link>
-              <Link to="/termos-uso" className="text-background/60 hover:text-background transition-colors">
+              <Link to="/termos-uso" className="text-zinc-600 hover:text-white transition-colors">
                 Termos de Uso
               </Link>
-              <Link to="/exclusao-dados" className="text-background/60 hover:text-background transition-colors">
+              <Link to="/exclusao-dados" className="text-zinc-600 hover:text-white transition-colors">
                 Exclusão de Dados
               </Link>
             </div>

@@ -30,30 +30,56 @@ export const PainPoints = ({ onContactClick }: PainPointsProps) => {
     };
 
     return (
-        <section className="py-20 bg-background">
-            <div className="max-w-4xl mx-auto px-6">
-                <h2 className="text-2xl font-bold mb-10 text-center">Sua empresa ainda perde tempo com:</h2>
-                <div className="space-y-4 mb-10">
-                    {points.map((point, index) => (
-                        <div key={index} className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300">
-                            <div className="p-3 bg-blue-500 rounded-full flex-shrink-0">
-                                {point.icon}
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-lg text-blue-900 mb-1">{point.title}</h3>
-                                <p className="text-gray-600 text-sm leading-relaxed">{point.description}</p>
-                            </div>
+        <section className="py-32 bg-background border-t border-white/5 relative">
+            <div className="max-w-6xl mx-auto px-6 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+
+                    {/* Header Area - Left Aligned */}
+                    <div className="col-span-12 md:col-span-4 sticky top-10">
+                        <div className="inline-block px-3 py-1 mb-6 border border-red-500/30 bg-red-500/10 text-red-500 text-xs font-mono uppercase tracking-widest rounded-sm">
+                            System Diagnostics
                         </div>
-                    ))}
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-none tracking-tighter">
+                            FALHA <br />CRÍTICA
+                        </h2>
+                        <p className="text-zinc-500 text-lg leading-relaxed">
+                            Detectamos ineficiências operacionais severas no seu fluxo atual.
+                        </p>
+                    </div>
+
+                    {/* Staggered List - Right Side */}
+                    <div className="col-span-12 md:col-span-8 flex flex-col gap-0 border-l border-white/10 pl-8 md:pl-12">
+                        {points.map((point, index) => (
+                            <div
+                                key={index}
+                                className="group flex flex-col md:flex-row items-baseline gap-6 py-12 border-b border-white/5 hover:border-white/20 transition-colors"
+                                style={{ paddingLeft: `${index * 40}px` }} // Staggered Effect
+                            >
+                                <div className="text-xl md:text-2xl font-mono text-zinc-600 group-hover:text-red-500 transition-colors">
+                                    0{index + 1}
+                                </div>
+                                <div>
+                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight group-hover:translate-x-2 transition-transform duration-300">
+                                        {point.title}
+                                    </h3>
+                                    <p className="text-zinc-500 max-w-md">
+                                        {point.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                <div className="flex justify-center">
-                    <Button
-                        onClick={scrollToForm}
-                        className="bg-[#0091FF] hover:bg-[#007acc] text-white rounded-full px-8 py-6 text-lg font-semibold shadow-lg shadow-blue-500/20 transition-all hover:scale-105"
-                    >
-                        Ver automação funcionando <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button>
+                <div className="grid grid-cols-12 mt-20">
+                    <div className="col-span-12 md:col-span-8 md:col-start-5 pl-8 md:pl-12">
+                        <Button
+                            onClick={scrollToForm}
+                            className="w-full md:w-auto bg-transparent border border-white/20 text-white hover:bg-white hover:text-black rounded-none px-12 py-8 text-lg font-bold uppercase tracking-widest transition-all"
+                        >
+                            Corrigir Falhas <ArrowRight className="ml-4 w-5 h-5" />
+                        </Button>
+                    </div>
                 </div>
             </div>
         </section>

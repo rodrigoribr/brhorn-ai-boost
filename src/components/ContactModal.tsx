@@ -35,8 +35,6 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-
-
     try {
       // Enviar dados para o webhook do n8n
       const webhookUrl = 'https://n8nwebhooks01.brhorn.com/webhook/5572cf97-cc95-4241-949a-02082b1b6ead';
@@ -70,11 +68,9 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-
-
       // Disparar evento de Lead no Facebook Pixel após sucesso
-      if ((window as any).fbq) {
-        (window as any).fbq('track', 'Lead');
+      if (window.fbq) {
+        window.fbq('track', 'Lead');
       }
 
       toast({
@@ -110,82 +106,78 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md mx-auto max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-md mx-auto max-h-[90vh] overflow-y-auto bg-zinc-950 border border-white/10 text-white">
         <DialogHeader>
           <div className="flex items-center justify-between">
-            <DialogTitle className="text-2xl font-bold text-foreground">
+            <DialogTitle className="text-2xl font-bold text-white tracking-tight">
               Fale com um Especialista
             </DialogTitle>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-              className="h-6 w-6 p-0"
-            >
-              <X className="h-4 w-4" />
-            </Button>
           </div>
-          <p className="text-muted-foreground">
+          <p className="text-zinc-400">
             Receba uma demonstração personalizada e descubra como podemos automatizar seu negócio.
           </p>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div className="grid grid-cols-1 gap-4">
             <div>
-              <Label htmlFor="name">Nome completo *</Label>
+              <Label htmlFor="name" className="text-zinc-300">Nome completo *</Label>
               <Input
                 id="name"
                 type="text"
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 placeholder="Seu nome completo"
+                className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
                 required
               />
             </div>
 
             <div>
-              <Label htmlFor="email">E-mail corporativo *</Label>
+              <Label htmlFor="email" className="text-zinc-300">E-mail corporativo *</Label>
               <Input
                 id="email"
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
                 placeholder="seu@email.com"
+                className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
                 required
               />
             </div>
 
             <div>
-              <Label htmlFor="phone">Telefone/WhatsApp *</Label>
+              <Label htmlFor="phone" className="text-zinc-300">Telefone/WhatsApp *</Label>
               <Input
                 id="phone"
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
                 placeholder="(11) 99999-9999"
+                className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
                 required
               />
             </div>
 
             <div>
-              <Label htmlFor="company">Empresa</Label>
+              <Label htmlFor="company" className="text-zinc-300">Empresa</Label>
               <Input
                 id="company"
                 type="text"
                 value={formData.company}
                 onChange={(e) => handleInputChange('company', e.target.value)}
                 placeholder="Nome da sua empresa"
+                className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
               />
             </div>
 
             <div>
-              <Label htmlFor="sector">Setor *</Label>
+              <Label htmlFor="sector" className="text-zinc-300">Setor *</Label>
               <Select value={formData.sector} onValueChange={(value) => handleInputChange('sector', value)}>
-                <SelectTrigger>
+                <SelectTrigger className="bg-white/5 border-white/10 text-white rounded-sm">
                   <SelectValue placeholder="Selecione seu setor" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-zinc-900 border-white/10 text-white">
                   <SelectItem value="clinica">Clínica/Saúde</SelectItem>
                   <SelectItem value="imobiliaria">Imobiliária</SelectItem>
                   <SelectItem value="profissional-liberal">Profissional Liberal</SelectItem>
@@ -198,13 +190,14 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
             </div>
 
             <div>
-              <Label htmlFor="message">Mensagem</Label>
+              <Label htmlFor="message" className="text-zinc-300">Mensagem</Label>
               <Textarea
                 id="message"
                 value={formData.message}
                 onChange={(e) => handleInputChange('message', e.target.value)}
                 placeholder="Conte-nos sobre seu negócio e objetivos..."
                 rows={3}
+                className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
               />
             </div>
           </div>
@@ -214,19 +207,18 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
               type="button"
               variant="outline"
               onClick={onClose}
-              className="flex-1"
+              className="flex-1 border-white/10 text-white bg-transparent hover:bg-white hover:text-black rounded-sm uppercase tracking-wider text-xs font-bold"
             >
               Cancelar
             </Button>
             <Button
               type="submit"
-              variant="cta"
               disabled={!isFormValid || isSubmitting}
-              className="flex-1"
+              className="flex-1 bg-white text-black hover:bg-zinc-200 rounded-sm uppercase tracking-wider text-xs font-bold shadow-[0_0_15px_rgba(255,255,255,0.1)]"
             >
               {isSubmitting ? (
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
                   Enviando...
                 </div>
               ) : (
@@ -239,8 +231,8 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
           </div>
         </form>
 
-        <div className="text-xs text-muted-foreground text-center pt-2 border-t">
-          Seus dados estão protegidos pela nossa política de privacidade
+        <div className="text-[10px] text-zinc-500 text-center pt-2 border-t border-white/5 uppercase tracking-widest">
+          Seus dados estão protegidos
         </div>
       </DialogContent>
     </Dialog>
