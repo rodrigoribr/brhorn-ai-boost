@@ -1,5 +1,5 @@
 
-import logo from "../assets/logo-new.png";
+import logo from "../assets/logo-original.png";
 import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 
@@ -39,8 +39,8 @@ const Hero = ({ onContactClick }: HeroProps) => {
         <div className="col-span-12 md:col-span-11 md:pl-12 flex flex-col items-start text-left">
 
           {/* Logo - Smaller and aligned */}
-          <div className="mb-12 w-48 opacity-80">
-            <img src={logo} alt="Brhorn Logo" className="w-full h-auto object-contain invert brightness-0 filter" />
+          <div className="mb-12 w-48">
+            <img src={logo} alt="Brhorn Logo" className="w-full h-auto object-contain" />
           </div>
 
           <div className="space-y-2 mb-8">

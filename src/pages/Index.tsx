@@ -2,6 +2,7 @@ import { useState } from "react";
 import Hero from "@/components/Hero";
 import { PainPoints } from "@/components/PainPoints";
 import { ValueProp } from "@/components/ValueProp";
+import { AxionSection } from "@/components/AxionSection";
 
 import { LeadFormSection } from "@/components/LeadFormSection";
 import Footer from "@/components/Footer";
@@ -49,6 +50,7 @@ const Index = () => {
       <Hero onContactClick={sendWebhookNotification} />
       <PainPoints onContactClick={sendWebhookNotification} />
       <ValueProp />
+      <AxionSection />
       <LeadFormSection />
       <Footer />
     </div>

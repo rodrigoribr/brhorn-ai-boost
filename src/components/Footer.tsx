@@ -1,4 +1,4 @@
-import logo from "@/assets/logo-new.png";
+import logo from "@/assets/logo-original.png";
 import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const Footer = () => {
             <img
               src={logo}
               alt="brhorn Logo"
-              className="h-10 w-auto mb-6 brightness-0 invert opacity-80"
+              className="h-10 w-auto mb-6"
             />
             <p className="text-zinc-500 mb-8 max-w-sm leading-relaxed text-sm">
               Transformamos negócios através da automação inteligente.
