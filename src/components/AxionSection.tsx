@@ -1,106 +1,132 @@
-
-import { CheckCircle2, ArrowRight, BrainCircuit, Target, ShoppingBag, Truck, Zap, Settings, TrendingUp, GitBranch, ShieldCheck } from "lucide-react";
+import { ArrowRight, Bot, Megaphone, MessageSquareText, PackageCheck, Settings2, ShoppingCart } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 
-export const AxionSection = () => {
-    const pillars = [
-        {
-            title: "Automação Cognitiva",
-            subtitle: "Inteligência que entende, não apenas responde.",
-            icon: BrainCircuit,
-            details: [
-                "Interpretação de linguagem natural e intenção",
-                "Negociação autônoma via WhatsApp",
-                "Tomada de decisão baseada em contexto"
-            ]
-        },
-        {
-            title: "Engenharia de Vendas",
-            subtitle: "Sua política comercial, aplicada com precisão.",
-            icon: Settings,
-            details: [
-                "Aplicação estrita de regras de negócio",
-                "Cálculo de fretes, impostos e descontos",
-                "Validação de estoque em tempo real"
-            ]
-        },
-        {
-            title: "Escala Industrial",
-            subtitle: "Atenda 10 ou 10.000 revendedores simultaneamente.",
-            icon: TrendingUp,
-            details: [
-                "Disponibilidade 24/7 sem filas",
-                "Zero erro humano na digitação de pedidos",
-                "Auditoria completa de cada interação"
-            ]
-        }
-    ];
-
-    return (
-        <section className="py-32 bg-background relative overflow-hidden border-t border-white/5">
-            {/* Background Texture & Elements */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white opacity-[0.02] rounded-full blur-3xl pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
-
-            <div className="max-w-7xl mx-auto px-6 relative z-10">
-
-                {/* Header Compacto */}
-                <div className="text-center mb-20 animate-fade-up">
-                    <h2 className="text-6xl md:text-8xl lg:text-[10rem] font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-600 tracking-tighter mb-4 opacity-100 leading-[0.8]">
-                        AXIØN
-                    </h2>
-                    <p className="text-lg md:text-xl text-zinc-400 font-mono uppercase tracking-widest mt-8 px-4">
-                        O piloto automático para vendas B2B
-                    </p>
-                </div>
-
-                {/* Interactive Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
-                    {pillars.map((pillar, i) => (
-                        <div key={i} className="group relative bg-white/5 border border-white/10 p-8 min-h-[350px] md:h-[400px] flex flex-col justify-between transition-all duration-500 hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] overflow-hidden rounded-sm">
-
-                            {/* Static Content - Mobile: Top / Desktop: Center then moves up */}
-                            <div className="relative z-10 transition-all duration-500 md:group-hover:-translate-y-2">
-                                <div className="w-12 h-12 bg-white/10 rounded-sm flex items-center justify-center mb-6 text-white group-hover:bg-white group-hover:text-black transition-colors duration-500">
-                                    <pillar.icon className="w-6 h-6" />
-                                </div>
-                                <h3 className="text-2xl text-white font-bold mb-3">{pillar.title}</h3>
-                                <p className="text-zinc-400 font-light text-lg leading-snug md:group-hover:text-white transition-colors">
-                                    {pillar.subtitle}
-                                </p>
-                            </div>
-
-                            {/* Details - Mobile: Always Visible / Desktop: Reveal on Hover */}
-                            <div className="relative md:absolute inset-0 md:bg-black/90 md:backdrop-blur-md flex flex-col justify-end p-0 md:p-8 mt-6 md:mt-0 
-                                            opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-20 
-                                            translate-y-0 md:translate-y-4 md:group-hover:translate-y-0">
-                                <ul className="space-y-4">
-                                    {pillar.details.map((detail, idx) => (
-                                        <li key={idx} className="flex items-start gap-3 text-sm text-zinc-300">
-                                            <div className="mt-1.5 w-1 h-1 rounded-full bg-white flex-shrink-0"></div>
-                                            {detail}
-                                        </li>
-                                    ))}
-                                </ul>
-                                <div className="hidden md:block w-full h-1 bg-white/20 mt-6 overflow-hidden">
-                                    <div className="w-full h-full bg-white origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 delay-100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Footer Statement - Simplified */}
-                <div className="flex justify-center animate-fade-up" style={{ animationDelay: '200ms' }}>
-                    <Link to="/axion">
-                        <Button className="bg-white text-black hover:bg-zinc-200 px-10 py-7 text-lg font-bold uppercase tracking-widest rounded-sm shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_50px_rgba(255,255,255,0.2)] transition-all">
-                            Conhecer o Axion <ArrowRight className="ml-3 w-5 h-5" />
-                        </Button>
-                    </Link>
-                </div>
-
-            </div>
-        </section>
-    );
+interface AxionSectionProps {
+  onContactClick?: () => void;
 }
+
+export const AxionSection = ({ onContactClick }: AxionSectionProps) => {
+  const features = [
+    { icon: MessageSquareText, text: "Atendimento e coleta de pedidos pelo WhatsApp" },
+    { icon: PackageCheck, text: "Catálogo com SKUs, preços, unidades e disponibilidade" },
+    { icon: ShoppingCart, text: "Pedidos, clientes, campanhas e histórico em um painel" },
+    { icon: Settings2, text: "Prompt Studio para ajustar tom, regras e comportamento" },
+  ];
+  const modules = [
+    { label: "Campanhas", icon: Megaphone },
+    { label: "Catálogo", icon: PackageCheck },
+    { label: "Histórico", icon: MessageSquareText },
+    { label: "Regras do bot", icon: Settings2 },
+  ];
+
+  return (
+    <section id="produtos" className="relative overflow-hidden bg-background py-28">
+      <div className="absolute right-0 top-20 h-96 w-96 translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
+      <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div>
+          <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-accent">Produto 01</p>
+          <h2 className="font-brand text-6xl leading-none text-white md:text-8xl">Axion</h2>
+          <p className="mt-6 max-w-xl text-xl leading-relaxed text-zinc-400">
+            Agente de IA para vendas B2B via WhatsApp. Ele entende pedidos recorrentes, aplica regras do negócio e
+            organiza a operação em um painel de controle.
+          </p>
+
+          <div className="mt-10 grid gap-4">
+            {features.map((feature) => (
+              <div key={feature.text} className="flex items-start gap-4 border-l border-white/10 pl-4">
+                <feature.icon className="mt-1 h-5 w-5 shrink-0 text-accent" />
+                <span className="text-zinc-300">{feature.text}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <Link to="/axion">
+              <Button className="h-14 rounded-sm bg-accent px-8 font-bold text-black hover:bg-amber-400">
+                Conhecer Axion
+                <ArrowRight className="ml-3 h-5 w-5" />
+              </Button>
+            </Link>
+            <Button
+              onClick={onContactClick}
+              variant="outline"
+              className="h-14 rounded-sm border-white/15 bg-transparent px-8 font-bold text-white hover:bg-white hover:text-black"
+            >
+              Pedir demonstração
+            </Button>
+          </div>
+        </div>
+
+        <div className="overflow-hidden rounded-sm border border-white/10 bg-zinc-950 shadow-[0_40px_100px_rgba(0,0,0,0.45)]">
+          <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+            <div className="flex items-center gap-3">
+              <Bot className="h-5 w-5 text-accent" />
+              <span className="font-brand text-2xl text-white">Axiøn dashboard</span>
+            </div>
+            <span className="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-emerald-300">
+              em produção
+            </span>
+          </div>
+
+          <div className="grid gap-px bg-white/10 md:grid-cols-4">
+            {[
+              ["284", "pedidos"],
+              ["147", "clientes ativos"],
+              ["R$ 20k+", "caso real/mês"],
+              ["24h", "operação assistida"],
+            ].map(([value, label]) => (
+              <div key={label} className="bg-zinc-950 p-5">
+                <p className="font-brand text-4xl text-white">{value}</p>
+                <p className="mt-1 text-[11px] uppercase tracking-wide text-zinc-500">{label}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid gap-px bg-white/10 lg:grid-cols-[1fr_0.8fr]">
+            <div className="bg-zinc-950 p-6">
+              <div className="mb-5 flex items-end justify-between">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">pedidos por dia</p>
+                  <p className="mt-1 text-sm text-zinc-300">Últimos 7 dias</p>
+                </div>
+                <p className="font-brand text-3xl text-accent">42</p>
+              </div>
+              <div className="flex h-44 items-end gap-3 border-b border-white/10 pb-3">
+                {[38, 62, 48, 78, 70, 92, 55].map((height, index) => (
+                  <div
+                    key={index}
+                    className={`flex-1 rounded-t-sm ${index === 5 ? "bg-accent" : "bg-white/15"}`}
+                    style={{ height: `${height}%` }}
+                  />
+                ))}
+              </div>
+              <div className="mt-3 flex justify-between text-[11px] text-zinc-600">
+                <span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span>
+              </div>
+            </div>
+
+            <div className="bg-zinc-950 p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">módulos</p>
+              <div className="mt-6 space-y-4">
+                {modules.map((module) => (
+                  <div key={module.label} className="flex items-center justify-between border-b border-white/5 pb-3">
+                    <span className="text-sm text-zinc-300">{module.label}</span>
+                    <module.icon className="h-4 w-4 text-zinc-600" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="border-l-4 border-l-accent bg-accent-light/10 px-5 py-4">
+            <p className="text-sm font-semibold text-white">Caso real em distribuição de alimentos</p>
+            <p className="mt-1 text-xs leading-relaxed text-zinc-500">
+              Atendimento de revendedores, pedidos via WhatsApp e acompanhamento de vendas recorrentes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};

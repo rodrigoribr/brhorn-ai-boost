@@ -11,7 +11,6 @@ import Imobiliarias from "./pages/Imobiliarias";
 import ProfissionaisLiberais from "./pages/ProfissionaisLiberais";
 import Marketing from "./pages/Marketing";
 import Contabilidade from "./pages/Contabilidade";
-import Pousadas from "./pages/Pousadas";
 import Restaurantes from "./pages/Restaurantes";
 import Ecommerce from "./pages/Ecommerce";
 import AutomacoesPersonalizadas from "./pages/AutomacoesPersonalizadas";
@@ -19,6 +18,7 @@ import PoliticaPrivacidade from "./pages/PoliticaPrivacidade";
 import TermosUso from "./pages/TermosUso";
 import ExclusaoDados from "./pages/ExclusaoDados";
 import AxionPage from "./pages/AxionPage";
+import ViaSerraPage from "./pages/ViaSerraPage";
 
 const queryClient = new QueryClient();
 
@@ -32,12 +32,13 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/axion" element={<AxionPage />} />
+          <Route path="/viaserra" element={<ViaSerraPage />} />
           <Route path="/clinicas" element={<Clinicas />} />
           <Route path="/imobiliarias" element={<Imobiliarias />} />
           <Route path="/profissionais-liberais" element={<ProfissionaisLiberais />} />
           <Route path="/marketing" element={<Marketing />} />
           <Route path="/contabilidade" element={<Contabilidade />} />
-          <Route path="/pousadas" element={<Pousadas />} />
+          <Route path="/pousadas" element={<ViaSerraPage />} />
           <Route path="/restaurantes" element={<Restaurantes />} />
           <Route path="/ecommerce" element={<Ecommerce />} />
           <Route path="/automacoes-personalizadas" element={<AutomacoesPersonalizadas />} />

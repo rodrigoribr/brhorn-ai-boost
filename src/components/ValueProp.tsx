@@ -1,51 +1,61 @@
-
-import { CheckCircle2, Sparkles } from "lucide-react";
+import { Database, GitBranch, Search, Settings2, TrendingUp } from "lucide-react";
 
 export const ValueProp = () => {
-    const benefits = [
-        {
-            title: "Agentes de IA 100% personalizados",
-            description: "Entendemos profundamente seu processo atual."
-        },
-        {
-            title: "Automação completa de atendimento",
-            description: "Desenvolvemos o agente de IA ideal."
-        },
-        {
-            title: "Integração nativa com WhatsApp, e-mail e CRM",
-            description: "Conectamos com todos os seus sistemas."
-        },
-        {
-            title: "Processos automáticos, auditáveis e controlados",
-            description: "Sua automação em plena operação imediata."
-        },
-        {
-            title: "Soluções sob medida para o seu negócio",
-            description: "Nossas soluções se adaptam às suas necessidades específicas."
-        }
-    ];
+  const steps = [
+    {
+      icon: Search,
+      title: "Entender a operação",
+      description: "Mapeamos o processo real: clientes, regras, exceções, canais e decisões que hoje dependem de pessoas.",
+    },
+    {
+      icon: Database,
+      title: "Organizar dados e regras",
+      description: "Transformamos conhecimento solto em cadastro, catálogo, prompt, status, permissões e histórico auditável.",
+    },
+    {
+      icon: Settings2,
+      title: "Construir produto ou automação",
+      description: "Escolhemos entre Axion, ViaSerra, adaptação ou uma automação sob medida, sem encaixar tudo à força.",
+    },
+    {
+      icon: GitBranch,
+      title: "Integrar com a rotina",
+      description: "Conectamos WhatsApp, Supabase, painéis, formulários e fluxos internos conforme a operação pede.",
+    },
+    {
+      icon: TrendingUp,
+      title: "Medir e evoluir",
+      description: "Depois do go-live, ajustamos regras, mensagens, telas e indicadores com base no uso real.",
+    },
+  ];
 
-    return (
-        <section className="py-24 bg-background border-t border-white/5">
-            <div className="max-w-5xl mx-auto px-6">
-                <div className="flex items-center gap-2 mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-white block w-full text-center md:text-left tracking-tight">O que a brhorn faz</h2>
-                </div>
+  return (
+    <section className="bg-background py-28">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="max-w-3xl">
+          <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-accent">Como trabalhamos</p>
+          <h2 className="font-brand text-5xl leading-none text-white md:text-7xl">
+            Engenharia aplicada antes de promessa de IA.
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-zinc-400">
+            A brhorn começa pela operação. IA entra quando ajuda a decidir, responder ou executar melhor, não como
+            enfeite no topo de um processo quebrado.
+          </p>
+        </div>
 
-                <div className="space-y-12">
-                    {benefits.map((benefit, index) => (
-                        <div key={index} className="flex items-start gap-6 group">
-                            <div className="mt-1 bg-white/10 rounded-full p-2 flex-shrink-0 border border-white/20 group-hover:border-white/50 transition-colors">
-                                <CheckCircle2 className="w-6 h-6 text-white" />
-                            </div>
-                            <div>
-                                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight group-hover:translate-x-1 transition-transform">{benefit.title}</h3>
-                                <p className="text-zinc-400 text-lg leading-relaxed max-w-2xl">{benefit.description}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
+        <div className="mt-16 grid gap-px overflow-hidden rounded-sm border border-white/10 bg-white/10 lg:grid-cols-5">
+          {steps.map((step, index) => (
+            <article key={step.title} className="bg-zinc-950 p-7">
+              <div className="mb-10 flex items-center justify-between">
+                <step.icon className="h-6 w-6 text-accent" />
+                <span className="font-brand text-3xl text-white/20">0{index + 1}</span>
+              </div>
+              <h3 className="text-lg font-bold text-white">{step.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-zinc-500">{step.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };

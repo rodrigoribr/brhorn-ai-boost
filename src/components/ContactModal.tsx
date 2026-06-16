@@ -6,8 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle, X } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { CheckCircle } from "lucide-react";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -134,7 +133,7 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
             </div>
 
             <div>
-              <Label htmlFor="email" className="text-zinc-300">E-mail corporativo *</Label>
+              <Label htmlFor="email" className="text-zinc-300">Seu melhor e-mail *</Label>
               <Input
                 id="email"
                 type="email"
@@ -178,6 +177,9 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
                   <SelectValue placeholder="Selecione seu setor" />
                 </SelectTrigger>
                 <SelectContent className="bg-zinc-900 border-white/10 text-white">
+                  <SelectItem value="axion">Axion / Pedidos B2B</SelectItem>
+                  <SelectItem value="viaserra">ViaSerra / Pousadas</SelectItem>
+                  <SelectItem value="automacao-sob-medida">Automação sob medida</SelectItem>
                   <SelectItem value="clinica">Clínica/Saúde</SelectItem>
                   <SelectItem value="imobiliaria">Imobiliária</SelectItem>
                   <SelectItem value="profissional-liberal">Profissional Liberal</SelectItem>

@@ -15,8 +15,8 @@ const Footer = () => {
               className="h-10 w-auto mb-6"
             />
             <p className="text-zinc-500 mb-8 max-w-sm leading-relaxed text-sm">
-              Transformamos negócios através da automação inteligente.
-              Especialistas em IA, n8n e desenvolvimento ágil para resultados extraordinários.
+              Produtos de IA e gestão para operações reais. Criamos sistemas que atendem clientes, organizam pedidos,
+              reservas e processos internos com controle.
             </p>
 
             <div className="flex gap-4">
@@ -45,7 +45,7 @@ const Footer = () => {
 
           {/* Contato */}
           <div>
-            <h3 className="font-mono text-sm uppercase tracking-widest text-white mb-6">Contato</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-white mb-6">Contato</h3>
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-white" />
@@ -79,7 +79,7 @@ const Footer = () => {
         <div className="border-t border-white/5 mt-16 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-zinc-600 text-xs uppercase tracking-wider">
-              © 2025 brhorn. Todos os direitos reservados.
+              © 2026 brhorn. Todos os direitos reservados.
             </p>
             <div className="flex gap-6 text-xs uppercase tracking-wider">
               <Link to="/politica-privacidade" className="text-zinc-600 hover:text-white transition-colors">

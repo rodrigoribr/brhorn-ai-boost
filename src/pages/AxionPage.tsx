@@ -30,7 +30,7 @@ const AxionPage = () => {
         "Contato manual com dezenas de revendedores",
         "Dependência de mensagens informais (WhatsApp)",
         "Janelas de corte e prazos ignorados",
-        "Dúvidas repetitivas sobre preços e estoque",
+        "Dúvidas repetitivas sobre preços, disponibilidade e regras",
         "Pedidos perdidos por esquecimento",
         "Falta de padronização e histórico"
     ];
@@ -54,7 +54,7 @@ const AxionPage = () => {
         {
             icon: ShoppingCart,
             title: "Gestão de Pedidos",
-            desc: "Status em tempo real, edição, validação e integração com ERP."
+            desc: "Status, edição, validação e histórico operacional dos pedidos."
         },
         {
             icon: Truck,
@@ -79,48 +79,49 @@ const AxionPage = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-background font-poppins text-white selection:bg-white selection:text-black">
+        <div className="min-h-screen bg-background font-sans text-white selection:bg-accent selection:text-black">
 
             {/* Scroll Progress Bar could go here */}
 
             {/* Navigation */}
-            <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5 h-16 flex items-center px-6">
+            <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5 h-16 flex items-center px-4 md:px-6">
                 <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
-                    <Link to="/" className="text-sm font-mono text-zinc-400 hover:text-white flex items-center gap-2 transition-colors">
-                        <ArrowLeft className="w-4 h-4" /> VOLTAR
+                    <Link to="/" className="text-sm font-mono text-zinc-400 hover:text-white flex items-center gap-2 transition-colors border border-white/10 p-2 rounded-sm md:border-0 md:p-0">
+                        <ArrowLeft className="w-4 h-4" /> <span className="hidden md:inline">VOLTAR</span>
                     </Link>
 
-                    <div className="flex items-center gap-4">
-                        <img src={logo} alt="Brhorn" className="h-6 w-auto" />
-                        <span className="text-zinc-600 font-light text-xl">|</span>
-                        <span className="font-bold tracking-tighter text-lg">AXIØN</span>
+                    <div className="flex items-center gap-3 md:gap-4">
+                        <img src={logo} alt="Brhorn" className="h-5 md:h-6 w-auto" />
+                        <span className="text-zinc-600 font-light text-lg md:text-xl">|</span>
+                        <span className="font-bold tracking-tighter text-base md:text-lg">AXIØN</span>
                     </div>
 
                     <Button
                         onClick={() => setIsModalOpen(true)}
                         size="sm"
-                        className="bg-white text-black hover:bg-zinc-200 text-xs uppercase font-bold tracking-wider"
+                        className="bg-white text-black hover:bg-zinc-200 text-[10px] md:text-xs uppercase font-bold tracking-wider h-8 md:h-9 px-3 md:px-4"
                     >
-                        Falar com Especialista
+                        <span className="hidden md:inline">Falar com Especialista</span>
+                        <span className="md:hidden">Contato</span>
                     </Button>
                 </div>
             </nav>
 
             {/* HERO SECTION */}
-            <section className="pt-40 pb-20 px-6 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white opacity-[0.03] rounded-full blur-[100px] pointer-events-none translate-x-1/3 -translate-y-1/2"></div>
+            <section className="pt-32 md:pt-40 pb-16 md:pb-20 px-6 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-white opacity-[0.03] rounded-full blur-[100px] pointer-events-none translate-x-1/3 -translate-y-1/2"></div>
 
                 <div className="max-w-5xl mx-auto">
                     <div className="inline-block mb-6 px-4 py-2 border border-white/20 rounded-full bg-white/5 backdrop-blur-sm">
-                        <span className="text-xs font-mono uppercase tracking-widest text-zinc-300">
+                        <span className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-zinc-300">
                             Brhorn AI Platform
                         </span>
                     </div>
 
-                    <h1 className="text-6xl md:text-9xl font-bold tracking-tighter mb-8 leading-[0.9]">
+                    <h1 className="text-5xl md:text-9xl font-bold tracking-tighter mb-6 md:mb-8 leading-[0.9]">
                         AXIØN
                     </h1>
-                    <h2 className="text-2xl md:text-4xl text-zinc-400 font-light mb-12 max-w-3xl leading-tight">
+                    <h2 className="text-xl md:text-4xl text-zinc-400 font-light mb-8 md:mb-12 max-w-3xl leading-tight">
                         O piloto automático para <span className="text-white font-medium">vendas B2B</span>.
                     </h2>
 
@@ -132,7 +133,7 @@ const AxionPage = () => {
                         onClick={() => setIsModalOpen(true)}
                         className="h-14 px-10 bg-white text-black hover:bg-zinc-200 text-lg font-bold rounded-sm uppercase tracking-widest shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] transition-all"
                     >
-                        Solicitar Demonstração
+                        Solicitar demonstração
                     </Button>
                 </div>
             </section>
@@ -183,8 +184,8 @@ const AxionPage = () => {
                         {[
                             { step: "1. Contato", desc: "Cliente chama no WhatsApp", icon: MessageSquare },
                             { step: "2. Interpretação", desc: "IA entende a intenção", icon: BrainCircuit },
-                            { step: "3. Validação", desc: "Regras e Estoque aplicados", icon: ShieldCheck },
-                            { step: "4. Execução", desc: "Pedido registrado no ERP", icon: CheckCircle2 }
+                            { step: "3. Validação", desc: "Regras comerciais aplicadas", icon: ShieldCheck },
+                            { step: "4. Execução", desc: "Pedido registrado no painel", icon: CheckCircle2 }
                         ].map((item, i) => (
                             <div key={i} className="p-8 bg-white/5 border border-white/10 rounded-sm relative group hover:bg-white/10 transition-colors">
                                 <div className="w-12 h-12 mx-auto bg-black border border-white/20 rounded-full flex items-center justify-center mb-4 group-hover:border-white transition-colors">
@@ -242,9 +243,9 @@ const AxionPage = () => {
                     </div>
 
                     <div className="bg-white/5 border border-white/10 p-12 rounded-sm backdrop-blur-md">
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Pronto para escalar?</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Pronto para organizar seus pedidos?</h2>
                         <p className="text-xl text-zinc-400 mb-8 max-w-2xl mx-auto">
-                            Transforme sua operação de vendas B2B hoje mesmo.
+                            Veja como o Axion pode assumir partes repetitivas do atendimento e dar controle ao time.
                         </p>
                         <Button
                             onClick={() => setIsModalOpen(true)}

@@ -1,48 +1,42 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import ContactModal from "./ContactModal";
 
-export const LeadFormSection = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+interface LeadFormSectionProps {
+  onContactClick: () => void;
+}
 
-    return (
-        <section id="contact-form" className="py-32 bg-background border-t border-white/5 relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white opacity-[0.02] rounded-full blur-3xl pointer-events-none"></div>
+export const LeadFormSection = ({ onContactClick }: LeadFormSectionProps) => {
+  return (
+    <section id="contact-form" className="relative overflow-hidden border-t border-white/10 bg-background py-32">
+      <div className="absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-3xl" />
 
-            <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-                <div className="inline-block mb-8">
-                    <span className="px-4 py-2 border border-white/20 rounded-full text-xs font-mono uppercase tracking-widest text-white bg-white/5">
-                        Start Now
-                    </span>
-                </div>
+      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+        <div className="mb-8 inline-block border-l-4 border-l-accent bg-white/[0.04] px-4 py-3">
+          <span className="text-xs font-bold uppercase tracking-[0.22em] text-zinc-300">
+            Próximo passo
+          </span>
+        </div>
 
-                <h2 className="text-5xl md:text-7xl font-bold mb-8 text-white tracking-tighter leading-none">
-                    PRONTO PARA <br />
-                    <span className="text-zinc-600">ESCALAR?</span>
-                </h2>
+        <h2 className="font-brand text-5xl leading-none text-white md:text-7xl">
+          Vamos olhar para a sua operação?
+        </h2>
 
-                <p className="text-xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-                    Não deixe sua operação manual limitar seu crescimento. Transforme seu atendimento hoje.
-                </p>
+        <p className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-zinc-400">
+          Conte onde o trabalho manual trava hoje. A brhorn ajuda a escolher entre produto pronto, adaptação ou
+          automação sob medida.
+        </p>
 
-                <Button
-                    onClick={() => setIsModalOpen(true)}
-                    className="bg-white hover:bg-zinc-200 text-black px-12 py-8 text-xl font-bold rounded-sm uppercase tracking-widest shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_60px_rgba(255,255,255,0.2)] transition-all hover:scale-105"
-                >
-                    Falar com Especialista <ArrowRight className="ml-4 w-6 h-6" />
-                </Button>
+        <Button
+          onClick={onContactClick}
+          className="mt-12 h-16 rounded-sm bg-accent px-12 text-lg font-bold text-black shadow-[0_0_40px_rgba(245,158,11,0.16)] transition-all hover:bg-amber-400"
+        >
+          Falar com a brhorn <ArrowRight className="ml-4 h-6 w-6" />
+        </Button>
 
-                <p className="mt-8 text-zinc-600 text-sm font-mono">
-                    Resposta em até 24 horas úteis.
-                </p>
-            </div>
-
-            <ContactModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-            />
-        </section>
-    );
+        <p className="mt-8 text-sm text-zinc-600">
+          Resposta em até 24 horas úteis pelo melhor canal informado.
+        </p>
+      </div>
+    </section>
+  );
 };
