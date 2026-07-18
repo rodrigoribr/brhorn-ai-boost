@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Hero from "@/components/Hero";
-import { PainPoints } from "@/components/PainPoints";
 import { ValueProp } from "@/components/ValueProp";
 import { AxionSection } from "@/components/AxionSection";
 import { ViaSerraSection } from "@/components/ViaSerraSection";
@@ -54,7 +53,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background font-sans text-foreground selection:bg-accent selection:text-black">
       <Hero onContactClick={() => openContact("hero_contact_button")} />
-      <PainPoints />
       <AxionSection onContactClick={() => openContact("axion_section_button")} />
       <ViaSerraSection onContactClick={() => openContact("viaserra_section_button")} />
       <ValueProp />
