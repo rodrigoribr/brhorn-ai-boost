@@ -5,11 +5,13 @@ import { AxionSection } from "@/components/AxionSection";
 import { ViaSerraSection } from "@/components/ViaSerraSection";
 import { LeadFormSection } from "@/components/LeadFormSection";
 import ContactModal from "@/components/ContactModal";
+import CallModal from "@/components/CallModal";
 import Footer from "@/components/Footer";
 
 const Index = () => {
   const [hasClickedContact, setHasClickedContact] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isCallOpen, setIsCallOpen] = useState(false);
 
   const sendWebhookNotification = async (source = "website_contact_intent") => {
     if (hasClickedContact) return;
@@ -52,7 +54,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground selection:bg-accent selection:text-black">
-      <Hero onContactClick={() => openContact("hero_contact_button")} />
+      <Hero
+        onContactClick={() => openContact("hero_contact_button")}
+        onCallClick={() => setIsCallOpen(true)}
+      />
       <AxionSection onContactClick={() => openContact("axion_section_button")} />
       <ViaSerraSection onContactClick={() => openContact("viaserra_section_button")} />
       <ValueProp />
@@ -61,6 +66,10 @@ const Index = () => {
       <ContactModal
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
+      />
+      <CallModal
+        isOpen={isCallOpen}
+        onClose={() => setIsCallOpen(false)}
       />
     </div>
   );

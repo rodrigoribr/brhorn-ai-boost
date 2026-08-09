@@ -1,13 +1,14 @@
 import logo from "../assets/logo-original.png";
-import { ArrowRight, Bot, CalendarDays, MessageSquareText, Sparkles } from "lucide-react";
+import { ArrowRight, Bot, CalendarDays, MessageSquareText, PhoneCall, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 
 interface HeroProps {
   onContactClick: () => void;
+  onCallClick: () => void;
 }
 
-const Hero = ({ onContactClick }: HeroProps) => {
+const Hero = ({ onContactClick, onCallClick }: HeroProps) => {
   const scrollToProducts = () => {
     document.getElementById("produtos")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -77,6 +78,14 @@ const Hero = ({ onContactClick }: HeroProps) => {
               className="h-14 rounded-sm border-white/15 bg-transparent px-8 text-base font-bold text-white hover:bg-white hover:text-black"
             >
               Falar com a brhorn
+            </Button>
+            <Button
+              onClick={onCallClick}
+              variant="ghost"
+              className="h-14 rounded-sm px-8 text-base font-bold text-zinc-300 hover:bg-white/5 hover:text-white"
+            >
+              <PhoneCall className="mr-3 h-5 w-5" />
+              Quero que me liguem
             </Button>
           </div>
 
