@@ -9,15 +9,13 @@ import {
   whatsappLink,
 } from "@/lib/contato";
 
-// Usa só tokens do tema: fica claro na home e escuro dentro de .legacy-dark.
 const Footer = () => (
   <footer className="border-t border-border bg-background py-14 text-muted-foreground">
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
       <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
         <div>
           <Link to="/" aria-label="brhorn, página inicial" className="inline-block">
-            <Logo className="only-light h-8 w-auto" />
-            <Logo className="only-dark h-8 w-auto" tone="dark" />
+            <Logo className="h-8 w-auto" />
           </Link>
           <p className="mt-5 max-w-sm text-sm leading-relaxed">
             Agentes de IA que fazem o trabalho e software sob medida, projetados com método de engenharia.

@@ -1,4 +1,7 @@
 {
+    "redirects": [
+        { "source": "/(clinicas|imobiliarias|profissionais-liberais|marketing|contabilidade|restaurantes|ecommerce|automacoes-personalizadas)", "destination": "/configuracao-de-agentes", "permanent": true }
+    ],
     "rewrites": [
         {
             "source": "/(.*)",

@@ -45,76 +45,6 @@
     --sidebar-border: 46 18% 82%;
     --sidebar-ring: 217 84% 52%;
   }
-
-  /* Tema escuro antigo, mantido só nas páginas que ainda não foram redesenhadas
-     (Axion, ViaSerra, setores e legais). Some quando elas forem refeitas. */
-  .legacy-dark {
-    --background: 240 10% 3.9%;
-    /* Zinc 950 - Deep Black */
-    --foreground: 0 0% 100%;
-    /* White */
-
-    --card: 240 10% 3.9%;
-    /* Same as bg */
-    --card-foreground: 0 0% 100%;
-
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 100%;
-
-    /* Primary is now White for high contrast */
-    --primary: 0 0% 100%;
-    --primary-foreground: 240 5.9% 10%;
-    /* Zinc 900 */
-    --primary-dark: 240 5% 84.9%;
-    /* Zinc 200 */
-
-    /* Secondary is Zinc 800 */
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    /* Muted is Zinc 900 */
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    /* Zinc 400 */
-
-    /* brhorn visual identity accent: amber */
-    --accent: 37 92% 50%;
-    --accent-foreground: 240 5.9% 10%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 3.7% 15.9%;
-    /* Zinc 800 */
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    /* Zinc 300 */
-
-    --radius: 0.125rem;
-    /* 2px - Sharp/Premium */
-
-    /* Custom Tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 70%));
-    --gradient-light: linear-gradient(135deg, hsl(240 4% 10%), hsl(240 4% 15%));
-    /* Subtle glow instead of heavy shadow */
-    --shadow-elegant: 0 0 0 1px hsl(240 3.7% 15.9%), 0 4px 12px hsl(0 0% 0% / 0.5);
-    --shadow-hero: 0 0 40px -10px hsl(0 0% 100% / 0.1);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* Sidebar match background */
-    --sidebar-background: 240 10% 3.9%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-
-    font-family: 'Manrope', sans-serif;
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-  }
 }
 
 @layer base {
@@ -202,10 +132,6 @@
   }
 }
 
-/* Peças que existem nas duas versões (ex.: logo do rodapé), escolhidas pelo tema da página. */
-.only-dark { display: none; }
-.legacy-dark .only-dark { display: block; }
-.legacy-dark .only-light { display: none; }
 
 /* Vida das páginas de produto: entrada ao rolar e peças animadas dos exemplos. */
 .revelar { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
