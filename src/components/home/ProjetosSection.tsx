@@ -19,14 +19,6 @@ const projetos = [
       "Recebe pedidos de revendedores pelo WhatsApp, consulta catálogo e preços, aplica as regras comerciais e organiza tudo num painel. Pronto e procurando as primeiras empresas para piloto.",
     link: { to: "/axion", label: "Ver o Axion" },
   },
-  {
-    nome: "Agente BOM",
-    tipo: "Indústria · cliente confidencial",
-    status: "Sob medida",
-    texto:
-      "Lê desenhos técnicos e monta a lista de materiais automaticamente. Roda offline, no computador do cliente: nenhum desenho sai da empresa.",
-    link: null,
-  },
 ];
 
 export const ProjetosSection = () => (
@@ -37,7 +29,7 @@ export const ProjetosSection = () => (
         Feito, entregue e funcionando.
       </h2>
 
-      <div className="mt-12 grid gap-6 lg:grid-cols-3">
+      <div className="mt-12 grid gap-6 lg:grid-cols-2">
         {projetos.map((p) => (
           <article key={p.nome} className="flex flex-col rounded border border-linha bg-card p-7">
             <div className="flex items-start justify-between gap-4">
