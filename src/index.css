@@ -2,28 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Design system: todas as cores em HSL. */
 
 @layer base {
+  /* Papel de projeto — tema claro da marca v3 (out/2026).
+     papel #F7F6F2 · nanquim #161A3A · azul projeto #1F6FEB · linha #D9D5C8 */
   :root {
-    /* Obsidian SaaS Theme - Light Mode (Inverted Logic: Defaulting to Dark aesthetics) 
-       actually, for a true black saas, we usually invert the logic so "default" feels dark 
-       OR we just set the variables to dark values by default. 
-       Let's keep standard light/dark semantics but force the default look to be "Dark" 
-       by defining the variables as dark in :root and just keeping .dark the same or similar.
-    */
+    --background: 48 24% 96%;
+    --foreground: 233 45% 16%;
+    --card: 45 33% 98%;
+    --card-foreground: 233 45% 16%;
+    --popover: 45 33% 98%;
+    --popover-foreground: 233 45% 16%;
 
-    /* 
-      Paleta Obsidian:
-      Zinc 950: 240 10% 3.9%
-      Zinc 900: 240 5.9% 10%
-      Zinc 800: 240 3.7% 15.9%
-      White: 0 0% 100%
-      Zinc 400: 240 5% 64.9%
-    */
+    --primary: 217 84% 52%;
+    --primary-foreground: 48 24% 96%;
+    --primary-dark: 222 70% 36%;
 
+    --secondary: 44 26% 92%;
+    --secondary-foreground: 233 45% 16%;
+    --muted: 44 26% 92%;
+    --muted-foreground: 230 12% 40%;
+
+    --accent: 217 84% 52%;
+    --accent-foreground: 48 24% 96%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 46 18% 82%;
+    --input: 46 18% 82%;
+    --ring: 217 84% 52%;
+
+    --radius: 0.25rem;
+
+    --sidebar-background: 48 24% 96%;
+    --sidebar-foreground: 233 45% 16%;
+    --sidebar-primary: 217 84% 52%;
+    --sidebar-primary-foreground: 48 24% 96%;
+    --sidebar-accent: 44 26% 92%;
+    --sidebar-accent-foreground: 233 45% 16%;
+    --sidebar-border: 46 18% 82%;
+    --sidebar-ring: 217 84% 52%;
+  }
+
+  /* Tema escuro antigo, mantido só nas páginas que ainda não foram redesenhadas
+     (Axion, ViaSerra, setores e legais). Some quando elas forem refeitas. */
+  .legacy-dark {
     --background: 240 10% 3.9%;
     /* Zinc 950 - Deep Black */
     --foreground: 0 0% 100%;
@@ -85,38 +110,10 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-  }
 
-  .dark {
-    /* Identical to root since we are enforcing dark mode */
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 100%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 100%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 0 0% 100%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 37 92% 50%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-
-    --sidebar-background: 240 10% 3.9%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    font-family: 'Manrope', sans-serif;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 }
 
@@ -127,7 +124,8 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Manrope', sans-serif;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 
   html {
@@ -202,4 +200,25 @@ All colors MUST be HSL.
       box-shadow: 0 0 10px hsl(0 0% 100% / 0.3), 0 0 20px hsl(0 0% 100% / 0.1);
     }
   }
+}
+
+/* Peças que existem nas duas versões (ex.: logo do rodapé), escolhidas pelo tema da página. */
+.only-dark { display: none; }
+.legacy-dark .only-dark { display: block; }
+.legacy-dark .only-light { display: none; }
+
+/* Vida das páginas de produto: entrada ao rolar e peças animadas dos exemplos. */
+.revelar { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.revelar.visivel { opacity: 1; transform: none; }
+@keyframes surgir { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.animate-surgir { animation: surgir .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes crescer { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.animate-crescer { transform-origin: left center; animation: crescer .6s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes percorrer { from { left: 0%; } to { left: 100%; } }
+.animate-percorrer { animation: percorrer 4.8s linear infinite; }
+@keyframes digitando { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
+.animate-digitando { animation: digitando 1.2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .revelar { opacity: 1; transform: none; transition: none; }
+  .animate-surgir, .animate-crescer, .animate-percorrer, .animate-digitando { animation: none; }
 }

@@ -74,7 +74,7 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
 
       toast({
         title: "Solicitação enviada com sucesso!",
-        description: "Nossa equipe entrará em contato em até 24 horas.",
+        description: "Respondo em até 1 dia útil.",
       });
 
       // Reset form
@@ -105,101 +105,98 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md mx-auto max-h-[90vh] overflow-y-auto bg-zinc-950 border border-white/10 text-white">
+      <DialogContent className="max-w-md mx-auto max-h-[90vh] overflow-y-auto bg-card border border-border text-foreground">
         <DialogHeader>
           <div className="flex items-center justify-between">
-            <DialogTitle className="text-2xl font-bold text-white tracking-tight">
-              Fale com um Especialista
+            <DialogTitle className="font-display text-3xl font-normal text-nanquim tracking-tight">
+              Descreva o seu caso
             </DialogTitle>
           </div>
-          <p className="text-zinc-400">
-            Receba uma demonstração personalizada e descubra como podemos automatizar seu negócio.
+          <p className="text-muted-foreground">
+            Conte o que trava hoje. Respondo em até 1 dia útil pelo canal que você preferir.
           </p>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div className="grid grid-cols-1 gap-4">
             <div>
-              <Label htmlFor="name" className="text-zinc-300">Nome completo *</Label>
+              <Label htmlFor="name" className="text-foreground">Nome completo *</Label>
               <Input
                 id="name"
                 type="text"
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 placeholder="Seu nome completo"
-                className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
+                className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
                 required
               />
             </div>
 
             <div>
-              <Label htmlFor="email" className="text-zinc-300">Seu melhor e-mail *</Label>
+              <Label htmlFor="email" className="text-foreground">Seu melhor e-mail *</Label>
               <Input
                 id="email"
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
                 placeholder="seu@email.com"
-                className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
+                className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
                 required
               />
             </div>
 
             <div>
-              <Label htmlFor="phone" className="text-zinc-300">Telefone/WhatsApp *</Label>
+              <Label htmlFor="phone" className="text-foreground">Telefone/WhatsApp *</Label>
               <Input
                 id="phone"
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
                 placeholder="(11) 99999-9999"
-                className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
+                className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
                 required
               />
             </div>
 
             <div>
-              <Label htmlFor="company" className="text-zinc-300">Empresa</Label>
+              <Label htmlFor="company" className="text-foreground">Empresa</Label>
               <Input
                 id="company"
                 type="text"
                 value={formData.company}
                 onChange={(e) => handleInputChange('company', e.target.value)}
                 placeholder="Nome da sua empresa"
-                className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
+                className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
               />
             </div>
 
             <div>
-              <Label htmlFor="sector" className="text-zinc-300">Setor *</Label>
+              <Label htmlFor="sector" className="text-foreground">Assunto *</Label>
               <Select value={formData.sector} onValueChange={(value) => handleInputChange('sector', value)}>
-                <SelectTrigger className="bg-white/5 border-white/10 text-white rounded-sm">
-                  <SelectValue placeholder="Selecione seu setor" />
+                <SelectTrigger className="bg-background border-border text-foreground rounded">
+                  <SelectValue placeholder="Escolha o assunto" />
                 </SelectTrigger>
-                <SelectContent className="bg-zinc-900 border-white/10 text-white">
-                  <SelectItem value="axion">Axion / Pedidos B2B</SelectItem>
+                <SelectContent className="bg-card border-border text-foreground">
+                  <SelectItem value="agente-whatsapp">Agente no WhatsApp</SelectItem>
+                  <SelectItem value="leitura-documentos">Leitura de documentos</SelectItem>
+                  <SelectItem value="configuracao-agentes">Configuração de agentes</SelectItem>
+                  <SelectItem value="software-sob-medida">Software sob medida</SelectItem>
+                  <SelectItem value="axion">Axion (piloto)</SelectItem>
                   <SelectItem value="viaserra">ViaSerra / Pousadas</SelectItem>
-                  <SelectItem value="automacao-sob-medida">Automação sob medida</SelectItem>
-                  <SelectItem value="clinica">Clínica/Saúde</SelectItem>
-                  <SelectItem value="imobiliaria">Imobiliária</SelectItem>
-                  <SelectItem value="profissional-liberal">Profissional Liberal</SelectItem>
-                  <SelectItem value="marketing">Marketing/Agência</SelectItem>
-                  <SelectItem value="e-commerce">E-commerce</SelectItem>
-                  <SelectItem value="servicos">Serviços</SelectItem>
                   <SelectItem value="outro">Outro</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <Label htmlFor="message" className="text-zinc-300">Mensagem</Label>
+              <Label htmlFor="message" className="text-foreground">Mensagem</Label>
               <Textarea
                 id="message"
                 value={formData.message}
                 onChange={(e) => handleInputChange('message', e.target.value)}
-                placeholder="Conte-nos sobre seu negócio e objetivos..."
+                placeholder="O que acontece hoje, quem faz e onde trava..."
                 rows={3}
-                className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
+                className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
               />
             </div>
           </div>
@@ -209,32 +206,32 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
               type="button"
               variant="outline"
               onClick={onClose}
-              className="flex-1 border-white/10 text-white bg-transparent hover:bg-white hover:text-black rounded-sm uppercase tracking-wider text-xs font-bold"
+              className="flex-1 border-border text-foreground bg-transparent hover:bg-secondary rounded"
             >
               Cancelar
             </Button>
             <Button
               type="submit"
               disabled={!isFormValid || isSubmitting}
-              className="flex-1 bg-white text-black hover:bg-zinc-200 rounded-sm uppercase tracking-wider text-xs font-bold shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+              className="flex-1 bg-projeto text-papel hover:bg-[#1a5fcc] rounded"
             >
               {isSubmitting ? (
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-4 h-4 border-2 border-papel border-t-transparent rounded-full animate-spin"></div>
                   Enviando...
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4" />
-                  Solicitar Contato
+                  Enviar
                 </div>
               )}
             </Button>
           </div>
         </form>
 
-        <div className="text-[10px] text-zinc-500 text-center pt-2 border-t border-white/5 uppercase tracking-widest">
-          Seus dados estão protegidos
+        <div className="text-xs text-muted-foreground text-center pt-3 border-t border-border">
+          Seus dados são usados só para responder este contato.
         </div>
       </DialogContent>
     </Dialog>

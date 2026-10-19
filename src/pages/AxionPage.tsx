@@ -1,270 +1,281 @@
 import {
-    ArrowLeft,
-    ArrowRight,
-    CheckCircle2,
-    LayoutDashboard,
-    Users,
-    Package,
-    ShoppingCart,
-    Truck,
-    Bot,
-    MessageSquare,
-    History,
-    AlertCircle,
-    BrainCircuit,
-    Zap,
-    ShieldCheck,
-    BarChart3
+  ArrowRight,
+  BarChart3,
+  Bot,
+  CalendarClock,
+  Eye,
+  FileText,
+  Hand,
+  History,
+  Image,
+  LayoutDashboard,
+  ListChecks,
+  MessageSquare,
+  Package,
+  Ruler,
+  ShieldCheck,
+  ShoppingCart,
+  Truck,
+  Users,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import Footer from "@/components/Footer";
-import { useState } from "react";
+import { SiteHeader } from "@/components/home/SiteHeader";
+import { ContatoSection } from "@/components/home/ContatoSection";
+import { Eyebrow, H2 } from "@/components/home/Titulos";
+import { AxionDemo } from "@/components/produto/AxionDemo";
+import { Revelar } from "@/components/produto/Revelar";
 import ContactModal from "@/components/ContactModal";
-import logo from "@/assets/logo-original.png";
+import CallModal from "@/components/CallModal";
+import Footer from "@/components/Footer";
+import { useContactIntent } from "@/hooks/use-contact-intent";
+import { usePageTitle } from "@/hooks/use-page-title";
+import { whatsappLink } from "@/lib/contato";
+
+const MSG_WHATSAPP = "Olá! Vi o Axion no site da brhorn e quero saber sobre o piloto para a minha distribuidora.";
+
+const PROBLEMAS = [
+  "Pedido chega por mensagem, áudio, foto e ligação, cada um de um jeito",
+  "Alguém passa o dia copiando pedido do WhatsApp para o sistema",
+  "O horário de corte passa e o pedido fica para a próxima rota",
+  "As mesmas perguntas sobre preço e prazo, todo dia",
+  "Revendedor que esqueceu de pedir só aparece quando falta produto",
+  "Sem histórico: ninguém sabe o que foi combinado com quem",
+];
+
+const PASSOS = [
+  { icon: MessageSquare, titulo: "Contato", texto: "O revendedor chama no WhatsApp que ele já usa. Nada para instalar." },
+  { icon: Bot, titulo: "Interpretação", texto: "O agente entende o pedido, mesmo escrito do jeito do cliente." },
+  { icon: ShieldCheck, titulo: "Regras", texto: "Aplica catálogo, preço, rota e horário de corte da sua empresa." },
+  { icon: ListChecks, titulo: "Registro", texto: "Confirma com o cliente e lança o pedido no painel." },
+];
+
+const ENTENDE = [
+  { icon: MessageSquare, titulo: "Mensagem picada", texto: "Espera o cliente terminar de escrever antes de responder, como uma pessoa faria." },
+  { icon: Image, titulo: "Foto da lista", texto: "O revendedor fotografa o papel do pedido e o agente lê os itens." },
+  { icon: FileText, titulo: "PDF", texto: "Lista ou cotação em PDF vira pedido sem ninguém digitar." },
+  { icon: Ruler, titulo: "Unidades e apelidos", texto: "Caixa, fardo, unidade e o nome que o cliente dá ao produto, tudo convertido." },
+  { icon: Truck, titulo: "Rota e horário de corte", texto: "Sabe o dia de entrega de cada região e avisa quando o pedido fecha." },
+  { icon: CalendarClock, titulo: "Lembretes e campanhas", texto: "Lembra quem ainda não pediu e envia listas e ofertas na hora certa." },
+];
+
+const PAINEL = [
+  { icon: LayoutDashboard, titulo: "Visão geral", texto: "Clientes ativos, pedidos do ciclo e atividade recente." },
+  { icon: Users, titulo: "Clientes", texto: "Cadastro, classificação e agente ligado por cliente." },
+  { icon: Package, titulo: "Catálogo", texto: "Produtos, preços, conversão de unidades e sinônimos." },
+  { icon: ShoppingCart, titulo: "Pedidos", texto: "Status, edição, validação e histórico." },
+  { icon: Truck, titulo: "Logística", texto: "Rotas por região, frequência de entrega e janelas de corte." },
+  { icon: Bot, titulo: "Estúdio do agente", texto: "Tom de voz, regras de negócio e o que o agente pode fazer." },
+  { icon: CalendarClock, titulo: "Comunicação", texto: "Campanhas, envio de listas e lembretes de fechamento." },
+  { icon: History, titulo: "Conversas", texto: "Todas as conversas, auditáveis, com opção de assumir." },
+];
+
+const CONTROLE = [
+  { icon: Eye, titulo: "Tudo registrado", texto: "Cada conversa e cada decisão do agente fica no histórico, para conferir quando quiser." },
+  { icon: Hand, titulo: "Você assume quando quiser", texto: "Um atendimento fora do comum? O seu time entra na conversa e o agente sai." },
+  { icon: ShieldCheck, titulo: "Regras escritas, não adivinhadas", texto: "Preço, prazo e limite vêm do seu cadastro. O agente não inventa condição comercial." },
+  { icon: BarChart3, titulo: "Envio com limite", texto: "Campanhas saem espaçadas e com teto por hora, para não parecer disparo em massa." },
+];
 
 const AxionPage = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isContactOpen, isCallOpen, closeContact, closeCall, openContact, trackWhatsapp } = useContactIntent();
+  usePageTitle("Axion · agente que tira pedido pelo WhatsApp · brhorn");
 
-    const problems = [
-        "Contato manual com dezenas de revendedores",
-        "Dependência de mensagens informais (WhatsApp)",
-        "Janelas de corte e prazos ignorados",
-        "Dúvidas repetitivas sobre preços, disponibilidade e regras",
-        "Pedidos perdidos por esquecimento",
-        "Falta de padronização e histórico"
-    ];
+  return (
+    <div className="min-h-screen bg-background font-sans text-foreground selection:bg-projeto/20">
+      <SiteHeader />
+      <main>
+        {/* Abertura */}
+        <section className="border-b border-linha bg-papel bg-[linear-gradient(#ebe8df_1px,transparent_1px),linear-gradient(90deg,#ebe8df_1px,transparent_1px)] bg-[size:24px_24px]">
+          <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-14 sm:px-6 md:pt-20 lg:grid-cols-[1.1fr_0.9fr]">
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <Eyebrow>Produto brhorn · Axion</Eyebrow>
+                <span className="rounded-full border border-projeto/30 bg-projeto/5 px-2.5 py-0.5 font-mono text-[11px] text-projeto">
+                  Aberto para piloto
+                </span>
+              </div>
+              <h1 className="mt-5 font-display text-[2.6rem] font-normal leading-[1.08] tracking-[-0.01em] text-nanquim sm:text-6xl">
+                O agente que <span className="text-projeto">tira pedido de revendedor</span> pelo WhatsApp.
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+                Para distribuidoras e atacadistas. O revendedor manda mensagem, foto ou PDF da lista; o Axion entende,
+                aplica as suas regras comerciais e registra o pedido no painel. O seu time fica com as exceções.
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={whatsappLink(MSG_WHATSAPP)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackWhatsapp("axion_hero_whatsapp")}
+                  className="inline-flex h-12 items-center justify-center rounded bg-projeto px-6 font-medium text-papel transition-colors hover:bg-[#1a5fcc]"
+                >
+                  Quero ser piloto
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+                <a
+                  href="#como-funciona"
+                  className="inline-flex h-12 items-center justify-center rounded border border-nanquim px-6 font-medium text-nanquim transition-colors hover:bg-nanquim hover:text-papel"
+                >
+                  Ver como funciona
+                </a>
+              </div>
+            </div>
+            <AxionDemo />
+          </div>
+        </section>
 
-    const features = [
-        {
-            icon: LayoutDashboard,
-            title: "Dashboard Gerencial",
-            desc: "Visão clara de clientes ativos, pedidos no ciclo, atividades recentes e limites de uso."
-        },
-        {
-            icon: Users,
-            title: "Gestão de Clientes (CRM)",
-            desc: "Cadastro completo, classificação VIP/Padrão e ativação individual de agentes."
-        },
-        {
-            icon: Package,
-            title: "Catálogo Inteligente",
-            desc: "SKUs, preços, conversão de unidades (cx → un) e sinônimos para IA entender."
-        },
-        {
-            icon: ShoppingCart,
-            title: "Gestão de Pedidos",
-            desc: "Status, edição, validação e histórico operacional dos pedidos."
-        },
-        {
-            icon: Truck,
-            title: "Logística e Ciclos",
-            desc: "Rotas por região, frequência de entrega e janelas de corte (horário limite)."
-        },
-        {
-            icon: Bot,
-            title: "Prompt Studio",
-            desc: "Controle total da IA: Persona, tom de voz, regras de negócio e mapeamento de intenções."
-        },
-        {
-            icon: MessageSquare,
-            title: "Regras de Comunicação",
-            desc: "Campanhas automáticas, envio de listas e lembretes de fechamento."
-        },
-        {
-            icon: History,
-            title: "Histórico Human-in-the-loop",
-            desc: "Auditoria de conversas e possibilidade de assumir o atendimento manualmente."
-        }
-    ];
+        {/* Problema */}
+        <section className="bg-papel py-20 lg:py-28">
+          <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
+            <Revelar>
+              <Eyebrow>O problema</Eyebrow>
+              <H2>Hoje o pedido chega de todo jeito.</H2>
+              <p className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground">
+                E alguém da sua equipe passa o dia traduzindo conversa em pedido. Não escala, e o erro aparece na
+                entrega.
+              </p>
+            </Revelar>
+            <ol className="divide-y divide-linha border-y border-linha">
+              {PROBLEMAS.map((p, i) => (
+                <li key={p}>
+                  <Revelar atraso={i * 70} className="flex gap-5 py-4">
+                    <span className="font-mono text-sm text-projeto">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-nanquim">{p}</span>
+                  </Revelar>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
 
-    return (
-        <div className="min-h-screen bg-background font-sans text-white selection:bg-accent selection:text-black">
+        {/* Como funciona */}
+        <section id="como-funciona" className="scroll-mt-20 border-t border-linha bg-[#f2f0ea] py-20 lg:py-28">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <Revelar>
+              <Eyebrow>Como funciona</Eyebrow>
+              <H2>Da mensagem ao pedido, sem ninguém digitar.</H2>
+            </Revelar>
+            <div className="relative mt-14">
+              {/* Linha do fluxo com o pino percorrendo, como na marca */}
+              <div className="absolute left-[12.5%] right-[12.5%] top-6 hidden h-px bg-linha md:block" aria-hidden="true">
+                <span className="animate-percorrer absolute -top-[3px] h-[7px] w-[7px] -translate-x-1/2 rounded-full bg-projeto" />
+              </div>
+              <ol className="grid gap-10 md:grid-cols-4 md:gap-6">
+                {PASSOS.map((p, i) => (
+                  <li key={p.titulo}>
+                    <Revelar atraso={i * 120} className="text-center">
+                      <span className="relative z-[1] mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-linha bg-card">
+                        <p.icon className="h-5 w-5 text-projeto" aria-hidden="true" />
+                      </span>
+                      <p className="mt-5 font-mono text-xs text-projeto">{String(i + 1).padStart(2, "0")}</p>
+                      <h3 className="mt-1 text-lg font-semibold text-nanquim">{p.titulo}</h3>
+                      <p className="mx-auto mt-2 max-w-[16rem] text-sm leading-relaxed text-muted-foreground">{p.texto}</p>
+                    </Revelar>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </section>
 
-            {/* Scroll Progress Bar could go here */}
+        {/* O que ele entende */}
+        <section className="bg-papel py-20 lg:py-28">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <Revelar>
+              <Eyebrow>O que ele entende</Eyebrow>
+              <H2>Feito para o jeito que o revendedor realmente pede.</H2>
+            </Revelar>
+            <div className="mt-12 grid gap-px overflow-hidden rounded border border-linha bg-linha sm:grid-cols-2 lg:grid-cols-3">
+              {ENTENDE.map((e) => (
+                <article key={e.titulo} className="group bg-card p-7 transition-colors hover:bg-papel">
+                  <e.icon className="h-6 w-6 text-projeto transition-transform group-hover:-translate-y-0.5" aria-hidden="true" />
+                  <h3 className="mt-5 text-lg font-semibold text-nanquim">{e.titulo}</h3>
+                  <p className="mt-2 leading-relaxed text-muted-foreground">{e.texto}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            {/* Navigation */}
-            <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5 h-16 flex items-center px-4 md:px-6">
-                <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
-                    <Link to="/" className="text-sm font-mono text-zinc-400 hover:text-white flex items-center gap-2 transition-colors border border-white/10 p-2 rounded-sm md:border-0 md:p-0">
-                        <ArrowLeft className="w-4 h-4" /> <span className="hidden md:inline">VOLTAR</span>
-                    </Link>
+        {/* Painel */}
+        <section className="border-t border-linha bg-[#f2f0ea] py-20 lg:py-28">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <Revelar>
+              <Eyebrow>O painel</Eyebrow>
+              <H2>O controle fica com você.</H2>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+                O agente trabalha no WhatsApp; a gestão acontece num painel web, com tudo o que ele precisa saber da sua
+                operação.
+              </p>
+            </Revelar>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {PAINEL.map((f, i) => (
+                <Revelar key={f.titulo} atraso={(i % 4) * 80}>
+                  <article className="h-full rounded border border-linha bg-card p-6 transition-colors hover:border-projeto/40">
+                    <f.icon className="h-5 w-5 text-projeto" aria-hidden="true" />
+                    <h3 className="mt-4 font-semibold text-nanquim">{f.titulo}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.texto}</p>
+                  </article>
+                </Revelar>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                    <div className="flex items-center gap-3 md:gap-4">
-                        <img src={logo} alt="Brhorn" className="h-5 md:h-6 w-auto" />
-                        <span className="text-zinc-600 font-light text-lg md:text-xl">|</span>
-                        <span className="font-bold tracking-tighter text-base md:text-lg">AXIØN</span>
-                    </div>
+        {/* Controle e segurança */}
+        <section className="bg-nanquim py-20 text-papel lg:py-28">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <Revelar>
+              <Eyebrow className="text-projeto-claro">Agente com supervisão</Eyebrow>
+              <H2 className="text-papel">Automático no que é rotina. Humano no que é exceção.</H2>
+            </Revelar>
+            <div className="mt-12 grid gap-px overflow-hidden rounded border border-papel/15 bg-papel/15 sm:grid-cols-2">
+              {CONTROLE.map((c) => (
+                <article key={c.titulo} className="bg-nanquim p-7">
+                  <c.icon className="h-5 w-5 text-projeto-claro" aria-hidden="true" />
+                  <h3 className="mt-5 font-semibold">{c.titulo}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-papel/70">{c.texto}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                    <Button
-                        onClick={() => setIsModalOpen(true)}
-                        size="sm"
-                        className="bg-white text-black hover:bg-zinc-200 text-[10px] md:text-xs uppercase font-bold tracking-wider h-8 md:h-9 px-3 md:px-4"
-                    >
-                        <span className="hidden md:inline">Falar com Especialista</span>
-                        <span className="md:hidden">Contato</span>
-                    </Button>
-                </div>
-            </nav>
+        {/* Piloto */}
+        <section className="bg-papel py-20 lg:py-28">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <Revelar>
+              <Eyebrow>Piloto</Eyebrow>
+              <H2>Começa pequeno, com acompanhamento de perto.</H2>
+            </Revelar>
+            <ol className="mt-12 grid gap-px overflow-hidden rounded border border-linha bg-linha md:grid-cols-3">
+              {[
+                ["Diagnóstico", "Entendo como os pedidos chegam hoje, o catálogo, as rotas e as regras comerciais."],
+                ["Grupo piloto", "O Axion começa atendendo um grupo de revendedores, com o seu time acompanhando cada conversa."],
+                ["Ajuste e decisão", "Ajustamos com base nas conversas reais. Se fizer sentido, ampliamos para a carteira."],
+              ].map(([t, d], i) => (
+                <li key={t} className="bg-card p-7">
+                  <span className="font-mono text-sm text-projeto">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="mt-5 text-lg font-semibold text-nanquim">{t}</h3>
+                  <p className="mt-2 leading-relaxed text-muted-foreground">{d}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
 
-            {/* HERO SECTION */}
-            <section className="pt-32 md:pt-40 pb-16 md:pb-20 px-6 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-white opacity-[0.03] rounded-full blur-[100px] pointer-events-none translate-x-1/3 -translate-y-1/2"></div>
-
-                <div className="max-w-5xl mx-auto">
-                    <div className="inline-block mb-6 px-4 py-2 border border-white/20 rounded-full bg-white/5 backdrop-blur-sm">
-                        <span className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-zinc-300">
-                            Brhorn AI Platform
-                        </span>
-                    </div>
-
-                    <h1 className="text-5xl md:text-9xl font-bold tracking-tighter mb-6 md:mb-8 leading-[0.9]">
-                        AXIØN
-                    </h1>
-                    <h2 className="text-xl md:text-4xl text-zinc-400 font-light mb-8 md:mb-12 max-w-3xl leading-tight">
-                        O piloto automático para <span className="text-white font-medium">vendas B2B</span>.
-                    </h2>
-
-                    <p className="text-lg text-zinc-500 max-w-2xl leading-relaxed mb-12 border-l-2 border-white/10 pl-6">
-                        O Axion é a plataforma que automatiza o processo de pedidos entre distribuidores e revendedores, utilizando agentes de IA para interpretar, decidir e executar.
-                    </p>
-
-                    <Button
-                        onClick={() => setIsModalOpen(true)}
-                        className="h-14 px-10 bg-white text-black hover:bg-zinc-200 text-lg font-bold rounded-sm uppercase tracking-widest shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] transition-all"
-                    >
-                        Solicitar demonstração
-                    </Button>
-                </div>
-            </section>
-
-            {/* PROBLEM SECTION - "Disorder" */}
-            <section className="py-24 bg-zinc-950 border-y border-white/5 relative">
-                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <div className="flex items-center gap-3 mb-6 text-red-400">
-                            <AlertCircle className="w-6 h-6" />
-                            <span className="font-mono uppercase tracking-widest text-sm">O Problema</span>
-                        </div>
-                        <h3 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-                            Sem escala,<br />sem controle.
-                        </h3>
-                        <p className="text-zinc-400 text-lg leading-relaxed">
-                            Distribuidores e atacadistas enfrentam um caos operacional diário. O contato manual e a dependência de mensagens informais geram gargalos que impedem o crescimento.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-4">
-                        {problems.map((prob, i) => (
-                            <div key={i} className="flex items-center gap-4 p-4 bg-red-500/5 border border-red-500/10 rounded-sm">
-                                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                                <span className="text-zinc-300">{prob}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* SOLUTION SECTION - "Order" */}
-            <section className="py-24 bg-background relative">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <div className="flex items-center justify-center gap-3 mb-6 text-emerald-400">
-                            <Zap className="w-6 h-6" />
-                            <span className="font-mono uppercase tracking-widest text-sm">A Solução</span>
-                        </div>
-                        <h3 className="text-4xl md:text-5xl font-bold mb-6">Autopiloto de Vendas</h3>
-                        <p className="text-zinc-400 max-w-2xl mx-auto">
-                            O Axion assume a fricção operacional. O time humano foca apenas na estratégia e nas exceções.
-                        </p>
-                    </div>
-
-                    {/* Funil Visual */}
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
-                        {[
-                            { step: "1. Contato", desc: "Cliente chama no WhatsApp", icon: MessageSquare },
-                            { step: "2. Interpretação", desc: "IA entende a intenção", icon: BrainCircuit },
-                            { step: "3. Validação", desc: "Regras comerciais aplicadas", icon: ShieldCheck },
-                            { step: "4. Execução", desc: "Pedido registrado no painel", icon: CheckCircle2 }
-                        ].map((item, i) => (
-                            <div key={i} className="p-8 bg-white/5 border border-white/10 rounded-sm relative group hover:bg-white/10 transition-colors">
-                                <div className="w-12 h-12 mx-auto bg-black border border-white/20 rounded-full flex items-center justify-center mb-4 group-hover:border-white transition-colors">
-                                    <item.icon className="w-5 h-5 text-zinc-300 group-hover:text-white" />
-                                </div>
-                                <h4 className="font-bold text-lg mb-2">{item.step}</h4>
-                                <p className="text-sm text-zinc-500">{item.desc}</p>
-                                {i < 3 && (
-                                    <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-[1px] bg-white/20 -translate-y-1/2 z-10"></div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* FEATURES GRID */}
-            <section className="py-24 bg-zinc-950/50 border-t border-white/5">
-                <div className="max-w-7xl mx-auto px-6">
-                    <h3 className="text-3xl font-bold mb-12 border-l-4 border-white pl-6">
-                        Painel de Controle
-                    </h3>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {features.map((feat, i) => (
-                            <div key={i} className="p-6 bg-background border border-white/10 hover:border-white/30 transition-all group">
-                                <feat.icon className="w-8 h-8 text-zinc-500 mb-6 group-hover:text-white transition-colors" />
-                                <h4 className="text-lg font-bold mb-3">{feat.title}</h4>
-                                <p className="text-sm text-zinc-400 leading-relaxed font-light">
-                                    {feat.desc}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* DIFFERENTIATORS & CTA */}
-            <section className="py-24 px-6 relative overflow-hidden">
-                <div className="max-w-5xl mx-auto text-center">
-                    <h3 className="text-4xl font-bold mb-12">Por que o Axion é diferente?</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 text-left">
-                        <div className="p-6 border-l border-white/20">
-                            <h4 className="font-bold text-xl mb-2">Produto Brhorn</h4>
-                            <p className="text-zinc-500 text-sm">Não somos revendedores de tecnologia. Somos os criadores da plataforma.</p>
-                        </div>
-                        <div className="p-6 border-l border-white/20">
-                            <h4 className="font-bold text-xl mb-2">Execução real</h4>
-                            <p className="text-zinc-500 text-sm">Vai além do chat. O Axion opera sistemas e processa regras complexas.</p>
-                        </div>
-                        <div className="p-6 border-l border-white/20">
-                            <h4 className="font-bold text-xl mb-2">Auditoria Total</h4>
-                            <p className="text-zinc-500 text-sm">Cada decisão da IA é registrada e pode ser supervisionada.</p>
-                        </div>
-                    </div>
-
-                    <div className="bg-white/5 border border-white/10 p-12 rounded-sm backdrop-blur-md">
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Pronto para organizar seus pedidos?</h2>
-                        <p className="text-xl text-zinc-400 mb-8 max-w-2xl mx-auto">
-                            Veja como o Axion pode assumir partes repetitivas do atendimento e dar controle ao time.
-                        </p>
-                        <Button
-                            onClick={() => setIsModalOpen(true)}
-                            className="h-16 px-12 bg-white text-black hover:bg-zinc-200 text-xl font-bold rounded-sm uppercase tracking-widest shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_50px_rgba(255,255,255,0.2)] transition-all"
-                        >
-                            Agendar Apresentação
-                        </Button>
-                    </div>
-                </div>
-            </section>
-
-            <Footer />
-
-            <ContactModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-            />
-        </div>
-    );
+        <ContatoSection
+          titulo="Sua distribuidora pode ser uma das primeiras."
+          texto="O Axion está pronto e procurando as primeiras empresas para piloto. Conte como os pedidos chegam hoje e eu digo se ele resolve."
+          mensagemWhatsapp={MSG_WHATSAPP}
+          onWhatsappClick={() => trackWhatsapp("axion_final_whatsapp")}
+          onFormClick={() => openContact("axion_final_form")}
+        />
+      </main>
+      <Footer />
+      <ContactModal isOpen={isContactOpen} onClose={closeContact} />
+      <CallModal isOpen={isCallOpen} onClose={closeCall} />
+    </div>
+  );
 };
 
 export default AxionPage;

@@ -70,17 +70,17 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-sm mx-auto bg-zinc-950 border border-white/10 text-white">
+      <DialogContent className="max-w-sm mx-auto bg-card border border-border text-foreground">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-white tracking-tight">
+          <DialogTitle className="font-display text-3xl font-normal text-nanquim tracking-tight">
             Quero que me liguem
           </DialogTitle>
-          <p className="text-zinc-400">Deixe seu nome e telefone, ligamos para você.</p>
+          <p className="text-muted-foreground">Deixe seu nome e telefone, ligamos para você.</p>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div>
-            <Label htmlFor="call-name" className="text-zinc-300">
+            <Label htmlFor="call-name" className="text-foreground">
               Nome
             </Label>
             <Input
@@ -89,13 +89,13 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
               value={formData.name}
               onChange={(e) => handleInputChange("name", e.target.value)}
               placeholder="Seu nome"
-              className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
+              className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
               required
             />
           </div>
 
           <div>
-            <Label htmlFor="call-phone" className="text-zinc-300">
+            <Label htmlFor="call-phone" className="text-foreground">
               Telefone/WhatsApp
             </Label>
             <Input
@@ -104,7 +104,7 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
               value={formData.phone}
               onChange={(e) => handleInputChange("phone", e.target.value)}
               placeholder="(11) 99999-9999"
-              className="mt-1 bg-white/5 border-white/10 text-white placeholder:text-zinc-600 focus:border-white/30 focus:ring-0 rounded-sm"
+              className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
               required
             />
           </div>
@@ -114,18 +114,18 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
               type="button"
               variant="outline"
               onClick={onClose}
-              className="flex-1 border-white/10 text-white bg-transparent hover:bg-white hover:text-black rounded-sm uppercase tracking-wider text-xs font-bold"
+              className="flex-1 border-border text-foreground bg-transparent hover:bg-secondary rounded"
             >
               Cancelar
             </Button>
             <Button
               type="submit"
               disabled={!isFormValid || isSubmitting}
-              className="flex-1 bg-white text-black hover:bg-zinc-200 rounded-sm uppercase tracking-wider text-xs font-bold shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+              className="flex-1 bg-projeto text-papel hover:bg-[#1a5fcc] rounded"
             >
               {isSubmitting ? (
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-4 h-4 border-2 border-papel border-t-transparent rounded-full animate-spin"></div>
                   Enviando...
                 </div>
               ) : (

@@ -20,7 +20,10 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'sans': ['Manrope', 'sans-serif'],
+				'sans': ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+				'display': ['Jost', 'system-ui', 'sans-serif'],
+				'mono': ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+				'manrope': ['Manrope', 'sans-serif'],
 				'poppins': ['Poppins', 'sans-serif'],
 				'brand': ['"DM Serif Display"', 'Georgia', 'serif'],
 			},
@@ -29,6 +32,13 @@ export default {
 					DEFAULT: '#13a4ec',
 					dark: '#088395',
 				},
+				papel: '#f7f6f2',
+				nanquim: '#161a3a',
+				projeto: {
+					DEFAULT: '#1f6feb',
+					claro: '#6ea8ff',
+				},
+				linha: '#d9d5c8',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

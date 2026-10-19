@@ -1,150 +1,216 @@
-import { useState } from "react";
-import { ArrowLeft, ArrowRight, BedDouble, CalendarDays, Gauge, ShieldCheck, UsersRound } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import Footer from "@/components/Footer";
+import {
+  ArrowRight,
+  BedDouble,
+  CalendarDays,
+  Download,
+  FileCheck2,
+  Gauge,
+  KeyRound,
+  MessageCircle,
+  MousePointerClick,
+  RefreshCw,
+  Search,
+  Trash2,
+  UsersRound,
+} from "lucide-react";
+import { SiteHeader } from "@/components/home/SiteHeader";
+import { ContatoSection } from "@/components/home/ContatoSection";
+import { Eyebrow, H2 } from "@/components/home/Titulos";
+import { ViaSerraDemo } from "@/components/produto/ViaSerraDemo";
+import { Revelar } from "@/components/produto/Revelar";
 import ContactModal from "@/components/ContactModal";
-import logo from "@/assets/logo-original.png";
+import CallModal from "@/components/CallModal";
+import Footer from "@/components/Footer";
+import { useContactIntent } from "@/hooks/use-contact-intent";
+import { usePageTitle } from "@/hooks/use-page-title";
+import { whatsappLink } from "@/lib/contato";
+
+const MSG_WHATSAPP = "Olá! Vi o ViaSerra no site da brhorn e quero conversar sobre a gestão da minha pousada.";
+
+const MODULOS = [
+  { icon: CalendarDays, titulo: "Calendário de reservas", texto: "Quartos em linhas, dias em colunas. Check-in, check-out e status num olhar." },
+  { icon: BedDouble, titulo: "Quartos e tarifas", texto: "Tipo, capacidade, leitos, comodidades e preço por pessoa e noite." },
+  { icon: UsersRound, titulo: "Hóspedes", texto: "Cadastro com contato, documento e histórico de hospedagens." },
+  { icon: Gauge, titulo: "Painel do dia", texto: "Ocupação, quem está na casa, receita do mês, próximas chegadas e origem das reservas." },
+];
+
+const ROTINA = [
+  {
+    icon: MousePointerClick,
+    titulo: "Arrastar para mudar",
+    texto: "Hóspede trocou de quarto ou de data? Arraste a reserva no calendário. Sem refazer cadastro.",
+  },
+  {
+    icon: RefreshCw,
+    titulo: "Ao vivo em todos os aparelhos",
+    texto: "A reserva lançada na recepção aparece na hora no celular de quem está fora. Ninguém trabalha com versão velha.",
+  },
+  {
+    icon: Search,
+    titulo: "Achar o hóspede em segundos",
+    texto: "Busca por nome direto no cadastro, mesmo com o cadastro grande.",
+  },
+];
+
+const PRIVACIDADE = [
+  { icon: KeyRound, titulo: "Login com verificação em duas etapas", texto: "Senha forte e código no celular para quem quiser mais proteção." },
+  { icon: FileCheck2, titulo: "Aceite de termos e LGPD", texto: "Termos de uso e política de privacidade aceitos e registrados por versão." },
+  { icon: Download, titulo: "Exportação dos dados", texto: "Os dados são seus: dá para baixar tudo quando quiser." },
+  { icon: Trash2, titulo: "Exclusão de verdade", texto: "Pedido de exclusão apaga os dados, como a LGPD exige." },
+];
 
 const ViaSerraPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const modules = [
-    {
-      icon: CalendarDays,
-      title: "Calendário de reservas",
-      desc: "Visualize quartos por linha, reservas por período, status, check-ins e check-outs.",
-    },
-    {
-      icon: BedDouble,
-      title: "Quartos e tarifas",
-      desc: "Controle tipo, capacidade, preço por pessoa/noite, leitos, comodidades e status.",
-    },
-    {
-      icon: UsersRound,
-      title: "Hóspedes",
-      desc: "Cadastro com contato, documento, busca, paginação e histórico de hospedagens.",
-    },
-    {
-      icon: Gauge,
-      title: "Dashboard operacional",
-      desc: "Ocupação, pessoas hospedadas, receita do mês, próximas chegadas e origem das reservas.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Privacidade e segurança",
-      desc: "Supabase Auth, MFA disponível, aceite LGPD, exportação e exclusão de dados.",
-    },
-  ];
+  const { isContactOpen, isCallOpen, closeContact, closeCall, openContact, trackWhatsapp } = useContactIntent();
+  usePageTitle("ViaSerra · gestão de pousadas sem planilha · brhorn");
 
   return (
-    <div className="min-h-screen bg-background text-white">
-      <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-background/80 px-4 backdrop-blur-md md:px-6">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 text-sm text-zinc-400 transition-colors hover:text-white">
-            <ArrowLeft className="h-4 w-4" />
-            <span className="hidden md:inline">Voltar</span>
-          </Link>
-
-          <div className="flex items-center gap-4">
-            <img src={logo} alt="brhorn" className="h-6 w-auto" />
-            <span className="text-zinc-600">|</span>
-            <span className="font-brand text-2xl">ViaSerra</span>
-          </div>
-
-          <Button
-            onClick={() => setIsModalOpen(true)}
-            size="sm"
-            className="rounded-sm bg-white text-xs font-bold uppercase tracking-wide text-black hover:bg-zinc-200"
-          >
-            Contato
-          </Button>
-        </div>
-      </nav>
-
+    <div className="min-h-screen bg-background font-sans text-foreground selection:bg-projeto/20">
+      <SiteHeader />
       <main>
-        <section className="relative overflow-hidden px-6 pb-20 pt-32 md:pt-40">
-          <div className="absolute right-0 top-0 h-[520px] w-[520px] translate-x-1/3 rounded-full bg-brand/10 blur-3xl" />
-          <div className="relative mx-auto grid max-w-7xl gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        {/* Abertura */}
+        <section className="border-b border-linha bg-papel bg-[linear-gradient(#ebe8df_1px,transparent_1px),linear-gradient(90deg,#ebe8df_1px,transparent_1px)] bg-[size:24px_24px]">
+          <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-14 sm:px-6 md:pt-20 lg:grid-cols-[1fr_1fr]">
             <div>
-              <p className="mb-6 text-xs font-bold uppercase tracking-[0.22em] text-brand">Produto brhorn</p>
-              <h1 className="font-brand text-6xl leading-none md:text-8xl">ViaSerra</h1>
-              <p className="mt-8 max-w-2xl text-2xl font-light leading-tight text-zinc-300">
-                Gestão simples para pousadas pequenas que precisam controlar reservas, quartos e hóspedes sem planilha.
+              <div className="flex flex-wrap items-center gap-3">
+                <Eyebrow>Produto brhorn · ViaSerra</Eyebrow>
+                <span className="rounded-full border border-projeto/30 bg-projeto/5 px-2.5 py-0.5 font-mono text-[11px] text-projeto">
+                  Em uso
+                </span>
+              </div>
+              <h1 className="mt-5 font-display text-[2.6rem] font-normal leading-[1.08] tracking-[-0.01em] text-nanquim sm:text-6xl">
+                Sua pousada organizada, <span className="text-projeto">sem planilha</span>.
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+                O sistema de gestão para pousadas pequenas: reservas, quartos e hóspedes num calendário só, atualizado
+                ao vivo no computador da recepção e no seu celular.
               </p>
-              <p className="mt-8 max-w-2xl text-lg leading-relaxed text-zinc-500">
-                O ViaSerra é um SaaS operacional em React, Vercel e Supabase. A camada de IA é visão futura; o produto
-                atual foca na rotina real da pousada.
-              </p>
-              <Button
-                onClick={() => setIsModalOpen(true)}
-                className="mt-10 h-14 rounded-sm bg-white px-9 text-base font-bold text-black hover:bg-zinc-200"
-              >
-                Conversar sobre ViaSerra <ArrowRight className="ml-3 h-5 w-5" />
-              </Button>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={whatsappLink(MSG_WHATSAPP)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackWhatsapp("viaserra_hero_whatsapp")}
+                  className="inline-flex h-12 items-center justify-center rounded bg-projeto px-6 font-medium text-papel transition-colors hover:bg-[#1a5fcc]"
+                >
+                  Conversar sobre o ViaSerra
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+                <a
+                  href="#modulos"
+                  className="inline-flex h-12 items-center justify-center rounded border border-nanquim px-6 font-medium text-nanquim transition-colors hover:bg-nanquim hover:text-papel"
+                >
+                  Ver o que tem
+                </a>
+              </div>
+              <p className="mt-6 font-mono text-xs text-muted-foreground">Em uso diário por uma pousada.</p>
             </div>
-
-            <div className="overflow-hidden rounded-sm border border-white/10 bg-white text-slate-950">
-              <div className="border-b border-slate-200 px-5 py-4">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Operação da pousada</p>
-                <p className="mt-1 font-brand text-3xl">Calendário de ocupação</p>
-              </div>
-              <div className="grid grid-cols-4 gap-px bg-slate-200">
-                {[
-                  ["78%", "ocupação hoje"],
-                  ["12", "pessoas"],
-                  ["4", "check-ins"],
-                  ["2", "check-outs"],
-                ].map(([value, label]) => (
-                  <div key={label} className="bg-white p-5">
-                    <p className="font-brand text-3xl">{value}</p>
-                    <p className="mt-1 text-[11px] uppercase tracking-wide text-slate-500">{label}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="space-y-3 p-5">
-                {["Araucária", "Mantiqueira", "Pedra Azul", "Serra"].map((room, index) => (
-                  <div key={room} className="grid grid-cols-[110px_1fr] items-center gap-3">
-                    <span className="text-xs font-medium text-slate-600">{room}</span>
-                    <div className="grid gap-1" style={{ gridTemplateColumns: "repeat(14, minmax(0, 1fr))" }}>
-                      {Array.from({ length: 14 }).map((_, day) => (
-                        <span
-                          key={day}
-                          className={`h-7 rounded-sm ${
-                            (day + index) % 6 === 0 ? "bg-amber-400" : (day + index) % 3 === 0 ? "bg-teal-600" : "bg-slate-100"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <ViaSerraDemo />
           </div>
         </section>
 
-        <section className="border-y border-white/10 bg-zinc-950 py-24">
-          <div className="mx-auto max-w-7xl px-6">
-            <div className="mb-14 max-w-3xl">
-              <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-brand">Módulos reais</p>
-              <h2 className="font-brand text-5xl leading-none md:text-7xl">O que já existe no produto.</h2>
-            </div>
-
-            <div className="grid gap-px overflow-hidden rounded-sm border border-white/10 bg-white/10 md:grid-cols-2 lg:grid-cols-5">
-              {modules.map((module) => (
-                <article key={module.title} className="bg-background p-7">
-                  <module.icon className="mb-10 h-6 w-6 text-brand" />
-                  <h3 className="text-lg font-bold text-white">{module.title}</h3>
-                  <p className="mt-4 text-sm leading-relaxed text-zinc-500">{module.desc}</p>
+        {/* Módulos */}
+        <section id="modulos" className="scroll-mt-20 bg-papel py-20 lg:py-28">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <Revelar>
+              <Eyebrow>O que tem</Eyebrow>
+              <H2>Tudo o que a recepção precisa, nada do que ela não usa.</H2>
+            </Revelar>
+            <div className="mt-12 grid gap-px overflow-hidden rounded border border-linha bg-linha sm:grid-cols-2 lg:grid-cols-4">
+              {MODULOS.map((m) => (
+                <article key={m.titulo} className="group bg-card p-7 transition-colors hover:bg-papel">
+                  <m.icon className="h-6 w-6 text-projeto transition-transform group-hover:-translate-y-0.5" aria-hidden="true" />
+                  <h3 className="mt-6 text-lg font-semibold text-nanquim">{m.titulo}</h3>
+                  <p className="mt-2 leading-relaxed text-muted-foreground">{m.texto}</p>
                 </article>
               ))}
             </div>
           </div>
         </section>
-      </main>
 
+        {/* Na rotina */}
+        <section className="border-t border-linha bg-[#f2f0ea] py-20 lg:py-28">
+          <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr]">
+            <Revelar>
+              <Eyebrow>Na rotina</Eyebrow>
+              <H2>Pensado para quem atende, limpa e cobra no mesmo dia.</H2>
+              <p className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground">
+                Pousada pequena não tem gente sobrando para alimentar sistema. Cada tela foi feita para resolver em
+                poucos cliques.
+              </p>
+            </Revelar>
+            <ol className="divide-y divide-linha border-y border-linha">
+              {ROTINA.map((r, i) => (
+                <li key={r.titulo}>
+                  <Revelar atraso={i * 90} className="flex gap-5 py-7">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-linha bg-card">
+                      <r.icon className="h-5 w-5 text-projeto" aria-hidden="true" />
+                    </span>
+                    <div>
+                      <h3 className="text-lg font-semibold text-nanquim">{r.titulo}</h3>
+                      <p className="mt-1.5 leading-relaxed text-muted-foreground">{r.texto}</p>
+                    </div>
+                  </Revelar>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* Privacidade */}
+        <section className="bg-nanquim py-20 text-papel lg:py-28">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <Revelar>
+              <Eyebrow className="text-projeto-claro">Privacidade e segurança</Eyebrow>
+              <H2 className="text-papel">Dado de hóspede é coisa séria.</H2>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-papel/70">
+                Nome, documento e telefone de quem se hospeda na sua casa. O ViaSerra trata isso com os cuidados que a
+                LGPD pede, desde o primeiro acesso.
+              </p>
+            </Revelar>
+            <div className="mt-12 grid gap-px overflow-hidden rounded border border-papel/15 bg-papel/15 sm:grid-cols-2 lg:grid-cols-4">
+              {PRIVACIDADE.map((p) => (
+                <article key={p.titulo} className="bg-nanquim p-7">
+                  <p.icon className="h-5 w-5 text-projeto-claro" aria-hidden="true" />
+                  <h3 className="mt-5 font-semibold">{p.titulo}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-papel/70">{p.texto}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Próximo passo do produto */}
+        <section className="bg-papel py-20 lg:py-28">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <Revelar className="grid items-center gap-10 rounded border border-linha bg-card p-8 sm:p-10 lg:grid-cols-[auto_1fr]">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-projeto/10">
+                <MessageCircle className="h-6 w-6 text-projeto" aria-hidden="true" />
+              </span>
+              <div>
+                <Eyebrow>Em desenvolvimento</Eyebrow>
+                <h2 className="mt-3 font-display text-3xl text-nanquim sm:text-4xl">
+                  Um agente que responde o hóspede no WhatsApp.
+                </h2>
+                <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
+                  Consulta a disponibilidade no calendário, informa valores e deixa a reserva pré-lançada para você
+                  confirmar. É a próxima peça do ViaSerra. Se você quer acompanhar de perto, fale comigo.
+                </p>
+              </div>
+            </Revelar>
+          </div>
+        </section>
+
+        <ContatoSection
+          titulo="Sua pousada ainda vive na planilha?"
+          texto="Conte como você controla as reservas hoje. Em uma conversa a gente vê se o ViaSerra serve para a sua casa."
+          mensagemWhatsapp={MSG_WHATSAPP}
+          onWhatsappClick={() => trackWhatsapp("viaserra_final_whatsapp")}
+          onFormClick={() => openContact("viaserra_final_form")}
+        />
+      </main>
       <Footer />
-      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ContactModal isOpen={isContactOpen} onClose={closeContact} />
+      <CallModal isOpen={isCallOpen} onClose={closeCall} />
     </div>
   );
 };

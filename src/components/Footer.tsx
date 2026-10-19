@@ -1,105 +1,90 @@
-import logo from "@/assets/logo-original.png";
-import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
+import { Instagram, Linkedin, Mail, MapPin, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Logo } from "@/components/brand/Logo";
+import {
+  EMAIL,
+  INSTAGRAM_URL,
+  LINKEDIN_URL,
+  TELEFONE_EXIBICAO,
+  whatsappLink,
+} from "@/lib/contato";
 
-const Footer = () => {
-  return (
-    <footer className="bg-background border-t border-white/5 text-zinc-400 py-16">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Logo e descrição */}
-          <div className="md:col-span-2">
-            <img
-              src={logo}
-              alt="brhorn Logo"
-              className="h-10 w-auto mb-6"
-            />
-            <p className="text-zinc-500 mb-8 max-w-sm leading-relaxed text-sm">
-              Produtos de IA e gestão para operações reais. Criamos sistemas que atendem clientes, organizam pedidos,
-              reservas e processos internos com controle.
-            </p>
-
-            <div className="flex gap-4">
+// Usa só tokens do tema: fica claro na home e escuro dentro de .legacy-dark.
+const Footer = () => (
+  <footer className="border-t border-border bg-background py-14 text-muted-foreground">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
+        <div>
+          <Link to="/" aria-label="brhorn, página inicial" className="inline-block">
+            <Logo className="only-light h-8 w-auto" />
+            <Logo className="only-dark h-8 w-auto" tone="dark" />
+          </Link>
+          <p className="mt-5 max-w-sm text-sm leading-relaxed">
+            Agentes de IA que fazem o trabalho e software sob medida, projetados com método de engenharia.
+          </p>
+          <div className="mt-6 flex gap-3">
+            {LINKEDIN_URL && (
               <a
-                href="https://www.instagram.com/brhorn_ia/"
-                className="w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all group"
-                aria-label="Instagram"
+                href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors hover:border-foreground hover:text-foreground"
               >
-                <Instagram className="w-4 h-4 text-zinc-400 group-hover:text-black" />
+                <Linkedin className="h-4 w-4" />
               </a>
-              <a
-                href="https://www.facebook.com/people/Brhorn/61579100998129/?locale=pt_BR"
-                className="w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all group"
-                aria-label="Facebook"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Facebook className="w-4 h-4 text-zinc-400 group-hover:text-black" />
-              </a>
-            </div>
-          </div>
-
-          {/* Links omitidos conforme solicitado */}
-
-          {/* Contato */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-white mb-6">Contato</h3>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-white" />
-                <a
-                  href="mailto:contato@brhorn.com"
-                  className="text-zinc-400 hover:text-white transition-colors"
-                >
-                  contato@brhorn.com
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-white" />
-                <a
-                  href="tel:+553599161747"
-                  className="text-zinc-400 hover:text-white transition-colors"
-                >
-                  (35) 9 9161 7547
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-white mt-0.5" />
-                <span className="text-zinc-400">
-                  Minas Gerais, Brasil
-                </span>
-              </li>
-            </ul>
+            )}
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors hover:border-foreground hover:text-foreground"
+            >
+              <Instagram className="h-4 w-4" />
+            </a>
           </div>
         </div>
 
-        {/* Linha divisória e informações legais */}
-        <div className="border-t border-white/5 mt-16 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-zinc-600 text-xs uppercase tracking-wider">
-              © 2026 brhorn. Todos os direitos reservados.
-            </p>
-            <div className="flex gap-6 text-xs uppercase tracking-wider">
-              <Link to="/politica-privacidade" className="text-zinc-600 hover:text-white transition-colors">
-                Política de Privacidade
-              </Link>
-              <Link to="/termos-uso" className="text-zinc-600 hover:text-white transition-colors">
-                Termos de Uso
-              </Link>
-              <Link to="/exclusao-dados" className="text-zinc-600 hover:text-white transition-colors">
-                Exclusão de Dados
-              </Link>
-            </div>
-          </div>
+        <div>
+          <h2 className="font-mono text-xs uppercase tracking-[0.14em] text-foreground">Contato</h2>
+          <ul className="mt-5 space-y-3 text-sm">
+            <li className="flex items-center gap-3">
+              <MessageCircle className="h-4 w-4 shrink-0" />
+              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
+                WhatsApp {TELEFONE_EXIBICAO}
+              </a>
+            </li>
+            <li className="flex items-center gap-3">
+              <Mail className="h-4 w-4 shrink-0" />
+              <a href={`mailto:${EMAIL}`} className="hover:text-foreground">
+                {EMAIL}
+              </a>
+            </li>
+            <li className="flex items-center gap-3">
+              <MapPin className="h-4 w-4 shrink-0" />
+              <span>Minas Gerais, Brasil</span>
+            </li>
+          </ul>
         </div>
       </div>
 
-      {/* Analytics placeholder */}
-      {/* GA4 here */}
-    </footer>
-  );
-};
+      <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 text-xs md:flex-row md:items-center">
+        <p>© {new Date().getFullYear()} brhorn</p>
+        <nav aria-label="Documentos legais" className="flex flex-wrap gap-x-6 gap-y-2">
+          <Link to="/politica-privacidade" className="hover:text-foreground">
+            Política de Privacidade
+          </Link>
+          <Link to="/termos-uso" className="hover:text-foreground">
+            Termos de Uso
+          </Link>
+          <Link to="/exclusao-dados" className="hover:text-foreground">
+            Exclusão de Dados
+          </Link>
+        </nav>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;
