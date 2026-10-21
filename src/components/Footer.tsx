@@ -18,7 +18,7 @@ const Footer = () => (
             <Logo className="h-8 w-auto" />
           </Link>
           <p className="mt-5 max-w-sm text-sm leading-relaxed">
-            Agentes de IA que fazem o trabalho e software sob medida, projetados com método de engenharia.
+            Agentes de IA nas rotinas da empresa e agente pessoal para o empresário, com método de engenharia.
           </p>
           <div className="mt-6 flex gap-3">
             {LINKEDIN_URL && (

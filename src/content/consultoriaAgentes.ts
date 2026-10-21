@@ -1,11 +1,12 @@
-// Conteúdo da página /consultoria-de-agentes, num lugar só para editar sem mexer no layout.
-// Mesma convenção de configuracaoAgentes.ts: preço vazio ("") mostra "Valor definido no diagnóstico".
+// Conteúdo da home (consultoria de agentes para empresas), num lugar só para editar sem mexer no layout.
+// Voz: primeira pessoa do singular. 🚫 Nada que lembre o Agente BOM: sem desenhos técnicos, listas de materiais ou engenharia.
+// FORMATOS e FAQ ainda não aparecem na home; preço vazio ("") mostra "Valor definido no diagnóstico".
 
 export const ABERTURA = {
-  rotulo: "Consultoria para empresas",
+  rotulo: "Agentes de IA para empresas",
   titulo: "Agentes de IA na rotina da sua empresa, com método de engenharia.",
   subtitulo:
-    "Do RH à engenharia: descobrimos onde um agente economiza tempo de verdade, projetamos com regras claras, provamos num piloto medido e só então ampliamos.",
+    "RH, financeiro, contabilidade, atendimento. Descubro onde um agente economiza tempo de verdade, projeto com regras claras, provo num piloto medido e só então amplio.",
 };
 
 export const PROBLEMAS = [
@@ -19,7 +20,7 @@ export const PROBLEMAS = [
   },
   {
     titulo: "Medo de expor dados",
-    texto: "Folha, contratos, desenhos e dados de clientes não podem ir para qualquer ferramenta, então a IA fica de fora.",
+    texto: "Folha, contratos e dados de clientes não podem ir para qualquer ferramenta, então a IA fica de fora.",
   },
 ];
 
@@ -35,7 +36,7 @@ export const FASES: Fase[] = [
     numero: "01",
     nome: "Diagnóstico",
     texto:
-      "Conversas com cada área para mapear as rotinas repetitivas, o volume e o tempo gasto. Também mostramos onde um agente não compensa.",
+      "Converso com cada área para mapear as rotinas repetitivas, o volume e o tempo gasto. Também mostro onde um agente não compensa.",
     entrega: "Mapa de oportunidades priorizado por esforço e retorno",
   },
   {
@@ -49,7 +50,7 @@ export const FASES: Fase[] = [
     numero: "03",
     nome: "Piloto",
     texto:
-      "O agente entra em um processo real, com uma equipe real, durante 30 a 60 dias. Medimos tempo, erros e uso, comparando com o antes.",
+      "O agente entra em um processo real, com uma equipe real, durante 30 a 60 dias. Meço tempo, erros e uso, comparando com o antes.",
     entrega: "Agente funcionando e relatório com o resultado medido",
   },
   {
@@ -96,14 +97,6 @@ export const AREAS = [
     ],
   },
   {
-    area: "Engenharia e projeto",
-    exemplos: [
-      "Extrai listas de materiais de desenhos e documentos técnicos",
-      "Compara revisões de desenhos e de especificações e lista o que mudou",
-      "Consulta normas, especificações de cliente e histórico de projetos",
-    ],
-  },
-  {
     area: "Qualidade e gestão",
     exemplos: [
       "Organiza registros de não conformidade e ações corretivas",
@@ -114,6 +107,10 @@ export const AREAS = [
 ];
 
 // Onde o agente prepara e uma pessoa decide. É argumento de venda, não letra miúda.
+// Na home vai só LIMITES_LINHA; a lista completa fica para uma página futura.
+export const LIMITES_LINHA =
+  "Contratação e desligamento, envios oficiais como folha, guias e eSocial, e a aprovação de pagamentos continuam com quem a empresa autorizar.";
+
 export const LIMITES = [
   {
     titulo: "Decisões sobre pessoas",
@@ -127,10 +124,6 @@ export const LIMITES = [
     titulo: "Pagamentos",
     texto: "O agente agenda e confere. A aprovação continua com quem a empresa autorizar.",
   },
-  {
-    titulo: "Liberação técnica",
-    texto: "Em engenharia e qualidade, o agente aponta e compara. A assinatura do responsável técnico continua sendo de uma pessoa.",
-  },
 ];
 
 export const SEGURANCA = [
@@ -140,15 +133,7 @@ export const SEGURANCA = [
   },
   {
     titulo: "Permissão por área",
-    texto: "O agente do financeiro não vê o RH, e o agente do RH não vê os desenhos da engenharia. Cada agente acessa só o que a rotina dele exige.",
-  },
-  {
-    titulo: "Dados sensíveis tratados à parte",
-    texto: "Atestados, exames e dados de saúde têm proteção reforçada na LGPD. Ficam em ambiente restrito ou no servidor da própria empresa.",
-  },
-  {
-    titulo: "Opção local",
-    texto: "Para desenhos, segredos industriais e o que não pode sair da empresa, o agente roda nos computadores da própria empresa, sem internet.",
+    texto: "O agente do financeiro não vê o RH. Cada agente acessa só o que a rotina dele exige, e dados de saúde ficam em ambiente restrito.",
   },
   {
     titulo: "Registro de tudo",
@@ -159,6 +144,10 @@ export const SEGURANCA = [
     texto: "Termo de confidencialidade e acordo de tratamento de dados assinados antes de qualquer acesso.",
   },
 ];
+
+// Para o que não pode sair da empresa. Vai numa linha abaixo dos cards de segurança.
+export const OPCAO_LOCAL =
+  "Quando a informação não pode sair da empresa, o agente roda nos computadores dela, sem depender de serviço na nuvem.";
 
 export interface Formato {
   id: string;

@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -35,31 +36,22 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
     setIsSubmitting(true);
 
     try {
-      // Enviar dados para o webhook do n8n
-      const webhookUrl = 'https://n8nwebhooks01.brhorn.com/webhook/5572cf97-cc95-4241-949a-02082b1b6ead';
-      const credentials = import.meta.env.VITE_WEBHOOK_CREDENTIALS;
+      // Grava em contact_leads pela Edge Function, ao lado dos pedidos de ligação (ver supabase/functions).
+      const functionsUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/contact-request`;
 
-      const headers: Record<string, string> = {
-        'Content-Type': 'application/json',
-      };
-
-      if (credentials) {
-        const encodedCredentials = credentials.includes(':') ? btoa(credentials) : credentials;
-        headers['Authorization'] = `Basic ${encodedCredentials}`;
-      }
-
-      const response = await fetch(webhookUrl, {
+      const response = await fetch(functionsUrl, {
         method: 'POST',
-        headers: headers,
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: import.meta.env.VITE_SUPABASE_KEY,
+        },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          company: formData.company || '',
+          company: formData.company,
           sector: formData.sector,
-          message: formData.message || '',
-          timestamp: new Date().toISOString(),
-          source: 'website_contact_form'
+          message: formData.message,
         })
       });
 
@@ -231,7 +223,11 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
         </form>
 
         <div className="text-xs text-muted-foreground text-center pt-3 border-t border-border">
-          Seus dados são usados só para responder este contato.
+          Seus dados são usados só para responder este contato. Veja a{" "}
+          <Link to="/politica-privacidade" onClick={onClose} className="underline underline-offset-4 hover:text-nanquim">
+            Política de Privacidade
+          </Link>
+          .
         </div>
       </DialogContent>
     </Dialog>

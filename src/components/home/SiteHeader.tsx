@@ -4,9 +4,9 @@ import { whatsappLink } from "@/lib/contato";
 
 // Links absolutos para funcionarem também fora da home.
 const links = [
-  { href: "/#servicos", label: "Serviços" },
+  { href: "/#como-funciona", label: "Como funciona" },
+  { href: "/#casos", label: "Casos" },
   { href: "/configuracao-de-agentes", label: "Agente pessoal" },
-  { href: "/#projetos", label: "Projetos" },
   { href: "/#quem-faz", label: "Quem faz" },
 ];
 

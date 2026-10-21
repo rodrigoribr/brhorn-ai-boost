@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { PhoneCall } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface CallModalProps {
   isOpen: boolean;
@@ -137,6 +138,14 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
             </Button>
           </div>
         </form>
+
+        <div className="text-xs text-muted-foreground text-center pt-3 border-t border-border">
+          Seus dados são usados só para responder este contato. Veja a{" "}
+          <Link to="/politica-privacidade" onClick={onClose} className="underline underline-offset-4 hover:text-nanquim">
+            Política de Privacidade
+          </Link>
+          .
+        </div>
       </DialogContent>
     </Dialog>
   );

@@ -31,7 +31,7 @@ export const PACOTES: Pacote[] = [
   {
     id: "equipe",
     nome: "Agentes para a Equipe",
-    paraQuem: "Para empresas de 3 a 10 pessoas que querem a IA trabalhando no processo, não só no navegador de cada um.",
+    paraQuem: "Para empresas que querem a IA trabalhando no processo, não só no navegador de cada um.",
     preco: "",
     cobranca: "Pagamento único",
     inclui: [

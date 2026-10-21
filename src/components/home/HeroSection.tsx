@@ -1,6 +1,9 @@
 import { ArrowRight, PhoneCall } from "lucide-react";
 import { BrDrawing } from "@/components/brand/BrDrawing";
 import { whatsappLink } from "@/lib/contato";
+import { ABERTURA } from "@/content/consultoriaAgentes";
+
+const MSG_WHATSAPP = "Olá! Vim pelo site da brhorn e quero conversar sobre um diagnóstico de agentes de IA para a minha empresa.";
 
 interface HeroSectionProps {
   onWhatsappClick: () => void;
@@ -12,28 +15,23 @@ export const HeroSection = ({ onWhatsappClick, onCallClick, onFormClick }: HeroS
   <section className="relative overflow-hidden bg-papel bg-[linear-gradient(#ebe8df_1px,transparent_1px),linear-gradient(90deg,#ebe8df_1px,transparent_1px)] bg-[size:24px_24px]">
     <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-20 pt-14 sm:px-6 md:pt-20 lg:grid-cols-[1.25fr_0.75fr] lg:pb-28">
       <div>
-        <p className="font-mono text-xs uppercase tracking-[0.14em] text-projeto">
-          Agentes de IA · Software sob medida
-        </p>
+        <p className="font-mono text-xs uppercase tracking-[0.14em] text-projeto">{ABERTURA.rotulo}</p>
 
         <h1 className="mt-5 font-display text-[2.6rem] font-normal leading-[1.08] tracking-[-0.01em] text-nanquim sm:text-6xl">
-          Agentes de IA que <span className="text-projeto">fazem o trabalho</span>, não só conversam.
+          Agentes de IA na rotina da sua empresa, <span className="text-projeto">com método de engenharia</span>.
         </h1>
 
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          Eles atendem no WhatsApp, leem documentos, lançam pedidos e alimentam os seus sistemas. Cada agente é
-          projetado como uma peça de engenharia: medido, testado e documentado antes de ir para a rotina.
-        </p>
+        <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{ABERTURA.subtitulo}</p>
 
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
-            href={whatsappLink()}
+            href={whatsappLink(MSG_WHATSAPP)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={onWhatsappClick}
             className="inline-flex h-12 items-center justify-center rounded bg-projeto px-6 font-medium text-papel transition-colors hover:bg-[#1a5fcc]"
           >
-            Conversar no WhatsApp
+            Começar pelo diagnóstico
             <ArrowRight className="ml-2 h-4 w-4" />
           </a>
           <button

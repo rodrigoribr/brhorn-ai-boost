@@ -1,4 +1,4 @@
-import { LinkSuporte, PaginaLegal } from "@/components/PaginaLegal";
+import { LinkEmail, PaginaLegal } from "@/components/PaginaLegal";
 
 const TermosUso = () => (
   <PaginaLegal
@@ -9,7 +9,7 @@ const TermosUso = () => (
       {
         texto: (
           <>
-            Contato: <LinkSuporte />
+            Contato: <LinkEmail />
           </>
         ),
       },

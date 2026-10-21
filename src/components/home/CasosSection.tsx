@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-// Só fatos verificáveis: sem números de exemplo, sem "ao vivo" de mentira.
+// Só fatos verificáveis: sem números de exemplo, sem "ao vivo" de mentira. A Frutty entra aqui quando for liberada.
 const projetos = [
   {
     nome: "ViaSerra",
@@ -21,12 +21,12 @@ const projetos = [
   },
 ];
 
-export const ProjetosSection = () => (
-  <section id="projetos" className="scroll-mt-20 border-t border-linha bg-[#f2f0ea] py-20 lg:py-28">
+export const CasosSection = () => (
+  <section id="casos" className="scroll-mt-20 border-t border-linha bg-[#f2f0ea] py-20 lg:py-28">
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
-      <p className="font-mono text-xs uppercase tracking-[0.14em] text-projeto">Projetos</p>
+      <p className="font-mono text-xs uppercase tracking-[0.14em] text-projeto">Casos</p>
       <h2 className="mt-4 max-w-3xl font-display text-4xl font-normal leading-tight text-nanquim sm:text-5xl">
-        Feito, entregue e funcionando.
+        O que eu já construí.
       </h2>
 
       <div className="mt-12 grid gap-6 lg:grid-cols-2">

@@ -1,4 +1,4 @@
-import { LinkSuporte, PaginaLegal } from "@/components/PaginaLegal";
+import { LinkEmail, PaginaLegal } from "@/components/PaginaLegal";
 
 const ExclusaoDados = () => (
   <PaginaLegal
@@ -7,11 +7,12 @@ const ExclusaoDados = () => (
       {
         texto: (
           <>
-            Envie e-mail para <LinkSuporte /> com o assunto "Data Deletion" e o ID/username.
+            Envie um e-mail para <LinkEmail /> com o assunto "Exclusão de dados" (ou "Data Deletion") e o nome e
+            telefone que você deixou no site. Se for uma conta Meta conectada, informe também o ID ou o nome de usuário.
           </>
         ),
       },
-      { texto: "Excluiremos dados vinculados em até 30 dias e confirmaremos por e-mail." },
+      { texto: "Apago os dados vinculados em até 15 dias e confirmo por e-mail." },
     ]}
   />
 );

@@ -2,12 +2,11 @@ import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/home/SiteHeader";
 import Footer from "@/components/Footer";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { EMAIL } from "@/lib/contato";
 
-export const EMAIL_SUPORTE = "suporte@brhorn.com";
-
-export const LinkSuporte = () => (
-  <a href={`mailto:${EMAIL_SUPORTE}`} className="text-nanquim underline underline-offset-4 hover:text-projeto">
-    {EMAIL_SUPORTE}
+export const LinkEmail = () => (
+  <a href={`mailto:${EMAIL}`} className="text-nanquim underline underline-offset-4 hover:text-projeto">
+    {EMAIL}
   </a>
 );
 
