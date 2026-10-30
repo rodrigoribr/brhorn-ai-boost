@@ -23,9 +23,6 @@ export default {
 				'sans': ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
 				'display': ['Jost', 'system-ui', 'sans-serif'],
 				'mono': ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
-				'manrope': ['Manrope', 'sans-serif'],
-				'poppins': ['Poppins', 'sans-serif'],
-				'brand': ['"DM Serif Display"', 'Georgia', 'serif'],
 			},
 			colors: {
 				brand: {
