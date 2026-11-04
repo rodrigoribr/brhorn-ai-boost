@@ -2,6 +2,8 @@ import { LinkEmail, PaginaLegal } from "@/components/PaginaLegal";
 
 // Reflete o que o site coleta de fato: ContactModal e CallModal (Edge Functions → Supabase contact_leads),
 // Meta Pixel e Google Fonts (index.html). Mudou a coleta ou um fornecedor? Atualize esta página e a data.
+// DEV-0004: a seção "Chat de diagnóstico" e a linha do provedor de IA são RASCUNHO para aprovação do
+// Rodrigo; só vão ao ar junto com o chat (Fase 2), e aí a data do topo muda.
 const PoliticaPrivacidade = () => (
   <PaginaLegal
     titulo="Política de Privacidade"
@@ -42,6 +44,45 @@ const PoliticaPrivacidade = () => (
         ),
       },
       {
+        titulo: "Chat de diagnóstico",
+        texto: (
+          <>
+            <p>
+              O diagnóstico inicial do site é uma conversa com um agente de IA da brhorn. Ele só começa depois que você
+              clica em "Concordo": sem isso, nada da conversa é gravado.
+            </p>
+            <ul className="mt-3 list-disc space-y-2 pl-5">
+              <li>
+                <strong className="font-medium text-nanquim">O que é coletado:</strong> as respostas que você digitar
+                (nome, empresa, cargo, a rotina que quer resolver, o volume dela e o seu contato), o texto da conversa e a
+                data do seu aceite. O endereço IP é guardado só de forma cifrada (hash), para limitar abusos.
+              </li>
+              <li>
+                <strong className="font-medium text-nanquim">Para quê:</strong> montar o diagnóstico inicial e permitir
+                que eu retorne o contato para conversar sobre ele.
+              </li>
+              <li>
+                <strong className="font-medium text-nanquim">Base legal:</strong> o seu consentimento (art. 7º, I, da
+                LGPD), que você pode retirar a qualquer momento pelo canal abaixo.
+              </li>
+              <li>
+                <strong className="font-medium text-nanquim">Onde fica:</strong> num servidor próprio da brhorn, e o
+                resumo com o seu contato vai para o sistema interno de contatos da brhorn. As mensagens passam por um
+                provedor de IA (OpenAI) para que o agente entenda as respostas.
+              </li>
+              <li>
+                <strong className="font-medium text-nanquim">Por quanto tempo:</strong> o texto da conversa fica guardado
+                por até 180 dias. O contato segue o prazo descrito em "Por quanto tempo", abaixo.
+              </li>
+            </ul>
+            <p className="mt-3">
+              Para pedir a exclusão, veja a página de <a href="/exclusao-dados" className="font-medium text-projeto underline underline-offset-2">exclusão de dados</a>{" "}
+              ou escreva para <LinkEmail />.
+            </p>
+          </>
+        ),
+      },
+      {
         titulo: "Para que os dados são usados",
         texto:
           "Para responder ao seu contato, fazer a ligação que você pediu e preparar uma eventual proposta. Os dados de navegação servem para medir quais páginas e anúncios funcionam. Não uso os seus dados para outra finalidade e não envio propaganda sem você pedir.",
@@ -60,7 +101,8 @@ const PoliticaPrivacidade = () => (
               <li>Vercel, que hospeda o site;</li>
               <li>Supabase, banco de dados onde ficam os contatos enviados pelo formulário e os pedidos de ligação;</li>
               <li>Google Fonts, de onde o site carrega as fontes, o que envia o seu endereço IP ao Google;</li>
-              <li>Meta, pelo Pixel, e o WhatsApp, quando você escolhe conversar por lá.</li>
+              <li>Meta, pelo Pixel, e o WhatsApp, quando você escolhe conversar por lá;</li>
+              <li>OpenAI, provedor de IA que processa as mensagens do chat de diagnóstico.</li>
             </ul>
             <p className="mt-3">
               Alguns desses fornecedores guardam dados fora do Brasil. A transferência segue as regras do art. 33 da

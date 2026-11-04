@@ -12,6 +12,7 @@ import ExclusaoDados from "./pages/ExclusaoDados";
 import AxionPage from "./pages/AxionPage";
 import ViaSerraPage from "./pages/ViaSerraPage";
 import ConfiguracaoAgentes from "./pages/ConfiguracaoAgentes";
+import DiagnosticoChat from "@/components/diagnostico/DiagnosticoChat";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,8 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        {/* DEV-0004: chat de diagnóstico, montado uma vez; abre por abrirDiagnostico() ou ?diagnostico=1 */}
+        <DiagnosticoChat />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
