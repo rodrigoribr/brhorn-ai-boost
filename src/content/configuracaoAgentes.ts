@@ -99,8 +99,8 @@ export const FAQ = [
     r: "Não. Você conta como é a sua rotina, eu traduzo em agente e te ensino a usar no dia a dia.",
   },
   {
-    p: "Qual ferramenta vocês usam: ChatGPT, Claude ou outra?",
-    r: "A que fizer mais sentido para você. Se você já paga uma, começamos por ela. A escolha é feita no diagnóstico, com os prós e contras de cada uma.",
+    p: "Qual ferramenta você usa: ChatGPT, Claude ou outra?",
+    r: "A que fizer mais sentido para você. Se você já paga uma, começo por ela. A escolha é feita no diagnóstico, com os prós e contras de cada uma.",
   },
   {
     p: "Quanto custa a ferramenta de IA em si?",

@@ -50,7 +50,7 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
 
       toast({
         title: "Pedido enviado!",
-        description: "Vamos te ligar em breve.",
+        description: "Eu te ligo em breve.",
       });
 
       setFormData({ name: "", phone: "" });
@@ -59,7 +59,7 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
       console.error("Erro ao enviar pedido de ligação:", error);
       toast({
         title: "Erro ao enviar pedido",
-        description: "Tente novamente ou entre em contato conosco diretamente.",
+        description: "Tente de novo ou chame direto no WhatsApp.",
         variant: "destructive",
       });
     } finally {
@@ -76,7 +76,7 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
           <DialogTitle className="font-display text-3xl font-normal text-nanquim tracking-tight">
             Quero que me liguem
           </DialogTitle>
-          <p className="text-muted-foreground">Deixe seu nome e telefone, ligamos para você.</p>
+          <p className="text-muted-foreground">Deixe seu nome e telefone, e eu ligo para você.</p>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">

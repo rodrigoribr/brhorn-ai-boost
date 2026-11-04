@@ -85,7 +85,7 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
       console.error('Erro ao enviar contato:', error);
       toast({
         title: "Erro ao enviar solicitação",
-        description: "Tente novamente ou entre em contato conosco diretamente.",
+        description: "Tente de novo ou chame direto no WhatsApp.",
         variant: "destructive"
       });
     } finally {

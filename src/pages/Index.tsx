@@ -22,7 +22,6 @@ const Index = () => {
       <SiteHeader />
       <main>
         <HeroSection
-          onWhatsappClick={() => trackWhatsapp("hero_whatsapp")}
           onCallClick={openCall}
           onFormClick={() => openContact("hero_form_link")}
         />

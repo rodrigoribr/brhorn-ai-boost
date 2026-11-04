@@ -7,7 +7,6 @@ import {
   FileText,
   Hand,
   History,
-  Image,
   LayoutDashboard,
   ListChecks,
   MessageSquare,
@@ -50,7 +49,6 @@ const PASSOS = [
 
 const ENTENDE = [
   { icon: MessageSquare, titulo: "Mensagem picada", texto: "Espera o cliente terminar de escrever antes de responder, como uma pessoa faria." },
-  { icon: Image, titulo: "Foto da lista", texto: "O revendedor fotografa o papel do pedido e o agente lê os itens." },
   { icon: FileText, titulo: "PDF", texto: "Lista ou cotação em PDF vira pedido sem ninguém digitar." },
   { icon: Ruler, titulo: "Unidades e apelidos", texto: "Caixa, fardo, unidade e o nome que o cliente dá ao produto, tudo convertido." },
   { icon: Truck, titulo: "Rota e horário de corte", texto: "Sabe o dia de entrega de cada região e avisa quando o pedido fecha." },
@@ -251,7 +249,7 @@ const AxionPage = () => {
               {[
                 ["Diagnóstico", "Entendo como os pedidos chegam hoje, o catálogo, as rotas e as regras comerciais."],
                 ["Grupo piloto", "O Axion começa atendendo um grupo de revendedores, com o seu time acompanhando cada conversa."],
-                ["Ajuste e decisão", "Ajustamos com base nas conversas reais. Se fizer sentido, ampliamos para a carteira."],
+                ["Ajuste e decisão", "Ajusto com base nas conversas reais. Se fizer sentido, o agente passa a atender a carteira toda."],
               ].map(([t, d], i) => (
                 <li key={t} className="bg-card p-7">
                   <span className="font-mono text-sm text-projeto">{String(i + 1).padStart(2, "0")}</span>

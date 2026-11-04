@@ -13,6 +13,7 @@ import AxionPage from "./pages/AxionPage";
 import ViaSerraPage from "./pages/ViaSerraPage";
 import ConfiguracaoAgentes from "./pages/ConfiguracaoAgentes";
 import DiagnosticoChat from "@/components/diagnostico/DiagnosticoChat";
+import { BotaoDiagnosticoFixo } from "@/components/diagnostico/BotaoDiagnostico";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,8 @@ const App = () => (
         </Routes>
         {/* DEV-0004: chat de diagnóstico, montado uma vez; abre por abrirDiagnostico() ou ?diagnostico=1 */}
         <DiagnosticoChat />
+        {/* DEV-0005: botão fixo "Fazer diagnóstico" (WhatsApp até o chat ir ao ar) */}
+        <BotaoDiagnosticoFixo />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

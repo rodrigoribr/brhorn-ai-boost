@@ -144,7 +144,14 @@
 .animate-percorrer { animation: percorrer 4.8s linear infinite; }
 @keyframes digitando { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
 .animate-digitando { animation: digitando 1.2s ease-in-out infinite; }
+/* DEV-0005: ilustração do método. O traço se desenha (pathLength=1) e as peças aparecem em sequência. */
+.metodo .metodo-traco { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s cubic-bezier(.45,.05,.25,1); }
+.metodo .metodo-ponto { opacity: 0; transition: opacity .5s ease; }
+.metodo.visivel .metodo-traco { stroke-dashoffset: 0; }
+.metodo.visivel .metodo-ponto { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .revelar { opacity: 1; transform: none; transition: none; }
+  .metodo .metodo-traco { stroke-dashoffset: 0; transition: none; }
+  .metodo .metodo-ponto { opacity: 1; transition: none; }
   .animate-surgir, .animate-crescer, .animate-percorrer, .animate-digitando { animation: none; }
 }

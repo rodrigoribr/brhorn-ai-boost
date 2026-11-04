@@ -1,17 +1,14 @@
-import { ArrowRight, PhoneCall } from "lucide-react";
+import { PhoneCall } from "lucide-react";
 import { BrDrawing } from "@/components/brand/BrDrawing";
-import { whatsappLink } from "@/lib/contato";
+import { BotaoDiagnostico, CLASSE_BOTAO_PRIMARIO, ConteudoBotao } from "@/components/diagnostico/BotaoDiagnostico";
 import { ABERTURA } from "@/content/consultoriaAgentes";
 
-const MSG_WHATSAPP = "Olá! Vim pelo site da brhorn e quero conversar sobre um diagnóstico de agentes de IA para a minha empresa.";
-
 interface HeroSectionProps {
-  onWhatsappClick: () => void;
   onCallClick: () => void;
   onFormClick: () => void;
 }
 
-export const HeroSection = ({ onWhatsappClick, onCallClick, onFormClick }: HeroSectionProps) => (
+export const HeroSection = ({ onCallClick, onFormClick }: HeroSectionProps) => (
   <section className="relative overflow-hidden bg-papel bg-[linear-gradient(#ebe8df_1px,transparent_1px),linear-gradient(90deg,#ebe8df_1px,transparent_1px)] bg-[size:24px_24px]">
     <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-20 pt-14 sm:px-6 md:pt-20 lg:grid-cols-[1.25fr_0.75fr] lg:pb-28">
       <div>
@@ -24,16 +21,9 @@ export const HeroSection = ({ onWhatsappClick, onCallClick, onFormClick }: HeroS
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{ABERTURA.subtitulo}</p>
 
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={whatsappLink(MSG_WHATSAPP)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={onWhatsappClick}
-            className="inline-flex h-12 items-center justify-center rounded bg-projeto px-6 font-medium text-papel transition-colors hover:bg-[#1a5fcc]"
-          >
-            Começar pelo diagnóstico
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </a>
+          <BotaoDiagnostico origem="hero" className={CLASSE_BOTAO_PRIMARIO}>
+            <ConteudoBotao />
+          </BotaoDiagnostico>
           <button
             type="button"
             onClick={onCallClick}

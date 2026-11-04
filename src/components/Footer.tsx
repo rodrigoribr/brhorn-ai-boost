@@ -10,7 +10,7 @@ import {
 } from "@/lib/contato";
 
 const Footer = () => (
-  <footer className="border-t border-border bg-background py-14 text-muted-foreground">
+  <footer className="border-t border-border bg-background pb-28 pt-14 text-muted-foreground sm:pb-14">
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
       <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
         <div>
