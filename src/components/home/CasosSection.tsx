@@ -19,7 +19,7 @@ const projetos = [
     status: "Piloto de 6 meses",
     texto:
       "Recebe os pedidos dos revendedores pelo WhatsApp, confere catálogo, preços e regras comerciais e organiza tudo num painel. Atendeu 50 revendedores de um produtor de queijos num piloto de 6 meses, de novembro de 2025 a maio de 2026.",
-    link: { to: "/axion", label: "Ver o Axion" },
+    link: { to: "/axion", label: "Ver o caso do Axion" },
   },
 ];
 

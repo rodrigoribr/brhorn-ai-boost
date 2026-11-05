@@ -1,9 +1,9 @@
 import {
-  ArrowRight,
   BarChart3,
   Bot,
   CalendarClock,
   Eye,
+  Camera,
   FileText,
   Hand,
   History,
@@ -27,9 +27,11 @@ import CallModal from "@/components/CallModal";
 import Footer from "@/components/Footer";
 import { useContactIntent } from "@/hooks/use-contact-intent";
 import { usePageTitle } from "@/hooks/use-page-title";
-import { whatsappLink } from "@/lib/contato";
+import { BotaoDiagnostico, CLASSE_BOTAO_PRIMARIO, ConteudoBotao } from "@/components/diagnostico/BotaoDiagnostico";
 
-const MSG_WHATSAPP = "Olá! Vi o Axion no site da brhorn e quero saber sobre o piloto para a minha distribuidora.";
+// DEV-0005: a página é um CASO (prova do método), não produto à venda. Só função conferida no código
+// do axion-backend em 2026-11-05 (foto e PDF confirmados pelo Rodrigo no piloto). Sem número além do piloto.
+const MSG_WHATSAPP = "Olá! Vi o caso do Axion no site da brhorn e quero conversar sobre uma rotina da minha empresa.";
 
 const PROBLEMAS = [
   "Pedido chega por mensagem, áudio, foto e ligação, cada um de um jeito",
@@ -43,39 +45,40 @@ const PROBLEMAS = [
 const PASSOS = [
   { icon: MessageSquare, titulo: "Contato", texto: "O revendedor chama no WhatsApp que ele já usa. Nada para instalar." },
   { icon: Bot, titulo: "Interpretação", texto: "O agente entende o pedido, mesmo escrito do jeito do cliente." },
-  { icon: ShieldCheck, titulo: "Regras", texto: "Aplica catálogo, preço, rota e horário de corte da sua empresa." },
+  { icon: ShieldCheck, titulo: "Regras", texto: "Aplica o catálogo, os preços, as unidades e a rota de entrega da empresa." },
   { icon: ListChecks, titulo: "Registro", texto: "Confirma com o cliente e lança o pedido no painel." },
 ];
 
 const ENTENDE = [
   { icon: MessageSquare, titulo: "Mensagem picada", texto: "Espera o cliente terminar de escrever antes de responder, como uma pessoa faria." },
+  { icon: Camera, titulo: "Foto da lista", texto: "O revendedor fotografa o pedido no papel e o agente lê os itens." },
   { icon: FileText, titulo: "PDF", texto: "Lista ou cotação em PDF vira pedido sem ninguém digitar." },
-  { icon: Ruler, titulo: "Unidades e apelidos", texto: "Caixa, fardo, unidade e o nome que o cliente dá ao produto, tudo convertido." },
-  { icon: Truck, titulo: "Rota e horário de corte", texto: "Sabe o dia de entrega de cada região e avisa quando o pedido fecha." },
-  { icon: CalendarClock, titulo: "Lembretes e campanhas", texto: "Lembra quem ainda não pediu e envia listas e ofertas na hora certa." },
+  { icon: Ruler, titulo: "Unidades", texto: "Caixa, fardo ou unidade: a quantidade é convertida pela regra de cada produto." },
+  { icon: Truck, titulo: "Rota de entrega", texto: "Sabe o dia de entrega de cada região e informa ao revendedor." },
+  { icon: CalendarClock, titulo: "Lembretes e campanhas", texto: "Lembra quem ainda não pediu antes do fechamento e envia listas e ofertas na hora marcada." },
 ];
 
 const PAINEL = [
   { icon: LayoutDashboard, titulo: "Visão geral", texto: "Clientes ativos, pedidos do ciclo e atividade recente." },
   { icon: Users, titulo: "Clientes", texto: "Cadastro, classificação e agente ligado por cliente." },
-  { icon: Package, titulo: "Catálogo", texto: "Produtos, preços, conversão de unidades e sinônimos." },
+  { icon: Package, titulo: "Catálogo", texto: "Produtos, preços e conversão de unidades." },
   { icon: ShoppingCart, titulo: "Pedidos", texto: "Status, edição, validação e histórico." },
-  { icon: Truck, titulo: "Logística", texto: "Rotas por região, frequência de entrega e janelas de corte." },
+  { icon: Truck, titulo: "Logística", texto: "Rotas por região e frequência de entrega." },
   { icon: Bot, titulo: "Estúdio do agente", texto: "Tom de voz, regras de negócio e o que o agente pode fazer." },
   { icon: CalendarClock, titulo: "Comunicação", texto: "Campanhas, envio de listas e lembretes de fechamento." },
-  { icon: History, titulo: "Conversas", texto: "Todas as conversas, auditáveis, com opção de assumir." },
+  { icon: History, titulo: "Conversas", texto: "Todas as conversas, para conferir o que foi combinado." },
 ];
 
 const CONTROLE = [
   { icon: Eye, titulo: "Tudo registrado", texto: "Cada conversa e cada decisão do agente fica no histórico, para conferir quando quiser." },
-  { icon: Hand, titulo: "Você assume quando quiser", texto: "Um atendimento fora do comum? O seu time entra na conversa e o agente sai." },
-  { icon: ShieldCheck, titulo: "Regras escritas, não adivinhadas", texto: "Preço, prazo e limite vêm do seu cadastro. O agente não inventa condição comercial." },
+  { icon: Hand, titulo: "Você assume quando quiser", texto: "Um atendimento fora do comum? Desliga o agente para aquele cliente e o time conversa direto." },
+  { icon: ShieldCheck, titulo: "Regras escritas, não adivinhadas", texto: "Preço e condição vêm do cadastro da empresa. O agente não inventa condição comercial." },
   { icon: BarChart3, titulo: "Envio com limite", texto: "Campanhas saem espaçadas e com teto por hora, para não parecer disparo em massa." },
 ];
 
 const AxionPage = () => {
   const { isContactOpen, isCallOpen, closeContact, closeCall, openContact, trackWhatsapp } = useContactIntent();
-  usePageTitle("Axion · agente que tira pedido pelo WhatsApp · brhorn");
+  usePageTitle("Caso Axion · agente que tira pedido pelo WhatsApp · brhorn");
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground selection:bg-projeto/20">
@@ -86,29 +89,23 @@ const AxionPage = () => {
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-14 sm:px-6 md:pt-20 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
               <div className="flex flex-wrap items-center gap-3">
-                <Eyebrow>Produto brhorn · Axion</Eyebrow>
+                <Eyebrow>Caso · Axion</Eyebrow>
                 <span className="rounded-full border border-projeto/30 bg-projeto/5 px-2.5 py-0.5 font-mono text-[11px] text-projeto">
-                  Aberto para piloto
+                  Piloto de 6 meses
                 </span>
               </div>
               <h1 className="mt-5 font-display text-[2.6rem] font-normal leading-[1.08] tracking-[-0.01em] text-nanquim sm:text-6xl">
                 O agente que <span className="text-projeto">tira pedido de revendedor</span> pelo WhatsApp.
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                Para distribuidoras e atacadistas. O revendedor manda mensagem, foto ou PDF da lista; o Axion entende,
-                aplica as suas regras comerciais e registra o pedido no painel. O seu time fica com as exceções.
+                Construído para um produtor de queijos, atendeu 50 revendedores num piloto de 6 meses, de novembro de
+                2025 a maio de 2026. O revendedor mandava mensagem, foto ou PDF da lista; o Axion entendia, aplicava as
+                regras comerciais e registrava o pedido no painel. O time ficava com as exceções.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={whatsappLink(MSG_WHATSAPP)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackWhatsapp("axion_hero_whatsapp")}
-                  className="inline-flex h-12 items-center justify-center rounded bg-projeto px-6 font-medium text-papel transition-colors hover:bg-[#1a5fcc]"
-                >
-                  Quero ser piloto
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
+                <BotaoDiagnostico origem="axion_hero" className={CLASSE_BOTAO_PRIMARIO}>
+                  <ConteudoBotao />
+                </BotaoDiagnostico>
                 <a
                   href="#como-funciona"
                   className="inline-flex h-12 items-center justify-center rounded border border-nanquim px-6 font-medium text-nanquim transition-colors hover:bg-nanquim hover:text-papel"
@@ -126,10 +123,10 @@ const AxionPage = () => {
           <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
             <Revelar>
               <Eyebrow>O problema</Eyebrow>
-              <H2>Hoje o pedido chega de todo jeito.</H2>
+              <H2>O pedido chegava de todo jeito.</H2>
               <p className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground">
-                E alguém da sua equipe passa o dia traduzindo conversa em pedido. Não escala, e o erro aparece na
-                entrega.
+                É assim na maioria das distribuidoras: alguém passa o dia traduzindo conversa em pedido. Não escala, e o
+                erro aparece na entrega.
               </p>
             </Revelar>
             <ol className="divide-y divide-linha border-y border-linha">
@@ -242,14 +239,14 @@ const AxionPage = () => {
         <section className="bg-papel py-20 lg:py-28">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <Revelar>
-              <Eyebrow>Piloto</Eyebrow>
-              <H2>Começa pequeno, com acompanhamento de perto.</H2>
+              <Eyebrow>O piloto</Eyebrow>
+              <H2>Seis meses com um cliente real.</H2>
             </Revelar>
             <ol className="mt-12 grid gap-px overflow-hidden rounded border border-linha bg-linha md:grid-cols-3">
               {[
-                ["Diagnóstico", "Entendo como os pedidos chegam hoje, o catálogo, as rotas e as regras comerciais."],
-                ["Grupo piloto", "O Axion começa atendendo um grupo de revendedores, com o seu time acompanhando cada conversa."],
-                ["Ajuste e decisão", "Ajusto com base nas conversas reais. Se fizer sentido, o agente passa a atender a carteira toda."],
+                ["Diagnóstico", "Antes de construir: como os pedidos chegavam, o catálogo, as rotas e as regras comerciais."],
+                ["Piloto", "50 revendedores do produtor de queijos pedindo pelo WhatsApp, de novembro de 2025 a maio de 2026."],
+                ["Ajuste", "Ajustes feitos a partir das conversas reais, com o histórico de cada uma no painel."],
               ].map(([t, d], i) => (
                 <li key={t} className="bg-card p-7">
                   <span className="font-mono text-sm text-projeto">{String(i + 1).padStart(2, "0")}</span>
@@ -262,8 +259,8 @@ const AxionPage = () => {
         </section>
 
         <ContatoSection
-          titulo="Sua distribuidora pode ser uma das primeiras."
-          texto="O Axion está pronto e procurando as primeiras empresas para piloto. Conte como os pedidos chegam hoje e eu digo se ele resolve."
+          titulo="Tem uma rotina parecida na sua empresa?"
+          texto="Pedido, cadastro, cobrança: o método é o mesmo do Axion. Conte onde o trabalho manual trava e eu digo se um agente resolve."
           mensagemWhatsapp={MSG_WHATSAPP}
           onWhatsappClick={() => trackWhatsapp("axion_final_whatsapp")}
           onFormClick={() => openContact("axion_final_form")}
