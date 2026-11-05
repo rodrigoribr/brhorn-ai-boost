@@ -2,8 +2,8 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Só fatos verificáveis: sem números de exemplo, sem "ao vivo" de mentira. A Frutty entra aqui quando for liberada.
-// DEV-0005: provas do que é construído, não produtos à venda. RASCUNHO para aprovação do Rodrigo:
-// o card do Axion (único número real: piloto de 6 meses, nov/2025 a mai/2026, 50 revendedores) e o parágrafo de abertura.
+// DEV-0005: provas do que é construído, não produtos à venda. Textos aprovados pelo Rodrigo em 2026-11-05
+// (único número real: piloto do Axion de 6 meses, nov/2025 a mai/2026, 50 revendedores).
 const projetos = [
   {
     nome: "ViaSerra",
@@ -18,7 +18,7 @@ const projetos = [
     tipo: "Pedidos via WhatsApp com IA",
     status: "Piloto de 6 meses",
     texto:
-      "Recebe os pedidos dos revendedores pelo WhatsApp, confere catálogo, preços e regras comerciais e organiza tudo num painel. Usado por 50 revendedores de um produtor de queijos num piloto de 6 meses, de novembro de 2025 a maio de 2026.",
+      "Recebe os pedidos dos revendedores pelo WhatsApp, confere catálogo, preços e regras comerciais e organiza tudo num painel. Atendeu 50 revendedores de um produtor de queijos num piloto de 6 meses, de novembro de 2025 a maio de 2026.",
     link: { to: "/axion", label: "Ver o Axion" },
   },
 ];
@@ -31,7 +31,7 @@ export const CasosSection = () => (
         O que eu já construí.
       </h2>
       <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-        Dois sistemas em uso real. Não são produtos de prateleira: mostram o tipo de trabalho que o método entrega.
+        Dois sistemas que rodaram com clientes reais. Não são produtos de prateleira: mostram o tipo de trabalho que o método entrega.
       </p>
 
       <div className="mt-12 grid gap-6 lg:grid-cols-2">

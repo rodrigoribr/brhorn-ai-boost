@@ -2,8 +2,8 @@ import { LinkEmail, PaginaLegal } from "@/components/PaginaLegal";
 
 // Reflete o que o site coleta de fato: ContactModal e CallModal (Edge Functions → Supabase contact_leads),
 // Meta Pixel e Google Fonts (index.html). Mudou a coleta ou um fornecedor? Atualize esta página e a data.
-// DEV-0004: a seção "Chat de diagnóstico" e a linha do provedor de IA são RASCUNHO para aprovação do
-// Rodrigo; só vão ao ar junto com o chat (Fase 2), e aí a data do topo muda.
+// DEV-0004: a seção "Chat de diagnóstico" e a linha do provedor de IA foram aprovadas pelo Rodrigo em
+// 2026-11-05; vão ao ar junto com o chat, e aí a data do topo muda.
 const PoliticaPrivacidade = () => (
   <PaginaLegal
     titulo="Política de Privacidade"
@@ -54,7 +54,7 @@ const PoliticaPrivacidade = () => (
             <ul className="mt-3 list-disc space-y-2 pl-5">
               <li>
                 <strong className="font-medium text-nanquim">O que é coletado:</strong> as respostas que você digitar
-                (nome, empresa, cargo, a rotina que quer resolver, o volume dela e o seu contato), o texto da conversa e a
+                (nome, empresa, o seu papel na rotina, o tamanho da empresa, a área e a rotina que quer resolver, onde ela acontece, o volume dela, WhatsApp e e-mail), o texto da conversa e a
                 data do seu aceite. O endereço IP é guardado só de forma cifrada (hash), para limitar abusos.
               </li>
               <li>
