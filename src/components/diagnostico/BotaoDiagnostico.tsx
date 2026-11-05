@@ -40,7 +40,7 @@ export const BotaoDiagnostico = ({ origem, className, children }: Props) => {
 };
 
 export const CLASSE_BOTAO_PRIMARIO =
-  "inline-flex h-12 items-center justify-center rounded bg-projeto px-6 font-medium text-papel transition-colors hover:bg-[#1a5fcc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-projeto focus-visible:ring-offset-2 focus-visible:ring-offset-papel";
+  "inline-flex h-12 items-center justify-center rounded-[var(--radius-control)] bg-t-accent px-6 font-medium text-t-accentink transition-colors duration-micro hover:bg-t-accenthover active:translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-focus)] disabled:opacity-60";
 
 export const ConteudoBotao = () => (
   <>
@@ -59,7 +59,7 @@ export const BotaoDiagnosticoFixo = () => {
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6 sm:pb-6">
       <BotaoDiagnostico
         origem="botao_fixo"
-        className="pointer-events-auto inline-flex h-12 items-center rounded-full border border-nanquim/10 bg-projeto pl-4 pr-5 font-medium text-papel shadow-[0_6px_20px_-6px_rgba(22,26,58,0.45)] transition-colors hover:bg-[#1a5fcc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-projeto focus-visible:ring-offset-2 focus-visible:ring-offset-papel"
+        className="pointer-events-auto inline-flex h-12 items-center rounded-full border border-t-rule bg-t-accent pl-4 pr-5 font-medium text-t-accentink shadow-[var(--shadow-float)] transition-colors duration-micro hover:bg-t-accenthover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-focus)]"
       >
         <MessageSquareText className="mr-2 h-4 w-4" aria-hidden="true" />
         Fazer diagnóstico

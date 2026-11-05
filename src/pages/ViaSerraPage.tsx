@@ -14,8 +14,8 @@ import {
   UsersRound,
 } from "lucide-react";
 import { SiteHeader } from "@/components/home/SiteHeader";
-import { ContatoSection } from "@/components/home/ContatoSection";
-import { Eyebrow, H2 } from "@/components/home/Titulos";
+import { ContatoSection } from "@/components/legado/ContatoSection";
+import { Eyebrow, H2 } from "@/components/legado/Titulos";
 import { ViaSerraDemo } from "@/components/produto/ViaSerraDemo";
 import { Revelar } from "@/components/produto/Revelar";
 import ContactModal from "@/components/ContactModal";

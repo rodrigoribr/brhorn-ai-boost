@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+// Legado: as páginas internas (/axion, /viaserra, /configuracao-de-agentes) ainda usam; saem na próxima etapa do redesign.
 import { whatsappLink } from "@/lib/contato";
 
 interface ContatoSectionProps {

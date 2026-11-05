@@ -4,7 +4,10 @@
 
 export const ABERTURA = {
   rotulo: "Agentes de IA para empresas",
-  titulo: "Agentes de IA na rotina da sua empresa, com método de engenharia.",
+  titulo: "Agentes de IA com método de engenharia.",
+  // Redesign 2026-11-04: o título antigo tinha 12 palavras.
+  tituloAntigo: "Agentes de IA na rotina da sua empresa, com método de engenharia.",
+  frase: "Acho onde um agente economiza tempo e provo num piloto medido.",
   subtitulo:
     "RH, financeiro, contabilidade, atendimento. Descubro onde um agente economiza tempo de verdade, projeto com regras claras, provo num piloto medido e só então amplio.",
 };

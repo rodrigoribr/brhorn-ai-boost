@@ -1,21 +1,23 @@
 import { Linkedin } from "lucide-react";
-import { BrMark } from "@/components/brand/Logo";
+import { BrhMark } from "@/components/brand/Logo";
+import { Cabeca, Secao } from "@/components/home/Titulos";
+import { CLASSE_LINK_TEXTO } from "@/components/home/classes";
 import { LINKEDIN_URL } from "@/lib/contato";
 
 export const QuemFazSection = () => (
-  <section id="quem-faz" className="scroll-mt-20 border-t border-linha bg-[#f2f0ea] py-20 lg:py-28">
-    <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 md:grid-cols-[260px_1fr] lg:gap-16">
-      {/* TODO(Rodrigo): trocar pelo retrato (foto quadrada, fundo neutro). */}
-      <div className="mx-auto flex aspect-square w-full max-w-[260px] items-center justify-center rounded border border-linha bg-card">
-        <BrMark className="w-1/2" />
+  <Secao id="quem-faz">
+    <div className="grid items-start gap-[var(--space-xl)] md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] md:gap-x-[var(--gap-columns)]">
+      {/* Espaço do retrato: a foto (quadrada, fundo neutro) entra como <img> aqui dentro e esconde o monograma. */}
+      <div
+        data-slot="retrato"
+        className="mx-auto flex aspect-square w-full max-w-[360px] items-center justify-center rounded-[var(--radius-card)] md:mx-0"
+      >
+        <BrhMark className="w-2/5" title="" />
       </div>
 
       <div>
-        <p className="font-mono text-xs uppercase tracking-[0.14em] text-projeto">Quem faz</p>
-        <h2 className="mt-4 font-display text-4xl font-normal leading-tight text-nanquim sm:text-5xl">
-          Rodrigo Brasil, engenheiro.
-        </h2>
-        <div className="mt-5 max-w-2xl space-y-4 text-lg leading-relaxed text-muted-foreground">
+        <Cabeca id="quem-faz" titulo="Rodrigo Brasil, engenheiro." />
+        <div className="mt-[var(--space-lg)] max-w-[60ch] space-y-[var(--space-md)] text-[length:var(--text-lead)] leading-[1.5] text-t-muted">
           <p>
             Me formei em engenharia estudando motores e trabalhei como projetista, desenhando peças que
             precisavam funcionar na primeira vez. Hoje aplico o mesmo método a agentes de IA: entender o mecanismo,
@@ -27,17 +29,12 @@ export const QuemFazSection = () => (
           </p>
         </div>
         {LINKEDIN_URL && (
-          <a
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-nanquim underline-offset-4 hover:underline"
-          >
-            <Linkedin className="h-4 w-4" />
+          <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={`${CLASSE_LINK_TEXTO} mt-[var(--space-lg)]`}>
+            <Linkedin className="h-4 w-4" aria-hidden="true" />
             Ver perfil no LinkedIn
           </a>
         )}
       </div>
     </div>
-  </section>
+  </Secao>
 );

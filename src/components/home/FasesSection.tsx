@@ -1,35 +1,44 @@
-import { Eyebrow, H2 } from "@/components/home/Titulos";
+import { Cabeca, Secao } from "@/components/home/Titulos";
 import { FASES } from "@/content/consultoriaAgentes";
 import { MetodoDesenho } from "@/components/brand/MetodoDesenho";
 
+// Feature Stack: o título fica preso à esquerda enquanto as quatro fases passam à direita.
+// Abaixo de 60rem vira coluna única, título em cima.
 export const FasesSection = () => (
-  <section id="como-funciona" className="scroll-mt-20 border-t border-linha bg-papel py-20 lg:py-28">
-    <div className="mx-auto max-w-6xl px-4 sm:px-6">
-      <Eyebrow>Como funciona</Eyebrow>
-      <H2>Quatro fases, e cada uma termina com uma entrega.</H2>
-      <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-        A empresa decide no fim de cada fase se segue para a próxima. Nada de projeto grande no escuro.
-      </p>
-
-      <div className="mt-12 rounded border border-linha bg-papel bg-[linear-gradient(#ebe8df_1px,transparent_1px),linear-gradient(90deg,#ebe8df_1px,transparent_1px)] bg-[size:24px_24px] px-3 py-8 sm:px-8 md:py-12">
-        <MetodoDesenho className="mx-auto max-w-[340px] md:max-w-none" />
+  <Secao id="como-funciona">
+    <div className="grid gap-[var(--space-2xl)] lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-x-[var(--gap-columns)]">
+      <div className="lg:sticky lg:top-[calc(var(--nav-height)+var(--space-xl))] lg:self-start">
+        <Cabeca
+          id="como-funciona"
+          titulo="Quatro fases, e cada uma termina com uma entrega."
+          texto="A empresa decide no fim de cada fase se segue para a próxima. Nada de projeto grande no escuro."
+        />
       </div>
 
-      <ol className="mt-8 grid gap-px overflow-hidden rounded border border-linha bg-linha md:grid-cols-2 lg:grid-cols-4">
-        {FASES.map((f) => (
-          <li key={f.numero} className="flex flex-col bg-card p-6">
-            <span className="font-mono text-sm text-projeto">{f.numero}</span>
-            <h3 className="mt-5 text-lg font-semibold text-nanquim">{f.nome}</h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{f.texto}</p>
-            <p className="mt-6 border-t border-linha pt-4 text-sm leading-relaxed text-nanquim">
-              <span className="block font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-                Entrega
+      <div className="min-w-0">
+        <MetodoDesenho className="mx-auto max-w-[340px] md:max-w-none" />
+
+        <ol className="mt-[var(--space-2xl)]">
+          {FASES.map((f) => (
+            <li
+              key={f.numero}
+              className="grid gap-[var(--space-md)] border-t border-t-rule py-[var(--space-xl)] sm:grid-cols-[4.5rem_minmax(0,1fr)] lg:min-h-[30vh] lg:last:min-h-0"
+            >
+              <span className="num font-display text-[length:var(--text-display-s)] leading-none text-t-accent">
+                {f.numero}
               </span>
-              {f.entrega}
-            </p>
-          </li>
-        ))}
-      </ol>
+              <div>
+                <h3 className="font-display text-[length:var(--text-title)] font-normal leading-[1.2] text-t-ink">{f.nome}</h3>
+                <p className="mt-[var(--space-sm)] max-w-[56ch] text-t-muted">{f.texto}</p>
+                <p className="mt-[var(--space-lg)] max-w-[56ch] border-l-2 border-t-accent pl-[var(--space-md)] text-t-ink">
+                  <span className="block text-sm text-t-muted">Entrega</span>
+                  {f.entrega}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
-  </section>
+  </Secao>
 );

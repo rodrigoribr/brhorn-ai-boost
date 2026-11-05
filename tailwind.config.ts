@@ -25,6 +25,14 @@ export default {
 				'mono': ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
 			},
 			colors: {
+				// Tokens do redesign (src/styles/tokens.css). Sem modificador de opacidade.
+				t: {
+					paper: 'var(--color-paper)', paper2: 'var(--color-paper-2)', paper3: 'var(--color-paper-3)',
+					ink: 'var(--color-ink)', ink2: 'var(--color-ink-2)', muted: 'var(--color-muted)',
+					rule: 'var(--color-rule)', rulestrong: 'var(--color-rule-strong)',
+					accent: 'var(--color-accent)', accenthover: 'var(--color-accent-hover)', accentink: 'var(--color-accent-ink)', focus: 'var(--color-focus)',
+					night: 'var(--color-night)', night2: 'var(--color-night-2)', nightink: 'var(--color-night-ink)', nightmuted: 'var(--color-night-muted)', nightaccent: 'var(--color-night-accent)', nightrule: 'var(--color-night-rule)',
+				},
 				brand: {
 					DEFAULT: '#13a4ec',
 					dark: '#088395',
@@ -32,7 +40,8 @@ export default {
 				papel: '#f7f6f2',
 				nanquim: '#161a3a',
 				projeto: {
-					DEFAULT: '#1f6feb',
+					// #1f6feb ficou só no logo; como texto dava 4,29:1 no papel.
+					DEFAULT: '#1a5fd6',
 					claro: '#6ea8ff',
 				},
 				linha: '#d9d5c8',
@@ -145,6 +154,14 @@ export default {
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-light': 'var(--gradient-light)',
+			},
+			transitionDuration: {
+				micro: 'var(--dur-micro)',
+				short: 'var(--dur-short)',
+				long: 'var(--dur-long)',
+			},
+			transitionTimingFunction: {
+				out: 'var(--ease-out)',
 			},
 			boxShadow: {
 				'elegant': 'var(--shadow-elegant)',

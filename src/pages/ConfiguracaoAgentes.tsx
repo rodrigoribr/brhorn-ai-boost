@@ -1,11 +1,11 @@
 import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { SiteHeader } from "@/components/home/SiteHeader";
-import { ContatoSection } from "@/components/home/ContatoSection";
+import { ContatoSection } from "@/components/legado/ContatoSection";
 import ContactModal from "@/components/ContactModal";
 import CallModal from "@/components/CallModal";
 import Footer from "@/components/Footer";
-import { Eyebrow, H2 } from "@/components/home/Titulos";
+import { Eyebrow, H2 } from "@/components/legado/Titulos";
 import { useContactIntent } from "@/hooks/use-contact-intent";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { whatsappLink } from "@/lib/contato";

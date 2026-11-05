@@ -1,6 +1,6 @@
 import { usePassos } from "./usePassos";
 
-// Calendário ilustrativo: as reservas entram uma a uma e, no fim, chega uma nova "ao vivo".
+// Calendário ilustrativo: as reservas entram uma a uma e, no fim, chega uma nova.
 // Não são dados de pousada real.
 const QUARTOS = ["Quarto 01", "Quarto 02", "Quarto 03", "Quarto 04", "Quarto 05"];
 const DIAS = 14;
@@ -22,9 +22,9 @@ const RESERVAS: { quarto: number; inicio: number; noites: number; status: Status
 const NOVA = { quarto: 4, inicio: 9, noites: 3, status: "confirmada" as Status, nome: "Nova" };
 
 const COR: Record<Status, string> = {
-  hospedado: "bg-nanquim text-papel",
-  confirmada: "bg-projeto text-papel",
-  pendente: "border border-dashed border-projeto bg-projeto/10 text-projeto",
+  hospedado: "bg-t-ink text-t-paper",
+  confirmada: "bg-t-accent text-t-accentink",
+  pendente: "border border-dashed border-t-accent bg-t-paper text-t-accent",
 };
 
 const DURACOES = [...RESERVAS.map(() => 380), 1400, 4200];
@@ -35,18 +35,9 @@ export const ViaSerraDemo = () => {
   const chegouNova = passo >= RESERVAS.length;
 
   return (
-    <figure className="overflow-hidden rounded border border-linha bg-card shadow-[0_24px_70px_-32px_rgba(22,26,58,0.4)]">
-      <figcaption className="flex items-center justify-between border-b border-linha px-5 py-3">
-        <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-          Exemplo · calendário de ocupação
-        </span>
-        <span className="flex shrink-0 items-center gap-1.5 whitespace-nowrap font-mono text-[11px] text-projeto">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-projeto opacity-60 motion-reduce:animate-none" />
-            <span className="relative h-1.5 w-1.5 rounded-full bg-projeto" />
-          </span>
-          Ao vivo
-        </span>
+    <figure className="overflow-hidden rounded-[var(--radius-card)] border border-t-rule bg-t-paper">
+      <figcaption className="flex items-center justify-between border-b border-t-rule px-5 py-3">
+        <span className="text-sm text-t-muted">Exemplo: calendário de ocupação</span>
       </figcaption>
 
       <div className="overflow-x-auto px-4 py-4 sm:px-5">
@@ -55,7 +46,7 @@ export const ViaSerraDemo = () => {
             <span />
             <div className="grid" style={{ gridTemplateColumns: `repeat(${DIAS}, minmax(0, 1fr))` }}>
               {Array.from({ length: DIAS }).map((_, d) => (
-                <span key={d} className="text-center font-mono text-[10px] text-muted-foreground">
+                <span key={d} className="text-center text-[11px] text-t-muted">
                   {SEMANA[d % 7]}
                 </span>
               ))}
@@ -65,21 +56,21 @@ export const ViaSerraDemo = () => {
           <div className="mt-2 space-y-1.5">
             {QUARTOS.map((q, qi) => (
               <div key={q} className="grid grid-cols-[72px_1fr] items-center gap-2">
-                <span className="text-[11px] font-medium text-nanquim">{q}</span>
+                <span className="text-[11px] font-medium text-t-ink">{q}</span>
                 <div
                   className="grid h-8 gap-px"
                   style={{ gridTemplateColumns: `repeat(${DIAS}, minmax(0, 1fr))` }}
                 >
                   {Array.from({ length: DIAS }).map((_, d) => (
-                    <span key={d} className="rounded-sm bg-[#f1eee6]" style={{ gridColumn: d + 1, gridRow: 1 }} />
+                    <span key={d} className="bg-t-paper2" style={{ gridColumn: d + 1, gridRow: 1 }} />
                   ))}
                   {[...visiveis, ...(chegouNova ? [NOVA] : [])]
                     .filter((r) => r.quarto === qi)
                     .map((r) => (
                       <span
                         key={`${r.nome}-${r.inicio}`}
-                        className={`animate-crescer z-[1] mx-px flex items-center overflow-hidden rounded-sm px-1.5 text-[10px] font-medium ${COR[r.status]} ${
-                          r === NOVA ? "ring-2 ring-projeto/40 ring-offset-1 ring-offset-card" : ""
+                        className={`animate-crescer z-[1] mx-px flex items-center overflow-hidden px-2 text-[11px] font-medium ${COR[r.status]} ${
+                          r === NOVA ? "outline outline-2 outline-offset-1 outline-[color:var(--color-accent)]" : ""
                         }`}
                         style={{ gridColumn: `${r.inicio + 1} / span ${r.noites}`, gridRow: 1 }}
                       >
@@ -93,16 +84,14 @@ export const ViaSerraDemo = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-linha px-5 py-3">
-        <div className="flex gap-4 font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">
-          <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-nanquim" />Hospedado</span>
-          <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-projeto" />Confirmada</span>
-          <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm border border-dashed border-projeto" />Pendente</span>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-t-rule px-5 py-3">
+        <div className="flex gap-4 text-xs text-t-muted">
+          <span className="flex items-center gap-1.5"><span className="h-2 w-2 bg-t-ink" aria-hidden="true" />Hospedado</span>
+          <span className="flex items-center gap-1.5"><span className="h-2 w-2 bg-t-accent" aria-hidden="true" />Confirmada</span>
+          <span className="flex items-center gap-1.5"><span className="h-2 w-2 border border-dashed border-t-accent" aria-hidden="true" />Pendente</span>
         </div>
         {chegouNova && (
-          <span className="animate-surgir rounded-full bg-projeto/10 px-2.5 py-0.5 font-mono text-[11px] text-projeto">
-            Nova reserva · Quarto 05 · 3 noites
-          </span>
+          <span className="animate-surgir text-xs text-t-accent">Nova reserva: Quarto 05, 3 noites</span>
         )}
       </div>
     </figure>

@@ -1,50 +1,48 @@
 import { PhoneCall } from "lucide-react";
-import { BrDrawing } from "@/components/brand/BrDrawing";
 import { BotaoDiagnostico, CLASSE_BOTAO_PRIMARIO, ConteudoBotao } from "@/components/diagnostico/BotaoDiagnostico";
 import { ABERTURA } from "@/content/consultoriaAgentes";
+import { CLASSE_BOTAO_SECUNDARIO } from "@/components/home/classes";
 
 interface HeroSectionProps {
   onCallClick: () => void;
   onFormClick: () => void;
 }
 
+// Hero Banner: uma coluna, cerca de metade da tela; a primeira seção aparece embaixo.
 export const HeroSection = ({ onCallClick, onFormClick }: HeroSectionProps) => (
-  <section className="relative overflow-hidden bg-papel bg-[linear-gradient(#ebe8df_1px,transparent_1px),linear-gradient(90deg,#ebe8df_1px,transparent_1px)] bg-[size:24px_24px]">
-    <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-20 pt-14 sm:px-6 md:pt-20 lg:grid-cols-[1.25fr_0.75fr] lg:pb-28">
-      <div>
-        <p className="font-mono text-xs uppercase tracking-[0.14em] text-projeto">{ABERTURA.rotulo}</p>
-
-        <h1 className="mt-5 font-display text-[2.6rem] font-normal leading-[1.08] tracking-[-0.01em] text-nanquim sm:text-6xl">
-          Agentes de IA na rotina da sua empresa, <span className="text-projeto">com método de engenharia</span>.
+  <section aria-labelledby="hero-titulo" className="bg-t-paper">
+    <div className="mx-auto flex max-w-[var(--container)] flex-col justify-center px-[var(--gutter)] pb-[var(--space-2xl)] pt-[var(--space-xl)] lg:min-h-[52vh] lg:py-[var(--space-2xl)]">
+      <div className="min-w-0">
+        <h1
+          id="hero-titulo"
+          className="max-w-[14ch] font-display text-[length:var(--text-display)] font-normal leading-[1.04] tracking-[var(--tracking-display)] text-t-ink"
+        >
+          {ABERTURA.titulo}
         </h1>
 
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{ABERTURA.subtitulo}</p>
+        <p className="lead mt-[var(--space-lg)] text-t-muted">{ABERTURA.frase}</p>
 
-        <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+        <div className="mt-[var(--space-xl)] flex flex-col gap-[var(--space-sm)] sm:flex-row">
           <BotaoDiagnostico origem="hero" className={CLASSE_BOTAO_PRIMARIO}>
             <ConteudoBotao />
           </BotaoDiagnostico>
-          <button
-            type="button"
-            onClick={onCallClick}
-            className="inline-flex h-12 items-center justify-center rounded border border-nanquim px-6 font-medium text-nanquim transition-colors hover:bg-nanquim hover:text-papel"
-          >
-            <PhoneCall className="mr-2 h-4 w-4" />
+          <button type="button" onClick={onCallClick} className={CLASSE_BOTAO_SECUNDARIO}>
+            <PhoneCall className="mr-2 h-4 w-4" aria-hidden="true" />
             Prefiro que me liguem
           </button>
         </div>
 
-        <p className="mt-4 text-sm text-muted-foreground">
+        <p className="mt-[var(--space-md)] text-sm text-t-muted">
           Ou{" "}
-          <button type="button" onClick={onFormClick} className="underline underline-offset-4 hover:text-nanquim">
+          <button
+            type="button"
+            onClick={onFormClick}
+            className="whitespace-nowrap rounded-[var(--radius-control)] text-t-ink underline underline-offset-4 hover:text-t-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-focus)]"
+          >
             descreva o seu caso por escrito
           </button>
           . Respondo em até 1 dia útil.
         </p>
-      </div>
-
-      <div className="mx-auto w-full max-w-[300px] sm:max-w-[360px] lg:max-w-none">
-        <BrDrawing className="h-auto w-full" />
       </div>
     </div>
   </section>

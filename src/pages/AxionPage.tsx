@@ -18,8 +18,8 @@ import {
   Users,
 } from "lucide-react";
 import { SiteHeader } from "@/components/home/SiteHeader";
-import { ContatoSection } from "@/components/home/ContatoSection";
-import { Eyebrow, H2 } from "@/components/home/Titulos";
+import { ContatoSection } from "@/components/legado/ContatoSection";
+import { Eyebrow, H2 } from "@/components/legado/Titulos";
 import { AxionDemo } from "@/components/produto/AxionDemo";
 import { Revelar } from "@/components/produto/Revelar";
 import ContactModal from "@/components/ContactModal";
@@ -154,7 +154,9 @@ const AxionPage = () => {
             <div className="relative mt-14">
               {/* Linha do fluxo com o pino percorrendo, como na marca */}
               <div className="absolute left-[12.5%] right-[12.5%] top-6 hidden h-px bg-linha md:block" aria-hidden="true">
-                <span className="animate-percorrer absolute -top-[3px] h-[7px] w-[7px] -translate-x-1/2 rounded-full bg-projeto" />
+                <span className="animate-percorrer absolute inset-x-0 -top-[3px] h-[7px]">
+                  <span className="absolute left-0 h-[7px] w-[7px] -translate-x-1/2 rounded-full bg-projeto" />
+                </span>
               </div>
               <ol className="grid gap-10 md:grid-cols-4 md:gap-6">
                 {PASSOS.map((p, i) => (

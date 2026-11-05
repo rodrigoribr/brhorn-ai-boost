@@ -7,10 +7,9 @@ import { SegurancaSection } from "@/components/home/SegurancaSection";
 import { CasosSection } from "@/components/home/CasosSection";
 import { AgentePessoalSection } from "@/components/home/AgentePessoalSection";
 import { QuemFazSection } from "@/components/home/QuemFazSection";
-import { ContatoSection } from "@/components/home/ContatoSection";
 import ContactModal from "@/components/ContactModal";
 import CallModal from "@/components/CallModal";
-import Footer from "@/components/Footer";
+import Footer, { FechoCarta } from "@/components/Footer";
 import { useContactIntent } from "@/hooks/use-contact-intent";
 
 const Index = () => {
@@ -18,29 +17,30 @@ const Index = () => {
     useContactIntent();
 
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground selection:bg-projeto/20">
+    <div className="min-h-screen bg-t-paper font-sans text-t-ink">
       <SiteHeader />
       <main>
         <HeroSection
           onCallClick={openCall}
           onFormClick={() => openContact("hero_form_link")}
         />
+        <CasosSection />
         <ProblemasSection />
         <AreasSection />
         <FasesSection />
         <SegurancaSection />
-        <CasosSection />
         <QuemFazSection />
         <AgentePessoalSection />
-        <ContatoSection
+      </main>
+      <Footer>
+        <FechoCarta
           titulo="Qual rotina da sua empresa você tiraria da mão da equipe primeiro?"
           texto="Conte em poucas linhas. A primeira conversa é sem compromisso, e você sai dela sabendo se um agente resolve, quanto trabalho dá e por onde começar."
           mensagemWhatsapp="Olá! Vim pelo site da brhorn e quero conversar sobre agentes de IA para a minha empresa."
           onWhatsappClick={() => trackWhatsapp("final_whatsapp")}
           onFormClick={() => openContact("final_form_button")}
         />
-      </main>
-      <Footer />
+      </Footer>
       <ContactModal isOpen={isContactOpen} onClose={closeContact} />
       <CallModal isOpen={isCallOpen} onClose={closeCall} />
     </div>
