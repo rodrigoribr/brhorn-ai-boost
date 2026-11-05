@@ -246,7 +246,7 @@ const AxionPage = () => {
               {[
                 ["Diagnóstico", "Antes de construir: como os pedidos chegavam, o catálogo, as rotas e as regras comerciais."],
                 ["Piloto", "50 revendedores do produtor de queijos pedindo pelo WhatsApp, de novembro de 2025 a maio de 2026."],
-                ["Ajuste", "Ajustes feitos a partir das conversas reais, com o histórico de cada uma no painel."],
+                ["Ajuste", "Prompt e modelo ajustados toda semana, a partir das conversas reais e do funcionamento da operação."],
               ].map(([t, d], i) => (
                 <li key={t} className="bg-card p-7">
                   <span className="font-mono text-sm text-projeto">{String(i + 1).padStart(2, "0")}</span>
