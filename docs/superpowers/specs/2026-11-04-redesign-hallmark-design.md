@@ -33,11 +33,15 @@ agentes de IA. A ação principal continua **Fazer diagnóstico**, e a secundár
 
 ## Fora de escopo
 
-Páginas internas, og-image, Termos de Uso, merge na `main`.
+og-image, Termos de Uso, merge na `main`.
 
 ## Estado (2026-11-05)
 
-Passos 1 a 4 feitos na branch, sem commit. Home: 0 FAIL no sloplint; links 18/18 e handlers 45/45 contra o
-`before.json`. `npm run build` passa. O `ContatoSection` e os antigos `Eyebrow`/`H2` foram para
-`src/components/legado/`, porque as páginas internas ainda os usam; saem quando elas forem refeitas.
+Passos 1 a 4 feitos e commitados (`23211b0`). Depois, as páginas internas `/axion`, `/viaserra` e
+`/configuracao-de-agentes` foram refeitas no mesmo sistema, com as peças de `src/components/paginas/Blocos.tsx`
+(abertura com o texto e a demonstração, grade com régua, tabela de duas colunas, passos e etapas) e o fecho em carta
+no rodapé. A pasta `legado/` saiu. O FAQ virou `<details>` nativo, que abre sem JavaScript.
+Sweep: 0 FAIL nas quatro rotas; links 36/36, handlers 45/45, figuras 5/5; os títulos que sumiram da contagem viraram
+`dt` com o mesmo texto. `npm run build` passa. Os FAILs que restam ficam fora do escopo: modais, chat, páginas legais
+e shadcn.
 Falta o retrato em Quem faz (espaço `data-slot="retrato"`, foto quadrada).

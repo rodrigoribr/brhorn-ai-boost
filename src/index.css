@@ -5,6 +5,9 @@
 /* Hallmark · waive 80 · figure.m-0 dentro do link brhorn, página inicial · é o logo brhorn animado no cabeçalho, não uma ilustração */
 /* Hallmark · waive 81 · div[data-slot=retrato] em Quem faz · espera o retrato do Rodrigo Brasil, engenheiro; o monograma fica até a foto chegar */
 /* Hallmark · waive 39b · button.whitespace-nowrap descreva o seu caso por escrito · link no meio da frase do hero, não um controle solto */
+/* Hallmark · pages: / (hero Banner), /axion, /viaserra, /configuracao-de-agentes (hero Stage: o texto e a demonstração do sistema) · as páginas internas usam components/paginas/Blocos */
+/* Hallmark · reworded headings: os h3 de Segurança, Painel, Supervisão e Privacidade viraram dt em tabelas de duas colunas; o texto de todos ficou igual */
+/* Hallmark · dropped os rótulos antes dos títulos (Caso · Axion, O problema, Em uso, Pacotes…) · 54 proíbe rótulo antes do título; os títulos já dizem o assunto */
 @import "./styles/tokens.css";
 @import "./styles/base.css" layer(base);
 
