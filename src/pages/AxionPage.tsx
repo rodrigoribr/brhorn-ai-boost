@@ -30,7 +30,8 @@ import { usePageTitle } from "@/hooks/use-page-title";
 import { BotaoDiagnostico, CLASSE_BOTAO_PRIMARIO, ConteudoBotao } from "@/components/diagnostico/BotaoDiagnostico";
 
 // DEV-0005: a página é um CASO (prova do método), não produto à venda. Só função conferida no código
-// do axion-backend em 2026-11-05 (foto e PDF confirmados pelo Rodrigo no piloto). Sem número além do piloto.
+// do axion-backend em 2026-11-05. O piloto (nov/2025 a mai/2026) rodou em n8n + Sheets + Postgres/NocoDB; o sistema
+// (axion-backend + painel) veio depois e atendeu clientes reais (Rodrigo, 2026-11-05). Sem número além do piloto.
 const MSG_WHATSAPP = "Olá! Vi o caso do Axion no site da brhorn e quero conversar sobre uma rotina da minha empresa.";
 
 const PROBLEMAS = [
@@ -98,9 +99,10 @@ const AxionPage = () => {
                 O agente que <span className="text-projeto">tira pedido de revendedor</span> pelo WhatsApp.
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                Construído para um produtor de queijos, atendeu 50 revendedores num piloto de 6 meses, de novembro de
-                2025 a maio de 2026. O revendedor mandava mensagem, foto ou PDF da lista; o Axion entendia, aplicava as
-                regras comerciais e registrava o pedido no painel. O time ficava com as exceções.
+                Começou num piloto de 6 meses com um produtor de queijos: 50 revendedores pedindo pelo WhatsApp, de
+                novembro de 2025 a maio de 2026. Depois virou um sistema próprio, com backend e painel, que atendeu
+                clientes reais. O revendedor manda mensagem, foto ou PDF da lista; o Axion entende, aplica as regras
+                comerciais e registra o pedido no painel. O time fica com as exceções.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <BotaoDiagnostico origem="axion_hero" className={CLASSE_BOTAO_PRIMARIO}>
@@ -239,14 +241,15 @@ const AxionPage = () => {
         <section className="bg-papel py-20 lg:py-28">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <Revelar>
-              <Eyebrow>O piloto</Eyebrow>
-              <H2>Seis meses com um cliente real.</H2>
+              <Eyebrow>Do piloto ao sistema</Eyebrow>
+              <H2>Primeiro provar, depois construir.</H2>
             </Revelar>
-            <ol className="mt-12 grid gap-px overflow-hidden rounded border border-linha bg-linha md:grid-cols-3">
+            <ol className="mt-12 grid gap-px overflow-hidden rounded border border-linha bg-linha md:grid-cols-2 lg:grid-cols-4">
               {[
                 ["Diagnóstico", "Antes de construir: como os pedidos chegavam, o catálogo, as rotas e as regras comerciais."],
-                ["Piloto", "50 revendedores do produtor de queijos pedindo pelo WhatsApp, de novembro de 2025 a maio de 2026."],
+                ["Piloto", "6 meses, de novembro de 2025 a maio de 2026: 50 revendedores do produtor de queijos pedindo pelo WhatsApp, num fluxo em n8n com planilhas do Google e banco em Postgres com NocoDB."],
                 ["Ajuste", "Prompt e modelo ajustados toda semana, a partir das conversas reais e do funcionamento da operação."],
+                ["Sistema próprio", "Com o que o piloto ensinou, o fluxo virou um sistema próprio, com backend e painel, que atendeu clientes reais."],
               ].map(([t, d], i) => (
                 <li key={t} className="bg-card p-7">
                   <span className="font-mono text-sm text-projeto">{String(i + 1).padStart(2, "0")}</span>
