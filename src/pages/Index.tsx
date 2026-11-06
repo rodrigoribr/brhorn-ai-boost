@@ -5,7 +5,6 @@ import { AreasSection } from "@/components/home/AreasSection";
 import { FasesSection } from "@/components/home/FasesSection";
 import { SegurancaSection } from "@/components/home/SegurancaSection";
 import { CasosSection } from "@/components/home/CasosSection";
-import { AgentePessoalSection } from "@/components/home/AgentePessoalSection";
 import { QuemFazSection } from "@/components/home/QuemFazSection";
 import ContactModal from "@/components/ContactModal";
 import CallModal from "@/components/CallModal";
@@ -30,7 +29,6 @@ const Index = () => {
         <FasesSection />
         <SegurancaSection />
         <QuemFazSection />
-        <AgentePessoalSection />
       </main>
       <Footer>
         <FechoCarta

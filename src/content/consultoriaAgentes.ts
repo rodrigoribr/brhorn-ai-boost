@@ -1,5 +1,8 @@
 // Conteúdo da home (consultoria de agentes para empresas), num lugar só para editar sem mexer no layout.
-// Voz: primeira pessoa do singular. 🚫 Nada que lembre o Agente BOM: sem desenhos técnicos, listas de materiais ou engenharia.
+// Voz (2026-11-05): a brhorn fala onde a empresa garante, assina e entrega (segurança, contrato, o que foi
+// construído); o "eu" fica no método (fases) e em Quem faz. Nunca "nós" nem "nossa equipe": é uma pessoa só.
+// 🚫 Nada que lembre o Agente BOM (chicotes, listas de materiais, Versigent). Leitura de documentos técnicos com
+// material próprio está liberada desde 2026-11-05: ver content/portfolio.ts.
 // FORMATOS e FAQ ainda não aparecem na home; preço vazio ("") mostra "Valor definido no diagnóstico".
 
 export const ABERTURA = {
@@ -7,7 +10,7 @@ export const ABERTURA = {
   titulo: "Agentes de IA com método de engenharia.",
   // Redesign 2026-11-04: o título antigo tinha 12 palavras.
   tituloAntigo: "Agentes de IA na rotina da sua empresa, com método de engenharia.",
-  frase: "Acho onde um agente economiza tempo e provo num piloto medido.",
+  frase: "A brhorn encontra onde um agente economiza tempo na sua empresa e prova o resultado num piloto medido.",
   subtitulo:
     "RH, financeiro, contabilidade, atendimento. Descubro onde um agente economiza tempo de verdade, projeto com regras claras, provo num piloto medido e só então amplio.",
 };
@@ -33,6 +36,8 @@ export interface Fase {
   texto: string;
   entrega: string;
 }
+// Sem prazo no site (decisão de 2026-11-05): cada empresa tem o seu tempo e a sua estrutura de dados.
+// O prazo de cada fase é combinado com o cliente, não prometido aqui.
 
 export const FASES: Fase[] = [
   {
@@ -53,7 +58,7 @@ export const FASES: Fase[] = [
     numero: "03",
     nome: "Piloto",
     texto:
-      "O agente entra em um processo real, com uma equipe real, durante 30 a 60 dias. Meço tempo, erros e uso, comparando com o antes.",
+      "O agente entra em um processo real, com uma equipe real, pelo tempo combinado no projeto. Meço tempo, erros e uso, comparando com o antes.",
     entrega: "Agente funcionando e relatório com o resultado medido",
   },
   {
@@ -65,47 +70,39 @@ export const FASES: Fase[] = [
   },
 ];
 
-// Exemplos, não um cardápio fechado: o diagnóstico decide o que entra.
-export const AREAS = [
+// Rotinas por TIPO DE TRABALHO, não por área (2026-11-05): serve para qualquer empresa e cada uma leva um
+// exemplo concreto. Exemplos, não um cardápio fechado: o diagnóstico decide o que entra.
+export interface Tarefa {
+  titulo: string;
+  texto: string;
+  exemplo: string;
+}
+
+export const TAREFAS: Tarefa[] = [
   {
-    area: "RH e departamento pessoal",
-    exemplos: [
-      "Responde às dúvidas dos funcionários sobre férias, benefícios e políticas internas",
-      "Prepara a integração de quem entra: documentos, acessos e treinamentos",
-      "Controla vencimento de exames, documentos e certificações",
-    ],
+    titulo: "Responder o que sempre perguntam",
+    texto: "Dúvidas de clientes, fornecedores ou da própria equipe, respondidas com base nos documentos da empresa.",
+    exemplo: "Prazo de entrega, política de férias, segunda via de boleto.",
   },
   {
-    area: "Financeiro e contabilidade",
-    exemplos: [
-      "Lança notas e boletos que chegam por e-mail",
-      "Concilia o extrato bancário e aponta divergências",
-      "Monta o pacote do fechamento mensal para a equipe revisar",
-    ],
+    titulo: "Ler documentos e tirar os dados",
+    texto: "Notas, pedidos, contratos e planilhas que chegam por e-mail viram dados no sistema, sem digitação.",
+    exemplo: "Lançar as notas fiscais que chegaram na semana.",
   },
   {
-    area: "Comercial e atendimento",
-    exemplos: [
-      "Prepara propostas a partir dos modelos e da tabela de preços",
-      "Registra os contatos e lembra os retornos pendentes",
-      "Responde às perguntas frequentes dos clientes com base nos documentos da empresa",
-    ],
+    titulo: "Conferir e cruzar informações",
+    texto: "Comparar um documento com outro e apontar só o que não bate, para uma pessoa resolver.",
+    exemplo: "Pedido, nota fiscal e recebimento; extrato e lançamentos.",
   },
   {
-    area: "Compras e suprimentos",
-    exemplos: [
-      "Compara cotações de fornecedores lado a lado",
-      "Acompanha prazos de entrega e avisa os atrasos",
-      "Confere pedido, nota fiscal e recebimento",
-    ],
+    titulo: "Lembrar prazos e cobrar retornos",
+    texto: "Vencimentos, entregas e retornos acompanhados sem depender da memória de ninguém.",
+    exemplo: "Avisar o atraso de um fornecedor antes que vire problema.",
   },
   {
-    area: "Qualidade e gestão",
-    exemplos: [
-      "Organiza registros de não conformidade e ações corretivas",
-      "Junta os números das áreas num relatório semanal",
-      "Mantém procedimentos e instruções de trabalho fáceis de consultar",
-    ],
+    titulo: "Montar relatórios e rascunhos",
+    texto: "Juntar números de várias fontes e preparar o documento para alguém da equipe revisar e enviar.",
+    exemplo: "O relatório semanal, a proposta a partir do modelo.",
   },
 ];
 
@@ -132,7 +129,7 @@ export const LIMITES = [
 export const SEGURANCA = [
   {
     titulo: "A empresa é dona de tudo",
-    texto: "Contas, chaves de acesso e dados ficam no nome da empresa. Eu configuro, a empresa controla e pode revogar meu acesso quando quiser.",
+    texto: "Contas, chaves de acesso e dados ficam no nome da empresa. A brhorn configura, a empresa controla e pode revogar o acesso quando quiser.",
   },
   {
     titulo: "Permissão por área",
@@ -144,7 +141,7 @@ export const SEGURANCA = [
   },
   {
     titulo: "LGPD por escrito",
-    texto: "Termo de confidencialidade e acordo de tratamento de dados assinados antes de qualquer acesso.",
+    texto: "Termo de confidencialidade e acordo de tratamento de dados assinados entre a sua empresa e a brhorn antes de qualquer acesso.",
   },
 ];
 
@@ -186,7 +183,7 @@ export const FORMATOS: Formato[] = [
     inclui: [
       "Especificação do agente e do critério de sucesso",
       "Construção e integração com os sistemas da empresa",
-      "Piloto de 30 a 60 dias com uma equipe real",
+      "Piloto com uma equipe real, no prazo combinado",
       "Relatório de resultado: tempo, erros e uso",
     ],
   },
@@ -224,7 +221,7 @@ export const FAQ = [
   },
   {
     p: "Quanto tempo leva até ver resultado?",
-    r: "O diagnóstico leva semanas, e o piloto, de 30 a 60 dias. Ao final do piloto, a empresa tem um número medido para decidir se amplia.",
+    r: "Depende da rotina e dos dados de cada empresa. O prazo de cada fase é combinado antes de começar, e ao final do piloto a empresa tem um número medido para decidir se amplia.",
   },
   {
     p: "Por que começar pelo diagnóstico e não direto pelo agente?",

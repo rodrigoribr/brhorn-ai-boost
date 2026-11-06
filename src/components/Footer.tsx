@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { ArrowRight, Instagram, Linkedin, Mail, MapPin, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Logo } from "@/components/brand/Logo";
+import { BrhMark } from "@/components/brand/Logo";
 import { CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
 import { CLASSE_BOTAO_SECUNDARIO } from "@/components/home/classes";
 import {
@@ -51,7 +51,7 @@ export const FechoCarta = ({ titulo, texto, mensagemWhatsapp, onWhatsappClick, o
       </button>
     </div>
     <p className="mt-[var(--space-2xl)] font-display text-[length:var(--text-title)] text-t-ink">Rodrigo Brasil</p>
-    <p className="text-sm text-t-muted">Engenheiro, brhorn</p>
+    <p className="text-sm text-t-muted">Engenheiro responsável, brhorn</p>
   </section>
 );
 
@@ -68,10 +68,10 @@ const Footer = ({ children }: { children?: ReactNode }) => (
       >
         <div>
           <Link to="/" aria-label="brhorn, página inicial" className={`inline-block ${FOCO}`}>
-            <Logo className="h-8" title="" />
+            <BrhMark className="h-10 w-auto" title="" />
           </Link>
           <p className="mt-[var(--space-md)] max-w-[44ch] text-sm">
-            Agentes de IA nas rotinas da empresa e agente pessoal para o empresário, com método de engenharia.
+            A brhorn é uma consultoria de engenharia em agentes de IA: nas rotinas da empresa e no agente pessoal do empresário.
           </p>
           <div className="mt-[var(--space-lg)] flex gap-[var(--space-sm)]">
             {LINKEDIN_URL && (
@@ -109,7 +109,7 @@ const Footer = ({ children }: { children?: ReactNode }) => (
       </div>
 
       <div className="mt-[var(--space-xl)] flex flex-col items-start justify-between gap-[var(--space-md)] border-t border-t-rule pt-[var(--space-lg)] text-xs md:flex-row md:items-center">
-        <p>© {new Date().getFullYear()} brhorn</p>
+        <p>© {new Date().getFullYear()} BRHORN AUTOMACAO &amp; IA LTDA · CNPJ 64.680.803/0001-17</p>
         <nav aria-label="Documentos legais" className="flex flex-wrap gap-x-[var(--space-lg)] gap-y-[var(--space-xs)]">
           <Link to="/politica-privacidade" className={LINK}>
             Política de Privacidade

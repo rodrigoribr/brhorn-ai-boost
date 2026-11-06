@@ -93,18 +93,17 @@
 .animate-percorrer { animation: percorrer 4.8s linear infinite; }
 @keyframes digitando { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
 .animate-digitando { animation: digitando 1.2s ease-in-out infinite; }
-/* DEV-0005: ilustração do método. O traço se desenha (pathLength=1) e as peças aparecem em sequência. */
-.metodo .metodo-traco { stroke-dasharray: 1; transition: stroke-dashoffset 1.6s cubic-bezier(.45,.05,.25,1); }
-.js .metodo:not(.visivel) .metodo-traco { stroke-dashoffset: 1; }
-.metodo .metodo-ponto { transition: opacity .5s ease; }
-.js .metodo:not(.visivel) .metodo-ponto { opacity: 0; }
-.metodo.visivel .metodo-traco { stroke-dashoffset: 0; }
-.metodo.visivel .metodo-ponto { opacity: 1; }
+/* Cronograma das fases: o trilho se desenha quando a seção entra na tela (vertical no celular, horizontal no desktop). */
+.fase-trilho { transform-origin: top; transition: transform 1s cubic-bezier(.45,.05,.25,1); }
+.js .revelar:not(.visivel) .fase-trilho { transform: scaleY(0); }
+@media (min-width: 64rem) {
+  .fase-trilho { transform-origin: left; }
+  .js .revelar:not(.visivel) .fase-trilho { transform: scaleX(0); }
+}
 @media (prefers-reduced-motion: reduce) {
   .js .revelar:not(.visivel) { opacity: 1; transform: none; }
   .revelar { transition: none; }
-  .js .metodo:not(.visivel) .metodo-traco { stroke-dashoffset: 0; }
-  .js .metodo:not(.visivel) .metodo-ponto { opacity: 1; }
-  .metodo .metodo-traco, .metodo .metodo-ponto { transition: none; }
+  .js .revelar:not(.visivel) .fase-trilho { transform: none; }
+  .fase-trilho { transition: none; }
   .animate-surgir, .animate-crescer, .animate-percorrer, .animate-digitando { animation: none; }
 }

@@ -19,6 +19,10 @@ export const QuemFazSection = () => (
         <Cabeca id="quem-faz" titulo="Rodrigo Brasil, engenheiro." />
         <div className="mt-[var(--space-lg)] max-w-[60ch] space-y-[var(--space-md)] text-[length:var(--text-lead)] leading-[1.5] text-t-muted">
           <p>
+            A brhorn é uma consultoria de engenharia em agentes de IA, com sede em Paraisópolis (MG). Eu conduzo cada
+            projeto do diagnóstico à entrega.
+          </p>
+          <p>
             Me formei em engenharia estudando motores e trabalhei como projetista, desenhando peças que
             precisavam funcionar na primeira vez. Hoje aplico o mesmo método a agentes de IA: entender o mecanismo,
             medir, testar e só então colocar para rodar.

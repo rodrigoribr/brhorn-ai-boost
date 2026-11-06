@@ -84,7 +84,8 @@ export const BrhMark = ({ className, tone = "light", title = "brhorn", gap = tru
 /** Compatibilidade: chamadas antigas do monograma. */
 export const BrMark = BrhMark;
 
-/** Assinatura: o brh e o nome escrito por inteiro, apoiado no pé do h (rodapé, materiais). */
+/** Assinatura: o brh e o nome escrito por inteiro. 🚫 Não usar no site (decisão de 2026-11-05: o monograma
+ *  já é a palavra brhorn; o nome escrito só aparece em textos e contratos). Fica para materiais fora do site. */
 export const Logo = ({ className, tone = "light", title = "brhorn" }: Omit<MarkProps, "gap">) => (
   <svg
     viewBox="-21 4 572 203"
