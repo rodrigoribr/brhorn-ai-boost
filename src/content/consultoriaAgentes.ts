@@ -10,9 +10,9 @@ export const ABERTURA = {
   titulo: "Agentes de IA com método de engenharia.",
   // Redesign 2026-11-04: o título antigo tinha 12 palavras.
   tituloAntigo: "Agentes de IA na rotina da sua empresa, com método de engenharia.",
-  frase: "A brhorn encontra onde um agente economiza tempo na sua empresa e prova o resultado num piloto medido.",
+  frase: "A brhorn encontra onde um agente economiza tempo na sua empresa.",
   subtitulo:
-    "RH, financeiro, contabilidade, atendimento. Descubro onde um agente economiza tempo de verdade, projeto com regras claras, provo num piloto medido e só então amplio.",
+    "RH, financeiro, contabilidade, atendimento. Descubro onde um agente economiza tempo de verdade e projeto com regras claras.",
 };
 
 export const PROBLEMAS = [
