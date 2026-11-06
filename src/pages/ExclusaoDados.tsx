@@ -12,7 +12,7 @@ const ExclusaoDados = () => (
           </>
         ),
       },
-      { texto: "Apago os dados vinculados em até 15 dias e confirmo por e-mail." },
+      { texto: "A brhorn apaga os dados vinculados em até 15 dias e confirma por e-mail." },
     ]}
   />
 );

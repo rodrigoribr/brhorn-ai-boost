@@ -1,14 +1,14 @@
-import { LinkEmail, PaginaLegal } from "@/components/PaginaLegal";
+import { LinkEmail, LinkPagina, PaginaLegal } from "@/components/PaginaLegal";
 
 // Reflete o que o site coleta de fato: ContactModal e CallModal (Edge Functions → Supabase contact_leads),
 // Meta Pixel e Google Fonts (index.html). Mudou a coleta ou um fornecedor? Atualize esta página e a data.
 // DEV-0004: a seção "Chat de diagnóstico" e a linha do provedor de IA foram aprovadas pelo Rodrigo em
-// 2026-11-05; vão ao ar junto com o chat, e aí a data do topo muda.
+// 2026-11-05 e estão no ar com o chat. Voz da empresa (a brhorn), como os Termos de Uso, desde 2026-11-05.
 const PoliticaPrivacidade = () => (
   <PaginaLegal
     titulo="Política de Privacidade"
     resumo="Este site coleta só o necessário para responder a quem entra em contato. Aqui está o que é coletado, para quê, com quem é compartilhado e como pedir a exclusão."
-    atualizacao="20 de outubro de 2026"
+    atualizacao="5 de novembro de 2026"
     secoes={[
       {
         titulo: "Quem é o responsável",
@@ -59,7 +59,7 @@ const PoliticaPrivacidade = () => (
               </li>
               <li>
                 <strong className="font-medium text-t-ink">Para quê:</strong> montar o diagnóstico inicial e permitir
-                que eu retorne o contato para conversar sobre ele.
+                que a brhorn retorne o contato para conversar sobre ele.
               </li>
               <li>
                 <strong className="font-medium text-t-ink">Base legal:</strong> o seu consentimento (art. 7º, I, da
@@ -76,7 +76,7 @@ const PoliticaPrivacidade = () => (
               </li>
             </ul>
             <p className="mt-3">
-              Para pedir a exclusão, veja a página de <a href="/exclusao-dados" className="font-medium text-t-accent underline underline-offset-2">exclusão de dados</a>{" "}
+              Para pedir a exclusão, veja a página de <LinkPagina to="/exclusao-dados">exclusão de dados</LinkPagina>{" "}
               ou escreva para <LinkEmail />.
             </p>
           </>
@@ -85,7 +85,7 @@ const PoliticaPrivacidade = () => (
       {
         titulo: "Para que os dados são usados",
         texto:
-          "Para responder ao seu contato, fazer a ligação que você pediu e preparar uma eventual proposta. Os dados de navegação servem para medir quais páginas e anúncios funcionam. Não uso os seus dados para outra finalidade e não envio propaganda sem você pedir.",
+          "Para responder ao seu contato, fazer a ligação que você pediu e preparar uma eventual proposta. Os dados de navegação servem para medir quais páginas e anúncios funcionam. A brhorn não usa os seus dados para outra finalidade e não envia propaganda sem você pedir.",
       },
       {
         titulo: "Base legal",
@@ -96,7 +96,7 @@ const PoliticaPrivacidade = () => (
         titulo: "Com quem é compartilhado",
         texto: (
           <>
-            <p>Não vendo dados. Eles passam apenas pelos fornecedores que fazem o site funcionar:</p>
+            <p>A brhorn não vende dados. Eles passam apenas pelos fornecedores que fazem o site funcionar:</p>
             <ul className="mt-3 list-disc space-y-2 pl-5">
               <li>Vercel, que hospeda o site;</li>
               <li>Supabase, banco de dados onde ficam os contatos enviados pelo formulário e os pedidos de ligação;</li>
@@ -119,7 +119,7 @@ const PoliticaPrivacidade = () => (
       {
         titulo: "Como os dados são protegidos",
         texto:
-          "O site só funciona com conexão criptografada (HTTPS). O acesso aos contatos é restrito a mim, e os fornecedores acima tratam os dados conforme os próprios contratos e políticas de segurança.",
+          "O site só funciona com conexão criptografada (HTTPS). O acesso aos contatos é restrito ao responsável pela brhorn, e os fornecedores acima tratam os dados conforme os próprios contratos e políticas de segurança.",
       },
       {
         titulo: "Cookies e como bloquear",
@@ -140,8 +140,8 @@ const PoliticaPrivacidade = () => (
         titulo: "Seus direitos",
         texto: (
           <>
-            Você pode pedir a confirmação de que tenho dados seus, o acesso, a correção, a exclusão e a informação
-            sobre com quem foram compartilhados (art. 18 da LGPD). Escreva para <LinkEmail />. Respondo em até 15
+            Você pode pedir a confirmação de que a brhorn tem dados seus, o acesso, a correção, a exclusão e a informação
+            sobre com quem foram compartilhados (art. 18 da LGPD). Escreva para <LinkEmail />. A brhorn responde em até 15
             dias. Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).
           </>
         ),

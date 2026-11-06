@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/home/SiteHeader";
 import Footer from "@/components/Footer";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { Link } from "react-router-dom";
 import { EMAIL } from "@/lib/contato";
 
 const FOCO =
@@ -14,6 +15,16 @@ export const LinkEmail = () => (
   >
     {EMAIL}
   </a>
+);
+
+/** Link para outra página do site, no mesmo estilo do e-mail. */
+export const LinkPagina = ({ to, children }: { to: string; children: ReactNode }) => (
+  <Link
+    to={to}
+    className={`rounded-[var(--radius-control)] text-t-ink underline underline-offset-4 transition-colors duration-micro hover:text-t-accent ${FOCO}`}
+  >
+    {children}
+  </Link>
 );
 
 type Secao = { titulo?: string; texto: ReactNode };
