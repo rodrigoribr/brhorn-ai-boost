@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { PhoneCall } from "lucide-react";
-import { Link } from "react-router-dom";
+import { CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
+import { CLASSE_BOTAO_SECUNDARIO } from "@/components/home/classes";
+import { CLASSE_CAMPO, Campo, NotaPrivacidade, TextoEnvio } from "@/components/formulario/Campo";
 
 interface CallModalProps {
   isOpen: boolean;
@@ -71,81 +69,50 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-sm mx-auto bg-card border border-border text-foreground">
-        <DialogHeader>
-          <DialogTitle className="font-display text-3xl font-normal text-nanquim tracking-tight">
-            Quero que me liguem
-          </DialogTitle>
-          <p className="text-muted-foreground">Deixe seu nome e telefone, e eu ligo para você.</p>
+      <DialogContent className="max-w-md gap-[var(--space-lg)] p-[var(--space-lg)] sm:p-[var(--space-xl)]">
+        <DialogHeader className="space-y-[var(--space-xs)] pr-8">
+          <DialogTitle>Quero que me liguem</DialogTitle>
+          <DialogDescription>Deixe seu nome e telefone, e eu ligo para você.</DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div>
-            <Label htmlFor="call-name" className="text-foreground">
-              Nome
-            </Label>
-            <Input
+        <form onSubmit={handleSubmit} className="grid gap-[var(--space-md)]">
+          <Campo id="call-name" rotulo="Nome">
+            <input
               id="call-name"
               type="text"
+              autoComplete="name"
               value={formData.name}
               onChange={(e) => handleInputChange("name", e.target.value)}
               placeholder="Seu nome"
-              className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
+              className={`${CLASSE_CAMPO} h-12`}
               required
             />
-          </div>
+          </Campo>
 
-          <div>
-            <Label htmlFor="call-phone" className="text-foreground">
-              Telefone/WhatsApp
-            </Label>
-            <Input
+          <Campo id="call-phone" rotulo="Telefone/WhatsApp">
+            <input
               id="call-phone"
               type="tel"
+              autoComplete="tel"
               value={formData.phone}
               onChange={(e) => handleInputChange("phone", e.target.value)}
               placeholder="(11) 99999-9999"
-              className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
+              className={`${CLASSE_CAMPO} h-12`}
               required
             />
-          </div>
+          </Campo>
 
-          <div className="flex gap-3 pt-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onClose}
-              className="flex-1 border-border text-foreground bg-transparent hover:bg-secondary rounded"
-            >
+          <div className="mt-[var(--space-xs)] flex flex-col-reverse gap-[var(--space-sm)] sm:flex-row sm:justify-end">
+            <button type="button" onClick={onClose} className={CLASSE_BOTAO_SECUNDARIO}>
               Cancelar
-            </Button>
-            <Button
-              type="submit"
-              disabled={!isFormValid || isSubmitting}
-              className="flex-1 bg-projeto text-papel hover:bg-[#1a5fcc] rounded"
-            >
-              {isSubmitting ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-papel border-t-transparent rounded-full animate-spin"></div>
-                  Enviando...
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <PhoneCall className="w-4 h-4" />
-                  Quero receber a ligação
-                </div>
-              )}
-            </Button>
+            </button>
+            <button type="submit" disabled={!isFormValid || isSubmitting} className={CLASSE_BOTAO_PRIMARIO}>
+              <TextoEnvio enviando={isSubmitting}>Quero receber a ligação</TextoEnvio>
+            </button>
           </div>
         </form>
 
-        <div className="text-xs text-muted-foreground text-center pt-3 border-t border-border">
-          Seus dados são usados só para responder este contato. Veja a{" "}
-          <Link to="/politica-privacidade" onClick={onClose} className="underline underline-offset-4 hover:text-nanquim">
-            Política de Privacidade
-          </Link>
-          .
-        </div>
+        <NotaPrivacidade onClose={onClose} />
       </DialogContent>
     </Dialog>
   );

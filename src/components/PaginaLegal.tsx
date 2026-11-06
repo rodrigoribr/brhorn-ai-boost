@@ -4,8 +4,14 @@ import Footer from "@/components/Footer";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { EMAIL } from "@/lib/contato";
 
+const FOCO =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-focus)]";
+
 export const LinkEmail = () => (
-  <a href={`mailto:${EMAIL}`} className="text-nanquim underline underline-offset-4 hover:text-projeto">
+  <a
+    href={`mailto:${EMAIL}`}
+    className={`rounded-[var(--radius-control)] text-t-ink underline underline-offset-4 transition-colors duration-micro hover:text-t-accent ${FOCO}`}
+  >
     {EMAIL}
   </a>
 );
@@ -19,38 +25,44 @@ type Props = {
   atualizacao?: string;
 };
 
-// Documento legal como ficha técnica: título da seção à esquerda, texto à direita.
+// Documento legal no sistema do redesign: abertura como nas páginas internas e, embaixo,
+// a ficha técnica com o título da seção à esquerda (4 colunas) e o texto à direita (8).
 export const PaginaLegal = ({ titulo, resumo, secoes, atualizacao }: Props) => {
   usePageTitle(`${titulo} · brhorn`);
 
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground selection:bg-projeto/20">
+    <div className="min-h-screen bg-t-paper text-t-ink">
       <SiteHeader />
       <main>
-        <section className="border-b border-linha bg-papel bg-[linear-gradient(#ebe8df_1px,transparent_1px),linear-gradient(90deg,#ebe8df_1px,transparent_1px)] bg-[size:24px_24px]">
-          <div className="mx-auto max-w-6xl px-4 pb-14 pt-14 sm:px-6 md:pt-20">
-            <h1 className="max-w-3xl font-display text-[2.4rem] font-normal leading-[1.1] tracking-[-0.01em] text-nanquim sm:text-5xl">
+        <section aria-labelledby="legal-titulo" className="bg-t-paper">
+          <div className="mx-auto max-w-[var(--container)] px-[var(--gutter)] pb-[var(--space-2xl)] pt-[var(--space-xl)] lg:pt-[var(--space-2xl)]">
+            <h1
+              id="legal-titulo"
+              className="max-w-[18ch] font-display text-[length:var(--text-display-s)] font-normal leading-[1.06] tracking-[var(--tracking-display)] text-t-ink"
+            >
               {titulo}
             </h1>
-            {resumo && <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">{resumo}</p>}
+            {resumo && <p className="lead mt-[var(--space-lg)] text-t-muted">{resumo}</p>}
             {atualizacao && (
-              <p className="mt-6 font-mono text-xs text-muted-foreground">Última atualização: {atualizacao}</p>
+              <p className="num mt-[var(--space-md)] text-sm text-t-muted">Última atualização: {atualizacao}</p>
             )}
           </div>
         </section>
 
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-16">
+        <div className="mx-auto max-w-[var(--container)] px-[var(--gutter)] pb-[var(--section-gap-s)]">
           {secoes.map((s, i) => (
             <section
               key={i}
-              className="grid gap-2 border-t border-linha py-8 first:border-t-0 first:pt-0 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-12"
+              className="grid gap-[var(--space-sm)] border-t border-t-rule py-[var(--space-xl)] md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] md:gap-x-[var(--gap-columns)]"
             >
               {s.titulo ? (
-                <h2 className="font-display text-xl font-normal text-nanquim">{s.titulo}</h2>
+                <h2 className="font-display text-[length:var(--text-title)] font-normal leading-[1.2] text-t-ink">
+                  {s.titulo}
+                </h2>
               ) : (
                 <span aria-hidden="true" className="hidden md:block" />
               )}
-              <div className="max-w-[65ch] leading-relaxed text-muted-foreground">{s.texto}</div>
+              <div className="max-w-[65ch] text-t-muted">{s.texto}</div>
             </section>
           ))}
         </div>

@@ -25,18 +25,18 @@ const PoliticaPrivacidade = () => (
         texto: (
           <ul className="list-disc space-y-2 pl-5">
             <li>
-              <strong className="font-medium text-nanquim">Formulário "descreva por escrito":</strong> nome, e-mail,
+              <strong className="font-medium text-t-ink">Formulário "descreva por escrito":</strong> nome, e-mail,
               telefone, empresa, setor e a mensagem que você escrever.
             </li>
             <li>
-              <strong className="font-medium text-nanquim">"Prefiro que me liguem":</strong> nome e telefone.
+              <strong className="font-medium text-t-ink">"Prefiro que me liguem":</strong> nome e telefone.
             </li>
             <li>
-              <strong className="font-medium text-nanquim">Dados técnicos:</strong> como em qualquer site, os servidores
+              <strong className="font-medium text-t-ink">Dados técnicos:</strong> como em qualquer site, os servidores
               registram o endereço IP e o tipo de navegador de cada acesso, para funcionar e se proteger de abusos.
             </li>
             <li>
-              <strong className="font-medium text-nanquim">Medição de visitas e anúncios:</strong> o Meta Pixel registra
+              <strong className="font-medium text-t-ink">Medição de visitas e anúncios:</strong> o Meta Pixel registra
               visitas e cliques de contato por meio de cookies, para medir o resultado de anúncios no Facebook e no
               Instagram.
             </li>
@@ -53,30 +53,30 @@ const PoliticaPrivacidade = () => (
             </p>
             <ul className="mt-3 list-disc space-y-2 pl-5">
               <li>
-                <strong className="font-medium text-nanquim">O que é coletado:</strong> as respostas que você digitar
+                <strong className="font-medium text-t-ink">O que é coletado:</strong> as respostas que você digitar
                 (nome, empresa, o seu papel na rotina, o tamanho da empresa, a área e a rotina que quer resolver, onde ela acontece, o volume dela, WhatsApp e e-mail), o texto da conversa e a
                 data do seu aceite. O endereço IP é guardado só de forma cifrada (hash), para limitar abusos.
               </li>
               <li>
-                <strong className="font-medium text-nanquim">Para quê:</strong> montar o diagnóstico inicial e permitir
+                <strong className="font-medium text-t-ink">Para quê:</strong> montar o diagnóstico inicial e permitir
                 que eu retorne o contato para conversar sobre ele.
               </li>
               <li>
-                <strong className="font-medium text-nanquim">Base legal:</strong> o seu consentimento (art. 7º, I, da
+                <strong className="font-medium text-t-ink">Base legal:</strong> o seu consentimento (art. 7º, I, da
                 LGPD), que você pode retirar a qualquer momento pelo canal abaixo.
               </li>
               <li>
-                <strong className="font-medium text-nanquim">Onde fica:</strong> num servidor próprio da brhorn, e o
+                <strong className="font-medium text-t-ink">Onde fica:</strong> num servidor próprio da brhorn, e o
                 resumo com o seu contato vai para o sistema interno de contatos da brhorn. As mensagens passam por um
                 provedor de IA (OpenAI) para que o agente entenda as respostas.
               </li>
               <li>
-                <strong className="font-medium text-nanquim">Por quanto tempo:</strong> o texto da conversa fica guardado
+                <strong className="font-medium text-t-ink">Por quanto tempo:</strong> o texto da conversa fica guardado
                 por até 180 dias. O contato segue o prazo descrito em "Por quanto tempo", abaixo.
               </li>
             </ul>
             <p className="mt-3">
-              Para pedir a exclusão, veja a página de <a href="/exclusao-dados" className="font-medium text-projeto underline underline-offset-2">exclusão de dados</a>{" "}
+              Para pedir a exclusão, veja a página de <a href="/exclusao-dados" className="font-medium text-t-accent underline underline-offset-2">exclusão de dados</a>{" "}
               ou escreva para <LinkEmail />.
             </p>
           </>

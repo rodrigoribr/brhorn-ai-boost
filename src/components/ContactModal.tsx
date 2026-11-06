@@ -1,13 +1,19 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
+import { CLASSE_BOTAO_SECUNDARIO } from "@/components/home/classes";
+import { CLASSE_CAMPO, Campo, NotaPrivacidade, TextoEnvio } from "@/components/formulario/Campo";
+
+const ASSUNTOS = [
+  { valor: "agente-whatsapp", texto: "Agente no WhatsApp" },
+  { valor: "leitura-documentos", texto: "Leitura de documentos" },
+  { valor: "configuracao-agentes", texto: "Configuração de agentes" },
+  { valor: "software-sob-medida", texto: "Software sob medida" },
+  { valor: "axion", texto: "Axion (piloto)" },
+  { valor: "viaserra", texto: "ViaSerra / Pousadas" },
+  { valor: "outro", texto: "Outro" },
+];
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -97,138 +103,109 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md mx-auto max-h-[90vh] overflow-y-auto bg-card border border-border text-foreground">
-        <DialogHeader>
-          <div className="flex items-center justify-between">
-            <DialogTitle className="font-display text-3xl font-normal text-nanquim tracking-tight">
-              Descreva o seu caso
-            </DialogTitle>
-          </div>
-          <p className="text-muted-foreground">
+      <DialogContent className="max-h-[90vh] max-w-lg gap-[var(--space-lg)] overflow-y-auto p-[var(--space-lg)] sm:p-[var(--space-xl)]">
+        <DialogHeader className="space-y-[var(--space-xs)] pr-8">
+          <DialogTitle>Descreva o seu caso</DialogTitle>
+          <DialogDescription>
             Conte o que trava hoje. Respondo em até 1 dia útil pelo canal que você preferir.
-          </p>
+          </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div className="grid grid-cols-1 gap-4">
-            <div>
-              <Label htmlFor="name" className="text-foreground">Nome completo *</Label>
-              <Input
-                id="name"
-                type="text"
-                value={formData.name}
-                onChange={(e) => handleInputChange('name', e.target.value)}
-                placeholder="Seu nome completo"
-                className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
-                required
-              />
-            </div>
+        <form onSubmit={handleSubmit} className="grid gap-[var(--space-md)]">
+          <Campo id="name" rotulo="Nome completo" obrigatorio>
+            <input
+              id="name"
+              type="text"
+              autoComplete="name"
+              value={formData.name}
+              onChange={(e) => handleInputChange('name', e.target.value)}
+              placeholder="Seu nome completo"
+              className={`${CLASSE_CAMPO} h-12`}
+              required
+            />
+          </Campo>
 
-            <div>
-              <Label htmlFor="email" className="text-foreground">Seu melhor e-mail *</Label>
-              <Input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => handleInputChange('email', e.target.value)}
-                placeholder="seu@email.com"
-                className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
-                required
-              />
-            </div>
+          <Campo id="email" rotulo="Seu melhor e-mail" obrigatorio>
+            <input
+              id="email"
+              type="email"
+              autoComplete="email"
+              value={formData.email}
+              onChange={(e) => handleInputChange('email', e.target.value)}
+              placeholder="seu@email.com"
+              className={`${CLASSE_CAMPO} h-12`}
+              required
+            />
+          </Campo>
 
-            <div>
-              <Label htmlFor="phone" className="text-foreground">Telefone/WhatsApp *</Label>
-              <Input
+          <div className="grid gap-[var(--space-md)] sm:grid-cols-2">
+            <Campo id="phone" rotulo="Telefone/WhatsApp" obrigatorio>
+              <input
                 id="phone"
                 type="tel"
+                autoComplete="tel"
                 value={formData.phone}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
                 placeholder="(11) 99999-9999"
-                className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
+                className={`${CLASSE_CAMPO} h-12`}
                 required
               />
-            </div>
+            </Campo>
 
-            <div>
-              <Label htmlFor="company" className="text-foreground">Empresa</Label>
-              <Input
+            <Campo id="company" rotulo="Empresa">
+              <input
                 id="company"
                 type="text"
+                autoComplete="organization"
                 value={formData.company}
                 onChange={(e) => handleInputChange('company', e.target.value)}
                 placeholder="Nome da sua empresa"
-                className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
+                className={`${CLASSE_CAMPO} h-12`}
               />
-            </div>
-
-            <div>
-              <Label htmlFor="sector" className="text-foreground">Assunto *</Label>
-              <Select value={formData.sector} onValueChange={(value) => handleInputChange('sector', value)}>
-                <SelectTrigger className="bg-background border-border text-foreground rounded">
-                  <SelectValue placeholder="Escolha o assunto" />
-                </SelectTrigger>
-                <SelectContent className="bg-card border-border text-foreground">
-                  <SelectItem value="agente-whatsapp">Agente no WhatsApp</SelectItem>
-                  <SelectItem value="leitura-documentos">Leitura de documentos</SelectItem>
-                  <SelectItem value="configuracao-agentes">Configuração de agentes</SelectItem>
-                  <SelectItem value="software-sob-medida">Software sob medida</SelectItem>
-                  <SelectItem value="axion">Axion (piloto)</SelectItem>
-                  <SelectItem value="viaserra">ViaSerra / Pousadas</SelectItem>
-                  <SelectItem value="outro">Outro</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div>
-              <Label htmlFor="message" className="text-foreground">Mensagem</Label>
-              <Textarea
-                id="message"
-                value={formData.message}
-                onChange={(e) => handleInputChange('message', e.target.value)}
-                placeholder="O que acontece hoje, quem faz e onde trava..."
-                rows={3}
-                className="mt-1 bg-background border-border text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-projeto rounded"
-              />
-            </div>
+            </Campo>
           </div>
 
-          <div className="flex gap-3 pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onClose}
-              className="flex-1 border-border text-foreground bg-transparent hover:bg-secondary rounded"
+          <Campo id="sector" rotulo="Assunto" obrigatorio>
+            <select
+              id="sector"
+              value={formData.sector}
+              onChange={(e) => handleInputChange('sector', e.target.value)}
+              className={`${CLASSE_CAMPO} h-12 ${formData.sector ? "" : "text-t-muted"}`}
+              required
             >
+              <option value="" disabled>
+                Escolha o assunto
+              </option>
+              {ASSUNTOS.map((a) => (
+                <option key={a.valor} value={a.valor} className="text-t-ink">
+                  {a.texto}
+                </option>
+              ))}
+            </select>
+          </Campo>
+
+          <Campo id="message" rotulo="Mensagem">
+            <textarea
+              id="message"
+              value={formData.message}
+              onChange={(e) => handleInputChange('message', e.target.value)}
+              placeholder="O que acontece hoje, quem faz e onde trava..."
+              rows={4}
+              className={`${CLASSE_CAMPO} resize-y py-3`}
+            />
+          </Campo>
+
+          <div className="mt-[var(--space-xs)] flex flex-col-reverse gap-[var(--space-sm)] sm:flex-row sm:justify-end">
+            <button type="button" onClick={onClose} className={CLASSE_BOTAO_SECUNDARIO}>
               Cancelar
-            </Button>
-            <Button
-              type="submit"
-              disabled={!isFormValid || isSubmitting}
-              className="flex-1 bg-projeto text-papel hover:bg-[#1a5fcc] rounded"
-            >
-              {isSubmitting ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-papel border-t-transparent rounded-full animate-spin"></div>
-                  Enviando...
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4" />
-                  Enviar
-                </div>
-              )}
-            </Button>
+            </button>
+            <button type="submit" disabled={!isFormValid || isSubmitting} className={CLASSE_BOTAO_PRIMARIO}>
+              <TextoEnvio enviando={isSubmitting}>Enviar</TextoEnvio>
+            </button>
           </div>
         </form>
 
-        <div className="text-xs text-muted-foreground text-center pt-3 border-t border-border">
-          Seus dados são usados só para responder este contato. Veja a{" "}
-          <Link to="/politica-privacidade" onClick={onClose} className="underline underline-offset-4 hover:text-nanquim">
-            Política de Privacidade
-          </Link>
-          .
-        </div>
+        <NotaPrivacidade onClose={onClose} />
       </DialogContent>
     </Dialog>
   );
