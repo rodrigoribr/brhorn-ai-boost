@@ -19,16 +19,17 @@ const CLASSE_CONVERSAR =
   "inline-flex h-11 items-center rounded-[var(--radius-control)] border border-t-ink px-5 text-sm font-medium text-t-ink transition-colors duration-micro hover:bg-t-ink hover:text-t-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-focus)]";
 
 /**
- * Cabeçalho fixo de altura constante. Só o monograma, sem o nome escrito: ao carregar ele acende
- * b → r → h → o → r → n e para na pose inteira. Passar o mouse ou focar o logo repete.
+ * Cabeçalho fixo de altura constante. Só o monograma, sem o nome escrito: ao carregar, uma faixa de luz
+ * percorre b → r → h → o → r → n e ele para na pose inteira. Passar o mouse ou focar o logo repete. Ao rolar a página, as
+ * letras acompanham o scroll (para frente ou para trás) e voltam à pose inteira quando ele para.
  */
 export const SiteHeader = () => {
   const [rodada, setRodada] = useState(0);
   const ultima = useRef(Date.now()); // a primeira apresentação começa ao carregar
   const repetir = () => {
-    // não reinicia no meio de uma apresentação (dura 5,6 s)
+    // não reinicia no meio de uma apresentação (dura 3,6 s, mais o reacender)
     const agora = Date.now();
-    if (agora - ultima.current < 5600) return;
+    if (agora - ultima.current < 4200) return;
     ultima.current = agora;
     setRodada((r) => r + 1);
   };
@@ -43,7 +44,7 @@ export const SiteHeader = () => {
           onFocus={repetir}
           className={cn("shrink-0", CLASSE_LINK, "text-t-ink")}
         >
-          <BrhAnimado key={rodada} legenda={false} title="" svgClassName="block h-11 w-auto" />
+          <BrhAnimado key={rodada} title="" svgClassName="block h-11 w-auto" acompanhaRolagem />
         </Link>
 
         <nav aria-label="Seções" className="hidden items-center gap-8 text-sm md:flex">
