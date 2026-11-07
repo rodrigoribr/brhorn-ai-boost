@@ -7,6 +7,7 @@
 // 🚫 O Agente BOM / wibom não entra (decisão de 2026-10-19, ligado à Versigent). O card "Leitura de documentos"
 // foi liberado pelo Rodrigo em 2026-11-05 com a condição: demonstração só com material próprio, nada da Versigent,
 // nada de chicote elétrico e sem o nome wibom.
+// Ordem = ordem da faixa da home. O agente pessoal vem primeiro (destaque pedido pelo Rodrigo em 2026-11-07).
 // ViaSerra: o sistema NÃO fala com o hóspede; quem usa é o gestor da pousada, com login. O vídeo mostra o gestor.
 
 export interface Projeto {
@@ -23,6 +24,17 @@ export interface Projeto {
 }
 
 export const PROJETOS: Projeto[] = [
+  {
+    id: "agente-pessoal",
+    nome: "Agente pessoal",
+    tipo: "Assistente do empresário",
+    situacao: "Serviço de configuração",
+    texto:
+      "Um agente nas suas contas e com os seus documentos: resumo da manhã, preparação de reuniões e rascunhos para você só revisar, com os mesmos cuidados de segurança.",
+    roteiro: ["Agenda e e-mails da manhã", "O que pede resposta, resumido", "Rascunho pronto para revisar"],
+    link: { to: "/configuracao-de-agentes", label: "Conhecer o agente pessoal" },
+    publicado: true,
+  },
   {
     id: "axion",
     nome: "Axion",
@@ -53,17 +65,6 @@ export const PROJETOS: Projeto[] = [
     texto:
       "PDFs com tabelas e desenhos de estruturas metálicas viram dados organizados, prontos para a planilha ou o sistema da empresa.",
     roteiro: ["PDFs e tabelas soltos", "O agente lê e confere", "Dados estruturados na planilha"],
-    publicado: true,
-  },
-  {
-    id: "agente-pessoal",
-    nome: "Agente pessoal",
-    tipo: "Assistente do empresário",
-    situacao: "Serviço de configuração",
-    texto:
-      "Um agente nas suas contas e com os seus documentos: resumo da manhã, preparação de reuniões e rascunhos para você só revisar, com os mesmos cuidados de segurança.",
-    roteiro: ["Agenda e e-mails da manhã", "O que pede resposta, resumido", "Rascunho pronto para revisar"],
-    link: { to: "/configuracao-de-agentes", label: "Conhecer o agente pessoal" },
     publicado: true,
   },
 ];

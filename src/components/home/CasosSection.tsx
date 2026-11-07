@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { ArrowRight, Pause, Play } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Cabeca, Secao } from "@/components/home/Titulos";
 import { CLASSE_LINK_TEXTO } from "@/components/home/classes";
@@ -87,7 +87,7 @@ const Card = ({ projeto }: { projeto: Projeto }) => {
       aria-labelledby={`projeto-${projeto.id}`}
       onMouseEnter={() => projeto.video && !menosMovimento() && tocar()}
       onMouseLeave={() => projeto.video && parar(true)}
-      className="group flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-t-rule bg-t-paper transition-colors duration-short hover:border-t-rulestrong"
+      className="group flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-[var(--radius-card)] sm:w-[calc((100%-var(--gap-columns))/1.6)] lg:w-[calc((100%-2*var(--gap-columns))/3.25)] border border-t-rule bg-t-paper transition-colors duration-short hover:border-t-rulestrong"
     >
       <div className={cn("relative border-b border-t-rule bg-t-paper2", projeto.video ? "aspect-[16/10]" : "h-36 sm:h-44")}>
         <Midia projeto={projeto} tocando={tocando} alternar={() => (tocando ? parar() : tocar())} video={video} />
@@ -118,19 +118,74 @@ const Card = ({ projeto }: { projeto: Projeto }) => {
   );
 };
 
+const Seta = ({ lado, ativa, onClick }: { lado: "antes" | "depois"; ativa: boolean; onClick: () => void }) => {
+  const Icone = lado === "antes" ? ArrowLeft : ArrowRight;
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={!ativa}
+      aria-label={lado === "antes" ? "Ver o trabalho anterior" : "Ver o próximo trabalho"}
+      className={cn(
+        "inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-pill)] border border-t-rule text-t-ink transition-colors duration-short hover:border-t-rulestrong disabled:cursor-default disabled:opacity-35 disabled:hover:border-t-rule",
+        FOCO,
+      )}
+    >
+      <Icone className="h-4 w-4" aria-hidden="true" />
+    </button>
+  );
+};
+
+// Faixa com rolagem lateral (2026-11-07): uma fileira só no desktop e no celular. O próximo card aparece cortado
+// na borda para mostrar que há mais; as setas existem porque a rodinha do mouse não rola para o lado.
+// Sem rolagem automática: o vídeo toca ao passar o mouse e o texto precisa ser lido.
 export const CasosSection = () => {
   const projetos = PROJETOS.filter((p) => p.publicado);
+  const faixa = useRef<HTMLDivElement>(null);
+  const [limites, setLimites] = useState({ inicio: true, fim: false });
+
+  const medir = useCallback(() => {
+    const el = faixa.current;
+    if (!el) return;
+    setLimites({ inicio: el.scrollLeft <= 4, fim: el.scrollLeft + el.clientWidth >= el.scrollWidth - 4 });
+  }, []);
+
+  useEffect(() => {
+    medir();
+    window.addEventListener("resize", medir);
+    return () => window.removeEventListener("resize", medir);
+  }, [medir]);
+
+  const andar = (sentido: 1 | -1) => {
+    const el = faixa.current;
+    const card = el?.querySelector("article");
+    if (!el || !card) return;
+    const passo = card.getBoundingClientRect().width + parseFloat(getComputedStyle(el).columnGap || "0");
+    el.scrollBy({ left: sentido * passo, behavior: menosMovimento() ? "auto" : "smooth" });
+  };
+
   return (
     <Secao id="casos">
-      <Cabeca
-        id="casos"
-        titulo="O que a brhorn já construiu."
-        texto="Sistemas em uso com clientes reais, uma demonstração e o agente pessoal, cada um com a situação dita às claras. Não são produtos de prateleira: mostram o tipo de trabalho que o método entrega."
-      />
+      <div className="flex items-end justify-between gap-[var(--space-lg)]">
+        <Cabeca
+          id="casos"
+          titulo="O que a brhorn já construiu."
+          texto="O agente pessoal, sistemas em uso com clientes reais e uma demonstração, cada um com a situação dita às claras. Não são produtos de prateleira: mostram o tipo de trabalho que o método entrega."
+        />
+        <div className="hidden shrink-0 gap-[var(--space-xs)] sm:flex">
+          <Seta lado="antes" ativa={!limites.inicio} onClick={() => andar(-1)} />
+          <Seta lado="depois" ativa={!limites.fim} onClick={() => andar(1)} />
+        </div>
+      </div>
       <div
+        ref={faixa}
+        onScroll={medir}
+        role="region"
+        aria-label="Trabalhos da brhorn, role para o lado para ver todos"
+        tabIndex={0}
         className={cn(
-          "mt-[var(--space-2xl)] grid gap-[var(--gap-columns)] md:grid-cols-2",
-          projetos.length === 3 && "lg:grid-cols-3",
+          "faixa-rolagem -mb-2 mt-[var(--space-2xl)] flex snap-x snap-mandatory gap-[var(--gap-columns)] overflow-x-auto overscroll-x-contain py-2",
+          FOCO,
         )}
       >
         {projetos.map((p) => (
