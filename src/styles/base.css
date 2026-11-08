@@ -73,3 +73,38 @@ button, input, select, textarea { font: inherit; }
   .caso:hover, .caso:focus-within { transform: none; }
   .caso-situacao-ponto.vivo { animation: none !important; }
 }
+
+/* ——— Problemas, Rotinas e Fases com entrada pelo scroll (2026-11-08) ———
+   Só esconde com JS ativo (.js no <html>); sem JS, tudo aparece pronto. */
+.entra { transition: opacity 600ms var(--ease-out) var(--atraso, 0ms), transform 700ms var(--ease-out) var(--atraso, 0ms); }
+.js .entra:not([data-visto]) { opacity: 0; transform: translateY(18px); }
+.regua-desenha { transform-origin: left; transition: transform 900ms var(--ease-in-out) var(--atraso, 0ms), background-color 900ms; }
+.js .entra:not([data-visto]) .regua-desenha { transform: scaleX(0); background-color: var(--color-accent); }
+[data-visto] .icone-pula { animation: icone-pula 650ms var(--ease-out) calc(var(--atraso, 0ms) + 250ms) both; }
+@keyframes icone-pula { 0% { transform: scale(0.4); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); } }
+
+.rotina-exemplo { display: grid; grid-template-rows: 1fr; transition: grid-template-rows 650ms var(--ease-out) var(--atraso, 0ms), opacity 500ms var(--ease-out) calc(var(--atraso, 0ms) + 120ms); }
+.js .rotina:not([data-aberto]) .rotina-exemplo { grid-template-rows: 0fr; opacity: 0; }
+.rotina-num { transition: transform var(--dur-short) var(--ease-out); display: inline-block; }
+.rotina:hover .rotina-num { transform: translateX(4px); }
+
+.fase h3, .fase > p, .fase-folha { transition: opacity 600ms var(--ease-out) var(--atraso-fase, 0ms), border-color 600ms var(--ease-out) var(--atraso-fase, 0ms), box-shadow 600ms var(--ease-out) var(--atraso-fase, 0ms); }
+.fase-circulo { transition: background-color 400ms var(--ease-out) var(--atraso-fase, 0ms), color 400ms var(--ease-out) var(--atraso-fase, 0ms), box-shadow 600ms var(--ease-out) var(--atraso-fase, 0ms); }
+@media (min-width: 64rem) { .fase { --atraso-fase: calc(var(--ordem, 0) * 380ms); } }
+.js .fase:not([data-ativa]) h3, .js .fase:not([data-ativa]) > p, .js .fase:not([data-ativa]) .fase-folha { opacity: 0.35; }
+.fase[data-ativa] .fase-circulo { background-color: var(--color-accent); color: var(--color-accent-ink); box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-accent) 16%, transparent); }
+.fase[data-ativa] .fase-folha { border-color: color-mix(in oklab, var(--color-accent) 45%, var(--color-rule-strong)); box-shadow: 0 14px 30px -22px color-mix(in oklab, var(--color-accent) 70%, transparent); }
+.fase-carimbo { transform: rotate(-2deg); }
+.js .fase:not([data-ativa]) .fase-carimbo { opacity: 0; }
+.fase[data-ativa] .fase-carimbo { animation: carimbo 480ms cubic-bezier(.3,1.6,.5,1) calc(var(--atraso-fase, 0ms) + 350ms) both; }
+@keyframes carimbo { 0% { opacity: 0; transform: scale(1.7) rotate(-14deg); } 100% { opacity: 1; transform: scale(1) rotate(-2deg); } }
+.fase[data-ativa] .fase-losango { animation: losango 1.2s var(--ease-out) calc(var(--atraso-fase, 0ms) + 600ms) both; }
+@keyframes losango { 0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-accent) 55%, transparent); } 100% { box-shadow: 0 0 0 10px color-mix(in oklab, var(--color-accent) 0%, transparent); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .entra:not([data-visto]) { opacity: 1; transform: none; }
+  .js .entra:not([data-visto]) .regua-desenha { transform: none; background-color: var(--color-rule-strong); }
+  .js .rotina:not([data-aberto]) .rotina-exemplo { grid-template-rows: 1fr; opacity: 1; }
+  .js .fase:not([data-ativa]) h3, .js .fase:not([data-ativa]) > p, .js .fase:not([data-ativa]) .fase-folha, .js .fase:not([data-ativa]) .fase-carimbo { opacity: 1; }
+  [data-visto] .icone-pula, .fase[data-ativa] .fase-carimbo, .fase[data-ativa] .fase-losango { animation: none; }
+}

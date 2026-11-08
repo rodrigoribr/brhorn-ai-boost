@@ -39,34 +39,35 @@ export interface Fase {
 // Sem prazo no site (decisão de 2026-11-05): cada empresa tem o seu tempo e a sua estrutura de dados.
 // O prazo de cada fase é combinado com o cliente, não prometido aqui.
 
+// Genérico desde 2026-11-08: serve tanto para um agente da empresa quanto para o agente pessoal do dono.
 export const FASES: Fase[] = [
   {
     numero: "01",
     nome: "Diagnóstico",
     texto:
-      "Converso com cada área para mapear as rotinas repetitivas, o volume e o tempo gasto. Também mostro onde um agente não compensa.",
-    entrega: "Mapa de oportunidades priorizado por esforço e retorno",
+      "Entendo a rotina, seja de uma área da empresa ou a sua: o que se repete, quanto tempo leva e onde um agente não compensa.",
+    entrega: "Mapa do que vale passar para um agente, por esforço e retorno",
   },
   {
     numero: "02",
     nome: "Projeto",
     texto:
-      "Para a oportunidade escolhida: que dados o agente usa, com que ferramentas conversa, quem aprova o quê e como medir o sucesso.",
+      "Defino o que o agente lê, com quais ferramentas conversa, o que faz sozinho e o que passa por uma pessoa antes de sair.",
     entrega: "Especificação do agente e critério de sucesso por escrito",
   },
   {
     numero: "03",
     nome: "Piloto",
     texto:
-      "O agente entra em um processo real, com uma equipe real, pelo tempo combinado no projeto. Meço tempo, erros e uso, comparando com o antes.",
-    entrega: "Agente funcionando e relatório com o resultado medido",
+      "O agente entra na rotina real, pelo tempo combinado. Acompanho o uso, os erros e o tempo economizado, comparando com o antes.",
+    entrega: "Agente funcionando e o resultado medido",
   },
   {
     numero: "04",
-    nome: "Escala",
+    nome: "Rotina",
     texto:
-      "Com o piloto aprovado, o agente se estende a outras áreas, com treinamento, política de uso de IA e acompanhamento.",
-    entrega: "Agentes em produção, equipe treinada e regras de uso",
+      "Aprovado o piloto, o agente vira parte do dia a dia: ajustes, novas tarefas ou outras áreas, com treinamento e regras de uso.",
+    entrega: "Agente em uso, quem usa treinado e regras por escrito",
   },
 ];
 
