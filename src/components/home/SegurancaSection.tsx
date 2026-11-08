@@ -1,7 +1,7 @@
 import { Cabeca, Secao } from "@/components/home/Titulos";
 import { LIMITES_LINHA, OPCAO_LOCAL, SEGURANCA } from "@/content/consultoriaAgentes";
 
-// A única faixa escura da página. As garantias são linhas de uma tabela: o compromisso à esquerda, o como à direita.
+// Faixa escura (a outra é Casos). As garantias são linhas de uma tabela: o compromisso à esquerda, o como à direita.
 export const SegurancaSection = () => (
   <Secao id="seguranca" tom="noite">
     <Cabeca id="seguranca" titulo="Os dados da empresa continuam da empresa." noite />

@@ -23,5 +23,53 @@ button, input, select, textarea { font: inherit; }
 @media (max-width: 60rem) { :root { --gutter: 24px; --section-gap-s: 80px; --section-gap: 96px; --section-gap-l: 120px; } }
 @media (max-width: 40rem) { :root { --gutter: 16px; --section-gap-s: 56px; --section-gap: 72px; --section-gap-l: 96px; --gap-columns: 16px; } }
 @media (prefers-reduced-motion: reduce) { *:not(.keep-motion), *:not(.keep-motion)::before, *:not(.keep-motion)::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
-.faixa-rolagem { scrollbar-width: none; }
+.faixa-rolagem { scrollbar-width: none; contain: paint; } /* sem o contain, o Chrome soma a faixa à largura da página no celular */
 .faixa-rolagem::-webkit-scrollbar { display: none; }
+
+/* ——— Casos em faixa escura (2026-11-08) ———
+   Cada card tem a sua cor (--cor) e o roteiro "acende" em sequência, como a faixa de luz do logo.
+   --luz (0 a 1) é animada por passo; o ponto e o texto leem dela. Só roda com a faixa na tela. */
+@property --luz { syntax: "<number>"; inherits: true; initial-value: 0; }
+.caso { --cor: var(--color-night-accent); transition: transform var(--dur-short) var(--ease-out), border-color var(--dur-short), box-shadow var(--dur-long) var(--ease-out); }
+.caso:hover, .caso:focus-within { transform: translateY(-4px); border-color: color-mix(in oklab, var(--cor) 55%, var(--color-night-rule)); box-shadow: 0 24px 48px -28px color-mix(in oklab, var(--cor) 70%, transparent); }
+.caso-midia { position: relative; background:
+  radial-gradient(110% 120% at 0% 0%, color-mix(in oklab, var(--cor) 26%, transparent), transparent 62%),
+  radial-gradient(70% 90% at 100% 100%, color-mix(in oklab, var(--cor) 12%, transparent), transparent 70%),
+  var(--color-night); }
+.caso-midia::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity var(--dur-long) var(--ease-out);
+  background: radial-gradient(90% 100% at 20% 0%, color-mix(in oklab, var(--cor) 22%, transparent), transparent 70%); }
+.caso:hover .caso-midia::after { opacity: 1; }
+.caso-barra { height: 2px; background: linear-gradient(90deg, var(--cor), color-mix(in oklab, var(--cor) 0%, transparent)); }
+
+.roteiro { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.roteiro::before, .roteiro::after { content: ""; position: absolute; top: 7px; left: 7px; height: 2px; border-radius: 2px; }
+.roteiro::before { width: calc(66.667% - 2px); background: var(--color-night-rule); }
+.roteiro::after { width: 0; background: linear-gradient(90deg, color-mix(in oklab, var(--cor) 30%, transparent), var(--cor)); box-shadow: 0 0 12px var(--cor); }
+.roteiro li { padding-right: var(--space-sm); }
+.roteiro-ponto { display: block; width: 16px; height: 16px; border-radius: 999px; position: relative; z-index: 1;
+  border: 2px solid color-mix(in oklab, var(--cor) calc(var(--luz) * 100%), var(--color-night-rule));
+  background: color-mix(in oklab, var(--cor) calc(var(--luz) * 100%), var(--color-night));
+  box-shadow: 0 0 0 calc(var(--luz) * 5px) color-mix(in oklab, var(--cor) 22%, transparent), 0 0 calc(var(--luz) * 18px) color-mix(in oklab, var(--cor) calc(var(--luz) * 80%), transparent); }
+.roteiro-num { color: color-mix(in oklab, var(--cor) calc(40% + var(--luz) * 60%), var(--color-night-muted)); }
+.roteiro-texto { color: color-mix(in oklab, var(--color-night-ink) calc(55% + var(--luz) * 45%), var(--color-night-muted)); }
+
+.rodando .roteiro li:nth-child(1) { animation: luz-1 5.4s var(--ease-in-out) infinite; }
+.rodando .roteiro li:nth-child(2) { animation: luz-2 5.4s var(--ease-in-out) infinite; }
+.rodando .roteiro li:nth-child(3) { animation: luz-3 5.4s var(--ease-in-out) infinite; }
+.rodando .roteiro::after { animation: trilho 5.4s var(--ease-in-out) infinite; }
+.rodando .roteiro li, .rodando .roteiro::after { animation-delay: var(--atraso, 0s) !important; }
+@keyframes luz-1 { 0%, 4% { --luz: 0; } 9%, 80% { --luz: 1; } 92%, 100% { --luz: 0; } }
+@keyframes luz-2 { 0%, 30% { --luz: 0; } 35%, 80% { --luz: 1; } 92%, 100% { --luz: 0; } }
+@keyframes luz-3 { 0%, 56% { --luz: 0; } 61%, 80% { --luz: 1; } 92%, 100% { --luz: 0; } }
+@keyframes trilho { 0%, 6% { width: 0; opacity: 1; } 58% { width: calc(66.667% - 2px); opacity: 1; } 80% { width: calc(66.667% - 2px); opacity: 1; } 92%, 100% { width: calc(66.667% - 2px); opacity: 0; } }
+
+.caso-situacao-ponto { width: 7px; height: 7px; border-radius: 999px; background: var(--cor); }
+.caso-situacao-ponto.vivo { box-shadow: 0 0 0 0 color-mix(in oklab, var(--cor) 60%, transparent); animation: vivo 2.2s var(--ease-out) infinite; }
+@keyframes vivo { 0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--cor) 60%, transparent); } 70%, 100% { box-shadow: 0 0 0 8px color-mix(in oklab, var(--cor) 0%, transparent); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .roteiro li { --luz: 1; animation: none !important; }
+  .roteiro::after { width: calc(66.667% - 2px); animation: none !important; }
+  .caso:hover, .caso:focus-within { transform: none; }
+  .caso-situacao-ponto.vivo { animation: none !important; }
+}
