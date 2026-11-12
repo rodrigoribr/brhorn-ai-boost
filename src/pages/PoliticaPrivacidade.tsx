@@ -1,14 +1,15 @@
 import { LinkEmail, LinkPagina, PaginaLegal } from "@/components/PaginaLegal";
+import { reabrirAviso } from "@/lib/consentimento";
 
 // Reflete o que o site coleta de fato: ContactModal e CallModal (Edge Functions → Supabase contact_leads),
-// Meta Pixel e Google Fonts (index.html). Mudou a coleta ou um fornecedor? Atualize esta página e a data.
+// Meta Pixel (só com consentimento, src/lib/consentimento.ts), Vercel Web Analytics e Google Fonts. Mudou a coleta ou um fornecedor? Atualize esta página e a data.
 // DEV-0004: a seção "Chat de diagnóstico" e a linha do provedor de IA foram aprovadas pelo Rodrigo em
 // 2026-11-05 e estão no ar com o chat. Voz da empresa (a brhorn), como os Termos de Uso, desde 2026-11-05.
 const PoliticaPrivacidade = () => (
   <PaginaLegal
     titulo="Política de Privacidade"
     resumo="Este site coleta só o necessário para responder a quem entra em contato. Aqui está o que é coletado, para quê, com quem é compartilhado e como pedir a exclusão."
-    atualizacao="5 de novembro de 2026"
+    atualizacao="12 de novembro de 2026"
     secoes={[
       {
         titulo: "Quem é o responsável",
@@ -36,9 +37,10 @@ const PoliticaPrivacidade = () => (
               registram o endereço IP e o tipo de navegador de cada acesso, para funcionar e se proteger de abusos.
             </li>
             <li>
-              <strong className="font-medium text-t-ink">Medição de visitas e anúncios:</strong> o Meta Pixel registra
-              visitas e cliques de contato por meio de cookies, para medir o resultado de anúncios no Facebook e no
-              Instagram.
+              <strong className="font-medium text-t-ink">Medição de visitas e anúncios:</strong> a Vercel conta as visitas
+              sem cookies e sem identificar você (páginas vistas, de onde veio, país e tipo de aparelho). Se você
+              aceitar no aviso de cookies, o Meta Pixel também registra visitas e cliques de contato por meio de
+              cookies, para medir o resultado de anúncios no Facebook e no Instagram.
             </li>
           </ul>
         ),
@@ -98,10 +100,10 @@ const PoliticaPrivacidade = () => (
           <>
             <p>A brhorn não vende dados. Eles passam apenas pelos fornecedores que fazem o site funcionar:</p>
             <ul className="mt-3 list-disc space-y-2 pl-5">
-              <li>Vercel, que hospeda o site;</li>
+              <li>Vercel, que hospeda o site e conta as visitas;</li>
               <li>Supabase, banco de dados onde ficam os contatos enviados pelo formulário e os pedidos de ligação;</li>
               <li>Google Fonts, de onde o site carrega as fontes, o que envia o seu endereço IP ao Google;</li>
-              <li>Meta, pelo Pixel, e o WhatsApp, quando você escolhe conversar por lá;</li>
+              <li>Meta, pelo Pixel (só se você aceitar os cookies), e o WhatsApp, quando você escolhe conversar por lá;</li>
               <li>OpenAI, provedor de IA que processa as mensagens do chat de diagnóstico.</li>
             </ul>
             <p className="mt-3">
@@ -123,8 +125,27 @@ const PoliticaPrivacidade = () => (
       },
       {
         titulo: "Cookies e como bloquear",
-        texto:
-          "O site não usa cookies de login. Os cookies do Meta Pixel podem ser bloqueados nas configurações do seu navegador ou nas preferências de anúncios da sua conta Meta. O site continua funcionando normalmente sem eles.",
+        texto: (
+          <>
+            <p>
+              O site não usa cookies de login. Os únicos cookies que não são necessários para o site funcionar são os
+              do Meta Pixel, e eles só são ativados se você clicar em "Aceitar" no aviso de cookies. A sua escolha
+              fica guardada no seu navegador. O site funciona igual sem eles.
+            </p>
+            <p className="mt-3">
+              Para mudar de ideia,{" "}
+              <button
+                type="button"
+                onClick={reabrirAviso}
+                className="rounded-[var(--radius-control)] text-t-ink underline underline-offset-4 transition-colors duration-micro hover:text-t-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-focus)]"
+              >
+                reveja a sua escolha de cookies
+              </button>
+              . Você também pode bloquear cookies nas configurações do seu navegador ou nas preferências de anúncios
+              da sua conta Meta.
+            </p>
+          </>
+        ),
       },
       {
         titulo: "Dados de clientes em projetos",

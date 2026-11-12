@@ -14,6 +14,7 @@ import ViaSerraPage from "./pages/ViaSerraPage";
 import ConfiguracaoAgentes from "./pages/ConfiguracaoAgentes";
 import DiagnosticoChat from "@/components/diagnostico/DiagnosticoChat";
 import { BotaoDiagnosticoFixo } from "@/components/diagnostico/BotaoDiagnostico";
+import AvisoCookies from "@/components/AvisoCookies";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,8 @@ const App = () => (
         <DiagnosticoChat />
         {/* DEV-0005: botão fixo "Fazer diagnóstico" (WhatsApp até o chat ir ao ar) */}
         <BotaoDiagnosticoFixo />
+        {/* Consentimento do Meta Pixel; enquanto aberto, o botão fixo some para não sobrepor */}
+        <AvisoCookies />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

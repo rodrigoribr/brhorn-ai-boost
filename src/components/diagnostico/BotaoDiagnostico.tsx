@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { useLocation } from "react-router-dom";
+import { useAvisoAberto } from "@/components/AvisoCookies";
 import { ArrowRight, MessageSquareText } from "lucide-react";
 import { whatsappLink } from "@/lib/contato";
 import { abrirDiagnostico } from "./abrir";
@@ -54,7 +55,8 @@ const SEM_BOTAO_FIXO = ["/politica-privacidade", "/termos-uso", "/exclusao-dados
 
 export const BotaoDiagnosticoFixo = () => {
   const { pathname } = useLocation();
-  if (SEM_BOTAO_FIXO.includes(pathname)) return null;
+  const avisoAberto = useAvisoAberto();
+  if (SEM_BOTAO_FIXO.includes(pathname) || avisoAberto) return null;
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6 sm:pb-6">
       <BotaoDiagnostico
