@@ -7,7 +7,7 @@ interface SecaoProps {
   id: string;
   children: ReactNode;
   className?: string;
-  /** "noite" = faixa escura (Casos e Segurança). */
+  /** "noite" = faixa escura. */
   tom?: "papel" | "papel2" | "noite";
 }
 

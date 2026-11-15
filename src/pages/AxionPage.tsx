@@ -7,14 +7,13 @@ import Footer, { FechoCarta } from "@/components/Footer";
 import { CLASSE_LINK_TEXTO } from "@/components/home/classes";
 import { useContactIntent } from "@/hooks/use-contact-intent";
 import { usePageTitle } from "@/hooks/use-page-title";
-import { BotaoDiagnostico, CHAT_ATIVO, CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
-import { whatsappLink } from "@/lib/contato";
+import { BotaoDiagnostico, CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
 import "./axion.css";
 
 const MSG_WHATSAPP = "Olá! Vi o Axion no site da brhorn e quero saber como usá-lo para receber pedidos dos meus revendedores.";
 
 const AxionPage = () => {
-  const { isContactOpen, isCallOpen, closeContact, closeCall, openContact, trackWhatsapp } = useContactIntent();
+  const { isContactOpen, contactSource, isCallOpen, closeContact, closeCall, openContact, trackWhatsapp } = useContactIntent();
   usePageTitle("Axion · Pedidos de revendedores pelo WhatsApp · brhorn");
 
   return (
@@ -49,27 +48,16 @@ const AxionPage = () => {
               <a href="#como-funciona" className={`${CLASSE_BOTAO_PRIMARIO} gap-2`}>
                 Ver o pedido acontecer <ArrowDown size={18} aria-hidden="true" />
               </a>
-              {CHAT_ATIVO ? (
-                <BotaoDiagnostico origem="axion_hero" className={`${CLASSE_LINK_TEXTO} min-h-11`}>
-                  Conversar sobre o Axion
-                </BotaoDiagnostico>
-              ) : (
-                <a
-                  href={whatsappLink(MSG_WHATSAPP)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${CLASSE_LINK_TEXTO} min-h-11`}
-                  onClick={() => trackWhatsapp("axion_hero")}
-                >
-                  Conversar sobre o Axion
-                </a>
-              )}
+              <BotaoDiagnostico origem="axion_hero" className={`${CLASSE_LINK_TEXTO} min-h-11`} mensagemWhatsapp={MSG_WHATSAPP}>
+                Conversar sobre o Axion
+              </BotaoDiagnostico>
             </div>
           </div>
         </section>
 
         <AxionDemo />
         <AxionPainel />
+
       </main>
       <Footer>
         <FechoCarta
@@ -80,7 +68,7 @@ const AxionPage = () => {
           onFormClick={() => openContact("axion_final_form")}
         />
       </Footer>
-      <ContactModal isOpen={isContactOpen} onClose={closeContact} />
+      <ContactModal isOpen={isContactOpen} source={contactSource} onClose={closeContact} />
       <CallModal isOpen={isCallOpen} onClose={closeCall} />
     </div>
   );

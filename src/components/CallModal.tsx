@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { registrarContato } from "@/lib/consentimento";
 import { useToast } from "@/hooks/use-toast";
 import { CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
 import { CLASSE_BOTAO_SECUNDARIO } from "@/components/home/classes";
@@ -14,6 +15,7 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({ name: "", phone: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitting = useRef(false);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -21,6 +23,8 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting.current) return;
+    submitting.current = true;
     setIsSubmitting(true);
 
     try {
@@ -38,13 +42,11 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
         }),
       });
 
-      if (!response.ok) {
+      if (!response.ok || (await response.json())?.success !== true) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      if (window.fbq) {
-        window.fbq("track", "Lead");
-      }
+      registrarContato("Lead", "hero_ligacao", "ligacao");
 
       toast({
         title: "Pedido enviado!",
@@ -61,6 +63,7 @@ const CallModal = ({ isOpen, onClose }: CallModalProps) => {
         variant: "destructive",
       });
     } finally {
+      submitting.current = false;
       setIsSubmitting(false);
     }
   };

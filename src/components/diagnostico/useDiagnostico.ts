@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from "react";
+import { registrarContato } from "@/lib/consentimento";
 import { apiDiagnostico, ErroChat, type Inicio } from "./api";
 
 export type Fase = "carregando" | "aceite" | "conversa" | "fim" | "erro";
@@ -20,6 +21,8 @@ export function useDiagnostico() {
   const [erro, setErro] = useState<string | null>(null);
   const sessao = useRef<string | null>(null);
   const seq = useRef(0);
+  const origemChat = useRef("");
+  const enviandoMensagem = useRef(false);
 
   const acrescentar = (autor: Mensagem["autor"], texto: string) =>
     setMensagens((m) => [...m, { id: ++seq.current, autor, texto }]);
@@ -30,7 +33,8 @@ export function useDiagnostico() {
     if (fatal || (e instanceof ErroChat && [404, 409].includes(e.status))) setFase("erro");
   };
 
-  const abrir = useCallback(async () => {
+  const abrir = useCallback(async (origem: string) => {
+    origemChat.current = origem;
     sessao.current = null;
     setMensagens([]);
     setErro(null);
@@ -67,27 +71,33 @@ export function useDiagnostico() {
 
   const enviar = useCallback(async (texto: string) => {
     const t = texto.trim();
-    if (!t || !sessao.current) return false;
+    const id = sessao.current;
+    if (!t || !id || enviandoMensagem.current) return false;
+    enviandoMensagem.current = true;
     setEnviando(true);
     setErro(null);
     acrescentar("visitante", t);
     try {
-      const p = await apiDiagnostico.enviar(sessao.current, t);
+      const p = await apiDiagnostico.enviar(id, t);
+      if (sessao.current !== id) return false;
       acrescentar("agente", p.mensagem);
       setEtapa(p.etapa);
       setTotal(p.total_etapas);
       setOpcoes(p.fim ? undefined : p.opcoes);
       if (p.fim) {
         setFase("fim");
-        if (p.resumo && window.fbq) window.fbq("track", "Lead");
+        sessao.current = null;
+        if (p.resumo) registrarContato("Lead", origemChat.current, "chat");
       }
       return true;
     } catch (e) {
+      if (sessao.current !== id) return false;
       // A mensagem não foi aceita: tira da tela para o visitante reenviar.
       setMensagens((m) => m.slice(0, -1));
       falhar(e, false);
       return false;
     } finally {
+      enviandoMensagem.current = false;
       setEnviando(false);
     }
   }, []);

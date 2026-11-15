@@ -1,49 +1,59 @@
 import { PhoneCall } from "lucide-react";
-import { BotaoDiagnostico, CLASSE_BOTAO_PRIMARIO, ConteudoBotao } from "@/components/diagnostico/BotaoDiagnostico";
+import { BotaoDiagnostico, CHAT_ATIVO, CLASSE_BOTAO_PRIMARIO, ConteudoBotao } from "@/components/diagnostico/BotaoDiagnostico";
 import { ABERTURA } from "@/content/consultoriaAgentes";
-import { CLASSE_BOTAO_SECUNDARIO } from "@/components/home/classes";
+import { CLASSE_LINK_TEXTO } from "@/components/home/classes";
+import { HeroEscritorio } from "@/components/home/HeroEscritorio";
+import { CONTATO_ROTINA_WHATSAPP } from "@/lib/contato";
 
 interface HeroSectionProps {
   onCallClick: () => void;
   onFormClick: () => void;
 }
 
-// Hero Banner: uma coluna, cerca de metade da tela; a primeira seção aparece embaixo.
 export const HeroSection = ({ onCallClick, onFormClick }: HeroSectionProps) => (
   <section aria-labelledby="hero-titulo" className="bg-t-paper">
-    <div className="mx-auto flex max-w-[var(--container)] flex-col justify-center px-[var(--gutter)] pb-[var(--space-2xl)] pt-[var(--space-xl)] lg:min-h-[52vh] lg:py-[var(--space-2xl)]">
-      <div className="min-w-0">
+    <div className="mx-auto grid max-w-[var(--container)] items-center gap-y-4 px-[var(--gutter)] pb-5 pt-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,5fr)] lg:py-5">
+      <div className="hero-escritorio-texto relative z-10 min-w-0">
         <h1
           id="hero-titulo"
-          className="max-w-[14ch] font-display text-[length:var(--text-display)] font-normal leading-[1.04] tracking-[var(--tracking-display)] text-t-ink"
+          className="max-w-[18ch] font-display text-[length:var(--text-display-hero)] font-normal leading-[1.04] tracking-[var(--tracking-display)] text-t-ink"
         >
-          {ABERTURA.titulo}
+          {ABERTURA.titulo[0]} <span className="text-t-accent block">{ABERTURA.titulo[1]}</span>
         </h1>
 
-        <p className="lead mt-[var(--space-lg)] text-t-muted">{ABERTURA.frase}</p>
+        <p className="lead mt-5 text-t-muted">{ABERTURA.frase}</p>
 
-        <div className="mt-[var(--space-xl)] flex flex-col gap-[var(--space-sm)] sm:flex-row">
-          <BotaoDiagnostico origem="hero" className={CLASSE_BOTAO_PRIMARIO}>
-            <ConteudoBotao />
+        <div className="mt-6 flex flex-col items-stretch sm:items-start">
+          <BotaoDiagnostico
+            origem="hero"
+            className={`${CLASSE_BOTAO_PRIMARIO} px-3 text-sm sm:px-6 sm:text-base`}
+            mensagemWhatsapp={CONTATO_ROTINA_WHATSAPP.mensagem}
+            descricao="primeira-conversa"
+          >
+            <ConteudoBotao>{CHAT_ATIVO ? "Conversar pelo chat" : CONTATO_ROTINA_WHATSAPP.rotulo}</ConteudoBotao>
           </BotaoDiagnostico>
-          <button type="button" onClick={onCallClick} className={CLASSE_BOTAO_SECUNDARIO}>
-            <PhoneCall className="mr-2 h-4 w-4" aria-hidden="true" />
-            Prefiro que me liguem
-          </button>
         </div>
 
-        <p className="mt-[var(--space-md)] text-sm text-t-muted">
-          Ou{" "}
+        <p id="primeira-conversa" className="mt-[var(--space-sm)] max-w-[52ch] text-sm text-t-muted">
+          {ABERTURA.primeiraConversa}
+        </p>
+
+        <div className="mt-2 flex flex-wrap gap-x-5 text-sm">
+          <button type="button" onClick={onCallClick} className={`${CLASSE_LINK_TEXTO} min-h-11`}>
+            <PhoneCall className="h-4 w-4" aria-hidden="true" />
+            Prefiro que me liguem
+          </button>
           <button
             type="button"
             onClick={onFormClick}
-            className="whitespace-nowrap rounded-[var(--radius-control)] text-t-ink underline underline-offset-4 hover:text-t-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-focus)]"
+            className={`${CLASSE_LINK_TEXTO} min-h-11`}
           >
-            descreva o seu caso por escrito
+            Descrever por escrito
           </button>
-          . Respondo em até 1 dia útil.
-        </p>
+        </div>
       </div>
+
+      <HeroEscritorio />
     </div>
   </section>
 );

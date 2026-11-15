@@ -3,7 +3,6 @@
  * axes: light/geometric-sans/cool · posture: paper · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P3 H3 E3 S3 R3 V3 · weakest: R, o retrato de quem faz ainda é um espaço vazio à espera da foto */
 /* Hallmark · waive 80 · figure.m-0 dentro do link brhorn, página inicial · é o logo brhorn animado no cabeçalho, não uma ilustração */
-/* Hallmark · waive 81 · div[data-slot=retrato] em Quem faz · espera o retrato do Rodrigo Brasil, engenheiro; o monograma fica até a foto chegar */
 /* Hallmark · waive 39b · button.whitespace-nowrap descreva o seu caso por escrito · link no meio da frase do hero, não um controle solto */
 /* Hallmark · pages: / (hero Banner), /axion, /viaserra, /configuracao-de-agentes (hero Stage: o texto e a demonstração do sistema) · as páginas internas usam components/paginas/Blocos */
 /* Hallmark · reworded headings: os h3 de Segurança, Painel, Supervisão e Privacidade viraram dt em tabelas de duas colunas; o texto de todos ficou igual */
@@ -93,17 +92,8 @@
 .animate-percorrer { animation: percorrer 4.8s linear infinite; }
 @keyframes digitando { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
 .animate-digitando { animation: digitando 1.2s ease-in-out infinite; }
-/* Cronograma das fases: o trilho se desenha quando a seção entra na tela (vertical no celular, horizontal no desktop). */
-.fase-trilho { transform-origin: top; transition: transform 1s cubic-bezier(.45,.05,.25,1); }
-.js .revelar:not(.visivel) .fase-trilho { transform: scaleY(0); }
-@media (min-width: 64rem) {
-  .fase-trilho { transform-origin: left; }
-  .js .revelar:not(.visivel) .fase-trilho { transform: scaleX(0); }
-}
 @media (prefers-reduced-motion: reduce) {
   .js .revelar:not(.visivel) { opacity: 1; transform: none; }
   .revelar { transition: none; }
-  .js .revelar:not(.visivel) .fase-trilho { transform: none; }
-  .fase-trilho { transition: none; }
   .animate-surgir, .animate-crescer, .animate-percorrer, .animate-digitando { animation: none; }
 }

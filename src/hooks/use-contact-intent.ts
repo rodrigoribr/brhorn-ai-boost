@@ -1,21 +1,20 @@
 import { useState } from "react";
+import { registrarContato } from "@/lib/consentimento";
 
 // Estado dos modais de contato + evento do Meta Pixel no clique do WhatsApp.
 // O aviso ao n8n (webhook CTA_site_brhorn) saiu em 2026-10-20: o fluxo estava desativado e gravava IP.
 export const useContactIntent = () => {
-  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [contactSource, setContactSource] = useState<string | null>(null);
   const [isCallOpen, setIsCallOpen] = useState(false);
 
   return {
-    isContactOpen,
+    isContactOpen: contactSource !== null,
+    contactSource,
     isCallOpen,
-    closeContact: () => setIsContactOpen(false),
+    closeContact: () => setContactSource(null),
     closeCall: () => setIsCallOpen(false),
-    // A origem segue no parâmetro para quando o rastreio por botão voltar.
-    openContact: (_source: string) => setIsContactOpen(true),
+    openContact: (source: string) => setContactSource(source),
     openCall: () => setIsCallOpen(true),
-    trackWhatsapp: (_source: string) => {
-      window.fbq?.("track", "Contact");
-    },
+    trackWhatsapp: (source: string) => registrarContato("Contact", source, "whatsapp"),
   };
 };

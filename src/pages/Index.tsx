@@ -1,45 +1,49 @@
 import { SiteHeader } from "@/components/home/SiteHeader";
 import { HeroSection } from "@/components/home/HeroSection";
-import { ProblemasSection } from "@/components/home/ProblemasSection";
-import { AreasSection } from "@/components/home/AreasSection";
 import { FasesSection } from "@/components/home/FasesSection";
-import { SegurancaSection } from "@/components/home/SegurancaSection";
 import { CasosSection } from "@/components/home/CasosSection";
-import { QuemFazSection } from "@/components/home/QuemFazSection";
+import { RotinaDemo } from "@/components/home/RotinaDemo";
 import ContactModal from "@/components/ContactModal";
 import CallModal from "@/components/CallModal";
 import Footer, { FechoCarta } from "@/components/Footer";
+import { FECHO } from "@/content/consultoriaAgentes";
+import { CONTATO_ROTINA_WHATSAPP } from "@/lib/contato";
 import { useContactIntent } from "@/hooks/use-contact-intent";
 
 const Index = () => {
-  const { isContactOpen, isCallOpen, closeContact, closeCall, openContact, openCall, trackWhatsapp } =
+  const { isContactOpen, contactSource, isCallOpen, closeContact, closeCall, openContact, openCall, trackWhatsapp } =
     useContactIntent();
 
   return (
     <div className="min-h-screen bg-t-paper font-sans text-t-ink">
-      <SiteHeader />
-      <main>
+      <a
+        href="#conteudo"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-50 focus:bg-t-paper focus:px-4 focus:py-3 focus:text-t-ink"
+      >
+        Pular para o conteúdo
+      </a>
+      <SiteHeader inicio />
+      <main id="conteudo" tabIndex={-1}>
         <HeroSection
           onCallClick={openCall}
           onFormClick={() => openContact("hero_form_link")}
         />
         <CasosSection />
-        <ProblemasSection />
-        <AreasSection />
+        <RotinaDemo />
         <FasesSection />
-        <SegurancaSection />
-        <QuemFazSection />
       </main>
       <Footer>
         <FechoCarta
-          titulo="Qual rotina da sua empresa você tiraria da mão da equipe primeiro?"
-          texto="Conte em poucas linhas. A primeira conversa é sem compromisso, e você sai dela sabendo se um agente resolve, quanto trabalho dá e por onde começar."
-          mensagemWhatsapp="Olá! Vim pelo site da brhorn e quero conversar sobre agentes de IA para a minha empresa."
+          titulo={FECHO.titulo}
+          texto={FECHO.texto}
+          mensagemWhatsapp={CONTATO_ROTINA_WHATSAPP.mensagem}
+          rotuloWhatsapp={CONTATO_ROTINA_WHATSAPP.rotulo}
+          origemWhatsapp="final_whatsapp"
           onWhatsappClick={() => trackWhatsapp("final_whatsapp")}
           onFormClick={() => openContact("final_form_button")}
         />
       </Footer>
-      <ContactModal isOpen={isContactOpen} onClose={closeContact} />
+      <ContactModal isOpen={isContactOpen} source={contactSource} onClose={closeContact} />
       <CallModal isOpen={isCallOpen} onClose={closeCall} />
     </div>
   );

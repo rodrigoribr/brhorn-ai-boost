@@ -1,6 +1,5 @@
 // Consentimento de cookies (LGPD, guia da ANPD de 2022). O único cookie que não é necessário é o do
-// Meta Pixel, então ele só carrega depois do "Aceitar". Antes disso window.fbq não existe, e todas as
-// chamadas do site (Lead, Contact) já usam window.fbq?.(...), então viram nada.
+// Meta Pixel, então ele só carrega depois do "Aceitar". Os eventos de contato também conferem a escolha atual.
 // O Vercel Web Analytics (main.tsx) não usa cookie e roda sempre.
 
 export type Escolha = "aceito" | "recusado";
@@ -44,6 +43,7 @@ export function reabrirAviso() {
     // ignora
   }
   escolhaDaSessao = null;
+  if (pixelCarregado) window.fbq?.("consent", "revoke");
   ouvintes.forEach((f) => f());
 }
 
@@ -51,6 +51,15 @@ let escolhaDaSessao: Escolha | null = typeof window === "undefined" ? null : ler
 
 export function escolhaAtual() {
   return escolhaDaSessao;
+}
+
+export function registrarContato(
+  evento: "Contact" | "Lead" | "ChatOpened",
+  origem: string,
+  tipo: "whatsapp" | "chat" | "formulario" | "ligacao",
+) {
+  if (escolhaAtual() !== "aceito") return;
+  window.fbq?.(evento === "ChatOpened" ? "trackCustom" : "track", evento, { origem, tipo });
 }
 
 export function ouvirEscolha(f: () => void) {

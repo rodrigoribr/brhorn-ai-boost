@@ -14,7 +14,7 @@ import "./viaserra.css";
 const MSG_WHATSAPP = "Olá! Vi o ViaSerra no site da brhorn e quero conversar sobre a gestão da minha pousada.";
 
 const ViaSerraPage = () => {
-  const { isContactOpen, isCallOpen, closeContact, closeCall, openContact, trackWhatsapp } = useContactIntent();
+  const { isContactOpen, contactSource, isCallOpen, closeContact, closeCall, openContact, trackWhatsapp } = useContactIntent();
   usePageTitle("ViaSerra · reservas e gestão de pousadas · brhorn");
 
   return (
@@ -80,7 +80,7 @@ const ViaSerraPage = () => {
           onFormClick={() => openContact("viaserra_final_form")}
         />
       </Footer>
-      <ContactModal isOpen={isContactOpen} onClose={closeContact} />
+      <ContactModal isOpen={isContactOpen} source={contactSource} onClose={closeContact} />
       <CallModal isOpen={isCallOpen} onClose={closeCall} />
     </div>
   );

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
+import { registrarContato } from "@/lib/consentimento";
 import { ArrowUp, Loader2 } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { LIMITE_TEXTO } from "./api";
@@ -39,7 +40,7 @@ function Progresso({ etapa, total }: { etapa: number; total: number }) {
 }
 
 const DiagnosticoChat = () => {
-  const [aberto, setAberto] = useState(false);
+  const [origem, setOrigem] = useState<string | null>(null);
   const [texto, setTexto] = useState("");
   const d = useDiagnostico();
   const fimDaLista = useRef<HTMLDivElement>(null);
@@ -47,19 +48,22 @@ const DiagnosticoChat = () => {
 
   // Abertura: evento global e, no teste da Fase 1, ?diagnostico=1.
   useEffect(() => {
-    const abrir = () => setAberto(true);
+    const abrir = (event: Event) => {
+      const origem = (event as CustomEvent<string>).detail;
+      setOrigem((atual) => atual ?? origem);
+    };
     window.addEventListener(EVENTO_ABRIR, abrir);
-    if (new URLSearchParams(window.location.search).get("diagnostico") === "1") abrir();
+    if (new URLSearchParams(window.location.search).get("diagnostico") === "1") setOrigem("link_direto");
     return () => window.removeEventListener(EVENTO_ABRIR, abrir);
   }, []);
 
   const { abrir } = d;
   useEffect(() => {
-    if (aberto) {
-      setTexto("");
-      void abrir();
-    }
-  }, [aberto, abrir]);
+    if (!origem) return;
+    registrarContato("ChatOpened", origem, "chat");
+    setTexto("");
+    void abrir(origem);
+  }, [origem, abrir]);
 
   useEffect(() => {
     fimDaLista.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -87,7 +91,7 @@ const DiagnosticoChat = () => {
   };
 
   return (
-    <Dialog open={aberto} onOpenChange={setAberto}>
+    <Dialog open={origem !== null} onOpenChange={(open) => { if (!open) setOrigem(null); }}>
       <DialogContent className="flex h-[100dvh] max-w-none flex-col gap-0 overflow-hidden rounded-none p-0 sm:h-[min(44rem,90vh)] sm:max-w-lg sm:rounded-[var(--radius-card)]">
         <header className="border-b border-t-rule px-[var(--space-lg)] pb-[var(--space-md)] pr-14 pt-[var(--space-lg)]">
           <DialogTitle className="text-[length:var(--text-xl)]">A rotina que mais toma tempo</DialogTitle>
@@ -124,7 +128,7 @@ const DiagnosticoChat = () => {
                 <button type="button" className={BOTAO_PRIMARIO} onClick={() => void d.aceitar()} disabled={d.enviando}>
                   {d.enviando ? <Loader2 className="h-4 w-4 animate-spin" /> : "Concordo e quero começar"}
                 </button>
-                <button type="button" className={BOTAO_SECUNDARIO} onClick={() => setAberto(false)} disabled={d.enviando}>
+                <button type="button" className={BOTAO_SECUNDARIO} onClick={() => setOrigem(null)} disabled={d.enviando}>
                   Agora não
                 </button>
               </div>
@@ -157,10 +161,10 @@ const DiagnosticoChat = () => {
             <div className="rounded-[var(--radius-card)] border border-t-rule bg-t-paper p-[var(--space-lg)]">
               <p className="text-t-ink">{d.erro}</p>
               <div className="mt-[var(--space-lg)] flex flex-col gap-[var(--space-sm)] sm:flex-row">
-                <button type="button" className={BOTAO_PRIMARIO} onClick={() => void d.abrir()}>
+                <button type="button" className={BOTAO_PRIMARIO} onClick={() => { if (origem) void d.abrir(origem); }}>
                   Começar de novo
                 </button>
-                <button type="button" className={BOTAO_SECUNDARIO} onClick={() => setAberto(false)}>
+                <button type="button" className={BOTAO_SECUNDARIO} onClick={() => setOrigem(null)}>
                   Fechar
                 </button>
               </div>
@@ -220,7 +224,7 @@ const DiagnosticoChat = () => {
 
         {d.fase === "fim" && (
           <footer className="border-t border-t-rule bg-t-paper px-[var(--space-md)] py-[var(--space-md)]">
-            <button type="button" className={`${BOTAO_PRIMARIO} w-full`} onClick={() => setAberto(false)}>
+            <button type="button" className={`${BOTAO_PRIMARIO} w-full`} onClick={() => setOrigem(null)}>
               Fechar
             </button>
           </footer>

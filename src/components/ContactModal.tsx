@@ -4,6 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import { CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
 import { CLASSE_BOTAO_SECUNDARIO } from "@/components/home/classes";
 import { CLASSE_CAMPO, Campo, NotaPrivacidade, TextoEnvio } from "@/components/formulario/Campo";
+import { registrarContato } from "@/lib/consentimento";
 
 const ASSUNTOS = [
   { valor: "agente-whatsapp", texto: "Agente no WhatsApp" },
@@ -17,11 +18,12 @@ const ASSUNTOS = [
 
 interface ContactModalProps {
   isOpen: boolean;
+  source?: string | null;
   onClose: () => void;
   onFormSubmit?: () => void;
 }
 
-const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
+const ContactModal = ({ isOpen, source, onClose, onFormSubmit }: ContactModalProps) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -65,14 +67,11 @@ const ContactModal = ({ isOpen, onClose, onFormSubmit }: ContactModalProps) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // Disparar evento de Lead no Facebook Pixel após sucesso
-      if (window.fbq) {
-        window.fbq('track', 'Lead');
-      }
+      if (source) registrarContato("Lead", source, "formulario");
 
       toast({
         title: "Solicitação enviada com sucesso!",
-        description: "Respondo em até 1 dia útil.",
+        description: "A brhorn responde em até 1 dia útil.",
       });
 
       // Reset form

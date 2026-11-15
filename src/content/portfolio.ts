@@ -1,13 +1,11 @@
-// Portfólio da home (cards com vídeo). Só fatos verificáveis no texto; o `roteiro` é o que o vídeo vai mostrar
-// e aparece no lugar dele enquanto o vídeo não existe.
+// Portfólio da home. As capas atuais mostram demonstrações ou ilustrações identificadas.
 //
 // Vídeo: coloque o arquivo em public/videos/ e preencha `video` (mp4 H.264, 8 a 15 s, sem som, 1280x800 ou
-// 16:10, até ~2 MB) e `poster` (o primeiro quadro em .jpg/.webp). Sem `video`, o card mostra o roteiro.
+// 16:10, até ~2 MB) e `poster` (o primeiro quadro em .jpg/.webp). O roteiro descreve o conteúdo do vídeo para leitores de tela.
 //
-// 🚫 O Agente BOM / wibom não entra (decisão de 2026-10-19, ligado à Versigent). O card "Leitura de documentos"
-// foi liberado pelo Rodrigo em 2026-11-05 com a condição: demonstração só com material próprio, nada da Versigent,
-// nada de chicote elétrico e sem o nome wibom.
-// Ordem = ordem da faixa da home. O agente pessoal vem primeiro (destaque pedido pelo Rodrigo em 2026-11-07).
+// 🚫 O Agente BOM / wibom não entra (decisão de 2026-10-19, ligado à Versigent).
+// A leitura de documentos aparece como capacidade do agente. Demonstrações usam só material próprio.
+// O agente de IA abre a faixa da home.
 // ViaSerra: o sistema NÃO fala com o hóspede; quem usa é o gestor da pousada, com login. O vídeo mostra o gestor.
 
 export interface Projeto {
@@ -15,7 +13,9 @@ export interface Projeto {
   nome: string;
   tipo: string;
   situacao: string;
-  texto: string;
+  capa?: { src: string; alt: string; ilustracao?: boolean };
+  detalhe?: { texto: string; area: readonly [number, number, number, number] };
+  destaque?: string;
   roteiro: [string, string, string];
   link?: { to: string; label: string };
   video?: string;
@@ -25,14 +25,18 @@ export interface Projeto {
 
 export const PROJETOS: Projeto[] = [
   {
-    id: "agente-pessoal",
-    nome: "Agente pessoal",
-    tipo: "Assistente do empresário",
+    id: "agente-ia",
+    nome: "Agente de IA",
+    tipo: "Lê documentos, confere dados e automatiza tarefas repetitivas.",
     situacao: "Serviço de configuração",
-    texto:
-      "Um agente nas suas contas e com os seus documentos: resumo da manhã, preparação de reuniões e rascunhos para você só revisar, com os mesmos cuidados de segurança.",
-    roteiro: ["Agenda e e-mails da manhã", "O que pede resposta, resumido", "Rascunho pronto para revisar"],
-    link: { to: "/configuracao-de-agentes", label: "Conhecer o agente pessoal" },
+    capa: {
+      src: "/projetos/agente-terceiro-turno.webp",
+      alt: "Um agente de IA trabalha à noite. O monitor mostra tarefas concluídas e uma exceção aguardando revisão.",
+      ilustracao: true,
+    },
+    detalhe: { texto: "Exceção separada para revisão", area: [48, 42, 35, 9] },
+    roteiro: ["Recebe tarefas e documentos", "Lê e confere os dados conforme as regras", "Separa exceções para revisão"],
+    link: { to: "/configuracao-de-agentes", label: "Ver serviço" },
     publicado: true,
   },
   {
@@ -40,10 +44,15 @@ export const PROJETOS: Projeto[] = [
     nome: "Axion",
     tipo: "Pedidos via WhatsApp com IA",
     situacao: "Piloto de 6 meses",
-    texto:
-      "Atendeu 50 revendedores de um produtor de queijos, de novembro de 2025 a maio de 2026: recebe o pedido no WhatsApp, confere catálogo, preço e regra comercial e organiza tudo num painel.",
-    roteiro: ["O revendedor pede pelo WhatsApp", "O agente confere e confirma", "O pedido entra no painel"],
-    link: { to: "/axion", label: "Ver o caso do Axion" },
+    capa: {
+      src: "/projetos/axion-expedicao.webp",
+      alt: "Um celular confirma um pedido ao lado de caixas e uma lista de itens numa mesa de expedição.",
+      ilustracao: true,
+    },
+    detalhe: { texto: "Confirmação do pedido", area: [57.5, 54, 15, 11.5] },
+    destaque: "50 revendedores no piloto",
+    roteiro: ["O revendedor pede pelo WhatsApp", "O agente confere e confirma", "O pedido fica registrado"],
+    link: { to: "/axion", label: "Ver caso" },
     publicado: true,
   },
   {
@@ -51,20 +60,14 @@ export const PROJETOS: Projeto[] = [
     nome: "ViaSerra",
     tipo: "Gestão de pousadas",
     situacao: "Em uso diário",
-    texto:
-      "Reservas, quartos, hóspedes e calendário de ocupação num sistema só, com privacidade e fluxos de LGPD documentados. Em uso diário por uma pousada.",
+    capa: {
+      src: "/projetos/viaserra-recepcao.webp",
+      alt: "Um calendário de ocupação no tablet, ao lado das chaves de uma pousada na serra.",
+      ilustracao: true,
+    },
+    detalhe: { texto: "Reserva no calendário", area: [61.4, 55.8, 9.6, 5.8] },
     roteiro: ["O gestor registra a reserva", "O calendário mostra a ocupação", "Lotação e receita no painel"],
-    link: { to: "/viaserra", label: "Ver o ViaSerra" },
-    publicado: true,
-  },
-  {
-    id: "documentos",
-    nome: "Leitura de documentos",
-    tipo: "Documentos técnicos em dados",
-    situacao: "Demonstração",
-    texto:
-      "PDFs com tabelas e desenhos de estruturas metálicas viram dados organizados, prontos para a planilha ou o sistema da empresa.",
-    roteiro: ["PDFs e tabelas soltos", "O agente lê e confere", "Dados estruturados na planilha"],
+    link: { to: "/viaserra", label: "Ver projeto" },
     publicado: true,
   },
 ];

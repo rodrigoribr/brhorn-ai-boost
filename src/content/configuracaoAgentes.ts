@@ -69,7 +69,7 @@ export const EXEMPLOS = [
 export const SEGURANCA = [
   {
     titulo: "Você é o dono de tudo",
-    texto: "Contas, chaves de acesso e dados ficam no seu nome. Eu configuro, você controla e pode me tirar quando quiser.",
+    texto: "Contas, chaves de acesso e dados ficam no seu nome. A brhorn configura o agente e você pode revogar o acesso a qualquer momento.",
   },
   {
     titulo: "Acesso mínimo",
@@ -96,7 +96,7 @@ export const SEGURANCA = [
 export const FAQ = [
   {
     p: "Preciso saber programar ou entender de IA?",
-    r: "Não. Você conta como é a sua rotina, eu traduzo em agente e te ensino a usar no dia a dia.",
+    r: "Não. Você apresenta sua rotina e a brhorn configura o agente e orienta o uso no dia a dia.",
   },
   {
     p: "Qual ferramenta você usa: ChatGPT, Claude ou outra?",
@@ -104,7 +104,7 @@ export const FAQ = [
   },
   {
     p: "Quanto custa a ferramenta de IA em si?",
-    r: "É paga direto por você ao fornecedor, sem intermediário. Uma assinatura individual de ChatGPT ou Claude costuma bastar; rotinas mais pesadas, como atender pelo WhatsApp, podem ter custo de uso variável, que eu estimo antes de começar.",
+    r: "O pagamento é feito diretamente ao fornecedor. Uma assinatura individual de ChatGPT ou Claude costuma bastar. Rotinas com custo variável, como atendimento pelo WhatsApp, recebem uma estimativa antes de começar.",
   },
   {
     p: "O agente vai responder em meu nome sozinho?",

@@ -1,116 +1,19 @@
 // Conteúdo da home (consultoria de agentes para empresas), num lugar só para editar sem mexer no layout.
-// Voz (2026-11-05): a brhorn fala onde a empresa garante, assina e entrega (segurança, contrato, o que foi
-// construído); o "eu" fica no método (fases) e em Quem faz. Nunca "nós" nem "nossa equipe": é uma pessoa só.
+// Voz institucional: a brhorn responde pela oferta, pela entrega e pelos compromissos do projeto.
 // 🚫 Nada que lembre o Agente BOM (chicotes, listas de materiais, Versigent). Leitura de documentos técnicos com
 // material próprio está liberada desde 2026-11-05: ver content/portfolio.ts.
-// FORMATOS e FAQ ainda não aparecem na home; preço vazio ("") mostra "Valor definido no diagnóstico".
+// FORMATOS ainda não aparece na home; preço vazio ("") mostra "Valor definido no diagnóstico".
 
 export const ABERTURA = {
-  rotulo: "Agentes de IA para empresas",
-  titulo: "Agentes de IA com método de engenharia.",
-  // Redesign 2026-11-04: o título antigo tinha 12 palavras.
-  tituloAntigo: "Agentes de IA na rotina da sua empresa, com método de engenharia.",
-  frase: "A brhorn encontra onde um agente economiza tempo na sua empresa.",
-  subtitulo:
-    "RH, financeiro, contabilidade, atendimento. Descubro onde um agente economiza tempo de verdade e projeto com regras claras.",
+  titulo: ["Agentes de IA", "para o dia a dia do seu negócio."],
+  frase: "O agente executa as tarefas que se repetem, segue as regras da sua operação e encaminha as exceções para quem decide.",
+  primeiraConversa: "Conte uma rotina da sua equipe. Na primeira conversa, vemos o que dá para automatizar.",
 };
 
-export const PROBLEMAS = [
-  {
-    titulo: "A assinatura existe, o resultado não",
-    texto: "A empresa paga ChatGPT ou Copilot, cada um usa de um jeito e nenhum processo mudou.",
-  },
-  {
-    titulo: "O piloto que nunca sai do piloto",
-    texto: "Alguém montou uma automação, ela funcionou na demonstração e ninguém sabe se dá retorno.",
-  },
-  {
-    titulo: "Medo de expor dados",
-    texto: "Folha, contratos e dados de clientes não podem ir para qualquer ferramenta, então a IA fica de fora.",
-  },
-];
-
-export interface Fase {
-  numero: string;
-  nome: string;
-  texto: string;
-  entrega: string;
-}
-// Sem prazo no site (decisão de 2026-11-05): cada empresa tem o seu tempo e a sua estrutura de dados.
-// O prazo de cada fase é combinado com o cliente, não prometido aqui.
-
-// Genérico desde 2026-11-08: serve tanto para um agente da empresa quanto para o agente pessoal do dono.
-export const FASES: Fase[] = [
-  {
-    numero: "01",
-    nome: "Diagnóstico",
-    texto:
-      "Entendo a rotina, seja de uma área da empresa ou a sua: o que se repete, quanto tempo leva e onde um agente não compensa.",
-    entrega: "Mapa do que vale passar para um agente, por esforço e retorno",
-  },
-  {
-    numero: "02",
-    nome: "Projeto",
-    texto:
-      "Defino o que o agente lê, com quais ferramentas conversa, o que faz sozinho e o que passa por uma pessoa antes de sair.",
-    entrega: "Especificação do agente e critério de sucesso por escrito",
-  },
-  {
-    numero: "03",
-    nome: "Piloto",
-    texto:
-      "O agente entra na rotina real, pelo tempo combinado. Acompanho o uso, os erros e o tempo economizado, comparando com o antes.",
-    entrega: "Agente funcionando e o resultado medido",
-  },
-  {
-    numero: "04",
-    nome: "Rotina",
-    texto:
-      "Aprovado o piloto, o agente vira parte do dia a dia: ajustes, novas tarefas ou outras áreas, com treinamento e regras de uso.",
-    entrega: "Agente em uso, quem usa treinado e regras por escrito",
-  },
-];
-
-// Rotinas por TIPO DE TRABALHO, não por área (2026-11-05): serve para qualquer empresa e cada uma leva um
-// exemplo concreto. Exemplos, não um cardápio fechado: o diagnóstico decide o que entra.
-export interface Tarefa {
-  titulo: string;
-  texto: string;
-  exemplo: string;
-}
-
-export const TAREFAS: Tarefa[] = [
-  {
-    titulo: "Responder o que sempre perguntam",
-    texto: "Dúvidas de clientes, fornecedores ou da própria equipe, respondidas com base nos documentos da empresa.",
-    exemplo: "Prazo de entrega, política de férias, segunda via de boleto.",
-  },
-  {
-    titulo: "Ler documentos e tirar os dados",
-    texto: "Notas, pedidos, contratos e planilhas que chegam por e-mail viram dados no sistema, sem digitação.",
-    exemplo: "Lançar as notas fiscais que chegaram na semana.",
-  },
-  {
-    titulo: "Conferir e cruzar informações",
-    texto: "Comparar um documento com outro e apontar só o que não bate, para uma pessoa resolver.",
-    exemplo: "Pedido, nota fiscal e recebimento; extrato e lançamentos.",
-  },
-  {
-    titulo: "Lembrar prazos e cobrar retornos",
-    texto: "Vencimentos, entregas e retornos acompanhados sem depender da memória de ninguém.",
-    exemplo: "Avisar o atraso de um fornecedor antes que vire problema.",
-  },
-  {
-    titulo: "Montar relatórios e rascunhos",
-    texto: "Juntar números de várias fontes e preparar o documento para alguém da equipe revisar e enviar.",
-    exemplo: "O relatório semanal, a proposta a partir do modelo.",
-  },
-];
-
-// Onde o agente prepara e uma pessoa decide. É argumento de venda, não letra miúda.
-// Na home vai só LIMITES_LINHA; a lista completa fica para uma página futura.
-export const LIMITES_LINHA =
-  "Contratação e desligamento, envios oficiais como folha, guias e eSocial, e a aprovação de pagamentos continuam com quem a empresa autorizar.";
+export const FECHO = {
+  titulo: "Qual rotina você passaria adiante primeiro?",
+  texto: "Conte como ela funciona hoje. Na primeira conversa, você descobre por onde vale começar.",
+};
 
 export const LIMITES = [
   {
@@ -126,29 +29,6 @@ export const LIMITES = [
     texto: "O agente agenda e confere. A aprovação continua com quem a empresa autorizar.",
   },
 ];
-
-export const SEGURANCA = [
-  {
-    titulo: "A empresa é dona de tudo",
-    texto: "Contas, chaves de acesso e dados ficam no nome da empresa. A brhorn configura, a empresa controla e pode revogar o acesso quando quiser.",
-  },
-  {
-    titulo: "Permissão por área",
-    texto: "O agente do financeiro não vê o RH. Cada agente acessa só o que a rotina dele exige, e dados de saúde ficam em ambiente restrito.",
-  },
-  {
-    titulo: "Registro de tudo",
-    texto: "Toda ação do agente fica registrada: o que leu, o que fez e quem aprovou.",
-  },
-  {
-    titulo: "LGPD por escrito",
-    texto: "Termo de confidencialidade e acordo de tratamento de dados assinados entre a sua empresa e a brhorn antes de qualquer acesso.",
-  },
-];
-
-// Para o que não pode sair da empresa. Vai numa linha abaixo dos cards de segurança.
-export const OPCAO_LOCAL =
-  "Quando a informação não pode sair da empresa, o agente roda nos computadores dela, sem depender de serviço na nuvem.";
 
 export interface Formato {
   id: string;
@@ -205,27 +85,18 @@ export const FORMATOS: Formato[] = [
 
 export const FAQ = [
   {
-    p: "Preciso ter uma equipe de TI?",
-    r: "Não. O trabalho é pensado para empresas que não têm TI dedicada. Se houver uma, ela participa das decisões de acesso e integração.",
+    id: "integracoes",
+    pergunta: "Dá para usar os sistemas que já tenho?",
+    resposta: "No diagnóstico, verifico o que seus sistemas permitem integrar. Dá para começar sem uma equipe de TI dedicada.",
   },
   {
-    p: "A IA vai substituir funcionários?",
-    r: "O objetivo é tirar o trabalho repetitivo de quem já está na equipe, para que essas pessoas façam o que exige julgamento. O diagnóstico mostra quanto tempo isso libera.",
+    id: "seguranca",
+    pergunta: "Quem tem acesso aos meus dados?",
+    resposta: "Os dados e as contas ficam com sua empresa, que define e pode revogar os acessos. O agente registra suas ações, e decisões sensíveis passam por quem você autorizar. Quando preciso, o processamento pode acontecer na própria empresa.",
   },
   {
-    p: "Funciona com o sistema que já usamos?",
-    r: "Na maioria dos casos, sim: ERP, planilhas, e-mail e pastas compartilhadas. Se um sistema não permite integração, o diagnóstico mostra a alternativa.",
-  },
-  {
-    p: "Quanto custa a ferramenta de IA em si?",
-    r: "Ela é paga direto pela empresa ao fornecedor, sem intermediário. Eu estimo esse custo no diagnóstico, antes de qualquer decisão.",
-  },
-  {
-    p: "Quanto tempo leva até ver resultado?",
-    r: "Depende da rotina e dos dados de cada empresa. O prazo de cada fase é combinado antes de começar, e ao final do piloto a empresa tem um número medido para decidir se amplia.",
-  },
-  {
-    p: "Por que começar pelo diagnóstico e não direto pelo agente?",
-    r: "Porque a rotina mais visível nem sempre dá o maior retorno. Projetar antes de construir custa menos que refazer.",
+    id: "custos",
+    pergunta: "Como vou saber quanto custa?",
+    resposta: "O diagnóstico estima o investimento conforme a rotina e as integrações. Se houver ferramentas pagas, sua empresa contrata direto com os fornecedores.",
   },
 ];

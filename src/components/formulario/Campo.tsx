@@ -46,9 +46,12 @@ export const TextoEnvio = ({ enviando, children }: { enviando: boolean; children
   );
 
 /** Rodapé das janelas de contato: para que servem os dados. */
-export const NotaPrivacidade = ({ onClose }: { onClose: () => void }) => (
+export const NotaPrivacidade = ({
+  onClose,
+  children = "Seus dados são usados só para responder este contato.",
+}: { onClose: () => void; children?: ReactNode }) => (
   <p className="border-t border-t-rule pt-[var(--space-md)] text-sm text-t-muted">
-    Seus dados são usados só para responder este contato. Veja a{" "}
+    {children} Veja a{" "}
     <Link
       to="/politica-privacidade"
       onClick={onClose}

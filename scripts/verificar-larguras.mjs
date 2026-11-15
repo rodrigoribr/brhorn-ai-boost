@@ -1,5 +1,5 @@
 // DEV-0005: confere, no build servido em BASE (padrão http://localhost:4174, `npx vite preview --port 4174`),
-// que nenhuma página rola na horizontal e que o botão fixo "Fazer diagnóstico" está visível.
+// que nenhuma página rola na horizontal e que o contato previsto para a rota e a largura está visível.
 // Uso: node scripts/verificar-larguras.mjs [pasta-das-capturas]
 import puppeteer from "puppeteer";
 
@@ -9,6 +9,8 @@ const PAGINAS = ["/", "/axion", "/viaserra", "/configuracao-de-agentes"];
 const LARGURAS = [
   [360, 780],
   [390, 844],
+  [768, 844],
+  [1024, 768],
   [1366, 768],
 ];
 
@@ -32,19 +34,19 @@ for (const [w, h] of LARGURAS) {
         .filter((el) => el.getBoundingClientRect().right > window.innerWidth + 1)
         .slice(0, 3)
         .map((el) => `${el.tagName.toLowerCase()}.${String(el.className).slice(0, 40)}`);
-      const botao = [...document.querySelectorAll("a,button")].find(
-        (el) => el.textContent?.trim() === "Fazer diagnóstico" && getComputedStyle(el.parentElement).position === "fixed",
-      );
+      const usaCabecalho = location.pathname === "/" && !matchMedia("(min-width: 64rem) and (pointer: fine)").matches;
+      const botao = document.querySelector(usaCabecalho ? '[data-origem="header_whatsapp"]' : '[data-origem="botao_fixo"]');
       const b = botao?.getBoundingClientRect();
+      const alvo = b && document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2);
       return {
         rolaHorizontal: document.documentElement.scrollWidth > window.innerWidth,
         largos,
-        botaoVisivel: !!b && b.bottom <= window.innerHeight && b.right <= window.innerWidth && b.width > 0,
+        contatoAcessivel: !!b && b.width > 0 && botao.contains(alvo),
       };
     });
-    const ok = !r.rolaHorizontal && r.botaoVisivel;
+    const ok = !r.rolaHorizontal && r.contatoAcessivel;
     if (!ok) falhas++;
-    console.log(`${ok ? "ok  " : "FALHA"} ${w}px ${caminho}  rolagem-horizontal=${r.rolaHorizontal} botao-fixo=${r.botaoVisivel}${r.largos.length ? "  largos: " + r.largos.join(", ") : ""}`);
+    console.log(`${ok ? "ok  " : "FALHA"} ${w}px ${caminho}  rolagem-horizontal=${r.rolaHorizontal} contato-acessível=${r.contatoAcessivel}${r.rolaHorizontal && r.largos.length ? "  largos: " + r.largos.join(", ") : ""}`);
     if (SAIDA && caminho === "/") {
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.screenshot({ path: `${SAIDA}/home-${w}.png`, fullPage: true });

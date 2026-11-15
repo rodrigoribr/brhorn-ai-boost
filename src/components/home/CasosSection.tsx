@@ -1,225 +1,176 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, ScanSearch } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Cabeca, Secao } from "@/components/home/Titulos";
 import { PROJETOS, type Projeto } from "@/content/portfolio";
 import { cn } from "@/lib/utils";
 
-// Portfólio em cards (2026-11-05): substitui as linhas longas de Casos e a seção Agente pessoal.
-// Com vídeo: toca ao passar o mouse e no toque/teclado pelo botão. Sem vídeo: mostra o roteiro em três quadros.
+const FOCO = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-t-nightaccent";
 
-const FOCO =
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-focus)]";
+const Capa = ({ projeto }: { projeto: Projeto }) => {
+  if (projeto.video) {
+    return (
+      <video controls muted playsInline preload="none" poster={projeto.poster}
+        src={projeto.video} aria-label={projeto.roteiro.join(", ")} className="h-full w-full object-contain" />
+    );
+  }
 
-const menosMovimento = () =>
-  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (projeto.capa) {
+    return (
+      <img src={projeto.capa.src} alt={projeto.capa.alt} loading="lazy" decoding="async"
+        className="absolute inset-0 h-full w-full object-cover" />
+    );
+  }
 
-/** Enquanto o vídeo não existe: o que ele vai mostrar, em três quadros numerados. */
-// Os passos acendem em sequência (CSS em base.css, `.roteiro`), como a faixa de luz do logo.
-const Roteiro = ({ passos }: { passos: Projeto["roteiro"] }) => (
-  <div className="flex h-full flex-col justify-center p-[var(--space-lg)]">
-    <ol className="roteiro">
-      {passos.map((p, i) => (
-        <li key={p} className="flex flex-col gap-[var(--space-sm)]">
-          <span className="roteiro-ponto" aria-hidden="true" />
-          <span className="roteiro-num num text-xs font-medium">{String(i + 1).padStart(2, "0")}</span>
-          <span className="roteiro-texto text-sm leading-snug">{p}</span>
-        </li>
-      ))}
-    </ol>
-  </div>
-);
-
-const Midia = ({ projeto, tocando, alternar, video }: {
-  projeto: Projeto;
-  tocando: boolean;
-  alternar: () => void;
-  video: React.RefObject<HTMLVideoElement>;
-}) => {
-  if (!projeto.video) return <Roteiro passos={projeto.roteiro} />;
-  return (
-    <>
-      <video
-        ref={video}
-        src={projeto.video}
-        poster={projeto.poster}
-        muted
-        loop
-        playsInline
-        preload="none"
-        aria-label={`Vídeo: ${projeto.roteiro.join(", ")}`}
-        className="h-full w-full object-cover"
-      />
-      <button
-        type="button"
-        onClick={alternar}
-        aria-pressed={tocando}
-        aria-label={tocando ? `Pausar o vídeo do ${projeto.nome}` : `Ver o vídeo do ${projeto.nome}`}
-        className={cn(
-          "absolute bottom-[var(--space-sm)] left-[var(--space-sm)] inline-flex h-11 items-center gap-2 rounded-[var(--radius-pill)] bg-t-ink px-4 text-sm font-medium text-t-paper transition-opacity duration-short",
-          tocando && "opacity-0 group-hover:opacity-100 focus-visible:opacity-100",
-          FOCO,
-        )}
-      >
-        {tocando ? <Pause className="h-4 w-4" aria-hidden="true" /> : <Play className="h-4 w-4" aria-hidden="true" />}
-        {tocando ? "Pausar" : "Ver funcionando"}
-      </button>
-    </>
-  );
+  return null;
 };
 
-// Cor de cada trabalho sobre a faixa escura. O azul da marca fica com o agente pessoal, que vem primeiro.
-const VISUAL: Record<string, { cor: string; vivo?: boolean }> = {
-  "agente-pessoal": { cor: "var(--color-night-accent)", vivo: true },
-  axion: { cor: "#4fd1a0" },
-  viaserra: { cor: "#f2b35b", vivo: true },
-  documentos: { cor: "#a99bff" },
-};
-
-const Card = ({ projeto, indice }: { projeto: Projeto; indice: number }) => {
-  const visual = VISUAL[projeto.id] ?? { cor: "var(--color-night-accent)" };
-  const video = useRef<HTMLVideoElement>(null);
-  const [tocando, setTocando] = useState(false);
-
-  const tocar = () => {
-    const v = video.current;
-    if (!v) return;
-    void v.play().then(() => setTocando(true)).catch(() => setTocando(false));
-  };
-  const parar = (voltar = false) => {
-    const v = video.current;
-    if (!v) return;
-    v.pause();
-    if (voltar) v.currentTime = 0;
-    setTocando(false);
-  };
+const Card = ({ projeto, indice, total }: { projeto: Projeto; indice: number; total: number }) => {
+  const [detalheAberto, setDetalheAberto] = useState(false);
+  const detalhe = projeto.video ? undefined : projeto.detalhe;
 
   return (
-    <article
-      aria-labelledby={`projeto-${projeto.id}`}
-      onMouseEnter={() => projeto.video && !menosMovimento() && tocar()}
-      onMouseLeave={() => projeto.video && parar(true)}
-      style={{ "--cor": visual.cor, "--atraso": `${indice * 0.7}s` } as React.CSSProperties}
-      className="caso group flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-[var(--radius-card)] border border-t-nightrule bg-t-night2 sm:w-[calc((100%-var(--gap-columns))/1.6)] lg:w-[calc((100%-2*var(--gap-columns))/3.25)]"
-    >
-      <div className="caso-barra" aria-hidden="true" />
-      <div className={cn("caso-midia border-b border-t-nightrule", projeto.video ? "aspect-[16/10]" : "h-40 sm:h-44")}>
-        <Midia projeto={projeto} tocando={tocando} alternar={() => (tocando ? parar() : tocar())} video={video} />
-      </div>
-
-      <div className="flex flex-1 flex-col p-[var(--space-lg)]">
-        <h3
-          id={`projeto-${projeto.id}`}
-          className="font-display text-[length:var(--text-2xl)] font-normal leading-[1.1] tracking-[var(--tracking-display)] text-t-nightink"
+    <div role="group" aria-roledescription="cartão" aria-label={`${indice + 1} de ${total}`} className="caso-slide">
+      <article aria-labelledby={`projeto-${projeto.id}`} className="flex h-full flex-col rounded-[var(--radius-card)] border border-t-nightrule bg-t-night2">
+        <figure
+          data-detalhe={detalheAberto || undefined}
+          className="projeto-figura relative grid aspect-[16/9] place-items-center overflow-hidden rounded-t-[var(--radius-card)] bg-t-night"
         >
-          {projeto.nome}
-        </h3>
-        <p className="mt-[var(--space-2xs)] text-sm text-t-nightmuted">{projeto.tipo}</p>
-        <p className="mt-[var(--space-sm)] inline-flex items-center gap-2 self-start rounded-[var(--radius-pill)] border border-t-nightrule px-3 py-1 text-xs font-medium text-t-nightink">
-          <span className={cn("caso-situacao-ponto", visual.vivo && "vivo")} aria-hidden="true" />
-          <span className="sr-only">Situação: </span>
-          {projeto.situacao}
-        </p>
-        <p className="mt-[var(--space-md)] text-t-nightmuted">{projeto.texto}</p>
-        {projeto.link && (
-          <Link
-            to={projeto.link.to}
-            className={`${FOCO} mt-auto inline-flex items-center gap-2 self-start rounded-[var(--radius-control)] pt-[var(--space-lg)] font-medium text-t-nightink underline underline-offset-4 transition-colors duration-micro hover:text-[color:var(--cor)]`}
-          >
-            {projeto.link.label}
-            <ArrowRight className="h-4 w-4 transition-transform duration-short group-hover:translate-x-1" aria-hidden="true" />
-          </Link>
-        )}
-      </div>
-    </article>
+          <div className="projeto-midia">
+            <div className="projeto-quadro grid place-items-center">
+              <Capa projeto={projeto} />
+              {detalhe && (
+                <span aria-hidden="true" className="projeto-destaque" style={{
+                  left: `${detalhe.area[0]}%`, top: `${detalhe.area[1]}%`,
+                  width: `${detalhe.area[2]}%`, height: `${detalhe.area[3]}%`,
+                }} />
+              )}
+            </div>
+          </div>
+          {!projeto.video && (
+            <figcaption className="absolute left-2 top-2 rounded bg-t-night px-2 py-0.5 text-xs text-t-nightink">
+              {projeto.capa && !projeto.capa.ilustracao ? "Demo" : "Ilustração"}
+            </figcaption>
+          )}
+          {detalhe && (
+            <>
+              <button type="button" aria-label={`Detalhe de ${projeto.nome}`}
+                aria-expanded={detalheAberto} aria-controls={`detalhe-${projeto.id}`}
+                onClick={() => setDetalheAberto(aberto => !aberto)}
+                className={`${FOCO} absolute bottom-0 right-0 grid h-11 w-11 place-items-center text-t-nightink focus-visible:-outline-offset-2`}>
+                <span className="grid h-8 w-8 place-items-center rounded-full border border-t-nightrule bg-t-night">
+                  <ScanSearch aria-hidden="true" size={16} />
+                </span>
+              </button>
+              <p id={`detalhe-${projeto.id}`} hidden={!detalheAberto}
+                className="absolute right-2 top-2 max-w-[calc(100%-5.25rem)] rounded bg-t-night px-2 py-1 text-xs leading-snug text-t-nightink">
+                {detalhe.texto}
+              </p>
+            </>
+          )}
+        </figure>
+        <div className="flex flex-1 flex-col px-4 pb-3 pt-3">
+          <span className="text-xs text-t-nightaccent">{projeto.situacao}</span>
+          <h3 id={`projeto-${projeto.id}`} className="mt-1 text-xl font-normal text-t-nightink">{projeto.nome}</h3>
+          <p className="mt-1 text-sm leading-snug text-t-nightmuted">{projeto.tipo}</p>
+          {projeto.destaque && <p className="mt-1 text-sm font-medium text-t-nightink">{projeto.destaque}</p>}
+          {projeto.link && (
+            <Link to={projeto.link.to} aria-label={`${projeto.link.label}: ${projeto.nome}`} className={`${FOCO} mt-auto inline-flex min-h-11 items-center gap-2 self-start rounded text-sm text-t-nightink underline underline-offset-4 hover:text-t-nightaccent`}>
+              {projeto.link.label}
+              <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+            </Link>
+          )}
+        </div>
+      </article>
+    </div>
   );
 };
 
-const Seta = ({ lado, ativa, onClick }: { lado: "antes" | "depois"; ativa: boolean; onClick: () => void }) => {
-  const Icone = lado === "antes" ? ArrowLeft : ArrowRight;
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={!ativa}
-      aria-label={lado === "antes" ? "Ver o trabalho anterior" : "Ver o próximo trabalho"}
-      className={cn(
-        "inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-pill)] border border-t-nightrule text-t-nightink transition-colors duration-short hover:border-t-nightink disabled:cursor-default disabled:opacity-35 disabled:hover:border-t-nightrule",
-        FOCO,
-      )}
-    >
-      <Icone className="h-4 w-4" aria-hidden="true" />
-    </button>
-  );
-};
+const projetos = PROJETOS.filter((projeto) => projeto.publicado);
+const ultimo = projetos.length - 1;
 
-// Faixa com rolagem lateral (2026-11-07): uma fileira só no desktop e no celular. O próximo card aparece cortado
-// na borda para mostrar que há mais; as setas existem porque a rodinha do mouse não rola para o lado.
-// Sem rolagem automática: o vídeo toca ao passar o mouse e o texto precisa ser lido.
 export const CasosSection = () => {
-  const projetos = PROJETOS.filter((p) => p.publicado);
   const faixa = useRef<HTMLDivElement>(null);
-  const [limites, setLimites] = useState({ inicio: true, fim: false });
-  const [naTela, setNaTela] = useState(false);
-
-  const medir = useCallback(() => {
-    const el = faixa.current;
-    if (!el) return;
-    setLimites({ inicio: el.scrollLeft <= 4, fim: el.scrollLeft + el.clientWidth >= el.scrollWidth - 4 });
-  }, []);
+  const [atual, setAtual] = useState(0);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
-    medir();
-    window.addEventListener("resize", medir);
-    return () => window.removeEventListener("resize", medir);
-  }, [medir]);
-
-  // A animação dos roteiros só roda com a faixa visível.
-  useEffect(() => {
-    const el = faixa.current;
-    if (!el || typeof IntersectionObserver === "undefined") return;
-    const obs = new IntersectionObserver(([e]) => setNaTela(e.isIntersecting), { threshold: 0.2 });
-    obs.observe(el);
-    return () => obs.disconnect();
+    const track = faixa.current;
+    if (!track) return;
+    let timer: number;
+    let anterior = 0;
+    const atualizar = () => {
+      const esquerda = track.getBoundingClientRect().left;
+      const primeiro = Array.from(track.children).findIndex((slide) =>
+        slide.getBoundingClientRect().right - slide.clientWidth / 2 > esquerda,
+      );
+      const selecionado = Math.max(0, primeiro);
+      setAtual(selecionado);
+      if (selecionado !== anterior) {
+        setStatus(`${projetos[selecionado].nome}, ${selecionado + 1} de ${projetos.length}`);
+        anterior = selecionado;
+      }
+    };
+    const aguardar = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(atualizar, 140);
+    };
+    const evento = "onscrollend" in track ? "scrollend" : "scroll";
+    const listener = evento === "scrollend" ? atualizar : aguardar;
+    track.addEventListener(evento, listener);
+    window.addEventListener("resize", atualizar);
+    return () => {
+      window.clearTimeout(timer);
+      track.removeEventListener(evento, listener);
+      window.removeEventListener("resize", atualizar);
+    };
   }, []);
 
-  const andar = (sentido: 1 | -1) => {
-    const el = faixa.current;
-    const card = el?.querySelector("article");
-    if (!el || !card) return;
-    const passo = card.getBoundingClientRect().width + parseFloat(getComputedStyle(el).columnGap || "0");
-    el.scrollBy({ left: sentido * passo, behavior: menosMovimento() ? "auto" : "smooth" });
+  const mostrar = (indice: number) => {
+    const track = faixa.current;
+    const slide = track?.children[indice];
+    if (!track || !slide) return;
+    track.scrollBy({ left: slide.getBoundingClientRect().left - track.getBoundingClientRect().left });
   };
 
   return (
-    <Secao id="casos" tom="noite">
-      <div className="flex items-end justify-between gap-[var(--space-lg)]">
-        <Cabeca
-          id="casos"
-          noite
-          titulo="O que a brhorn já construiu."
-          texto="O agente pessoal, sistemas em uso com clientes reais e uma demonstração, cada um com a situação dita às claras. Não são produtos de prateleira: mostram o tipo de trabalho que o método entrega."
-        />
-        <div className="hidden shrink-0 gap-[var(--space-xs)] sm:flex">
-          <Seta lado="antes" ativa={!limites.inicio} onClick={() => andar(-1)} />
-          <Seta lado="depois" ativa={!limites.fim} onClick={() => andar(1)} />
+    <Secao id="casos" tom="noite" className="casos-secao py-8 md:py-12">
+      <div className="mx-auto max-w-6xl">
+        <div className="flex items-center justify-between gap-3">
+          <Cabeca id="casos" noite titulo="Projetos da brhorn" />
+          <div className="flex shrink-0 gap-2 lg:hidden">
+            {[
+              { delta: -1, Icone: ArrowLeft, rotulo: "Projeto anterior" },
+              { delta: 1, Icone: ArrowRight, rotulo: "Próximo projeto" },
+            ].map(({ delta, Icone, rotulo }) => {
+              const destino = atual + delta;
+              const indisponivel = destino < 0 || destino > ultimo;
+              return (
+                <button key={rotulo} type="button" aria-label={rotulo} aria-controls="faixa-casos" aria-disabled={indisponivel}
+                  onClick={indisponivel ? undefined : () => mostrar(destino)}
+                  className={`${FOCO} grid h-11 w-11 place-items-center rounded-full border border-t-nightmuted aria-disabled:opacity-40`}>
+                  <Icone className="h-4 w-4" aria-hidden="true" />
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
-      <div
-        ref={faixa}
-        onScroll={medir}
-        role="region"
-        aria-label="Trabalhos da brhorn, role para o lado para ver todos"
-        tabIndex={0}
-        className={cn(
-          "faixa-rolagem -mb-2 mt-[var(--space-2xl)] flex snap-x snap-mandatory gap-[var(--gap-columns)] overflow-x-auto overscroll-x-contain pb-2 pt-3",
-          naTela && "rodando",
-          FOCO,
-        )}
-      >
-        {projetos.map((p, i) => (
-          <Card key={p.id} projeto={p} indice={i} />
-        ))}
+        <div ref={faixa} id="faixa-casos" role="region" aria-label="Projetos" aria-roledescription="carrossel"
+          tabIndex={0} className={`${FOCO} casos-faixa mt-4 rounded`}>
+          {projetos.map((projeto, indice) => (
+            <Card key={projeto.id} projeto={projeto} indice={indice} total={projetos.length} />
+          ))}
+        </div>
+        <div className="flex justify-center lg:hidden" role="group" aria-label="Selecionar projeto">
+          {projetos.map((projeto, indice) => (
+            <button key={projeto.id} type="button" aria-label={projeto.nome}
+              aria-controls="faixa-casos" aria-current={indice === atual ? "true" : undefined}
+              onClick={() => mostrar(indice)} className={`${FOCO} grid h-11 w-11 place-items-center rounded-full`}>
+              <span aria-hidden="true" className={cn("h-2 rounded-full", indice === atual ? "w-5 bg-t-nightaccent" : "w-2 bg-t-nightmuted")} />
+            </button>
+          ))}
+        </div>
+        <p className="sr-only" role="status">{status}</p>
       </div>
     </Secao>
   );
