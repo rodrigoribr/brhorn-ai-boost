@@ -1,6 +1,7 @@
 {
     "redirects": [
-        { "source": "/(clinicas|imobiliarias|profissionais-liberais|marketing|contabilidade|restaurantes|ecommerce|automacoes-personalizadas)", "destination": "/configuracao-de-agentes", "permanent": true }
+        { "source": "/(clinicas|imobiliarias|profissionais-liberais|marketing|contabilidade|restaurantes|ecommerce|automacoes-personalizadas)", "destination": "/configuracao-de-agentes", "permanent": true },
+        { "source": "/pousadas", "destination": "/viaserra", "permanent": true }
     ],
     "rewrites": [
         {
