@@ -54,12 +54,12 @@ const ConfiguracaoAgentes = () => {
             </div>
             <figure className="agentes-hero-foto">
               <img
-                src="/projetos/agentes/bandejas-de-trabalho.webp"
-                srcSet="/projetos/agentes/bandejas-de-trabalho-640.webp 640w, /projetos/agentes/bandejas-de-trabalho.webp 1200w"
+                src="/projetos/agentes/rotina-automatizada.webp"
+                srcSet="/projetos/agentes/rotina-automatizada-640.webp 640w, /projetos/agentes/rotina-automatizada.webp 1200w"
                 sizes="(min-width: 1400px) 720px, (min-width: 960px) 54vw, 100vw"
                 width={1200}
                 height={800}
-                alt="Duas bandejas de correspondência. Uma recebe papéis presos por um clipe, e a outra guarda uma folha conferida."
+                alt="Uma cadeira vazia ao lado de formulários que flutuam até uma pilha organizada. Na borda da mesa, um relógio se curva."
                 fetchPriority="high"
               />
             </figure>
