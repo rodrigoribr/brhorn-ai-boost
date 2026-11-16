@@ -1,17 +1,25 @@
 import type { ReactNode } from "react";
-import { ArrowRight, Facebook, Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { ArrowRight, ContactRound, Facebook, Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { registrarContato } from "@/lib/consentimento";
 import { BrhMark } from "@/components/brand/Logo";
 import { CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
 import { CLASSE_BOTAO_SECUNDARIO } from "@/components/home/classes";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { EMAIL, FACEBOOK_URL, INSTAGRAM_URL, LINKEDIN_BRHORN_URL, LINKEDIN_URL, whatsappLink } from "@/lib/contato";
 
 const LINK = "inline-flex min-h-11 items-center gap-1.5 rounded-[var(--radius-control)] hover:text-t-accent hover:underline";
 
-const REDES = [
+const CONTATOS = [
+  {
+    nome: "WhatsApp",
+    url: whatsappLink(),
+    Icone: MessageCircle,
+    onClick: () => registrarContato("Contact", "rodape_whatsapp", "whatsapp"),
+  },
+  { nome: "E-mail", url: `mailto:${EMAIL}`, Icone: Mail, novaAba: false },
   { nome: "LinkedIn da brhorn", url: LINKEDIN_BRHORN_URL, Icone: Linkedin },
-  { nome: "LinkedIn pessoal", url: LINKEDIN_URL, Icone: Linkedin },
+  { nome: "LinkedIn pessoal", url: LINKEDIN_URL, Icone: ContactRound },
   { nome: "Instagram", url: INSTAGRAM_URL, Icone: Instagram },
   { nome: "Facebook", url: FACEBOOK_URL, Icone: Facebook },
 ];
@@ -73,18 +81,23 @@ const Footer = ({ children }: { children?: ReactNode }) => (
           <BrhMark className="h-8 w-auto" title="" />
           <span>brhorn.com</span>
         </a>
-        <nav aria-label="Contato e redes sociais" className="flex min-w-0 flex-wrap gap-x-4 text-sm">
-          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer"
-            onClick={() => registrarContato("Contact", "rodape_whatsapp", "whatsapp")} className={LINK}>
-            <MessageCircle className="h-4 w-4" aria-hidden="true" /> WhatsApp
-          </a>
-          <a href={`mailto:${EMAIL}`} className={LINK}>
-            <Mail className="h-4 w-4" aria-hidden="true" /> E-mail
-          </a>
-          {REDES.map(({ nome, url, Icone }) => (
-            <a key={nome} href={url} target="_blank" rel="noopener noreferrer" className={LINK}>
-              <Icone className="h-4 w-4" aria-hidden="true" /> {nome}
-            </a>
+        <nav aria-label="Contato e redes sociais" className="flex min-w-0 flex-wrap gap-1">
+          {CONTATOS.map(({ nome, url, Icone, novaAba = true, onClick }) => (
+            <Tooltip key={nome}>
+              <TooltipTrigger asChild>
+                <a
+                  href={url}
+                  aria-label={nome}
+                  target={novaAba ? "_blank" : undefined}
+                  rel={novaAba ? "noopener noreferrer" : undefined}
+                  onClick={onClick}
+                  className="grid h-11 w-11 shrink-0 place-items-center rounded-lg hover:bg-t-paper2 hover:text-t-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-t-accent"
+                >
+                  <Icone className="h-5 w-5" aria-hidden="true" />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>{nome}</TooltipContent>
+            </Tooltip>
           ))}
         </nav>
       </div>

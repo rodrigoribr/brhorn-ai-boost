@@ -6,19 +6,16 @@ const ETAPAS = [
     id: "receber-cotacao",
     aba: "Receber",
     titulo: "A cotação chega por e-mail.",
-    texto: "O agente identifica a cotação e reúne os dados do anexo para a conferência.",
   },
   {
     id: "conferir-cotacao",
     aba: "Conferir",
-    titulo: "O agente confere as regras da equipe.",
-    texto: "Neste exemplo, toda cotação precisa ter quantidade, valor e prazo de entrega. O agente marca o que está faltando.",
+    titulo: "O agente identifica o que falta.",
   },
   {
     id: "revisar-cotacao",
     aba: "Preparar",
-    titulo: "Você recebe a pendência e o rascunho.",
-    texto: "O agente prepara a resposta para você revisar e enviar.",
+    titulo: "A resposta fica pronta para você revisar.",
   },
 ] as const;
 
@@ -112,7 +109,7 @@ export function AgentesDemo() {
           <span className="font-mono text-xs text-t-muted">Exemplo ilustrativo</span>
         </header>
         <div className="agentes-pastas grid gap-8">
-          {ETAPAS.map(({ id, aba, titulo, texto }, indice) => {
+          {ETAPAS.map(({ id, aba, titulo }, indice) => {
             const Cena = CENAS[indice];
             const proxima = ETAPAS[indice + 1];
             return (
@@ -121,7 +118,6 @@ export function AgentesDemo() {
                 <div className="agentes-pasta-corpo grid items-center gap-6 overflow-clip p-4 sm:p-8 md:grid-cols-2 lg:gap-12 lg:p-16">
                   <div>
                     <h3 id={`${id}-titulo`} className="max-w-[18ch] text-3xl lg:text-5xl">{titulo}</h3>
-                    <p className="mt-3 max-w-[35ch]">{texto}</p>
                     {proxima && (
                       <a
                         href={`#${proxima.id}`}

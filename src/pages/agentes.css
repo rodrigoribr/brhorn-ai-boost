@@ -24,8 +24,16 @@
   overflow: hidden;
   border-radius: .75rem;
   mask-image:
-    linear-gradient(to right, transparent, #000 11%, #000 95%, transparent),
-    linear-gradient(to bottom, transparent, #000 7%, #000 92%, transparent);
+    linear-gradient(
+      to right,
+      transparent, rgb(0 0 0 / .2) 3%, rgb(0 0 0 / .8) 8%, #000 14%,
+      #000 86%, rgb(0 0 0 / .8) 92%, rgb(0 0 0 / .2) 97%, transparent
+    ),
+    linear-gradient(
+      to bottom,
+      transparent, rgb(0 0 0 / .2) 3%, rgb(0 0 0 / .8) 9%, #000 16%,
+      #000 84%, rgb(0 0 0 / .8) 91%, rgb(0 0 0 / .2) 97%, transparent
+    );
   mask-composite: intersect;
 }
 
