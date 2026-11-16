@@ -9,14 +9,21 @@ const __dirname = path.dirname(__filename);
 const DIST_DIR = path.join(__dirname, 'dist');
 const TARGET_FILE = path.join(DIST_DIR, 'index.html');
 const PORT = 45678;
+// Rotas que vão ao Google: cada uma vira dist/<rota>/index.html com o HTML pronto.
+// Manter igual a src/lib/seo.ts e public/sitemap.xml.
+const ROTAS_SEO = ['/', '/configuracao-de-agentes', '/axion', '/viaserra'];
+// O template original fica em memória: a home pré-renderizada não pode virar o shell das outras rotas.
+const TEMPLATE = fs.readFileSync(TARGET_FILE);
 
 const server = http.createServer((req, res) => {
     try {
         const urlPath = req.url.split('?')[0];
         let filePath = path.join(DIST_DIR, urlPath === '/' ? 'index.html' : urlPath);
 
-        if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
-            filePath = TARGET_FILE;
+        if (filePath === TARGET_FILE || !fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(TEMPLATE);
+            return;
         }
 
         const ext = path.extname(filePath).toLowerCase();
@@ -80,17 +87,18 @@ server.listen(PORT, async () => {
 
         const page = await browser.newPage();
 
-        console.log('Navigating...');
-        await page.goto(`http://localhost:${PORT}/`, {
-            waitUntil: 'networkidle0',
-            timeout: 60000
-        });
-
-        console.log('Capturing HTML...');
-        const html = await page.content();
-
-        console.log(`Saving index.html (${html.length} bytes)...`);
-        fs.writeFileSync(TARGET_FILE, html);
+        for (const rota of ROTAS_SEO) {
+            console.log(`Navigating ${rota}...`);
+            await page.goto(`http://localhost:${PORT}${rota}`, {
+                waitUntil: 'networkidle0',
+                timeout: 60000
+            });
+            const html = await page.content();
+            const destino = rota === '/' ? TARGET_FILE : path.join(DIST_DIR, rota.slice(1), 'index.html');
+            fs.mkdirSync(path.dirname(destino), { recursive: true });
+            fs.writeFileSync(destino, html);
+            console.log(`Saved ${path.relative(DIST_DIR, destino)} (${html.length} bytes)`);
+        }
         console.log('✅ Prerender successful!');
 
         await browser.close();

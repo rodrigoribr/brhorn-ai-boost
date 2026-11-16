@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Páginas que o Google deve indexar. Rota nova: entra aqui, em src/lib/seo.ts e no prerender.js. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.brhorn.com/</loc></url>
+  <url><loc>https://www.brhorn.com/configuracao-de-agentes</loc></url>
+  <url><loc>https://www.brhorn.com/axion</loc></url>
+  <url><loc>https://www.brhorn.com/viaserra</loc></url>
+  <url><loc>https://www.brhorn.com/politica-privacidade</loc></url>
+  <url><loc>https://www.brhorn.com/termos-uso</loc></url>
+</urlset>
