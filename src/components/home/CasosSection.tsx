@@ -47,11 +47,6 @@ const Card = ({ projeto, indice, total }: { projeto: Projeto; indice: number; to
               )}
             </div>
           </div>
-          {!projeto.video && (
-            <figcaption className="absolute left-2 top-2 rounded bg-t-night px-2 py-0.5 text-xs text-t-nightink">
-              {projeto.capa && !projeto.capa.ilustracao ? "Demo" : "Ilustração"}
-            </figcaption>
-          )}
           {detalhe && (
             <>
               <button type="button" aria-label={`Detalhe de ${projeto.nome}`}
@@ -70,7 +65,7 @@ const Card = ({ projeto, indice, total }: { projeto: Projeto; indice: number; to
           )}
         </figure>
         <div className="flex flex-1 flex-col px-4 pb-3 pt-3">
-          <span className="text-xs text-t-nightaccent">{projeto.situacao}</span>
+          {projeto.situacao && <span className="text-xs text-t-nightaccent">{projeto.situacao}</span>}
           <h3 id={`projeto-${projeto.id}`} className="mt-1 text-xl font-normal text-t-nightink">{projeto.nome}</h3>
           <p className="mt-1 text-sm leading-snug text-t-nightmuted">{projeto.tipo}</p>
           {projeto.destaque && <p className="mt-1 text-sm font-medium text-t-nightink">{projeto.destaque}</p>}

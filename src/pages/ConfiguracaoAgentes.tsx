@@ -46,7 +46,7 @@ const ConfiguracaoAgentes = () => {
                 sizes="(min-width: 1400px) 720px, (min-width: 960px) 54vw, 100vw"
                 width={1200}
                 height={800}
-                alt="Ilustração de um escritório com documentos conferidos no monitor e uma pendência destacada para revisão. Ao fundo, duas pessoas conversam."
+                alt="Escritório com documentos conferidos no monitor e uma pendência destacada para revisão. Ao fundo, duas pessoas conversam."
                 fetchPriority="high"
               />
             </figure>
