@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/home/SiteHeader";
 import { AgentesDemo } from "@/components/produto/AgentesDemo";
-import { AgenteConfereVideo } from "@/components/produto/AgenteConfereVideo";
+import { CenaVideo } from "@/components/CenaVideo";
 import ContactModal from "@/components/ContactModal";
 import CallModal from "@/components/CallModal";
 import Footer, { FechoCarta } from "@/components/Footer";
@@ -41,7 +41,11 @@ const ConfiguracaoAgentes = () => {
               </p>
             </div>
             <figure className="agentes-hero-foto">
-              <AgenteConfereVideo />
+              <CenaVideo
+                src="/projetos/agentes/agente-confere.mp4"
+                poster="/projetos/agentes/agente-confere-poster.webp"
+                descricao="Animação: e-mails chegam, o agente confere quantidade, valor e prazo de cada um. Os completos vão para Pronto; a cotação sem prazo vai para Para você revisar."
+              />
             </figure>
             <div className="agentes-hero-acoes flex flex-wrap items-center gap-x-6 gap-y-1">
               <a

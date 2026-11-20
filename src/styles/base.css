@@ -127,17 +127,6 @@ button, input, select, textarea { font: inherit; }
 @media (hover: hover) {
   .caso-slide:hover .projeto-destaque { opacity: 1; }
 }
-.rotina-etapa::before {
-  content: "";
-  position: absolute;
-  inset: -1px 0 auto;
-  height: 2px;
-  background: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--dur-long) var(--ease-out);
-}
-.rotina-etapa[data-concluida]::before { transform: scaleX(1); }
 
 .casos-faixa {
   --largura-cartao: min(86%, 21rem);
