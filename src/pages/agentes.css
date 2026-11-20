@@ -37,7 +37,13 @@
   mask-composite: intersect;
 }
 
-.agentes-hero-foto img { display: block; width: 100%; height: auto; }
+.agentes-hero-foto :is(img, video) { display: block; width: 100%; height: auto; }
+
+/* a cena do Remotion já tem as peças encostadas nas bordas: sem a máscara que esfuma a foto */
+.agentes-hero-foto:has(video) {
+  mask-image: none;
+  box-shadow: 0 24px 48px -28px #161a3a80;
+}
 
 .agentes-pasta {
   --agentes-fundo: #f9f5ec;

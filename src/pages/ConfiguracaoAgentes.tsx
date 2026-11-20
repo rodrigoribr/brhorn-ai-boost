@@ -1,6 +1,7 @@
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/home/SiteHeader";
 import { AgentesDemo } from "@/components/produto/AgentesDemo";
+import { AgenteConfereVideo } from "@/components/produto/AgenteConfereVideo";
 import ContactModal from "@/components/ContactModal";
 import CallModal from "@/components/CallModal";
 import Footer, { FechoCarta } from "@/components/Footer";
@@ -40,15 +41,7 @@ const ConfiguracaoAgentes = () => {
               </p>
             </div>
             <figure className="agentes-hero-foto">
-              <img
-                src="/projetos/agentes/conferencia-de-documentos.webp"
-                srcSet="/projetos/agentes/conferencia-de-documentos-640.webp 640w, /projetos/agentes/conferencia-de-documentos.webp 1200w"
-                sizes="(min-width: 1400px) 720px, (min-width: 960px) 54vw, 100vw"
-                width={1200}
-                height={800}
-                alt="Escritório com documentos conferidos no monitor e uma pendência destacada para revisão. Ao fundo, duas pessoas conversam."
-                fetchPriority="high"
-              />
+              <AgenteConfereVideo />
             </figure>
             <div className="agentes-hero-acoes flex flex-wrap items-center gap-x-6 gap-y-1">
               <a
