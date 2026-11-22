@@ -3,16 +3,13 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { FasesSection } from "@/components/home/FasesSection";
 import { CasosSection } from "@/components/home/CasosSection";
 import { RotinaDemo } from "@/components/home/RotinaDemo";
-import ContactModal from "@/components/ContactModal";
-import CallModal from "@/components/CallModal";
 import Footer, { FechoCarta } from "@/components/Footer";
 import { FECHO } from "@/content/consultoriaAgentes";
 import { CONTATO_ROTINA_WHATSAPP } from "@/lib/contato";
 import { useContactIntent } from "@/hooks/use-contact-intent";
 
 const Index = () => {
-  const { isContactOpen, contactSource, isCallOpen, closeContact, closeCall, openContact, openCall, trackWhatsapp } =
-    useContactIntent();
+  const { trackWhatsapp } = useContactIntent();
 
   return (
     <div className="min-h-screen bg-t-paper font-sans text-t-ink">
@@ -24,10 +21,7 @@ const Index = () => {
       </a>
       <SiteHeader inicio />
       <main id="conteudo" tabIndex={-1}>
-        <HeroSection
-          onCallClick={openCall}
-          onFormClick={() => openContact("hero_form_link")}
-        />
+        <HeroSection />
         <CasosSection />
         <RotinaDemo />
         <FasesSection />
@@ -40,11 +34,8 @@ const Index = () => {
           rotuloWhatsapp={CONTATO_ROTINA_WHATSAPP.rotulo}
           origemWhatsapp="final_whatsapp"
           onWhatsappClick={() => trackWhatsapp("final_whatsapp")}
-          onFormClick={() => openContact("final_form_button")}
         />
       </Footer>
-      <ContactModal isOpen={isContactOpen} source={contactSource} onClose={closeContact} />
-      <CallModal isOpen={isCallOpen} onClose={closeCall} />
     </div>
   );
 };

@@ -2,8 +2,6 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/home/SiteHeader";
 import { AgentesDemo } from "@/components/produto/AgentesDemo";
 import { CenaVideo } from "@/components/CenaVideo";
-import ContactModal from "@/components/ContactModal";
-import CallModal from "@/components/CallModal";
 import Footer, { FechoCarta } from "@/components/Footer";
 import { Cabeca, Secao } from "@/components/home/Titulos";
 import { CLASSE_LINK_TEXTO } from "@/components/home/classes";
@@ -16,7 +14,7 @@ import "./agentes.css";
 const MSG_WHATSAPP = "Olá! Vim pela página de configuração de agentes da brhorn e quero conversar sobre uma rotina que gostaria de automatizar.";
 
 const ConfiguracaoAgentes = () => {
-  const { isContactOpen, contactSource, isCallOpen, closeContact, closeCall, openContact, trackWhatsapp } = useContactIntent();
+  const { trackWhatsapp } = useContactIntent();
 
   usePageTitle("Agente de IA para sua rotina ou equipe · brhorn");
 
@@ -85,11 +83,8 @@ const ConfiguracaoAgentes = () => {
           texto="Pode ser uma tarefa sua ou um processo que passa por várias pessoas."
           mensagemWhatsapp={MSG_WHATSAPP}
           onWhatsappClick={() => trackWhatsapp("agentes_final_whatsapp")}
-          onFormClick={() => openContact("agentes_final_form")}
         />
       </Footer>
-      <ContactModal isOpen={isContactOpen} source={contactSource} onClose={closeContact} />
-      <CallModal isOpen={isCallOpen} onClose={closeCall} />
     </div>
   );
 };

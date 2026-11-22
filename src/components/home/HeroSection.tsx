@@ -1,16 +1,9 @@
-import { PhoneCall } from "lucide-react";
 import { BotaoDiagnostico, CHAT_ATIVO, CLASSE_BOTAO_PRIMARIO, ConteudoBotao } from "@/components/diagnostico/BotaoDiagnostico";
 import { ABERTURA } from "@/content/consultoriaAgentes";
-import { CLASSE_LINK_TEXTO } from "@/components/home/classes";
 import { HeroEscritorio } from "@/components/home/HeroEscritorio";
 import { CONTATO_ROTINA_WHATSAPP } from "@/lib/contato";
 
-interface HeroSectionProps {
-  onCallClick: () => void;
-  onFormClick: () => void;
-}
-
-export const HeroSection = ({ onCallClick, onFormClick }: HeroSectionProps) => (
+export const HeroSection = () => (
   <section aria-labelledby="hero-titulo" className="bg-t-paper">
     <div className="mx-auto grid max-w-[var(--container)] items-center gap-y-4 px-[var(--gutter)] pb-5 pt-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,5fr)] lg:py-5">
       <div className="hero-escritorio-texto relative z-10 min-w-0">
@@ -37,20 +30,6 @@ export const HeroSection = ({ onCallClick, onFormClick }: HeroSectionProps) => (
         <p id="primeira-conversa" className="mt-[var(--space-sm)] max-w-[52ch] text-sm text-t-muted">
           {ABERTURA.primeiraConversa}
         </p>
-
-        <div className="mt-2 flex flex-wrap gap-x-5 text-sm">
-          <button type="button" onClick={onCallClick} className={`${CLASSE_LINK_TEXTO} min-h-11`}>
-            <PhoneCall className="h-4 w-4" aria-hidden="true" />
-            Prefiro que me liguem
-          </button>
-          <button
-            type="button"
-            onClick={onFormClick}
-            className={`${CLASSE_LINK_TEXTO} min-h-11`}
-          >
-            Descrever por escrito
-          </button>
-        </div>
       </div>
 
       <HeroEscritorio />

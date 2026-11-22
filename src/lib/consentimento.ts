@@ -56,7 +56,7 @@ export function escolhaAtual() {
 export function registrarContato(
   evento: "Contact" | "Lead" | "ChatOpened",
   origem: string,
-  tipo: "whatsapp" | "chat" | "formulario" | "ligacao",
+  tipo: "whatsapp" | "chat",
 ) {
   if (escolhaAtual() !== "aceito") return;
   window.fbq?.(evento === "ChatOpened" ? "trackCustom" : "track", evento, { origem, tipo });

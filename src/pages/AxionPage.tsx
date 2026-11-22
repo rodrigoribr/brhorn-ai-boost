@@ -1,8 +1,6 @@
 import { ArrowDown } from "lucide-react";
 import { SiteHeader } from "@/components/home/SiteHeader";
 import { AxionDemo, AxionPainel } from "@/components/produto/AxionDemo";
-import ContactModal from "@/components/ContactModal";
-import CallModal from "@/components/CallModal";
 import Footer, { FechoCarta } from "@/components/Footer";
 import { CLASSE_LINK_TEXTO } from "@/components/home/classes";
 import { useContactIntent } from "@/hooks/use-contact-intent";
@@ -13,7 +11,7 @@ import "./axion.css";
 const MSG_WHATSAPP = "Olá! Vi o Axion no site da brhorn e quero saber como usá-lo para receber pedidos dos meus revendedores.";
 
 const AxionPage = () => {
-  const { isContactOpen, contactSource, isCallOpen, closeContact, closeCall, openContact, trackWhatsapp } = useContactIntent();
+  const { trackWhatsapp } = useContactIntent();
   usePageTitle("Axion · Pedidos de revendedores pelo WhatsApp · brhorn");
 
   return (
@@ -65,11 +63,8 @@ const AxionPage = () => {
           texto="Conte como sua equipe recebe os pedidos hoje e veja como o Axion pode entrar nessa rotina."
           mensagemWhatsapp={MSG_WHATSAPP}
           onWhatsappClick={() => trackWhatsapp("axion_final_whatsapp")}
-          onFormClick={() => openContact("axion_final_form")}
         />
       </Footer>
-      <ContactModal isOpen={isContactOpen} source={contactSource} onClose={closeContact} />
-      <CallModal isOpen={isCallOpen} onClose={closeCall} />
     </div>
   );
 };

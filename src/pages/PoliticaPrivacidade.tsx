@@ -1,15 +1,16 @@
 import { LinkEmail, LinkPagina, PaginaLegal } from "@/components/PaginaLegal";
 import { reabrirAviso } from "@/lib/consentimento";
 
-// Reflete o que o site coleta de fato: ContactModal e CallModal (Edge Functions → Supabase contact_leads),
-// Meta Pixel (só com consentimento, src/lib/consentimento.ts), Vercel Web Analytics e Google Fonts. Mudou a coleta ou um fornecedor? Atualize esta página e a data.
+// Reflete o que o site coleta de fato: o chat de diagnóstico (DEV-0004), o Meta Pixel (só com consentimento,
+// src/lib/consentimento.ts), Vercel Web Analytics e Google Fonts. Os formulários de contato e de ligação saíram
+// em 2026-11-22; o Supabase segue na lista por causa dos contatos antigos. Mudou a coleta ou um fornecedor? Atualize esta página e a data.
 // DEV-0004: a seção "Chat de diagnóstico" e a linha do provedor de IA foram aprovadas pelo Rodrigo em
 // 2026-11-05 e estão no ar com o chat. Voz da empresa (a brhorn), como os Termos de Uso, desde 2026-11-05.
 const PoliticaPrivacidade = () => (
   <PaginaLegal
     titulo="Política de Privacidade"
     resumo="Este site coleta só o necessário para responder a quem entra em contato. Aqui está o que é coletado, para quê, com quem é compartilhado e como pedir a exclusão."
-    atualizacao="12 de novembro de 2026"
+    atualizacao="22 de novembro de 2026"
     secoes={[
       {
         titulo: "Quem é o responsável",
@@ -26,11 +27,8 @@ const PoliticaPrivacidade = () => (
         texto: (
           <ul className="list-disc space-y-2 pl-5">
             <li>
-              <strong className="font-medium text-t-ink">Formulário "descreva por escrito":</strong> nome, e-mail,
-              telefone, empresa, setor e a mensagem que você escrever.
-            </li>
-            <li>
-              <strong className="font-medium text-t-ink">"Prefiro que me liguem":</strong> nome e telefone.
+              <strong className="font-medium text-t-ink">Chat de diagnóstico:</strong> as respostas que você digitar,
+              como descrito na seção abaixo.
             </li>
             <li>
               <strong className="font-medium text-t-ink">Dados técnicos:</strong> como em qualquer site, os servidores
@@ -87,7 +85,7 @@ const PoliticaPrivacidade = () => (
       {
         titulo: "Para que os dados são usados",
         texto:
-          "Para responder ao seu contato, fazer a ligação que você pediu e preparar uma eventual proposta. Os dados de navegação servem para medir quais páginas e anúncios funcionam. A brhorn não usa os seus dados para outra finalidade e não envia propaganda sem você pedir.",
+          "Para responder ao seu contato e preparar uma eventual proposta. Os dados de navegação servem para medir quais páginas e anúncios funcionam. A brhorn não usa os seus dados para outra finalidade e não envia propaganda sem você pedir.",
       },
       {
         titulo: "Base legal",
@@ -101,7 +99,7 @@ const PoliticaPrivacidade = () => (
             <p>A brhorn não vende dados. Eles passam apenas pelos fornecedores que fazem o site funcionar:</p>
             <ul className="mt-3 list-disc space-y-2 pl-5">
               <li>Vercel, que hospeda o site e conta as visitas;</li>
-              <li>Supabase, banco de dados onde ficam os contatos enviados pelo formulário e os pedidos de ligação;</li>
+              <li>Supabase, banco de dados onde ficam os contatos enviados pelo antigo formulário do site;</li>
               <li>Google Fonts, de onde o site carrega as fontes, o que envia o seu endereço IP ao Google;</li>
               <li>Meta, pelo Pixel (só se você aceitar os cookies), e o WhatsApp, quando você escolhe conversar por lá;</li>
               <li>OpenAI, provedor de IA que processa as mensagens do chat de diagnóstico.</li>

@@ -1,8 +1,6 @@
 import { ArrowDown } from "lucide-react";
 import { SiteHeader } from "@/components/home/SiteHeader";
 import { ViaSerraDemo } from "@/components/produto/ViaSerraDemo";
-import ContactModal from "@/components/ContactModal";
-import CallModal from "@/components/CallModal";
 import Footer, { FechoCarta } from "@/components/Footer";
 import { CLASSE_LINK_TEXTO } from "@/components/home/classes";
 import { CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
@@ -14,7 +12,7 @@ import "./viaserra.css";
 const MSG_WHATSAPP = "Olá! Vi o ViaSerra no site da brhorn e quero conversar sobre a gestão da minha pousada.";
 
 const ViaSerraPage = () => {
-  const { isContactOpen, contactSource, isCallOpen, closeContact, closeCall, openContact, trackWhatsapp } = useContactIntent();
+  const { trackWhatsapp } = useContactIntent();
   usePageTitle("ViaSerra · reservas e gestão de pousadas · brhorn");
 
   return (
@@ -77,11 +75,8 @@ const ViaSerraPage = () => {
           texto="Conte como a recepção se organiza hoje e veja como o ViaSerra pode ajudar no dia a dia."
           mensagemWhatsapp={MSG_WHATSAPP}
           onWhatsappClick={() => trackWhatsapp("viaserra_final_whatsapp")}
-          onFormClick={() => openContact("viaserra_final_form")}
         />
       </Footer>
-      <ContactModal isOpen={isContactOpen} source={contactSource} onClose={closeContact} />
-      <CallModal isOpen={isCallOpen} onClose={closeCall} />
     </div>
   );
 };

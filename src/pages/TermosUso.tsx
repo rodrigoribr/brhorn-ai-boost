@@ -1,13 +1,14 @@
 import { LinkEmail, LinkPagina, PaginaLegal } from "@/components/PaginaLegal";
 
 // Termos de Uso reescritos em 2026-11-05 a partir do que o site faz de verdade: páginas informativas, chat de
-// diagnóstico com IA (DEV-0004), formulários de contato e de ligação, e contratação só por proposta ou contrato.
+// diagnóstico com IA (DEV-0004), contato pelo WhatsApp, e contratação só por proposta ou contrato.
+// Os formulários de contato e de ligação saíram em 2026-11-22.
 // Voz da empresa (a brhorn). Mudou o site, um serviço ou o chat? Atualize esta página e a data.
 const TermosUso = () => (
   <PaginaLegal
     titulo="Termos de Uso"
-    resumo="As regras para usar este site, o chat de diagnóstico e os formulários de contato. A contratação de um projeto segue proposta e contrato próprios."
-    atualizacao="5 de novembro de 2026"
+    resumo="As regras para usar este site, o chat de diagnóstico e o contato pelo WhatsApp. A contratação de um projeto segue proposta e contrato próprios."
+    atualizacao="22 de novembro de 2026"
     secoes={[
       {
         titulo: "Quem é a brhorn",
@@ -47,14 +48,14 @@ const TermosUso = () => (
         ),
       },
       {
-        titulo: "Formulários e pedidos de contato",
+        titulo: "Pedidos de contato",
         texto:
-          "Ao enviar um formulário, pedir uma ligação ou concluir o chat, você declara que os dados são seus e verdadeiros. Pedir contato não obriga nenhuma das partes a contratar.",
+          "Ao concluir o chat ou escrever para a brhorn, você declara que os dados são seus e verdadeiros. Pedir contato não obriga nenhuma das partes a contratar.",
       },
       {
         titulo: "Uso permitido",
         texto:
-          "Não é permitido usar o site para atividades ilegais, enviar conteúdo ofensivo ou de terceiros sem autorização, tentar acessar áreas restritas, sobrecarregar os servidores ou automatizar o envio de mensagens ao chat e aos formulários. A brhorn pode bloquear acessos que façam isso.",
+          "Não é permitido usar o site para atividades ilegais, enviar conteúdo ofensivo ou de terceiros sem autorização, tentar acessar áreas restritas, sobrecarregar os servidores ou automatizar o envio de mensagens ao chat. A brhorn pode bloquear acessos que façam isso.",
       },
       {
         titulo: "Projetos e contas de terceiros",

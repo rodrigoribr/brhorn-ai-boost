@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { registrarContato } from "@/lib/consentimento";
 import { BrhMark } from "@/components/brand/Logo";
 import { CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
-import { CLASSE_BOTAO_SECUNDARIO } from "@/components/home/classes";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { EMAIL, FACEBOOK_URL, INSTAGRAM_URL, LINKEDIN_BRHORN_URL, LINKEDIN_URL, whatsappLink } from "@/lib/contato";
 
@@ -31,7 +30,6 @@ interface FechoCartaProps {
   rotuloWhatsapp?: string;
   origemWhatsapp?: string;
   onWhatsappClick: () => void;
-  onFormClick: () => void;
 }
 
 export const FechoCarta = ({
@@ -41,7 +39,6 @@ export const FechoCarta = ({
   rotuloWhatsapp = "Conversar no WhatsApp",
   origemWhatsapp,
   onWhatsappClick,
-  onFormClick,
 }: FechoCartaProps) => (
   <section id="contato" aria-labelledby="contato-titulo"
     className="flex flex-wrap items-center justify-between gap-x-8 gap-y-5 border-b border-t-rule py-8 md:py-10">
@@ -64,9 +61,6 @@ export const FechoCarta = ({
         {rotuloWhatsapp}
         <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
       </a>
-      <button type="button" onClick={onFormClick} className={`${CLASSE_BOTAO_SECUNDARIO} text-sm`}>
-        Descrever por escrito
-      </button>
     </div>
   </section>
 );
