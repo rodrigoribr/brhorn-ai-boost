@@ -62,6 +62,12 @@ export function registrarContato(
   window.fbq?.(evento === "ChatOpened" ? "trackCustom" : "track", evento, { origem, tipo });
 }
 
+/** DEV-0066: clique em "Testar grátis" do ViaSerra. Evento padrão `StartTrial` do Meta, só com aceite. */
+export function registrarInicioTeste(origem: string) {
+  if (escolhaAtual() !== "aceito") return;
+  window.fbq?.("track", "StartTrial", { origem, produto: "viaserra" });
+}
+
 export function ouvirEscolha(f: () => void) {
   ouvintes.add(f);
   return () => {

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { registrarContato } from "@/lib/consentimento";
 import { BrhMark } from "@/components/brand/Logo";
 import { CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
+import { CLASSE_BOTAO_SECUNDARIO } from "@/components/home/classes";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { EMAIL, FACEBOOK_URL, INSTAGRAM_URL, LINKEDIN_BRHORN_URL, LINKEDIN_URL, whatsappLink } from "@/lib/contato";
 
@@ -30,6 +31,8 @@ interface FechoCartaProps {
   rotuloWhatsapp?: string;
   origemWhatsapp?: string;
   onWhatsappClick: () => void;
+  /** Ação principal antes do WhatsApp (ex.: "Testar grátis" do ViaSerra). Com ela, o WhatsApp vira secundário. */
+  acaoPrincipal?: ReactNode;
 }
 
 export const FechoCarta = ({
@@ -39,6 +42,7 @@ export const FechoCarta = ({
   rotuloWhatsapp = "Conversar no WhatsApp",
   origemWhatsapp,
   onWhatsappClick,
+  acaoPrincipal,
 }: FechoCartaProps) => (
   <section id="contato" aria-labelledby="contato-titulo"
     className="flex flex-wrap items-center justify-between gap-x-8 gap-y-5 border-b border-t-rule py-8 md:py-10">
@@ -50,13 +54,14 @@ export const FechoCarta = ({
       <p className="mt-2 text-t-muted">{texto}</p>
     </div>
     <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
+      {acaoPrincipal}
       <a
         href={whatsappLink(mensagemWhatsapp)}
         target="_blank"
         rel="noopener noreferrer"
         onClick={onWhatsappClick}
         data-origem={origemWhatsapp}
-        className={`${CLASSE_BOTAO_PRIMARIO} px-3 text-sm sm:px-6`}
+        className={`${acaoPrincipal ? CLASSE_BOTAO_SECUNDARIO : CLASSE_BOTAO_PRIMARIO} px-3 text-sm sm:px-6`}
       >
         {rotuloWhatsapp}
         <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />

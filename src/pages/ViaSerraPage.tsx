@@ -1,18 +1,62 @@
-import { ArrowDown } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { ArrowRight, Check } from "lucide-react";
 import { SiteHeader } from "@/components/home/SiteHeader";
 import { ViaSerraDemo } from "@/components/produto/ViaSerraDemo";
 import Footer, { FechoCarta } from "@/components/Footer";
+import { useAvisoAberto } from "@/components/AvisoCookies";
 import { CLASSE_LINK_TEXTO } from "@/components/home/classes";
 import { CLASSE_BOTAO_PRIMARIO } from "@/components/diagnostico/BotaoDiagnostico";
+import { VIASERRA_CONDICOES, VIASERRA_NOTA_CTA, VIASERRA_PLANOS, VIASERRA_TESTE_DIAS } from "@/content/viaserraPreco";
 import { useContactIntent } from "@/hooks/use-contact-intent";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { whatsappLink } from "@/lib/contato";
+import { type BotaoTeste, linkTesteViaSerra, origemDaChegada } from "@/lib/viaserraTeste";
 import "./viaserra.css";
 
 const MSG_WHATSAPP = "Olá! Vi o ViaSerra no site da brhorn e quero conversar sobre a gestão da minha pousada.";
 
+/** Links do teste por botão, com a origem da chegada. No prerender (sem window) saem com a origem padrão. */
+function useLinksTeste() {
+  const { search } = useLocation();
+  const [chegada, setChegada] = useState<Record<string, string>>({});
+  useEffect(() => setChegada(origemDaChegada(search)), [search]);
+  return (botao: BotaoTeste) => linkTesteViaSerra(botao, chegada);
+}
+
+/** DEV-0066: barra "Testar grátis" no celular, entre o botão do topo e o fecho. */
+function BarraTeste({ href, onClick, alvos }: { href: string; onClick: () => void; alvos: React.RefObject<HTMLElement>[] }) {
+  const avisoAberto = useAvisoAberto();
+  const [visiveis, setVisiveis] = useState<Record<number, boolean>>({ 0: true });
+
+  useEffect(() => {
+    const obs = alvos.map((alvo, i) => {
+      if (!alvo.current) return null;
+      const o = new IntersectionObserver(([e]) => setVisiveis((v) => ({ ...v, [i]: e.isIntersecting })));
+      o.observe(alvo.current);
+      return o;
+    });
+    return () => obs.forEach((o) => o?.disconnect());
+  }, [alvos]);
+
+  // Some com o aviso de cookies aberto (fica no mesmo lugar) e com o botão do topo ou o fecho na tela.
+  const mostrar = !avisoAberto && !Object.values(visiveis).some(Boolean);
+  return (
+    <div className="viaserra-barra" data-visivel={mostrar} aria-hidden={!mostrar}>
+      <span>{VIASERRA_TESTE_DIAS} dias grátis, sem cartão</span>
+      <a href={href} onClick={onClick} tabIndex={mostrar ? 0 : -1} className={CLASSE_BOTAO_PRIMARIO}>
+        Testar grátis
+      </a>
+    </div>
+  );
+}
+
 const ViaSerraPage = () => {
-  const { trackWhatsapp } = useContactIntent();
+  const { trackWhatsapp, trackTesteViaSerra } = useContactIntent();
+  const linkTeste = useLinksTeste();
+  const ctaTopo = useRef<HTMLDivElement>(null);
+  const fecho = useRef<HTMLDivElement>(null);
+  const [alvosBarra] = useState(() => [ctaTopo, fecho]);
   usePageTitle("ViaSerra · reservas e gestão de pousadas · brhorn");
 
   return (
@@ -43,10 +87,17 @@ const ViaSerraPage = () => {
                 fetchPriority="high"
               />
             </figure>
-            <div className="viaserra-hero-actions">
-              <a href="#modulos" className={`${CLASSE_BOTAO_PRIMARIO} gap-2`}>
-                Acompanhar uma reserva <ArrowDown size={18} aria-hidden="true" />
-              </a>
+            <div className="viaserra-hero-actions" ref={ctaTopo}>
+              <div className="viaserra-cta">
+                <a
+                  href={linkTeste("hero")}
+                  onClick={() => trackTesteViaSerra("viaserra_hero")}
+                  className={`${CLASSE_BOTAO_PRIMARIO} gap-2`}
+                >
+                  Testar {VIASERRA_TESTE_DIAS} dias grátis <ArrowRight size={18} aria-hidden="true" />
+                </a>
+                <p>{VIASERRA_NOTA_CTA}</p>
+              </div>
               <a
                 href={whatsappLink(MSG_WHATSAPP)}
                 target="_blank"
@@ -62,6 +113,37 @@ const ViaSerraPage = () => {
 
         <ViaSerraDemo />
 
+        <section id="preco" className="viaserra-preco" aria-labelledby="viaserra-preco-titulo">
+          <div className="viaserra-wrap viaserra-preco-grid">
+            <div>
+              <h2 id="viaserra-preco-titulo">Preço</h2>
+              <ul className="viaserra-condicoes">
+                {VIASERRA_CONDICOES.map((c) => (
+                  <li key={c}><Check size={18} aria-hidden="true" />{c}</li>
+                ))}
+              </ul>
+            </div>
+            <ul className="viaserra-planos">
+              {VIASERRA_PLANOS.map((p) => (
+                <li key={p.nome}>
+                  <span>{p.nome}</span>
+                  <p><strong>{p.valor}</strong> {p.periodo}</p>
+                  <small>{p.nota}</small>
+                </li>
+              ))}
+            </ul>
+            <div className="viaserra-cta">
+              <a
+                href={linkTeste("preco")}
+                onClick={() => trackTesteViaSerra("viaserra_preco")}
+                className={`${CLASSE_BOTAO_PRIMARIO} gap-2`}
+              >
+                Testar {VIASERRA_TESTE_DIAS} dias grátis <ArrowRight size={18} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </section>
+
         <div className="viaserra-wrap">
           <details id="privacidade" className="viaserra-privacy">
             <summary>Como o ViaSerra protege os dados dos hóspedes?</summary>
@@ -70,13 +152,27 @@ const ViaSerraPage = () => {
         </div>
       </main>
       <Footer>
-        <FechoCarta
-          titulo="Como você controla as reservas da sua pousada?"
-          texto="Conte como a recepção se organiza hoje e veja como o ViaSerra pode ajudar no dia a dia."
-          mensagemWhatsapp={MSG_WHATSAPP}
-          onWhatsappClick={() => trackWhatsapp("viaserra_final_whatsapp")}
-        />
+        <div ref={fecho} className="viaserra-fecho">
+          <FechoCarta
+            titulo="Teste o ViaSerra com as reservas da sua pousada"
+            texto={`${VIASERRA_TESTE_DIAS} dias grátis, sem cartão. Se preferir, conte como a recepção se organiza hoje e a gente conversa.`}
+            mensagemWhatsapp={MSG_WHATSAPP}
+            rotuloWhatsapp="Conversar sobre o ViaSerra"
+            onWhatsappClick={() => trackWhatsapp("viaserra_final_whatsapp")}
+            acaoPrincipal={
+              <a
+                href={linkTeste("final")}
+                onClick={() => trackTesteViaSerra("viaserra_final")}
+                className={`${CLASSE_BOTAO_PRIMARIO} px-3 text-sm sm:px-6`}
+              >
+                Testar {VIASERRA_TESTE_DIAS} dias grátis
+                <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
+              </a>
+            }
+          />
+        </div>
       </Footer>
+      <BarraTeste href={linkTeste("barra")} onClick={() => trackTesteViaSerra("viaserra_barra")} alvos={alvosBarra} />
     </div>
   );
 };

@@ -55,9 +55,69 @@
 
 .viaserra-hero-image img { display: block; width: 100%; height: auto; }
 
-.viaserra-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1.5rem; }
-.viaserra-hero-actions > a:first-child { background: var(--via-green); }
-.viaserra-hero-actions > a:first-child:hover { background: var(--via-green-dark); }
+.viaserra-hero-actions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .75rem 1.5rem; }
+.viaserra-hero-actions > a { min-height: 3rem; }
+
+/* DEV-0066: no celular, a chamada vem antes da foto (preço e botão sem rolar). */
+.viaserra-hero-image { order: 2; }
+.viaserra-hero-actions { order: 1; }
+
+.viaserra-cta { display: grid; justify-items: start; gap: .5rem; }
+.viaserra-cta > a { background: var(--via-green); }
+.viaserra-cta > a:hover { background: var(--via-green-dark); }
+.viaserra-cta > p { color: var(--color-muted); font: 400 .875rem/1.4 var(--font-outlier); }
+.viaserra-fecho a[href*="viaserra.brhorn.com"] { background: var(--via-green); }
+.viaserra-fecho a[href*="viaserra.brhorn.com"]:hover { background: var(--via-green-dark); }
+
+/* DEV-0066: bloco de preço. */
+.viaserra-preco { padding-block: clamp(3rem, 7vw, 6rem); }
+.viaserra-preco-grid { display: grid; gap: 2rem; }
+.viaserra-preco h2 { font-size: var(--text-section); }
+
+.viaserra-condicoes { display: grid; gap: .5rem; margin-top: 1rem; }
+.viaserra-condicoes li { display: flex; align-items: center; gap: .5rem; }
+.viaserra-condicoes svg { flex-shrink: 0; color: var(--via-green); }
+
+.viaserra-planos { display: grid; gap: 1rem; }
+
+.viaserra-planos li {
+  display: grid;
+  gap: .25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--color-rule);
+  border-radius: .75rem;
+  background: var(--via-white);
+}
+
+.viaserra-planos span { color: var(--via-green); font: 500 .875rem/1.4 var(--font-outlier); }
+.viaserra-planos p { color: var(--color-muted); }
+.viaserra-planos strong { color: var(--color-ink); font: 500 2.25rem/1.1 var(--font-display); }
+.viaserra-planos small { color: var(--color-muted); font-size: .875rem; }
+
+/* DEV-0066: barra fixa "Testar grátis" só no celular. Some com o aviso de cookies aberto. */
+.viaserra-barra {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .75rem 1rem max(.75rem, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--color-rule);
+  background: var(--via-white);
+  box-shadow: 0 -10px 30px -20px #161a3a60;
+  transition: transform 200ms var(--via-ease), visibility 200ms;
+}
+
+.viaserra-barra[data-visivel="false"] { visibility: hidden; transform: translateY(110%); }
+.viaserra-barra span { min-width: 0; color: var(--color-muted); font: 400 .8125rem/1.3 var(--font-outlier); }
+.viaserra-barra a { flex-shrink: 0; background: var(--via-green); }
+.viaserra-barra a:hover { background: var(--via-green-dark); }
+
+@media (prefers-reduced-motion: reduce) { .viaserra-barra { transition: none; } }
+@media (min-width: 768px) { .viaserra-barra { display: none; } }
 
 .viaserra-flow {
   padding-block: clamp(3rem, 7vw, 6rem);
@@ -230,6 +290,12 @@ body:has(.viaserra-page) [data-origem="botao_fixo"] { display: none; }
 
 @media (min-width: 768px) {
   .viaserra-folder-body { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .viaserra-planos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 960px) {
+  .viaserra-preco-grid { grid-template-columns: minmax(0, 4fr) minmax(0, 5fr); align-items: start; column-gap: 2rem; }
+  .viaserra-preco-grid > .viaserra-cta { grid-column: 2; }
 }
 
 @media (min-width: 960px) {

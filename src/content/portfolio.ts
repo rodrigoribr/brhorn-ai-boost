@@ -62,7 +62,7 @@ export const PROJETOS: Projeto[] = [
     },
     detalhe: { texto: "Reserva no calendário", area: [61.4, 55.8, 9.6, 5.8] },
     roteiro: ["O gestor registra a reserva", "O calendário mostra a ocupação", "Lotação e receita no painel"],
-    link: { to: "/viaserra", label: "Ver projeto" },
+    link: { to: "/viaserra", label: "Conhecer o ViaSerra" },
     publicado: true,
   },
 ];
